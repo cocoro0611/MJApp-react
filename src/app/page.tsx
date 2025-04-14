@@ -1,5 +1,7 @@
 import { allUserSelect } from "@prisma/client/sql";
 import { PrismaClient } from "@prisma/client";
+import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
 
 export default async function Home() {
   const prisma = new PrismaClient();
@@ -13,6 +15,8 @@ export default async function Home() {
           <li key={user.id}>{user.name}</li>
         ))}
       </ul>
+      <Button variant="contained">Hello world</Button>
+      <AddIcon color="info" fontSize="large" />
     </div>
   );
 }
