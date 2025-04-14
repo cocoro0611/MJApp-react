@@ -1,1 +1,1 @@
-SELECT id, name FROM "User";
+SELECT "id", "name", "createdAt" FROM "User";

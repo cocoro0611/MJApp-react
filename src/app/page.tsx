@@ -12,7 +12,9 @@ export default async function Home() {
       <h1>投稿一覧</h1>
       <ul>
         {users.map((user) => (
-          <li key={user.id}>{user.name}</li>
+          <li key={user.id}>
+            {user.name}:{user.createdAt.toISOString()}
+          </li>
         ))}
       </ul>
       <Button variant="contained">Hello world</Button>
