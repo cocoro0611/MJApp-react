@@ -1,0 +1,15 @@
+services:
+  postgresql:
+    image: postgres:16
+    container_name: reactApp
+    ports:
+      - "5433:5433"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: cocoro
+      POSTGRES_DB: reactapp
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
