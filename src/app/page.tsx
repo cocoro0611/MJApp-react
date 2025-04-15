@@ -2,10 +2,11 @@ import { allUserSelect } from "@prisma/client/sql";
 import { PrismaClient } from "@prisma/client";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
+import type { UserData } from "../lib/models/users/type";
 
 export default async function Home() {
   const prisma = new PrismaClient();
-  const users = await prisma.$queryRawTyped(allUserSelect());
+  const users: UserData[] = await prisma.$queryRawTyped(allUserSelect());
 
   return (
     <div>
