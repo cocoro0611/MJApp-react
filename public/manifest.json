@@ -1,0 +1,16 @@
+{
+  "theme_color": "#2DDFFC",
+  "background_color": "#2DDFFC",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "Reactアプリ",
+  "description": "This is a demo to create PWA with next",
+  "icons": [
+    {
+      "src": "/apple-icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
