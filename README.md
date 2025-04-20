@@ -1,3 +1,3 @@
 ```
-npx prisma generate --sql
+npx prisma db seed
 ```

@@ -1,7 +1,7 @@
 "use server";
 
 import { v4 } from "uuid";
-import { db } from "../../db";
+import { db } from "../db";
 import type { UserData } from "./type";
 
 export const createUser = async (data: FormData) => {
