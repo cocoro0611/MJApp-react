@@ -4,8 +4,8 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Reactアプリ",
-  "description": "This is a demo to create PWA with next",
+  "name": "麻雀計算",
+  "description": "これは麻雀で点数を計算するアプリケーションです",
   "icons": [
     {
       "src": "/apple-icon.png",
