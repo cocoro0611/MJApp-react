@@ -6,7 +6,7 @@ export default async function Home() {
 
   return (
     <div>
-      <h1>投稿一覧</h1>
+      <h1>テスト投稿一覧</h1>
       <ul>
         {users.map((user) => (
           <li key={user.id}>{user.name}</li>
