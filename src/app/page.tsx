@@ -4,41 +4,60 @@
 // import { Button } from "@mui/material";
 // // import Grid from "../components/layout/Grid";
 import { Grid, ListItem } from "@mui/material";
-import { AppBar, Toolbar, IconButton, Typography } from "@mui/material";
 
 export default async function Home() {
   // const users = await readUsers();
 
   return (
     <div>
-      <AppBar position="static">
-        <Toolbar variant="dense">
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <div>ss</div>
-          </IconButton>
-          <Typography variant="h6" color="inherit" component="div">
-            Photos
-          </Typography>
-        </Toolbar>
-      </AppBar>
-
       <Grid container spacing={2}>
         <Grid size={8}>
-          <ListItem>size=8</ListItem>
+          <ListItem className="h-40">size=8</ListItem>
         </Grid>
         <Grid size={4}>
-          <ListItem>size=4</ListItem>
+          <ListItem className="h-40">size=4</ListItem>
         </Grid>
         <Grid size={4}>
-          <ListItem>size=4</ListItem>
+          <ListItem className="h-40">size=4</ListItem>
         </Grid>
         <Grid size={8}>
-          <ListItem>size=8</ListItem>
+          <ListItem className="h-40">size=8</ListItem>
+        </Grid>
+        <Grid size={4}>
+          <ListItem className="h-40">size=4</ListItem>
+        </Grid>
+        <Grid size={8}>
+          <ListItem className="h-40">size=8</ListItem>
+        </Grid>{" "}
+        <Grid size={4}>
+          <ListItem className="h-40">size=4</ListItem>
+        </Grid>
+        <Grid size={8}>
+          <ListItem className="h-40">size=8</ListItem>
+        </Grid>{" "}
+        <Grid size={4}>
+          <ListItem className="h-40">size=4</ListItem>
+        </Grid>
+        <Grid size={8}>
+          <ListItem className="h-40">size=8</ListItem>
+        </Grid>{" "}
+        <Grid size={4}>
+          <ListItem className="h-40">size=4</ListItem>
+        </Grid>
+        <Grid size={8}>
+          <ListItem className="h-40">size=8</ListItem>
+        </Grid>{" "}
+        <Grid size={4}>
+          <ListItem className="h-40">size=4</ListItem>
+        </Grid>
+        <Grid size={8}>
+          <ListItem className="h-40">size=8</ListItem>
+        </Grid>{" "}
+        <Grid size={4}>
+          <ListItem className="h-40">size=4</ListItem>
+        </Grid>
+        <Grid size={8}>
+          <ListItem className="h-40">size=8</ListItem>
         </Grid>
       </Grid>
     </div>

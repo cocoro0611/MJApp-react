@@ -12,7 +12,17 @@ export default function RootLayout({
       <link rel="manifest" href="/manifest.json" />
       <AppRouterCacheProvider>
         <body>
-          <Container maxWidth="lg">{children}</Container>
+          <header className="fixed top-0 w-full z-10 bg-amber-300">
+            ヘッダー
+          </header>
+
+          <Container maxWidth="lg" className="my-10">
+            {children}
+          </Container>
+
+          <footer className="fixed bottom-0 w-full z-10 bg-amber-500">
+            フッター
+          </footer>
         </body>
       </AppRouterCacheProvider>
     </html>
