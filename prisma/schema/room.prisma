@@ -1,0 +1,26 @@
+// model Room {
+//     id           String     @id @default(uuid()) @db.Uuid
+//     name         String
+//     initialPoint Int
+//     returnPoint  Int
+//     bonusPoint   String
+//     scoreRate    Int
+//     chipRate     Int
+//     gameAmount   Int
+//     createdAt    DateTime   @default(now())
+//     updatedAt    DateTime   @default(now())
+//     users        RoomUser[]
+//     scores       Score[]
+//     chips        Chip[]
+// }
+
+// model RoomUser {
+//     users     User     @relation(fields: [userId], references: [id])
+//     rooms     Room     @relation(fields: [roomId], references: [id])
+//     userId    String   @db.Uuid
+//     roomId    String   @db.Uuid
+//     createdAt DateTime @default(now())
+
+//     @@id([userId, roomId])
+//     @@unique([userId, roomId])
+// }

@@ -44,3 +44,7 @@
 //     </div>
 //   );
 // }
+
+export default function Hoge() {
+  return <div>ss</div>;
+}
