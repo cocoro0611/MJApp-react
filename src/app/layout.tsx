@@ -1,4 +1,5 @@
-import "@/src/style/globals.css";
+import "@/src/styles/globals.css";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 
 export default function RootLayout({
   children,
@@ -6,9 +7,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <link rel="manifest" href="/manifest.json" />
-      <body>{children}</body>
+      <AppRouterCacheProvider>
+        <body>{children}</body>
+      </AppRouterCacheProvider>
     </html>
   );
 }

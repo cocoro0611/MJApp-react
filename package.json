@@ -13,6 +13,11 @@
     "seed": "node prisma/seeds/index.mjs"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.0.2",
+    "@mui/material": "^7.0.2",
+    "@mui/material-nextjs": "^7.0.2",
     "@prisma/client": "5.20.0",
     "kysely": "^0.28.0",
     "next": "15.3.0",
@@ -24,18 +29,18 @@
     "uuid": "^11.1.0"
   },
   "devDependencies": {
-    "eslint": "^9",
     "@eslint/eslintrc": "^3",
-    "eslint-config-next": "15.3.0",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/pg": "^8.11.13",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.0",
     "prettier": "3.5.3",
     "prettier-plugin-prisma": "^5.0.0",
     "prisma": "5.22.0",
     "tailwindcss": "^4",
-    "@tailwindcss/postcss": "^4",
     "typescript": "^5"
   }
 }

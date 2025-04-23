@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { readUsers } from "../lib/models/users/read";
 import { deleteUser } from "../lib/models/users/delete";
+import { Button } from "@mui/material";
 
 export default async function Home() {
   const users = await readUsers();
@@ -8,6 +9,7 @@ export default async function Home() {
   return (
     <div>
       <h1>投稿一覧</h1>
+      <Button variant="contained">ssss</Button>
       <ul>
         {users.map((user) => (
           <li key={user.id}>
