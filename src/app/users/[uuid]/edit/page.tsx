@@ -17,13 +17,13 @@ const UserEditPage = async ({
         <input type="text" name="name" defaultValue={user?.name} />
         <label>アイコン</label>
         <input type="text" name="icon" defaultValue={user?.icon} />
-        <button type="submit" className="test-btn">
+        <button type="submit" className="primary rounded-lg p-4">
           更新
         </button>
       </Form>
       <Form action={deleteUser}>
         <input type="hidden" name="id" value={user?.id} />
-        <button type="submit" className="test-btn">
+        <button type="submit" className="primary rounded-lg p-4">
           削除
         </button>
       </Form>

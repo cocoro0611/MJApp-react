@@ -1,0 +1,40 @@
+import Card from "@/src/components/ui/Card";
+import Image from "next/image";
+
+interface UserCardProps {
+  href: string;
+  name: string;
+  icon: string;
+  size?: "md" | "lg";
+}
+
+const cardSizeClassName = {
+  md: {
+    card: "h-20 w-20",
+    image: { width: 50, height: 50 },
+    text: "text-sm",
+  },
+  lg: {
+    card: "h-40 w-40",
+    image: { width: 100, height: 100 },
+    text: "text-lg",
+  },
+};
+
+const UserCard = ({ href, name, icon, size = "md" }: UserCardProps) => {
+  const cardSize = cardSizeClassName[size];
+
+  return (
+    <Card href={href} className={`center flex-col ${cardSize.card}`}>
+      <Image
+        src={icon}
+        alt="user-icon"
+        width={cardSize.image.width}
+        height={cardSize.image.height}
+      />
+      <span className={cardSize.text}>{name}</span>
+    </Card>
+  );
+};
+
+export default UserCard;

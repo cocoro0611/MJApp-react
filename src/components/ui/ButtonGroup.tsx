@@ -12,11 +12,10 @@ interface TabItem {
 
 interface ButtonGroupProps {
   tabs: TabItem[];
-  color: "blue-active" | "red-active";
   className?: string;
 }
 
-const ButtonGroup = ({ tabs, color, className = "" }: ButtonGroupProps) => {
+const ButtonGroup = ({ tabs, className = "" }: ButtonGroupProps) => {
   const pathname = usePathname();
 
   return (
@@ -28,7 +27,7 @@ const ButtonGroup = ({ tabs, color, className = "" }: ButtonGroupProps) => {
           className={`border-y border-r border-gray-500 
         ${index === 0 ? "rounded-l-lg border-l" : ""}
         ${index === tabs.length - 1 ? "rounded-r-lg" : ""}
-        ${pathname === tab.id ? color : "inactive"}
+        ${pathname.startsWith(tab.id) ? "primary" : "inactive"}
         ${className}`}
         >
           <span>{tab.icon && tab.icon}</span>

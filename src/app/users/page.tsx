@@ -1,24 +1,25 @@
 import { readUsers } from "@/src/lib/models/users/read";
-import Link from "next/link";
+import UserCard from "@/src/template/Users/UserCard";
+import ButtonFixed from "@/src/components/ui/ButtonFixed";
 
 const UsersPage = async () => {
   const users = await readUsers();
 
   return (
     <div>
-      {users.map((user) => (
-        <div key={user.id}>
-          <div>{user.name}</div>
-          <div>{user.icon}</div>
-          <Link href={`/users/${user.id}`} className="bg-blue-200">
-            編集ボタン
-          </Link>
-        </div>
-      ))}
+      <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
+        {users.map((user) => (
+          <div key={user.id} className="center">
+            <UserCard
+              href={`/users/${user.id}/edit`}
+              name={user.name}
+              icon={user.icon}
+            />
+          </div>
+        ))}
+      </div>
       <div className="py-20"></div>
-      <Link href="/users/new" className="test-btn">
-        ユーザ作成ページへ
-      </Link>
+      <ButtonFixed href="/users/new" />
     </div>
   );
 };
