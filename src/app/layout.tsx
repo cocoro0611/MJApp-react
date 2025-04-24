@@ -12,7 +12,11 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+        {/* FIXME:拡大できないように調整 */}
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+        />
         <link rel="manifest" href="/manifest.json" />
       </head>
       <AppRouterCacheProvider>
