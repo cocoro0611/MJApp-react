@@ -5,7 +5,7 @@ import ButtonGroup from "../ui/ButtonGroup";
 
 const tabs = [
   { id: "/", label: "ホーム", icon: <HomeIcon /> },
-  { id: "/users", label: "メンバー", icon: <PersonIcon /> },
+  { id: "/users", label: "ユーザー", icon: <PersonIcon /> },
   { id: "/fu-count", label: "符数計算", icon: <CalculateOutlinedIcon /> },
   { id: "/han-count", label: "翻数計算", icon: <CalculateOutlinedIcon /> },
 ];

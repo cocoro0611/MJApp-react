@@ -1,31 +1,26 @@
-// import Form from "next/form";
-// import { createUser } from "@/src/lib/models/users/create";
-// import Link from "next/link";
+import { readUsers } from "@/src/lib/models/users/read";
+import Link from "next/link";
 
-const UserPage = () => {
-  return <div>メンバーページ</div>;
+const UsersPage = async () => {
+  const users = await readUsers();
+
+  return (
+    <div>
+      {users.map((user) => (
+        <div key={user.id}>
+          <div>{user.name}</div>
+          <div>{user.icon}</div>
+          <Link href={`/users/${user.id}`} className="bg-blue-200">
+            編集ボタン
+          </Link>
+        </div>
+      ))}
+      <div className="py-20"></div>
+      <Link href="/users/new" className="test-btn">
+        ユーザ作成ページへ
+      </Link>
+    </div>
+  );
 };
 
-export default UserPage;
-// export default function CreateUser() {
-//   return (
-//     <div>
-//       ss
-//       <Form action={createUser}>
-//         <label>名前</label>
-//         <input type="text" name="name" />
-//         <button
-//           type="submit"
-//           className="h-10 w-20 text-white bg-red-500 hover:bg-red-700 active:bg-red-900 rounded"
-//         >
-//           作成
-//         </button>
-//       </Form>
-//       <Link href="/">
-//         <button className="h-10 w-20 text-white bg-blue-500 hover:bg-blue-700 active:bg-blue-900 rounded">
-//           ホームへ
-//         </button>
-//       </Link>
-//     </div>
-//   );
-// }
+export default UsersPage;

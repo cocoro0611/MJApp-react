@@ -31,8 +31,8 @@ const ButtonGroup = ({ tabs, color, className = "" }: ButtonGroupProps) => {
         ${pathname === tab.id ? color : "inactive"}
         ${className}`}
         >
-          {tab.icon && tab.icon}
-          <button>{tab.label}</button>
+          <span>{tab.icon && tab.icon}</span>
+          <span>{tab.label}</span>
         </Link>
       ))}
     </>

@@ -1,13 +1,6 @@
-// import Link from "next/link";
-// import { readUsers } from "../lib/models/users/read";
-// import { deleteUser } from "../lib/models/users/delete";
-// import { Button } from "@mui/material";
-// // import Grid from "../components/layout/Grid";
 import { Grid, ListItem } from "@mui/material";
 
-export default async function Home() {
-  // const users = await readUsers();
-
+const Home = () => {
   return (
     <div>
       <Grid container spacing={2}>
@@ -17,79 +10,9 @@ export default async function Home() {
         <Grid size={4}>
           <ListItem className="h-40">size=4</ListItem>
         </Grid>
-        <Grid size={4}>
-          <ListItem className="h-40">size=4</ListItem>
-        </Grid>
-        <Grid size={8}>
-          <ListItem className="h-40">size=8</ListItem>
-        </Grid>
-        <Grid size={4}>
-          <ListItem className="h-40">size=4</ListItem>
-        </Grid>
-        <Grid size={8}>
-          <ListItem className="h-40">size=8</ListItem>
-        </Grid>{" "}
-        <Grid size={4}>
-          <ListItem className="h-40">size=4</ListItem>
-        </Grid>
-        <Grid size={8}>
-          <ListItem className="h-40">size=8</ListItem>
-        </Grid>{" "}
-        <Grid size={4}>
-          <ListItem className="h-40">size=4</ListItem>
-        </Grid>
-        <Grid size={8}>
-          <ListItem className="h-40">size=8</ListItem>
-        </Grid>{" "}
-        <Grid size={4}>
-          <ListItem className="h-40">size=4</ListItem>
-        </Grid>
-        <Grid size={8}>
-          <ListItem className="h-40">size=8</ListItem>
-        </Grid>{" "}
-        <Grid size={4}>
-          <ListItem className="h-40">size=4</ListItem>
-        </Grid>
-        <Grid size={8}>
-          <ListItem className="h-40">size=8</ListItem>
-        </Grid>{" "}
-        <Grid size={4}>
-          <ListItem className="h-40">size=4</ListItem>
-        </Grid>
-        <Grid size={8}>
-          <ListItem className="h-40">size=8</ListItem>
-        </Grid>
       </Grid>
     </div>
-    // <div>
-    //   <h1>投稿一覧</h1>
-    //   <Button variant="contained">ssss</Button>
-    //   <ul>
-    //     {users.map((user) => (
-    //       <li key={user.id}>
-    //         {user.name}
-    //         <Link href={`/edit/${user.id}`}>
-    //           <button className="h-8 w-16 text-white bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 rounded">
-    //             編集
-    //           </button>
-    //         </Link>
-    //         <form action={deleteUser}>
-    //           <input type="hidden" name="id" value={user.id} />
-    //           <button
-    //             type="submit"
-    //             className="h-8 w-16 text-white bg-red-500 hover:bg-red-700 active:bg-red-900 rounded"
-    //           >
-    //             削除
-    //           </button>
-    //         </form>
-    //       </li>
-    //     ))}
-    //   </ul>
-    //   <Link href="/crad">
-    //     <button className="h-10 w-20 text-white bg-blue-500 hover:bg-blue-700 active:bg-blue-900 rounded">
-    //       作成画面
-    //     </button>
-    //   </Link>
-    // </div>
   );
-}
+};
+
+export default Home;

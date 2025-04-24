@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@layer Test {
+  .test-btn {
+    @apply bg-blue-800  hover:bg-blue-900 active:bg-blue-950 text-white rounded p-4;
+  }
+}
+
 @layer Base {
   .center {
     @apply flex justify-center items-center text-center;
