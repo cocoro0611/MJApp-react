@@ -22,7 +22,7 @@ export default function RootLayout({
       <AppRouterCacheProvider>
         <body>
           <Header />
-          <Container className="mt-10 mb-10">{children}</Container>
+          <Container className="mt-16 mb-20">{children}</Container>
           <Footer />
         </body>
       </AppRouterCacheProvider>

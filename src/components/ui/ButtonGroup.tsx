@@ -2,32 +2,40 @@
 
 import { ReactNode } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+interface TabItem {
+  id: string;
+  label: string;
+  icon?: ReactNode;
+}
 
 interface ButtonGroupProps {
-  children: ReactNode;
-  href: string;
-  index: number;
-  totalButtons: number;
+  tabs: TabItem[];
+  color: "blue-active" | "red-active";
   className?: string;
 }
 
-const ButtonGroup = ({
-  children,
-  href,
-  index,
-  totalButtons,
-  className = "",
-}: ButtonGroupProps) => {
+const ButtonGroup = ({ tabs, color, className = "" }: ButtonGroupProps) => {
+  const pathname = usePathname();
+
   return (
-    <Link
-      href={href}
-      className={`border-y border-r border-gray-500 
+    <>
+      {tabs.map((tab, index) => (
+        <Link
+          href={tab.id}
+          key={tab.id}
+          className={`border-y border-r border-gray-500 
         ${index === 0 ? "rounded-l-lg border-l" : ""}
-        ${index === totalButtons - 1 ? "rounded-r-lg" : ""}
+        ${index === tabs.length - 1 ? "rounded-r-lg" : ""}
+        ${pathname === tab.id ? color : "inactive"}
         ${className}`}
-    >
-      {children}
-    </Link>
+        >
+          {tab.icon && tab.icon}
+          <button>{tab.label}</button>
+        </Link>
+      ))}
+    </>
   );
 };
 

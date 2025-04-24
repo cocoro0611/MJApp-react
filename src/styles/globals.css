@@ -2,27 +2,36 @@
 
 @layer Base {
   .center {
-    @apply flex justify-center items-center;
+    @apply flex justify-center items-center text-center;
+  }
+}
+
+@layer Color {
+  .primary {
+    @apply bg-blue-800 text-white;
   }
 }
 
 @layer Containers {
   .header-container {
     @apply fixed top-0 w-full z-10;
-    @apply bg-blue-800 text-white font-bold;
+    @apply font-bold text-lg;
   }
   .nav-container {
     @apply fixed bottom-0 w-full z-10;
-    @apply font-bold;
+    @apply font-bold text-sm;
   }
   .container-width {
     @apply w-full max-w-[1200px];
   }
 }
 
-@layer navButton {
-  .active {
+@layer ButtonGroup {
+  .blue-active {
     @apply bg-blue-800  hover:bg-blue-900 active:bg-blue-950 text-white;
+  }
+  .red-active {
+    @apply bg-red-800  hover:bg-red-900 active:bg-red-950 text-white;
   }
   .inactive {
     @apply bg-white  hover:bg-gray-100 active:bg-gray-200 text-black;
