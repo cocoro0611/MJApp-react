@@ -2,6 +2,7 @@ import Form from "next/form";
 import Button from "@/src/components/ui/Button";
 import InputField from "@/src/components/form/InputField";
 import IconSelect from "@/src/components/form/IconSelect";
+import AlertDialog from "@/src/components/layout/Dialog";
 import { readUser } from "@/src/lib/models/users/read";
 import { updateUser } from "@/src/lib/models/users/update";
 import { deleteUser } from "@/src/lib/models/users/delete";
@@ -32,6 +33,7 @@ const UserEditPage = async ({ params }: { params: { uuid: string } }) => {
         <Button color="danger" className="w-[19.4rem] md:w-[39.2rem]">
           削除
         </Button>
+        <AlertDialog></AlertDialog>
       </Form>
     </>
   );

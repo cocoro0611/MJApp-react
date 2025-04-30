@@ -11,7 +11,7 @@ const Card = ({ children, href, className = "" }: CardProps) => {
   return (
     <Link
       href={href}
-      className={`secondary card-border font-bold ${className}`}
+      className={`secondary scale-effect card-border font-bold ${className}`}
     >
       {children}
     </Link>

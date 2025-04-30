@@ -19,7 +19,7 @@ const InputField = ({
 }: InputFieldProps) => {
   return (
     <div>
-      <label htmlFor={name} className="label-text">
+      <label htmlFor={name} className="flex text-blue-800 font-bold">
         {label}
       </label>
       <input

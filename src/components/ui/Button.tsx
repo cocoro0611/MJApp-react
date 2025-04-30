@@ -14,7 +14,7 @@ const Button = ({
   className = "",
 }: ButtonProps) => {
   return (
-    <button type={type} className={`rounded px-4 py-2 ${color} ${className}`}>
+    <button type={type} className={`rounded  px-4 py-2 ${color} ${className}`}>
       {children}
     </button>
   );

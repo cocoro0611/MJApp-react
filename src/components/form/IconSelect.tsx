@@ -44,7 +44,7 @@ const IconSelect = ({ defaultValue = "" }: IconSelectProps) => {
 
   return (
     <div>
-      <label className="label-text">アイコン</label>
+      <label className="flex text-blue-800 font-bold">アイコン</label>
       <input
         type="hidden"
         name="icon"
@@ -62,7 +62,9 @@ const IconSelect = ({ defaultValue = "" }: IconSelectProps) => {
             alt={icon}
             onClick={() => setSelectedIcon(icon)}
             className={
-              selectedIcon === icon ? "secondary icon-border" : "rounded-full"
+              selectedIcon === icon
+                ? "secondary revolution-effect icon-border"
+                : "rounded-full"
             }
             width={45}
             height={45}

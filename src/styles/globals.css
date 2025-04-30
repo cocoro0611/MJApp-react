@@ -12,13 +12,6 @@
   }
 }
 
-@layer Text {
-  .label-text {
-    @apply text-blue-800 font-bold;
-    @apply flex justify-start text-left items-center;
-  }
-}
-
 @layer Color {
   .primary {
     @apply bg-blue-800  hover:bg-blue-900 active:bg-blue-950 text-white;
@@ -31,6 +24,15 @@
   }
   .inactive {
     @apply bg-white  hover:bg-gray-100 active:bg-gray-200 text-black;
+  }
+}
+
+@layer Effect {
+  .scale-effect {
+    @apply hover:scale-105 active:scale-95 duration-150;
+  }
+  .revolution-effect {
+    @apply hover:rotate-12 duration-150;
   }
 }
 
