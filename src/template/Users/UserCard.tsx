@@ -2,7 +2,7 @@ import Card from "@/src/components/ui/Card";
 import Image from "next/image";
 
 interface UserCardProps {
-  href: string;
+  href?: string;
   name: string;
   icon: string;
   size?: "md" | "lg";
@@ -17,11 +17,11 @@ const cardSizeClassName = {
   lg: {
     card: "h-40 w-40",
     image: { width: 100, height: 100 },
-    text: "text-lg",
+    text: "text-lg mt-2",
   },
 };
 
-const UserCard = ({ href, name, icon, size = "md" }: UserCardProps) => {
+const UserCard = ({ href = "", name, icon, size = "md" }: UserCardProps) => {
   const cardSize = cardSizeClassName[size];
 
   return (

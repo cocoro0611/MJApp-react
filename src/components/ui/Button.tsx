@@ -2,13 +2,19 @@ import { ReactNode } from "react";
 
 interface ButtonProps {
   children: ReactNode;
+  color?: "primary" | "secondary" | "danger" | "inactive";
   type?: "button" | "submit";
   className?: string;
 }
 
-const Button = ({ children, type = "submit", className = "" }: ButtonProps) => {
+const Button = ({
+  children,
+  color = "primary",
+  type = "submit",
+  className = "",
+}: ButtonProps) => {
   return (
-    <button type={type} className={`primary rounded p-4 ${className}`}>
+    <button type={type} className={`rounded px-4 py-2 ${color} ${className}`}>
       {children}
     </button>
   );

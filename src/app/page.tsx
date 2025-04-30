@@ -1,18 +1,7 @@
-import { Grid, ListItem } from "@mui/material";
+import { redirect } from "next/navigation";
 
 const Home = () => {
-  return (
-    <div>
-      <Grid container spacing={2}>
-        <Grid size={8}>
-          <ListItem className="h-40">size=8</ListItem>
-        </Grid>
-        <Grid size={4}>
-          <ListItem className="h-40">size=4</ListItem>
-        </Grid>
-      </Grid>
-    </div>
-  );
+  return redirect("/rooms");
 };
 
 export default Home;

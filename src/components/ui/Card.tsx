@@ -9,7 +9,10 @@ interface CardProps {
 
 const Card = ({ children, href, className = "" }: CardProps) => {
   return (
-    <Link href={href} className={`card-style ${className}`}>
+    <Link
+      href={href}
+      className={`secondary card-border font-bold ${className}`}
+    >
       {children}
     </Link>
   );

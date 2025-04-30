@@ -7,7 +7,7 @@ const UsersPage = async () => {
 
   return (
     <div>
-      <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
+      <div className="grid-4">
         {users.map((user) => (
           <div key={user.id} className="center">
             <UserCard
@@ -18,7 +18,6 @@ const UsersPage = async () => {
           </div>
         ))}
       </div>
-      <div className="py-20"></div>
       <ButtonFixed href="/users/new" />
     </div>
   );

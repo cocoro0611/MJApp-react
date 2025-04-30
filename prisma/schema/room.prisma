@@ -1,31 +1,31 @@
-// model Room {
-//     id           String     @id @default(uuid()) @db.Uuid
-//     name         String
-//     player1      String
-//     player2      String
-//     player3      String
-//     player4      String
-//     initialPoint Int
-//     returnPoint  Int
-//     bonusPoint   String
-//     scoreRate    Int
-//     chipRate     Int
-//     gameAmount   Int
-//     createdAt    DateTime   @default(now())
-//     updatedAt    DateTime   @default(now())
-//     RoomUser     RoomUser[]
-//     Score        Score[]
-// }
+model Room {
+    id           String   @id @default(uuid()) @db.Uuid
+    name         String
+    initialPoint Int
+    returnPoint  Int
+    bonusPoint   String
+    scoreRate    Int
+    chipRate     Int
+    gameAmount   Int
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @default(now())
 
-// model RoomUser {
-//     rooms     Room     @relation(fields: [roomId], references: [id])
-//     scores1   Score[]
-//     scores2   Score[]
-//     scores3   Score[]
-//     scores4   Score[]
-//     roomId    String   @db.Uuid
-//     createdAt DateTime @default(now())
+    roomUsers RoomUser[]
+    scores    Score[]
+    chips     Chip[]
+}
 
-//     @@id([roomId])
-//     @@unique([roomId])
-// }
+model RoomUser {
+    id        String   @id @default(uuid()) @db.Uuid
+    position  Int // 1-4のポジション（player1-4に相当）
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String @db.Uuid
+    room   Room   @relation(fields: [roomId], references: [id])
+    roomId String @db.Uuid
+
+    @@unique([roomId, position])
+    @@unique([roomId, userId])
+}

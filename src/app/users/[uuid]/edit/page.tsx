@@ -1,33 +1,39 @@
 import Form from "next/form";
+import Button from "@/src/components/ui/Button";
+import InputField from "@/src/components/form/InputField";
+import IconSelect from "@/src/components/form/IconSelect";
 import { readUser } from "@/src/lib/models/users/read";
 import { updateUser } from "@/src/lib/models/users/update";
 import { deleteUser } from "@/src/lib/models/users/delete";
 
-const UserEditPage = async ({
-  params: { uuid },
-}: {
-  params: { uuid: string };
-}) => {
+const UserEditPage = async ({ params }: { params: { uuid: string } }) => {
+  const uuid = params.uuid;
   const user = await readUser(uuid);
 
   return (
-    <div>
-      <Form action={updateUser}>
+    <>
+      <Form action={updateUser} className="center flex-col space-y-8">
         <input type="hidden" name="id" value={user?.id} />
-        <input type="text" name="name" defaultValue={user?.name} />
-        <label>アイコン</label>
-        <input type="text" name="icon" defaultValue={user?.icon} />
-        <button type="submit" className="primary rounded-lg p-4">
-          更新
-        </button>
+        <InputField
+          label="名前"
+          name="name"
+          type="text"
+          maxLength={4}
+          placeholder="名前を入力（４文字以内）"
+          defaultValue={user?.name}
+          className="w-[19.4rem] md:w-[39.2rem]"
+        />
+        <IconSelect defaultValue={user?.icon} />
+        <Button className="w-[19.4rem] md:w-[39.2rem]">更新</Button>
       </Form>
-      <Form action={deleteUser}>
+      {/* FIXME:削除ボタン（仮） */}
+      <Form action={deleteUser} className="center my-10">
         <input type="hidden" name="id" value={user?.id} />
-        <button type="submit" className="primary rounded-lg p-4">
+        <Button color="danger" className="w-[19.4rem] md:w-[39.2rem]">
           削除
-        </button>
+        </Button>
       </Form>
-    </div>
+    </>
   );
 };
 
