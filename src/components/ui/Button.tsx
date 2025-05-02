@@ -1,7 +1,10 @@
+"use client";
+
 import { ReactNode } from "react";
 
 interface ButtonProps {
   children: ReactNode;
+  onClick?: () => void;
   color?: "primary" | "secondary" | "danger" | "inactive";
   type?: "button" | "submit";
   className?: string;
@@ -9,12 +12,17 @@ interface ButtonProps {
 
 const Button = ({
   children,
+  onClick = () => {},
   color = "primary",
   type = "submit",
   className = "",
 }: ButtonProps) => {
   return (
-    <button type={type} className={`rounded  px-4 py-2 ${color} ${className}`}>
+    <button
+      onClick={onClick}
+      type={type}
+      className={`rounded  px-4 py-2 ${color} ${className}`}
+    >
       {children}
     </button>
   );

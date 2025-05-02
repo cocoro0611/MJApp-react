@@ -45,12 +45,7 @@ const IconSelect = ({ defaultValue = "" }: IconSelectProps) => {
   return (
     <div>
       <label className="flex text-blue-800 font-bold">アイコン</label>
-      <input
-        type="hidden"
-        name="icon"
-        defaultValue={defaultValue}
-        value={selectedIcon}
-      />
+      <input type="hidden" name="icon" value={selectedIcon} />
       <div className="center py-4">
         <UserCard name="名前" icon={selectedIcon} size="lg" />
       </div>

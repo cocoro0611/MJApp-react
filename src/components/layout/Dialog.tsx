@@ -1,15 +1,10 @@
 "use client";
 
-import * as React from "react";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import { useState } from "react";
+import Button from "../ui/Button";
 
-const AlertDialog = () => {
-  const [open, setOpen] = React.useState(false);
+const Dialog = () => {
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -21,33 +16,37 @@ const AlertDialog = () => {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button type="button" onClick={handleClickOpen}>
         Open alert dialog
       </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
+
+      {/* モーダルの背景オーバーレイ */}
+      {open && (
+        <div
+          className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 transition-all duration-300"
+          onClick={handleClose}
+        >
+          {/* モーダルコンテンツ */}
+          <div
+            className="bg-white rounded-xl p-8 max-w-sm w-full mx-4 shadow-xl transform transition-all duration-300 ease-out"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-xl font-bold mb-2">確認</h2>
+            <p className="mb-8 text-gray-600">本当に削除しますか？</p>
+
+            <div className="center gap-4">
+              <Button type="button" onClick={handleClose} color="secondary">
+                キャンセル
+              </Button>
+              <Button type="button" onClick={handleClose} color="danger">
+                削除する
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default AlertDialog;
+export default Dialog;
