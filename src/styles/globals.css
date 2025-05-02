@@ -53,20 +53,22 @@
 }
 
 @layer Containers {
+  /* 固定するために container mx-auto fixed を指定する必要あり */
   .header-container {
-    @apply absolute w-full top-0 z-10;
+    @apply container mx-auto fixed top-0 z-10;
     @apply font-bold text-lg;
     @apply bg-blue-800 text-white;
   }
   .footer-container {
-    @apply absolute w-full bottom-0 z-10;
+    @apply container mx-auto fixed bottom-0 z-10;
     @apply font-bold text-sm;
   }
 }
 
 @layer SpecialButton {
   .fixed-btn {
-    @apply absolute bottom-24 right-10 z-10;
+    @apply fixed bottom-[10vh] z-10;
+    @apply right-[4vh] md:right-[8vh] lg:right-[12vh] xl:right-[16vh];
     @apply px-5 py-3 text-3xl rounded-xl;
   }
 }

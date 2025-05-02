@@ -3,6 +3,7 @@
 import { db } from "../db";
 import type { UserData } from "./type";
 import { redirect } from "next/navigation";
+import { TOAST_TIME } from "@/src/constants";
 
 type UserUpdateData = Omit<UserData, "createdAt">;
 
@@ -16,7 +17,7 @@ export const updateUser = async (data: FormData) => {
   };
   await db.updateTable("User").set(userData).where("id", "=", userId).execute();
 
-  // Toastの都合上1s遅延を設定
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  // Toastの都合上遅延を設定
+  await new Promise((resolve) => setTimeout(resolve, TOAST_TIME));
   redirect("/users");
 };

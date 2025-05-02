@@ -4,6 +4,7 @@ import { v4 } from "uuid";
 import { db } from "../db";
 import type { UserData } from "./type";
 import { redirect } from "next/navigation";
+import { TOAST_TIME } from "@/src/constants";
 
 type UserCreateData = Omit<UserData, "createdAt" | "updatedAt">;
 
@@ -15,7 +16,7 @@ export const createUser = async (data: FormData) => {
   };
   await db.insertInto("User").values(userData).execute();
 
-  // Toastの都合上1s遅延を設定
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  // Toast通知の都合上遅延を設定
+  await new Promise((resolve) => setTimeout(resolve, TOAST_TIME));
   redirect("/users/");
 };

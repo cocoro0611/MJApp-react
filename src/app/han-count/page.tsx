@@ -1,5 +1,13 @@
+import Header from "@/src/components/layout/Header";
+import Main from "@/src/components/layout/Main";
+
 const HanCountPage = () => {
-  return <div>翻数のカウントページ</div>;
+  return (
+    <>
+      <Header title="　" isBackIcon={false} />
+      <Main>翻数のカウントページ</Main>
+    </>
+  );
 };
 
 export default HanCountPage;

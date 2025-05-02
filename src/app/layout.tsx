@@ -19,8 +19,7 @@ export default function RootLayout({
       </head>
       <AppRouterCacheProvider>
         <body className="bg-blue-50 min-h-screen">
-          {/* MEMO:relativeにより子要素ではabsoluteでcontainer内の相対座標で設定可 */}
-          <div className="container mx-auto relative bg-white min-h-screen shadow-xl">
+          <div className="container mx-auto bg-white min-h-screen shadow-xl">
             <div className="pb-20">{children}</div>
             <Footer />
           </div>

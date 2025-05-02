@@ -1,57 +1,12 @@
-import { Grid, ListItem } from "@mui/material";
+import Header from "@/src/components/layout/Header";
+import Main from "@/src/components/layout/Main";
 
 const RoomsPage = () => {
   return (
-    <div>
-      <Grid container spacing={2}>
-        <Grid size={8}>
-          <ListItem className="h-40">size=8</ListItem>
-        </Grid>
-        <Grid size={4}>
-          <ListItem className="h-40">size=4</ListItem>
-        </Grid>
-      </Grid>
-      <Grid container spacing={2}>
-        <Grid size={8}>
-          <ListItem className="h-40">size=8</ListItem>
-        </Grid>
-        <Grid size={4}>
-          <ListItem className="h-40">size=4</ListItem>
-        </Grid>
-      </Grid>
-      <Grid container spacing={2}>
-        <Grid size={8}>
-          <ListItem className="h-40">size=8</ListItem>
-        </Grid>
-        <Grid size={4}>
-          <ListItem className="h-40">size=4</ListItem>
-        </Grid>
-      </Grid>
-      <Grid container spacing={2}>
-        <Grid size={8}>
-          <ListItem className="h-40">size=8</ListItem>
-        </Grid>
-        <Grid size={4}>
-          <ListItem className="h-40">size=4</ListItem>
-        </Grid>
-      </Grid>
-      <Grid container spacing={2}>
-        <Grid size={8}>
-          <ListItem className="h-40">size=8</ListItem>
-        </Grid>
-        <Grid size={4}>
-          <ListItem className="h-40">size=4</ListItem>
-        </Grid>
-      </Grid>
-      <Grid container spacing={2}>
-        <Grid size={8}>
-          <ListItem className="h-40">size=8</ListItem>
-        </Grid>
-        <Grid size={4}>
-          <ListItem className="h-40">size=4</ListItem>
-        </Grid>
-      </Grid>
-    </div>
+    <>
+      <Header title="ルーム一覧" isBackIcon={false} />
+      <Main>ルームの一覧ページ</Main>
+    </>
   );
 };
 

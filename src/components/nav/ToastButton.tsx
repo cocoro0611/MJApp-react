@@ -1,10 +1,11 @@
 "use client";
 
-import { ReactNode } from "react";
 import Button from "../ui/Button";
 import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { ReactNode } from "react";
 import { useState } from "react";
+import { TOAST_TIME } from "@/src/constants";
 
 interface ToastButtonProps {
   children: ReactNode;
@@ -45,7 +46,7 @@ const ToastButton = ({
       </Button>
       <Snackbar
         open={open}
-        autoHideDuration={1000}
+        autoHideDuration={TOAST_TIME}
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
