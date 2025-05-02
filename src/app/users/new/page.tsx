@@ -1,5 +1,5 @@
 import Form from "next/form";
-import Button from "@/src/components/ui/Button";
+import ToastButton from "@/src/components/nav/ToastButton";
 import InputField from "@/src/components/form/InputField";
 import IconSelect from "@/src/components/form/IconSelect";
 import { createUser } from "@/src/lib/models/users/create";
@@ -16,7 +16,13 @@ const UserNewPage = () => {
         className="w-[19.4rem] md:w-[39.2rem]"
       />
       <IconSelect />
-      <Button className="w-[19.4rem] md:w-[39.2rem]">作成</Button>
+      <ToastButton
+        alertMessage="作成しました"
+        alertColor="success"
+        className="w-[19.4rem] md:w-[39.2rem]"
+      >
+        作成
+      </ToastButton>
     </Form>
   );
 };

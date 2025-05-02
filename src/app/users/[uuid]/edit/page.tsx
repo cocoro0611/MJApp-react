@@ -1,11 +1,11 @@
 import Form from "next/form";
-import Button from "@/src/components/ui/Button";
 import InputField from "@/src/components/form/InputField";
 import IconSelect from "@/src/components/form/IconSelect";
-import Dialog from "@/src/components/layout/Dialog";
+import DeleteDialog from "@/src/components/nav/DeleteDialog";
 import { readUser } from "@/src/lib/models/users/read";
 import { updateUser } from "@/src/lib/models/users/update";
 import { deleteUser } from "@/src/lib/models/users/delete";
+import ToastButton from "@/src/components/nav/ToastButton";
 
 const UserEditPage = async ({ params }: { params: { uuid: string } }) => {
   const uuid = params.uuid;
@@ -25,15 +25,18 @@ const UserEditPage = async ({ params }: { params: { uuid: string } }) => {
           className="w-[19.4rem] md:w-[39.2rem]"
         />
         <IconSelect defaultValue={user?.icon} />
-        <Button className="w-[19.4rem] md:w-[39.2rem]">更新</Button>
+        <ToastButton
+          alertMessage="更新しました"
+          alertColor="success"
+          className="w-[19.4rem] md:w-[39.2rem]"
+        >
+          更新
+        </ToastButton>
       </Form>
       {/* FIXME:削除ボタン（仮） */}
       <Form action={deleteUser} className="center my-10">
         <input type="hidden" name="id" value={user?.id} />
-        <Button color="danger" className="w-[19.4rem] md:w-[39.2rem]">
-          削除
-        </Button>
-        <Dialog></Dialog>
+        <DeleteDialog />
       </Form>
     </>
   );

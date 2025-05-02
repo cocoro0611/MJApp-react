@@ -1,41 +1,45 @@
 "use client";
 
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
+import HeaderLeft from "./HeaderLeft";
+import HeaderCenter from "./HeaderCenter";
+import HeaderRight from "./HeaderRight";
 
 const Header = () => {
   const pathname = usePathname();
 
   const getTitle = () => {
     const patterns = [
-      { regex: /^\/rooms$/, title: "ルーム" },
-      { regex: /^\/rooms\/new$/, title: "ルーム作成" },
-      { regex: /^\/rooms\/[^/]+$/, title: "ルーム詳細" },
-      { regex: /^\/rooms\/[^/]+\/edit$/, title: "ルーム編集" },
-      { regex: /^\/users$/, title: "ユーザー" },
-      { regex: /^\/users\/new$/, title: "ユーザー作成" },
-      { regex: /^\/users\/[^/]+$/, title: "ユーザー詳細" },
-      { regex: /^\/users\/[^/]+\/edit$/, title: "ユーザー編集" },
-      { regex: /^\/fu-count$/, title: "符数計算" },
-      { regex: /^\/han-count$/, title: "翻数計算" },
+      { regex: /^\/rooms$/, title: "room" },
+      { regex: /^\/rooms\/new$/, title: "roomCreate" },
+      { regex: /^\/rooms\/[^/]+$/, title: "roomDetail" },
+      { regex: /^\/rooms\/[^/]+\/edit$/, title: "roomEdit" },
+      { regex: /^\/users$/, title: "user" },
+      { regex: /^\/users\/new$/, title: "userCreate" },
+      { regex: /^\/users\/[^/]+$/, title: "userDetail" },
+      { regex: /^\/users\/[^/]+\/edit$/, title: "userEdit" },
+      { regex: /^\/fu-count$/, title: "fuCount" },
+      { regex: /^\/han-count$/, title: "hanCount" },
     ];
 
     const match = patterns.find((p) => p.regex.test(pathname));
     return match ? match.title : "";
   };
 
+  const title = getTitle();
+
   return (
     <header className="header-container center">
       <div className="container-width center">
-        <Link href="/" className="w-1/12 py-2">
-          <ArrowBackIosIcon />
-        </Link>
-        <div className="w-5/6 py-2">{getTitle()}</div>
-        <Link href="/" className="w-1/12 py-2">
-          <DeleteOutlineIcon />
-        </Link>
+        <div className="w-1/12 py-2">
+          <HeaderLeft title={title} />
+        </div>
+        <div className="w-5/6 py-2">
+          <HeaderCenter title={title} />
+        </div>
+        <div className="w-1/12 py-2">
+          <HeaderRight title={title} />
+        </div>
       </div>
     </header>
   );

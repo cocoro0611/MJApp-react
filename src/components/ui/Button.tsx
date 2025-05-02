@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 interface ButtonProps {
   children: ReactNode;
   onClick?: () => void;
-  color?: "primary" | "secondary" | "danger" | "inactive";
+  color?: "primary" | "secondary" | "danger" | "cancel" | "inactive";
   type?: "button" | "submit";
   className?: string;
 }

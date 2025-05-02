@@ -14,5 +14,8 @@ export const createUser = async (data: FormData) => {
     icon: data.get("icon") as string,
   };
   await db.insertInto("User").values(userData).execute();
+
+  // Toastの都合上1s遅延を設定
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   redirect("/users/");
 };

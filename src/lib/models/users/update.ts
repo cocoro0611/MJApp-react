@@ -15,5 +15,8 @@ export const updateUser = async (data: FormData) => {
     updatedAt: new Date(),
   };
   await db.updateTable("User").set(userData).where("id", "=", userId).execute();
+
+  // Toastの都合上1s遅延を設定
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   redirect("/users");
 };
