@@ -1,7 +1,5 @@
 import "@/src/styles/globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-import { Container } from "@mui/material";
-import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 
 export default function RootLayout({
@@ -20,10 +18,12 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <AppRouterCacheProvider>
-        <body>
-          <Header />
-          <Container className="mt-16 mb-20">{children}</Container>
-          <Footer />
+        <body className="bg-blue-50 min-h-screen">
+          {/* MEMO:relativeにより子要素ではabsoluteでcontainer内の相対座標で設定可 */}
+          <div className="container mx-auto relative bg-white min-h-screen shadow-xl">
+            <div className="pb-20">{children}</div>
+            <Footer />
+          </div>
         </body>
       </AppRouterCacheProvider>
     </html>

@@ -5,7 +5,7 @@
     @apply flex justify-center items-center text-center;
   }
   .grid-4 {
-    @apply grid grid-cols-4 md:grid-cols-8 gap-4;
+    @apply grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-4;
   }
   .grid-6 {
     @apply grid grid-cols-6 md:grid-cols-12 gap-2;
@@ -27,7 +27,7 @@
     @apply border border-gray-300;
   }
   .inactive {
-    @apply bg-white  hover:bg-gray-100 active:bg-gray-200 text-black;
+    @apply bg-white  hover:bg-gray-100 active:bg-gray-200 text-gray-800;
   }
 }
 
@@ -54,23 +54,19 @@
 
 @layer Containers {
   .header-container {
-    @apply fixed top-0 w-full z-10;
+    @apply absolute w-full top-0 z-10;
     @apply font-bold text-lg;
     @apply bg-blue-800 text-white;
   }
-  .nav-container {
-    @apply fixed bottom-0 w-full z-10;
+  .footer-container {
+    @apply absolute w-full bottom-0 z-10;
     @apply font-bold text-sm;
-  }
-  .container-width {
-    @apply w-full max-w-[1200px];
   }
 }
 
 @layer SpecialButton {
   .fixed-btn {
-    @apply fixed bottom-24 right-10 z-10;
+    @apply absolute bottom-24 right-10 z-10;
     @apply px-5 py-3 text-3xl rounded-xl;
-    @apply bg-blue-800  hover:bg-blue-900 active:bg-blue-950 text-white;
   }
 }

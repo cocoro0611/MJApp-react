@@ -12,13 +12,11 @@ const tabs = [
 
 const Footer = () => {
   return (
-    <nav className="nav-container center">
-      <div className="container-width center">
-        <ButtonGroup
-          tabs={tabs}
-          className="center py-2 flex-1 flex-col md:flex-row md:space-x-2"
-        />
-      </div>
+    <nav className="footer-container center">
+      <ButtonGroup
+        tabs={tabs}
+        className="center w-full py-2 flex-col md:flex-row md:space-x-2"
+      />
     </nav>
   );
 };

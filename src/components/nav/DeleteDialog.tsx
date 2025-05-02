@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Dialog from "./Dialog";
 import Button from "../ui/Button";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ToastButton from "@/src/components/nav/ToastButton";
+import { useState } from "react";
 
 const DeleteDialog = () => {
   const [open, setOpen] = useState(false);
@@ -18,9 +19,9 @@ const DeleteDialog = () => {
 
   return (
     <>
-      <Button type="button" color="danger" onClick={handleOpen}>
-        削除
-      </Button>
+      <button type="button" onClick={handleOpen}>
+        <DeleteOutlineIcon />
+      </button>
 
       <Dialog
         open={open}

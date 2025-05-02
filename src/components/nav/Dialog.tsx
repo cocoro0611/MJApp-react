@@ -26,8 +26,8 @@ const Dialog = ({
             className="bg-white rounded-xl p-8 w-full max-w-sm"
             onClick={(e) => e.stopPropagation()} // モーダル内のクリックでダイアログが閉じないように制御
           >
-            <div className="text-xl font-bold mb-2">{title}</div>
-            <div className="text-gray-800 mb-8">{message}</div>
+            <div className="text-gray-800 text-xl font-bold mb-2">{title}</div>
+            <div className="text-gray-600 text-sm mb-8">{message}</div>
             <div className="center gap-4">{children}</div>
           </div>
         </div>

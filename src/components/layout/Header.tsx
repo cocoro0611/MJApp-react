@@ -1,47 +1,31 @@
-"use client";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import Link from "next/link";
+import { ReactNode } from "react";
 
-import { usePathname } from "next/navigation";
-import HeaderLeft from "./HeaderLeft";
-import HeaderCenter from "./HeaderCenter";
-import HeaderRight from "./HeaderRight";
+interface HeaderProps {
+  title: string;
+  href?: string;
+  isBackIcon?: boolean;
+  children?: ReactNode;
+}
 
-const Header = () => {
-  const pathname = usePathname();
-
-  const getTitle = () => {
-    const patterns = [
-      { regex: /^\/rooms$/, title: "room" },
-      { regex: /^\/rooms\/new$/, title: "roomCreate" },
-      { regex: /^\/rooms\/[^/]+$/, title: "roomDetail" },
-      { regex: /^\/rooms\/[^/]+\/edit$/, title: "roomEdit" },
-      { regex: /^\/users$/, title: "user" },
-      { regex: /^\/users\/new$/, title: "userCreate" },
-      { regex: /^\/users\/[^/]+$/, title: "userDetail" },
-      { regex: /^\/users\/[^/]+\/edit$/, title: "userEdit" },
-      { regex: /^\/fu-count$/, title: "fuCount" },
-      { regex: /^\/han-count$/, title: "hanCount" },
-    ];
-
-    const match = patterns.find((p) => p.regex.test(pathname));
-    return match ? match.title : "";
-  };
-
-  const title = getTitle();
-
+const Header = ({
+  title,
+  href = "",
+  isBackIcon = true,
+  children,
+}: HeaderProps) => {
   return (
-    <header className="header-container center">
-      <div className="container-width center">
-        <div className="w-1/12 py-2">
-          <HeaderLeft title={title} />
-        </div>
-        <div className="w-5/6 py-2">
-          <HeaderCenter title={title} />
-        </div>
-        <div className="w-1/12 py-2">
-          <HeaderRight title={title} />
-        </div>
-      </div>
-    </header>
+    <>
+      <header className="header-container center">
+        <Link href={href} className="w-1/12 py-2">
+          {isBackIcon && <ArrowBackIosIcon />}
+        </Link>
+        <div className="w-5/6 py-2">{title}</div>
+        <div className="w-1/12 py-2">{children}</div>
+      </header>
+      <div className="pb-20"></div>
+    </>
   );
 };
 

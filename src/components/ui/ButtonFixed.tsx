@@ -6,7 +6,7 @@ interface ButtonFixedProps {
 
 const ButtonFixed = ({ href }: ButtonFixedProps) => {
   return (
-    <Link href={href} className="fixed-btn">
+    <Link href={href} className="fixed-btn primary">
       +
     </Link>
   );

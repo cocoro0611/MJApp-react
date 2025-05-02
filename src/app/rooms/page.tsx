@@ -11,6 +11,46 @@ const RoomsPage = () => {
           <ListItem className="h-40">size=4</ListItem>
         </Grid>
       </Grid>
+      <Grid container spacing={2}>
+        <Grid size={8}>
+          <ListItem className="h-40">size=8</ListItem>
+        </Grid>
+        <Grid size={4}>
+          <ListItem className="h-40">size=4</ListItem>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid size={8}>
+          <ListItem className="h-40">size=8</ListItem>
+        </Grid>
+        <Grid size={4}>
+          <ListItem className="h-40">size=4</ListItem>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid size={8}>
+          <ListItem className="h-40">size=8</ListItem>
+        </Grid>
+        <Grid size={4}>
+          <ListItem className="h-40">size=4</ListItem>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid size={8}>
+          <ListItem className="h-40">size=8</ListItem>
+        </Grid>
+        <Grid size={4}>
+          <ListItem className="h-40">size=4</ListItem>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid size={8}>
+          <ListItem className="h-40">size=8</ListItem>
+        </Grid>
+        <Grid size={4}>
+          <ListItem className="h-40">size=4</ListItem>
+        </Grid>
+      </Grid>
     </div>
   );
 };
