@@ -47,7 +47,7 @@
   .icon-border {
     @apply border border-blue-300 rounded-full;
   }
-  .input-boder {
+  .input-border {
     @apply border-1 border-blue-500 rounded;
   }
 }

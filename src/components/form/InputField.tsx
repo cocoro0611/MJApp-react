@@ -29,7 +29,7 @@ const InputField = ({
         maxLength={maxLength}
         placeholder={placeholder}
         defaultValue={defaultValue}
-        className={`input-boder p-2 ${className}`}
+        className={`input-border p-2 ${className}`}
       />
     </div>
   );
