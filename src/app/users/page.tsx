@@ -13,13 +13,12 @@ const UsersPage = async () => {
       <Main>
         <div className="grid-4">
           {users.map((user) => (
-            <div key={user.id} className="center">
-              <UserCard
-                href={`/users/${user.id}/edit`}
-                name={user.name}
-                icon={user.icon}
-              />
-            </div>
+            <UserCard
+              key={user.id}
+              href={`/users/${user.id}/edit`}
+              name={user.name}
+              icon={user.icon}
+            />
           ))}
         </div>
         <ButtonFixed href="/users/new" />
