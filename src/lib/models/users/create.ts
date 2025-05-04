@@ -11,8 +11,8 @@ type UserCreateData = Omit<UserData, "createdAt" | "updatedAt">;
 export const createUser = async (data: FormData) => {
   const userData: UserCreateData = {
     id: v4(),
-    name: data.get("name") as string,
-    icon: data.get("icon") as string,
+    name: String(data.get("name")),
+    icon: String(data.get("icon")),
   };
   await db.insertInto("User").values(userData).execute();
 

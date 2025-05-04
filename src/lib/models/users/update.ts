@@ -8,11 +8,11 @@ import { TOAST_TIME } from "@/src/constants";
 type UserUpdateData = Omit<UserData, "createdAt">;
 
 export const updateUser = async (data: FormData) => {
-  const userId = data.get("id") as string;
+  const userId = String(data.get("id"));
   const userData: UserUpdateData = {
     id: userId,
-    name: data.get("name") as string,
-    icon: data.get("icon") as string,
+    name: String(data.get("name")),
+    icon: String(data.get("icon")),
     updatedAt: new Date(),
   };
   await db.updateTable("User").set(userData).where("id", "=", userId).execute();
