@@ -48,6 +48,7 @@ export type User = {
     id: Generated<string>;
     name: string;
     icon: string;
+    defaultSelected: boolean;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
 };

@@ -82,6 +82,10 @@
     @apply border border-blue-500;
     @apply p-1 rounded-2xl w-30;
   }
+  .setting-custom-btn {
+    @apply bg-blue-100  hover:bg-blue-200 active:bg-blue-300 text-blue-500;
+    @apply px-4 rounded-lg font-bold text-sm;
+  }
   .fixed-btn {
     @apply fixed bottom-[10vh] z-10;
     @apply right-[4vh] md:right-[8vh] lg:right-[12vh] xl:right-[16vh];

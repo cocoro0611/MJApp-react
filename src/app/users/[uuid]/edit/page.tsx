@@ -33,7 +33,10 @@ const UserEditPage = async ({ params }: { params: { uuid: string } }) => {
             defaultValue={user?.name}
             className="w-[19.4rem] md:w-[39.2rem]"
           />
-          <IconSelectField defaultValue={user?.icon} />
+          <IconSelectField
+            defaultValue={user?.icon}
+            className="w-[19.4rem] md:w-[39.2rem]"
+          />
           <ToastButton
             alertMessage="更新しました"
             alertColor="success"

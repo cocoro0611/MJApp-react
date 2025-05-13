@@ -7,6 +7,7 @@ interface ButtonProps {
   onClick?: () => void;
   color?: "primary" | "secondary" | "danger" | "cancel" | "inactive";
   type?: "button" | "submit";
+  disabled?: boolean;
   className?: string;
 }
 
@@ -15,13 +16,18 @@ const Button = ({
   onClick = () => {},
   color = "primary",
   type = "submit",
+  disabled = false,
   className = "",
 }: ButtonProps) => {
   return (
     <button
-      onClick={onClick}
+      onClick={disabled ? undefined : onClick}
       type={type}
-      className={`rounded px-4 py-2 ${color} ${className}`}
+      disabled={disabled}
+      className={`rounded px-4 py-2 cursor-not-allowed 
+      ${color}
+      ${disabled ? "cursor-not-allowed opacity-50" : ""}  
+      ${className}`}
     >
       {children}
     </button>

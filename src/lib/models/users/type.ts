@@ -3,5 +3,5 @@ import { TS } from "../types-utils";
 
 export type UserData = Pick<
   TS<User>,
-  "id" | "name" | "icon" | "createdAt" | "updatedAt"
+  "id" | "name" | "icon" | "defaultSelected" | "createdAt" | "updatedAt"
 >;

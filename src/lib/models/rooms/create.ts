@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
 
 type RoomCreateData = Omit<RoomData, "createdAt" | "updatedAt">;
-// type RoomUserCreateData = Omit<RoomUserData, "createdAt" | "updatedAt">;
+type RoomUserCreateData = Omit<RoomUserData, "createdAt" | "updatedAt">;
 
 export const createRoom = async (data: FormData) => {
   const roomData: RoomCreateData = {
@@ -21,16 +21,17 @@ export const createRoom = async (data: FormData) => {
     gameAmount: 0,
   };
 
-  // const roomUserData: RoomUserCreateData = {
-  //   id: v4(),
-  //   position: Number(data.get("position")),
-  //   userId: String(data.get("userId")),
-  //   roomId: roomData.id,
-  // };
+  const userIds = data.getAll("userIds");
+  const roomUsersData: RoomUserCreateData[] = userIds.map((userId, index) => ({
+    id: v4(),
+    position: index + 1,
+    userId: String(userId),
+    roomId: roomData.id,
+  }));
 
   await db.transaction().execute(async (trx) => {
     await trx.insertInto("Room").values(roomData).execute();
-    // await trx.insertInto("RoomUser").values(roomUserData).execute();
+    await trx.insertInto("RoomUser").values(roomUsersData).execute();
   });
 
   // Toast通知の都合上遅延を設定

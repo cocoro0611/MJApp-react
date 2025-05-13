@@ -3,7 +3,7 @@ import Main from "@/src/components/layout/Main";
 import Form from "next/form";
 import InputField from "@/src/components/form/InputField";
 import SelectField from "@/src/components/form/SelectField";
-// import UserSelectField from "@/src/components/form/userSelectField";
+import UserSelectField from "@/src/components/form/UserSelectField";
 import ToastButton from "@/src/components/nav/ToastButton";
 import {
   INITIAL_POINT_OPTIONS,
@@ -14,8 +14,11 @@ import {
   DEFAULT_GAME_RULES,
 } from "@/src/constants/gameRules";
 import { createRoom } from "@/src/lib/models/rooms/create";
+import { readUsers } from "@/src/lib/models/users/read";
 
-const RoomNewPage = () => {
+const RoomNewPage = async () => {
+  const users = await readUsers();
+
   return (
     <>
       <Header title="ルームの作成" href="/rooms" />
@@ -30,7 +33,10 @@ const RoomNewPage = () => {
             defaultValue={new Date().toLocaleDateString("ja-JP")}
             className="w-[19.4rem] md:w-[39.2rem]"
           />
-          {/* <UserSelectField /> */}
+          <UserSelectField
+            users={users}
+            className="w-[19.4rem] md:w-[39.2rem]"
+          />
           <SelectField
             label="持ち点"
             name="initialPoint"

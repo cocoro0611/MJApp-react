@@ -12,6 +12,7 @@ interface ToastButtonProps {
   alertMessage: string;
   alertColor: "error" | "info" | "success" | "warning";
   color?: "primary" | "secondary" | "danger" | "cancel" | "inactive";
+  disabled?: boolean;
   className?: string;
 }
 
@@ -20,6 +21,7 @@ const ToastButton = ({
   alertMessage,
   alertColor,
   color = "primary",
+  disabled = false,
   className = "",
 }: ToastButtonProps) => {
   const [open, setOpen] = useState(false);
@@ -41,7 +43,12 @@ const ToastButton = ({
 
   return (
     <>
-      <Button color={color} className={className} onClick={handleClick}>
+      <Button
+        color={color}
+        disabled={disabled}
+        className={className}
+        onClick={handleClick}
+      >
         {children}
       </Button>
       <Snackbar

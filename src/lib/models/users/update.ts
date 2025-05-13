@@ -5,7 +5,7 @@ import type { UserData } from "./type";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
 
-type UserUpdateData = Omit<UserData, "createdAt">;
+type UserUpdateData = Omit<UserData, "defaultSelected" | "createdAt">;
 
 export const updateUser = async (data: FormData) => {
   const userId = String(data.get("id"));

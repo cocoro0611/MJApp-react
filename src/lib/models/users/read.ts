@@ -22,7 +22,7 @@ export const readUsers = async (): Promise<UserData[]> => {
 
   const users = await db
     .selectFrom("User")
-    .select(["id", "name", "icon", "createdAt", "updatedAt"])
+    .select(["id", "name", "icon", "defaultSelected", "createdAt", "updatedAt"])
     .orderBy("createdAt", "asc")
     .execute();
 
