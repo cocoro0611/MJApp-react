@@ -2,7 +2,7 @@ import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import Form from "next/form";
 import InputField from "@/src/components/form/InputField";
-import IconSelect from "@/src/components/form/IconSelect";
+import IconSelectField from "@/src/components/form/IconSelectField";
 import ToastButton from "@/src/components/nav/ToastButton";
 import DeleteDialog from "@/src/components/nav/DeleteDialog";
 import { readUser } from "@/src/lib/models/users/read";
@@ -33,7 +33,7 @@ const UserEditPage = async ({ params }: { params: { uuid: string } }) => {
             defaultValue={user?.name}
             className="w-[19.4rem] md:w-[39.2rem]"
           />
-          <IconSelect defaultValue={user?.icon} />
+          <IconSelectField defaultValue={user?.icon} />
           <ToastButton
             alertMessage="更新しました"
             alertColor="success"

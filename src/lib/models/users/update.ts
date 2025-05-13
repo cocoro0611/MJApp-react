@@ -3,7 +3,7 @@
 import { db } from "../db";
 import type { UserData } from "./type";
 import { redirect } from "next/navigation";
-import { TOAST_TIME } from "@/src/constants";
+import { TOAST_TIME } from "@/src/constants/toastTime";
 
 type UserUpdateData = Omit<UserData, "createdAt">;
 

@@ -1,28 +1,54 @@
+"use client";
+import { useState } from "react";
+
+type optionsType = {
+  value: number | string;
+  label: string;
+};
+
 interface SelectFieldProps {
   label: string;
   name: string;
-  defaultValue?: string;
+  options: optionsType[];
+  defaultValue: number | string;
   className?: string;
 }
 
 const SelectField = ({
   label,
   name,
-  defaultValue = "",
+  options,
+  defaultValue,
   className = "",
 }: SelectFieldProps) => {
+  const [selectedValue, setSelectedValue] = useState<number | string>(
+    defaultValue
+  );
+
   return (
-    <div>
-      <label htmlFor={name} className="flex text-blue-800 font-bold">
+    <div className={`${className}`}>
+      <label htmlFor={name} className="flex text-blue-800 font-bold ">
         {label}
       </label>
-      <input id={name} name={name} type="hidden" defaultValue={defaultValue} />
-      <button type="button" className="setting-btn-on">
-        25000
-      </button>
-      <button type="button" className="setting-btn-off">
-        25000
-      </button>
+      <input id={name} name={name} type="hidden" value={selectedValue} />
+      <div className="center gap-2 mt-2">
+        <div className="grid-2 text-sm">
+          {options.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              className={
+                selectedValue === option.value
+                  ? "setting-btn-on"
+                  : "setting-btn-off"
+              }
+              onClick={() => setSelectedValue(option.value)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

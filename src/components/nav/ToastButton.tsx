@@ -5,7 +5,7 @@ import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { ReactNode } from "react";
 import { useState } from "react";
-import { TOAST_TIME } from "@/src/constants";
+import { TOAST_TIME } from "@/src/constants/toastTime";
 
 interface ToastButtonProps {
   children: ReactNode;
@@ -30,7 +30,7 @@ const ToastButton = ({
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
-    reason?: SnackbarCloseReason,
+    reason?: SnackbarCloseReason
   ) => {
     if (reason === "clickaway") {
       return;

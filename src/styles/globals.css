@@ -4,6 +4,13 @@
   .center {
     @apply flex justify-center items-center text-center;
   }
+  .grid-fixed-4 {
+    @apply container mx-auto fixed top-0 z-10;
+    @apply grid grid-cols-4 gap-4;
+  }
+  .grid-2 {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-2;
+  }
   .grid-4 {
     @apply grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-4;
   }

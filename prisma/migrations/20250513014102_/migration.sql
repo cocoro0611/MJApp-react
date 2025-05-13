@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Room" ALTER COLUMN "bonusPoint" SET DATA TYPE TEXT;

@@ -4,7 +4,7 @@ import { v4 } from "uuid";
 import { db } from "../db";
 import type { UserData } from "./type";
 import { redirect } from "next/navigation";
-import { TOAST_TIME } from "@/src/constants";
+import { TOAST_TIME } from "@/src/constants/toastTime";
 
 type UserCreateData = Omit<UserData, "createdAt" | "updatedAt">;
 

@@ -2,7 +2,7 @@
 
 import { db } from "../db";
 import { redirect } from "next/navigation";
-import { TOAST_TIME } from "@/src/constants";
+import { TOAST_TIME } from "@/src/constants/toastTime";
 
 export const deleteUser = async (data: FormData) => {
   const userId = data.get("id") as string;

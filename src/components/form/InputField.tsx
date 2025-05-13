@@ -18,7 +18,7 @@ const InputField = ({
   className = "",
 }: InputFieldProps) => {
   return (
-    <div>
+    <div className={`${className}`}>
       <label htmlFor={name} className="flex text-blue-800 font-bold">
         {label}
       </label>
