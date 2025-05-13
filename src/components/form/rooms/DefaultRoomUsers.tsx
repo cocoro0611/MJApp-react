@@ -1,10 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { readDefaultUsers } from "@/src/lib/models/users/read";
 
-const DefaultRoomUsers = async () => {
-  const roomUsers = await readDefaultUsers();
+type UserType = {
+  id: string;
+  name: string;
+  icon: string;
+};
 
+interface DefaultRoomUsersProps {
+  roomUsers: UserType[];
+}
+
+const DefaultRoomUsers = ({ roomUsers }: DefaultRoomUsersProps) => {
   return (
     <div className="form-width">
       <div className="flex justify-between">

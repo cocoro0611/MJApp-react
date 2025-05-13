@@ -6,13 +6,12 @@ import UserCard from "@/src/template/Users/UserCard";
 import { ICON_LIST } from "@/src/constants/iconList";
 
 interface SelectIconProps {
-  defaultValue?: string;
+  name: string;
+  value: string;
 }
 
-const SelectIcon = ({ defaultValue = "" }: SelectIconProps) => {
-  const initialIcon = ICON_LIST.includes(defaultValue)
-    ? defaultValue
-    : ICON_LIST[0];
+const SelectIcon = ({ name, value }: SelectIconProps) => {
+  const initialIcon = ICON_LIST.includes(value) ? value : ICON_LIST[0];
 
   const [selectedIcon, setSelectedIcon] = useState(initialIcon);
 
@@ -21,7 +20,7 @@ const SelectIcon = ({ defaultValue = "" }: SelectIconProps) => {
       <label className={`flex text-blue-800 font-bold `}>アイコン</label>
       <input type="hidden" name="icon" value={selectedIcon} />
       <div className="center py-4">
-        <UserCard name="名前" icon={selectedIcon} size="lg" />
+        <UserCard name={name} icon={selectedIcon} size="lg" />
       </div>
       <div className="grid-6">
         {ICON_LIST.map((icon) => (

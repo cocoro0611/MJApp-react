@@ -4,7 +4,8 @@ interface InputFieldProps {
   type: "text" | "number" | "hidden";
   maxLength: number;
   placeholder?: string;
-  defaultValue?: string;
+  value: string;
+  onChange?: (value: string) => void;
   className?: string;
 }
 
@@ -14,7 +15,8 @@ const InputField = ({
   type,
   maxLength,
   placeholder = "",
-  defaultValue = "",
+  value,
+  onChange,
   className = "form-width",
 }: InputFieldProps) => {
   return (
@@ -28,7 +30,8 @@ const InputField = ({
         type={type}
         maxLength={maxLength}
         placeholder={placeholder}
-        defaultValue={defaultValue}
+        value={value}
+        onChange={(e) => onChange?.(e.target.value)}
         className="input-border p-2 w-full"
       />
     </div>

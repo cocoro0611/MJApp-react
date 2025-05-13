@@ -1,7 +1,7 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import Form from "next/form";
-import SelectRoomUsers from "@/src/template/Rooms/SelectRoomUsers";
+import SelectRoomUsers from "@/src/components/form/rooms/SelectRoomUsers";
 import { readUsers } from "@/src/lib/models/users/read";
 import { updateDefaultUser } from "@/src/lib/models/users/update";
 

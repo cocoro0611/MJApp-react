@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/src/components/ui/Button";
-import UserCard from "../Users/UserCard";
+import UserCard from "../../../template/Users/UserCard";
 import useUserSelect from "@/src/hooks/useUserSelect";
 import type { UserData } from "@/src/lib/models/users/type";
 
@@ -37,7 +37,11 @@ const SelectRoomUsers = ({ users }: SelectRoomUsersProps) => {
                 name={user.name}
                 icon={user.icon}
                 size="sm"
-                isColor={isUserSelected(user.id) ? "secondary" : ""}
+                isColor={
+                  isUserSelected(user.id)
+                    ? "secondary card-border "
+                    : "border-2 border-gray-200 rounded-lg"
+                }
               />
             </div>
           ))}
