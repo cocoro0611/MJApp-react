@@ -15,10 +15,10 @@ const InputField = ({
   maxLength,
   placeholder = "",
   defaultValue = "",
-  className = "",
+  className = "form-width",
 }: InputFieldProps) => {
   return (
-    <div className={`${className}`}>
+    <div className={className}>
       <label htmlFor={name} className="flex text-blue-800 font-bold">
         {label}
       </label>
@@ -29,7 +29,7 @@ const InputField = ({
         maxLength={maxLength}
         placeholder={placeholder}
         defaultValue={defaultValue}
-        className={`input-border p-2 ${className}`}
+        className="input-border p-2 w-full"
       />
     </div>
   );

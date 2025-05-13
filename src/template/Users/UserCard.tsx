@@ -5,10 +5,16 @@ interface UserCardProps {
   href?: string;
   name: string;
   icon: string;
-  size?: "md" | "lg";
+  size?: "sm" | "md" | "lg";
+  isColor?: "secondary" | "";
 }
 
 const cardSizeClassName = {
+  sm: {
+    card: "h-16 w-16",
+    image: { width: 30, height: 30 },
+    text: "text-sm mt-1",
+  },
   md: {
     card: "h-20 w-20",
     image: { width: 50, height: 50 },
@@ -21,11 +27,17 @@ const cardSizeClassName = {
   },
 };
 
-const UserCard = ({ href = "", name, icon, size = "md" }: UserCardProps) => {
+const UserCard = ({
+  href = "",
+  name,
+  icon,
+  size = "md",
+  isColor = "secondary",
+}: UserCardProps) => {
   const cardSize = cardSizeClassName[size];
 
   return (
-    <Card href={href} className={`center flex-col ${cardSize.card}`}>
+    <Card href={href} className={`center flex-col ${isColor} ${cardSize.card}`}>
       <Image
         src={icon}
         alt="user-icon"

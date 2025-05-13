@@ -6,6 +6,10 @@ import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
 
 type UserUpdateData = Omit<UserData, "defaultSelected" | "createdAt">;
+type updateDefaultUser = Omit<
+  UserData,
+  "name" | "icon" | "createdAt" | "updatedAt"
+>;
 
 export const updateUser = async (data: FormData) => {
   const userId = String(data.get("id"));
@@ -20,4 +24,22 @@ export const updateUser = async (data: FormData) => {
   // Toastの都合上遅延を設定
   await new Promise((resolve) => setTimeout(resolve, TOAST_TIME));
   redirect("/users");
+};
+
+export const updateDefaultUser = async (data: FormData) => {
+  const selectedUserIds = data.getAll("userIds").map((id) => String(id));
+
+  await db.transaction().execute(async (trx) => {
+    await trx.updateTable("User").set({ defaultSelected: false }).execute();
+
+    if (selectedUserIds.length > 0) {
+      await trx
+        .updateTable("User")
+        .set({ defaultSelected: true })
+        .where("id", "in", selectedUserIds)
+        .execute();
+    }
+  });
+
+  redirect("/rooms/new");
 };

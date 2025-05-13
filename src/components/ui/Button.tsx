@@ -24,7 +24,7 @@ const Button = ({
       onClick={disabled ? undefined : onClick}
       type={type}
       disabled={disabled}
-      className={`rounded px-4 py-2 cursor-not-allowed 
+      className={`rounded px-4 py-2
       ${color}
       ${disabled ? "cursor-not-allowed opacity-50" : ""}  
       ${className}`}

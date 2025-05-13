@@ -28,3 +28,16 @@ export const readUsers = async (): Promise<UserData[]> => {
 
   return users;
 };
+
+export const readDefaultUsers = async (): Promise<UserData[]> => {
+  unstable_noStore();
+
+  const defaultUsers = await db
+    .selectFrom("User")
+    .select(["id", "name", "icon", "defaultSelected", "createdAt", "updatedAt"])
+    .where("defaultSelected", "=", true)
+    .orderBy("createdAt", "asc")
+    .execute();
+
+  return defaultUsers;
+};

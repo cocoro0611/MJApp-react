@@ -5,19 +5,18 @@ import { db } from "../db";
 import type { UserData } from "./type";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
-import { readUsers } from "./read";
+import { readDefaultUsers } from "./read";
 
 type UserCreateData = Omit<UserData, "createdAt" | "updatedAt">;
 
 export const createUser = async (data: FormData) => {
-  const allUsers = await readUsers();
-  const users = allUsers.filter((user) => user.defaultSelected === true);
+  const defaultUsers = await readDefaultUsers();
 
   const userData: UserCreateData = {
     id: v4(),
     name: String(data.get("name")),
     icon: String(data.get("icon")),
-    defaultSelected: users.length < 4,
+    defaultSelected: defaultUsers.length < 4,
   };
   await db.insertInto("User").values(userData).execute();
 

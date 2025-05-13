@@ -5,15 +5,11 @@ import Image from "next/image";
 import UserCard from "@/src/template/Users/UserCard";
 import { ICON_LIST } from "@/src/constants/iconList";
 
-interface IconSelectProps {
-  className?: string;
+interface SelectIconProps {
   defaultValue?: string;
 }
 
-const IconSelectField = ({
-  className = "",
-  defaultValue = "",
-}: IconSelectProps) => {
+const SelectIcon = ({ defaultValue = "" }: SelectIconProps) => {
   const initialIcon = ICON_LIST.includes(defaultValue)
     ? defaultValue
     : ICON_LIST[0];
@@ -21,10 +17,8 @@ const IconSelectField = ({
   const [selectedIcon, setSelectedIcon] = useState(initialIcon);
 
   return (
-    <div>
-      <label className={`flex text-blue-800 font-bold ${className}`}>
-        アイコン
-      </label>
+    <div className="form-width">
+      <label className={`flex text-blue-800 font-bold `}>アイコン</label>
       <input type="hidden" name="icon" value={selectedIcon} />
       <div className="center py-4">
         <UserCard name="名前" icon={selectedIcon} size="lg" />
@@ -50,4 +44,4 @@ const IconSelectField = ({
   );
 };
 
-export default IconSelectField;
+export default SelectIcon;

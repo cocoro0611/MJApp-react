@@ -22,7 +22,7 @@ const ToastButton = ({
   alertColor,
   color = "primary",
   disabled = false,
-  className = "",
+  className = "form-width",
 }: ToastButtonProps) => {
   const [open, setOpen] = useState(false);
 

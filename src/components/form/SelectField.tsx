@@ -19,20 +19,20 @@ const SelectField = ({
   name,
   options,
   defaultValue,
-  className = "",
+  className = "form-width",
 }: SelectFieldProps) => {
   const [selectedValue, setSelectedValue] = useState<number | string>(
     defaultValue
   );
 
   return (
-    <div className={`${className}`}>
-      <label htmlFor={name} className="flex text-blue-800 font-bold ">
+    <div className={className}>
+      <label htmlFor={name} className="flex text-blue-800 font-bold">
         {label}
       </label>
       <input id={name} name={name} type="hidden" value={selectedValue} />
-      <div className="center gap-2 mt-2">
-        <div className="grid-2 text-sm">
+      <div className="center gap-2 mt-2 text-sm">
+        <div className="grid-2">
           {options.map((option) => (
             <button
               key={option.value}
