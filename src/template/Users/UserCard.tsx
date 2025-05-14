@@ -1,5 +1,5 @@
-import Card from "@/src/components/ui/Card";
 import Image from "next/image";
+import Card from "@/src/components/ui/Card";
 
 interface UserCardProps {
   href?: string;

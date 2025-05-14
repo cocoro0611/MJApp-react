@@ -22,7 +22,7 @@ const SelectField = ({
   className = "form-width",
 }: SelectFieldProps) => {
   const [selectedValue, setSelectedValue] = useState<number | string>(
-    defaultValue,
+    defaultValue
   );
 
   return (
@@ -37,11 +37,13 @@ const SelectField = ({
             <button
               key={option.value}
               type="button"
-              className={
-                selectedValue === option.value
-                  ? "setting-btn-on"
-                  : "setting-btn-off"
-              }
+              className={`scale-effect
+                ${
+                  selectedValue === option.value
+                    ? "setting-btn-on"
+                    : "setting-btn-off"
+                }
+                `}
               onClick={() => setSelectedValue(option.value)}
             >
               {option.label}

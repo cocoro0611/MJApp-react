@@ -13,21 +13,18 @@ interface RoomCardProps {
   users: RoomUsers[];
 }
 
-const RoomCard = ({
-  href,
-  name,
-  users,
-}: RoomCardProps) => {
+const RoomCard = ({ href, name, users }: RoomCardProps) => {
   return (
     <Card
       href={href}
-      className="flex flex-col px-4 py-2 secondary card-border"
+      className="flex flex-col w-full px-4 py-2 secondary card-border"
     >
       <div className="text-left">{name}</div>
       <div className="center gap-8">
         {users.map((user) => (
           <div key={user.name} className="text-xs">
             <Image
+              key={user.name}
               src={user.icon}
               alt={`${user.name}のアイコン`}
               width={40}

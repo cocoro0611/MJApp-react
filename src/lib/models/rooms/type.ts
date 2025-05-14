@@ -21,6 +21,6 @@ export type RoomUserData = Pick<
   "id" | "position" | "userId" | "roomId" | "createdAt" | "updatedAt"
 >;
 
-export type ReadUsersData = Pick<RoomData, "id" | "name"> & {
+export type ReadRoomsData = Pick<RoomData, "id" | "name"> & {
   users: (Pick<UserData, "id" | "name" | "icon"> & { totalScore: number })[];
 };
