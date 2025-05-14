@@ -11,7 +11,7 @@ const useUserSelect = (users: UserData[], maxSelection: number = 4) => {
   };
 
   const [selectedUserIds, setSelectedUserIds] = useState<string[]>(
-    getDefaultSelectedUserIds
+    getDefaultSelectedUserIds,
   );
 
   // ユーザーの選択状態を切り替える関数

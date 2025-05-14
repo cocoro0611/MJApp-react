@@ -6,7 +6,7 @@ interface UserCardProps {
   name: string;
   icon: string;
   size?: "sm" | "md" | "lg";
-  isColor?: string;
+  className?: string;
 }
 
 const cardSizeClassName = {
@@ -32,12 +32,15 @@ const UserCard = ({
   name,
   icon,
   size = "md",
-  isColor = "secondary card-border",
+  className = "secondary card-border",
 }: UserCardProps) => {
   const cardSize = cardSizeClassName[size];
 
   return (
-    <Card href={href} className={`center flex-col ${isColor} ${cardSize.card}`}>
+    <Card
+      href={href}
+      className={`center flex-col ${cardSize.card} ${className}`}
+    >
       <Image
         src={icon}
         alt="user-icon"

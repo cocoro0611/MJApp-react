@@ -8,7 +8,7 @@ interface ButtonFixedProps {
 const ButtonFixed = ({ href, disabled = false }: ButtonFixedProps) => {
   if (disabled) {
     return (
-      <span className="fixed-btn primary cursor-not-allowed opacity-50">+</span>
+      <div className="fixed-btn primary cursor-not-allowed opacity-50">+</div>
     );
   }
 

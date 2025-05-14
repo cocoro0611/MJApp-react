@@ -1,4 +1,5 @@
 import type { Room, RoomUser } from "../types";
+import type { UserData } from "../users/type";
 import { TS } from "../types-utils";
 
 export type RoomData = Pick<
@@ -19,3 +20,7 @@ export type RoomUserData = Pick<
   TS<RoomUser>,
   "id" | "position" | "userId" | "roomId" | "createdAt" | "updatedAt"
 >;
+
+export type ReadUsersData = Pick<RoomData, "id" | "name"> & {
+  users: (Pick<UserData, "id" | "name" | "icon"> & { totalScore: number })[];
+};

@@ -5,17 +5,12 @@ import InputField from "@/src/components/form/InputField";
 import SelectIcon from "@/src/components/form/users/SelectIcon";
 import ToastButton from "@/src/components/nav/ToastButton";
 import { useState } from "react";
-
-type UserType = {
-  id: string;
-  name: string;
-  icon: string;
-};
+import type { ReadUserData } from "@/src/lib/models/users/type";
 
 interface UserFormProps {
   action: (formData: FormData) => void;
   btnText: string;
-  user?: UserType;
+  user?: ReadUserData;
 }
 
 const UserForm = ({ action, btnText, user }: UserFormProps) => {

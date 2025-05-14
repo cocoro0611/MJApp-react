@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import UserCard from "@/src/template/Users/UserCard";
+import { useState } from "react";
 import { ICON_LIST } from "@/src/constants/iconList";
 
 interface SelectIconProps {

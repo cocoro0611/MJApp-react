@@ -22,7 +22,7 @@ const SelectField = ({
   className = "form-width",
 }: SelectFieldProps) => {
   const [selectedValue, setSelectedValue] = useState<number | string>(
-    defaultValue
+    defaultValue,
   );
 
   return (

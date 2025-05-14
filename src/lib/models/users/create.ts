@@ -5,7 +5,7 @@ import { db } from "../db";
 import type { UserData } from "./type";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
-import { readDefaultUsers } from "./read";
+import { readDefaultUsers } from "./read/read-default-users";
 
 type UserCreateData = Omit<UserData, "createdAt" | "updatedAt">;
 

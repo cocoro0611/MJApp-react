@@ -37,10 +37,10 @@ const SelectRoomUsers = ({ users }: SelectRoomUsersProps) => {
                 name={user.name}
                 icon={user.icon}
                 size="sm"
-                isColor={
+                className={
                   isUserSelected(user.id)
-                    ? "secondary card-border "
-                    : "border-2 border-gray-200 rounded-lg"
+                    ? "secondary card-border"
+                    : "not-select-border"
                 }
               />
             </div>

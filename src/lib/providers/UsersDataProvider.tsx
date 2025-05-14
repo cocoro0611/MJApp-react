@@ -2,7 +2,7 @@
 
 import { ReactNode, createContext, useEffect, useState } from "react";
 import type { UserData } from "../models/users/type";
-import { readUsers } from "../models/users/read";
+import { readUsers } from "../models/users/read/read-users";
 
 interface UsersDataProviderProps {
   children: ReactNode;

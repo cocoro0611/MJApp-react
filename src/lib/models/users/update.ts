@@ -6,10 +6,6 @@ import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
 
 type UserUpdateData = Omit<UserData, "defaultSelected" | "createdAt">;
-type updateDefaultUser = Omit<
-  UserData,
-  "name" | "icon" | "createdAt" | "updatedAt"
->;
 
 export const updateUser = async (data: FormData) => {
   const userId = String(data.get("id"));
@@ -41,5 +37,6 @@ export const updateDefaultUser = async (data: FormData) => {
     }
   });
 
+  // これは瞬時に反映してほしいので、Toastの設定はなし
   redirect("/rooms/new");
 };

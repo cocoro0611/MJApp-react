@@ -2,7 +2,7 @@ import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import RoomCard from "@/src/template/Rooms/RoomCard";
 import ButtonFixed from "@/src/components/ui/ButtonFixed";
-import { readDefaultUsers } from "@/src/lib/models/users/read";
+import { readDefaultUsers } from "@/src/lib/models/users/read/read-default-users";
 
 // TODO: readroomsの実装
 const rooms = [
@@ -10,10 +10,30 @@ const rooms = [
     id: "11111",
     name: "2025年5月4日",
     users: [
-      { name: "太郎", icon: "/users-icon/monster01.png", totalScore: -10 },
-      { name: "二郎", icon: "/users-icon/monster02.png", totalScore: -30 },
-      { name: "三郎", icon: "/users-icon/monster03.png", totalScore: 30 },
-      { name: "四郎", icon: "/users-icon/monster04.png", totalScore: 10 },
+      {
+        id: "ssss",
+        name: "太郎",
+        icon: "/users-icon/monster01.png",
+        totalScore: -10,
+      },
+      {
+        id: "ssss",
+        name: "二郎",
+        icon: "/users-icon/monster02.png",
+        totalScore: -30,
+      },
+      {
+        id: "ssss",
+        name: "三郎",
+        icon: "/users-icon/monster03.png",
+        totalScore: 30,
+      },
+      {
+        id: "ssss",
+        name: "四郎",
+        icon: "/users-icon/monster04.png",
+        totalScore: 10,
+      },
     ],
   },
   {
