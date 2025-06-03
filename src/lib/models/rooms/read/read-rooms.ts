@@ -1,11 +1,11 @@
 "use server";
 
 import { db } from "../../db";
-import type { ReadRoomsData } from "../type";
+import type { ReadRoomData } from "../type";
 
 // N+1問題はあるが一旦はよし
-export const readRooms = async (): Promise<ReadRoomsData[]> => {
-  const roomsUsers: ReadRoomsData[] = [];
+export const readRooms = async (): Promise<ReadRoomData[]> => {
+  const roomsUsers: ReadRoomData[] = [];
 
   const rooms = await db
     .selectFrom("Room")

@@ -5,8 +5,6 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 
 export type Chip = {
-    id: Generated<string>;
-    input: number;
     chip: number;
     gameCount: number;
     createdAt: Generated<Timestamp>;
@@ -27,7 +25,6 @@ export type Room = {
     updatedAt: Generated<Timestamp>;
 };
 export type RoomUser = {
-    id: Generated<string>;
     position: number;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
@@ -35,8 +32,6 @@ export type RoomUser = {
     roomId: string;
 };
 export type Score = {
-    id: Generated<string>;
-    input: number;
     score: number;
     gameCount: number;
     createdAt: Generated<Timestamp>;

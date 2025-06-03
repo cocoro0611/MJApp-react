@@ -16,19 +16,17 @@ CREATE TABLE "Room" (
 
 -- CreateTable
 CREATE TABLE "RoomUser" (
-    "id" UUID NOT NULL,
     "position" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" UUID NOT NULL,
     "roomId" UUID NOT NULL,
 
-    CONSTRAINT "RoomUser_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "RoomUser_pkey" PRIMARY KEY ("roomId","userId")
 );
 
 -- CreateTable
 CREATE TABLE "Score" (
-    "id" UUID NOT NULL,
     "input" INTEGER NOT NULL,
     "score" INTEGER NOT NULL,
     "gameCount" INTEGER NOT NULL,
@@ -37,12 +35,11 @@ CREATE TABLE "Score" (
     "userId" UUID NOT NULL,
     "roomId" UUID NOT NULL,
 
-    CONSTRAINT "Score_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Score_pkey" PRIMARY KEY ("userId","roomId","gameCount")
 );
 
 -- CreateTable
 CREATE TABLE "Chip" (
-    "id" UUID NOT NULL,
     "input" INTEGER NOT NULL,
     "chip" INTEGER NOT NULL,
     "gameCount" INTEGER NOT NULL,
@@ -51,20 +48,23 @@ CREATE TABLE "Chip" (
     "userId" UUID NOT NULL,
     "roomId" UUID NOT NULL,
 
-    CONSTRAINT "Chip_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Chip_pkey" PRIMARY KEY ("userId","roomId","gameCount")
+);
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" UUID NOT NULL,
+    "name" TEXT NOT NULL,
+    "icon" TEXT NOT NULL,
+    "isDefaultUser" BOOLEAN NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "RoomUser_roomId_position_key" ON "RoomUser"("roomId", "position");
-
--- CreateIndex
-CREATE UNIQUE INDEX "RoomUser_roomId_userId_key" ON "RoomUser"("roomId", "userId");
-
--- CreateIndex
-CREATE INDEX "Score_userId_roomId_gameCount_idx" ON "Score"("userId", "roomId", "gameCount");
-
--- CreateIndex
-CREATE INDEX "Chip_userId_roomId_gameCount_idx" ON "Chip"("userId", "roomId", "gameCount");
 
 -- AddForeignKey
 ALTER TABLE "RoomUser" ADD CONSTRAINT "RoomUser_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

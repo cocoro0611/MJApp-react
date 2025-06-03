@@ -16,7 +16,6 @@ model Room {
 }
 
 model RoomUser {
-    id        String   @id @default(uuid()) @db.Uuid
     position  Int // 1-4のポジション（player1-4に相当）
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())
@@ -26,6 +25,6 @@ model RoomUser {
     room   Room   @relation(fields: [roomId], references: [id])
     roomId String @db.Uuid
 
+    @@id([roomId, userId])
     @@unique([roomId, position])
-    @@unique([roomId, userId])
 }

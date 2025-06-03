@@ -3,8 +3,6 @@ import { TS } from "../types-utils";
 
 export type ScoreData = Pick<
   TS<Score>,
-  | "id"
-  | "input"
   | "score"
   | "gameCount"
   | "userId"
@@ -15,8 +13,6 @@ export type ScoreData = Pick<
 
 export type ChipData = Pick<
   TS<Chip>,
-  | "id"
-  | "input"
   | "chip"
   | "gameCount"
   | "userId"

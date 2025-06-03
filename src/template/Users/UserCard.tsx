@@ -11,7 +11,7 @@ interface UserCardProps {
 
 const cardSizeClassName = {
   sm: {
-    card: "h-16 w-16",
+    card: "h-16 w-full",
     image: { width: 30, height: 30 },
     text: "text-sm mt-1",
   },

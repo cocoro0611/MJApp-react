@@ -5,10 +5,6 @@
   .form-width {
     @apply w-[19.4rem] md:w-[39.2rem];
   }
-  .grid-fixed-4 {
-    @apply container mx-auto fixed top-0 z-10;
-    @apply grid grid-cols-4 gap-4;
-  }
   .grid-2 {
     @apply grid grid-cols-2 md:grid-cols-4 gap-2;
   }

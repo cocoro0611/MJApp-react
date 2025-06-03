@@ -18,9 +18,19 @@ export type RoomData = Pick<
 
 export type RoomUserData = Pick<
   TS<RoomUser>,
-  "id" | "position" | "userId" | "roomId" | "createdAt" | "updatedAt"
+  "position" | "userId" | "roomId" | "createdAt" | "updatedAt"
 >;
 
-export type ReadRoomsData = Pick<RoomData, "id" | "name"> & {
-  users: (Pick<UserData, "id" | "name" | "icon"> & { totalScore: number })[];
+export type ReadRoomData = Pick<RoomData, "id" | "name"> & {
+  users: (Pick<UserData, "id" | "name" | "icon"> & {
+    totalScore: number;
+  })[];
+};
+
+export type ReadRoomDetailData = Pick<RoomData, "id" | "name"> & {
+  users: (Pick<UserData, "id" | "name" | "icon"> & {
+    totalScore: number;
+    totalChip: number;
+    totalPoint: number;
+  })[];
 };

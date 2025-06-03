@@ -22,19 +22,16 @@ export const createRoom = async (data: FormData) => {
     bonusPoint: String(data.get("bonusPoint")),
     scoreRate: Number(data.get("scoreRate")),
     chipRate: Number(data.get("chipRate")),
-    gameAmount: 0,
+    gameAmount: Number(data.get("gameAmount")),
   };
 
   const roomUsersData: RoomUserCreateData[] = userIds.map((userId, index) => ({
-    id: v4(),
     position: index + 1,
     userId: String(userId),
     roomId: roomData.id,
   }));
 
   const scoreData: ScoreCreateData[] = userIds.map((userId) => ({
-    id: v4(),
-    input: 0,
     score: 0,
     gameCount: 1,
     userId: String(userId),
