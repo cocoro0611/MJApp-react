@@ -1,13 +1,53 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import DeleteForm from "@/src/components/form/DeleteForm";
-import GameBord from "@/src/template/Rooms/GameBord";
+import GameBoard from "@/src/template/Rooms/GameBoard";
+import ScoreBoard from "@/src/template/Rooms/ScoreBoard";
 import { readRoom } from "@/src/lib/models/rooms/read/read-room";
 import { deleteRoom } from "@/src/lib/models/rooms/delete";
 
 interface RoomEditPageProps {
   params: Promise<{ uuid: string }>;
 }
+
+const ScoreData = [
+  {
+    gameCount: 1,
+    scores: [
+      { position: 1, score: 10 },
+      { position: 2, score: 10 },
+      { position: 3, score: 10 },
+      { position: 4, score: 10 },
+    ],
+  },
+  {
+    gameCount: 2,
+    scores: [
+      { position: 1, score: 10 },
+      { position: 2, score: 10 },
+      { position: 3, score: 10 },
+      { position: 4, score: 10 },
+    ],
+  },
+  {
+    gameCount: 3,
+    scores: [
+      { position: 1, score: 10 },
+      { position: 2, score: 10 },
+      { position: 3, score: 10 },
+      { position: 4, score: 10 },
+    ],
+  },
+  {
+    gameCount: 4,
+    scores: [
+      { position: 1, score: 10 },
+      { position: 2, score: 10 },
+      { position: 3, score: 10 },
+      { position: 4, score: 10 },
+    ],
+  },
+];
 
 const RoomEditPage = async ({ params }: RoomEditPageProps) => {
   const { uuid } = await params;
@@ -23,15 +63,8 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
         <DeleteForm action={deleteRoom} name="id" value={room?.id} />
       </Header>
       <Main>
-        <GameBord room={room} />
-        
-        <div className="score-container room-container-border">
-          <div className="room-container-inner-border">sss</div>
-          <div className="room-container-inner-border">sss</div>
-          <div className="room-container-inner-border">sss</div>
-          <div className="room-container-inner-border">sss</div>
-          <div className="room-container-inner-border">sss</div>
-        </div>
+        <GameBoard room={room} />
+        <ScoreBoard scores={ScoreData} />
       </Main>
     </>
   );

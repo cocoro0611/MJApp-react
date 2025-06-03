@@ -16,13 +16,14 @@
   }
   .score-container {
     @apply container mx-auto fixed top-48;
+    @apply text-sm;
   }
   .room-container-border {
     @apply grid grid-cols-5;
-    @apply border-x border-gray-300;
+    @apply border border-gray-300;
   }
   .room-container-inner-border {
-    @apply border border-gray-300;
+    @apply border-x border-gray-300;
   }
   .room-container-inner-border > * {
     @apply border-y border-gray-300;

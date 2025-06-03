@@ -2,11 +2,11 @@ import Card from "@/src/components/ui/Card";
 import UserCard from "@/src/template/Users/UserCard";
 import { ReadRoomDetailData } from "@/src/lib/models/rooms/type";
 
-interface GameBordProps {
+interface GameBoardProps {
   room: ReadRoomDetailData;
 }
 
-const GameBord = ({ room }: GameBordProps) => {
+const GameBoard = ({ room }: GameBoardProps) => {
   return (
     <div className="room-container room-container-border">
       <div className="room-container-inner-border">
@@ -45,4 +45,4 @@ const GameBord = ({ room }: GameBordProps) => {
   );
 };
 
-export default GameBord;
+export default GameBoard;
