@@ -46,3 +46,5 @@ export const DEFAULT_GAME_RULES = {
   scoreRate: 50,
   chipRate: 200,
 };
+
+export const MAX_ROOM_PLAYERS = 4;

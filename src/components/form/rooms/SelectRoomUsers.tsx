@@ -3,29 +3,25 @@
 import Button from "@/src/components/ui/Button";
 import UserCard from "../../../template/Users/UserCard";
 import useUserSelect from "@/src/hooks/useUserSelect";
-import type { UserData } from "@/src/lib/models/users/type";
+import type { ReadUserData } from "@/src/lib/models/users/type";
+import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
 
 interface SelectRoomUsersProps {
-  users: UserData[];
+  users: ReadUserData[];
 }
 
 const SelectRoomUsers = ({ users }: SelectRoomUsersProps) => {
-  const {
-    selectedUserIds,
-    toggleUser,
-    isUserSelected,
-    isSelectionComplete,
-    selectionCount,
-    maxSelection,
-  } = useUserSelect(users, 4);
+  const { selectedUsers, toggleUser, isUserSelected, isReady } =
+    useUserSelect(users);
 
   return (
     <div className="form-width">
       <label className="center text-blue-800 font-bold">
-        ４人選択してください ({selectionCount}/{maxSelection})
+        {MAX_ROOM_PLAYERS}人選択してください ({selectedUsers.length}/
+        {MAX_ROOM_PLAYERS})
       </label>
 
-      {selectedUserIds.map((userId) => (
+      {selectedUsers.map((userId) => (
         <input key={userId} type="hidden" name="userIds" value={userId} />
       ))}
 
@@ -47,7 +43,7 @@ const SelectRoomUsers = ({ users }: SelectRoomUsersProps) => {
           ))}
         </div>
       </div>
-      <Button disabled={!isSelectionComplete()} className="form-width">
+      <Button disabled={!isReady()} className="form-width">
         選択
       </Button>
     </div>

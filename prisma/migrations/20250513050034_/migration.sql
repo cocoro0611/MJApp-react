@@ -1,2 +1,2 @@
 -- AlterTable
-ALTER TABLE "User" ADD COLUMN     "defaultSelected" BOOLEAN NOT NULL DEFAULT true;
+ALTER TABLE "User" ADD COLUMN     "isDefaultUser" BOOLEAN NOT NULL DEFAULT true;

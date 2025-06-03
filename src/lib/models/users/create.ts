@@ -16,7 +16,7 @@ export const createUser = async (data: FormData) => {
     id: v4(),
     name: String(data.get("name")),
     icon: String(data.get("icon")),
-    defaultSelected: defaultUsers.length < 4,
+    isDefaultUser: defaultUsers.length < 4,
   };
   await db.insertInto("User").values(userData).execute();
 

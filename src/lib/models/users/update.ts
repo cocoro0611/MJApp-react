@@ -5,7 +5,7 @@ import type { UserData } from "./type";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
 
-type UserUpdateData = Omit<UserData, "defaultSelected" | "createdAt">;
+type UserUpdateData = Omit<UserData, "isDefaultUser" | "createdAt">;
 
 export const updateUser = async (data: FormData) => {
   const userId = String(data.get("id"));
@@ -26,12 +26,12 @@ export const updateDefaultUser = async (data: FormData) => {
   const selectedUserIds = data.getAll("userIds").map((id) => String(id));
 
   await db.transaction().execute(async (trx) => {
-    await trx.updateTable("User").set({ defaultSelected: false }).execute();
+    await trx.updateTable("User").set({ isDefaultUser: false }).execute();
 
     if (selectedUserIds.length > 0) {
       await trx
         .updateTable("User")
-        .set({ defaultSelected: true })
+        .set({ isDefaultUser: true })
         .where("id", "in", selectedUserIds)
         .execute();
     }

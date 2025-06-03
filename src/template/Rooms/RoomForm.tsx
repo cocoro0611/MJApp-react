@@ -29,6 +29,7 @@ interface RoomFormProps {
 
 const RoomForm = ({ action, btnText, roomUsers }: RoomFormProps) => {
   const [name, setName] = useState(new Date().toLocaleDateString("ja-JP"));
+  const [amount, setAmount] = useState("");
 
   return (
     <Form action={action} className="center flex-col space-y-8">
@@ -71,6 +72,15 @@ const RoomForm = ({ action, btnText, roomUsers }: RoomFormProps) => {
         name="chipRate"
         options={CHIP_RATE_OPTIONS}
         defaultValue={DEFAULT_GAME_RULES.chipRate}
+      />
+      <InputField
+        label="場代（後ほど更新できます）"
+        name="gameAmount"
+        type="number"
+        maxLength={5}
+        placeholder="金額を入力"
+        value={amount}
+        onChange={(value) => setAmount(value)}
       />
       <ToastButton alertMessage={`${btnText}しました`} alertColor="success">
         {btnText}

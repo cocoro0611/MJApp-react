@@ -1,2 +1,2 @@
 -- AlterTable
-ALTER TABLE "User" ALTER COLUMN "defaultSelected" DROP DEFAULT;
+ALTER TABLE "User" ALTER COLUMN "isDefaultUser" DROP DEFAULT;

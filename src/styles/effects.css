@@ -1,0 +1,8 @@
+@layer Effect {
+  .scale-effect {
+    @apply hover:scale-105 active:scale-95 duration-150;
+  }
+  .revolution-effect {
+    @apply hover:rotate-12 duration-150;
+  }
+}

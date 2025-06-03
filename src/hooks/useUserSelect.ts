@@ -1,59 +1,47 @@
 "use client";
 
 import { useState } from "react";
-import type { UserData } from "@/src/lib/models/users/type";
+import { MAX_ROOM_PLAYERS } from "../constants/gameRules";
+import type { ReadUserData } from "@/src/lib/models/users/type";
 
-// FIXME: なぜか動いているので確認が必要
-const useUserSelect = (users: UserData[], maxSelection: number = 4) => {
-  // 初期状態：defaultSelectedがtrueのユーザーのIDを取得
-  const getDefaultSelectedUserIds = () => {
-    return users.filter((user) => user.defaultSelected).map((user) => user.id);
+const useUserSelect = (users: ReadUserData[]) => {
+  // 初期値：isDefaultUserがtrueのユーザーを取得
+  const getDefaultUsers = () => {
+    return users.filter((user) => user.isDefaultUser).map((user) => user.id);
   };
 
-  const [selectedUserIds, setSelectedUserIds] = useState<string[]>(
-    getDefaultSelectedUserIds,
-  );
+  const [selectedUsers, setSelectedUsers] = useState<string[]>(getDefaultUsers);
 
-  // ユーザーの選択状態を切り替える関数
+  // 選択状態を切り替え
   const toggleUser = (userId: string) => {
-    const isUserSelected = selectedUserIds.includes(userId);
+    const isUserSelected = selectedUsers.includes(userId);
 
     if (isUserSelected) {
-      removeUserFromSelection(userId);
+      // 選択解除
+      setSelectedUsers((prev) => prev.filter((id) => id !== userId));
     } else {
-      addUserToSelection(userId);
+      // 選択追加（上限チェック）
+      if (selectedUsers.length < MAX_ROOM_PLAYERS) {
+        setSelectedUsers((prev) => [...prev, userId]);
+      }
     }
   };
 
-  // ユーザーを選択リストに追加
-  const addUserToSelection = (userId: string) => {
-    if (selectedUserIds.length < maxSelection) {
-      setSelectedUserIds((prev) => [...prev, userId]);
-    }
-  };
-
-  // ユーザーを選択リストから削除
-  const removeUserFromSelection = (userId: string) => {
-    setSelectedUserIds((prev) => prev.filter((id) => id !== userId));
-  };
-
-  // ユーザーが選択されているかチェック
+  // 選択状態の確認：親コンポーネントのカードの色制御で利用
   const isUserSelected = (userId: string) => {
-    return selectedUserIds.includes(userId);
+    return selectedUsers.includes(userId);
   };
 
-  // 選択完了かどうか
-  const isSelectionComplete = () => {
-    return selectedUserIds.length === maxSelection;
+  // 選択完了の確認：親コンポーネントのボタンの活性制御で利用
+  const isReady = () => {
+    return selectedUsers.length === MAX_ROOM_PLAYERS;
   };
 
   return {
-    selectedUserIds,
+    selectedUsers,
     toggleUser,
     isUserSelected,
-    isSelectionComplete,
-    selectionCount: selectedUserIds.length,
-    maxSelection,
+    isReady,
   };
 };
 

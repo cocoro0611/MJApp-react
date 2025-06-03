@@ -3,7 +3,7 @@
 import Image from "next/image";
 import UserCard from "@/src/template/Users/UserCard";
 import { useState } from "react";
-import { ICON_LIST } from "@/src/constants/iconList";
+import { USER_LIST } from "@/src/constants/iconList";
 
 interface SelectIconProps {
   name: string;
@@ -11,7 +11,8 @@ interface SelectIconProps {
 }
 
 const SelectIcon = ({ name, value }: SelectIconProps) => {
-  const initialIcon = ICON_LIST.includes(value) ? value : ICON_LIST[0];
+  const iconList = USER_LIST.map((user) => user.icon);
+  const initialIcon = iconList.includes(value) ? value : iconList[0];
 
   const [selectedIcon, setSelectedIcon] = useState(initialIcon);
 
@@ -23,7 +24,7 @@ const SelectIcon = ({ name, value }: SelectIconProps) => {
         <UserCard name={name} icon={selectedIcon} size="lg" />
       </div>
       <div className="grid-6">
-        {ICON_LIST.map((icon) => (
+        {iconList.map((icon) => (
           <Image
             key={icon}
             src={icon}

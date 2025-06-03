@@ -1,0 +1,12 @@
+@layer Containers {
+  /* 固定するために container mx-auto fixed を指定する必要あり */
+  .header-container {
+    @apply container mx-auto fixed top-0 z-10;
+    @apply font-bold text-lg;
+    @apply bg-blue-800 text-white;
+  }
+  .footer-container {
+    @apply container mx-auto fixed bottom-0 z-10;
+    @apply font-bold text-sm;
+  }
+}

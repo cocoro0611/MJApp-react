@@ -8,7 +8,7 @@ export const readUser = async (
 ): Promise<ReadUserData | null> => {
   const user = await db
     .selectFrom("User")
-    .select(["id", "name", "icon"])
+    .select(["id", "name", "icon", "isDefaultUser"])
     .where("id", "=", userId)
     .executeTakeFirst();
 

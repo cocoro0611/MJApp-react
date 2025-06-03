@@ -3,7 +3,10 @@ import { TS } from "../types-utils";
 
 export type UserData = Pick<
   TS<User>,
-  "id" | "name" | "icon" | "defaultSelected" | "createdAt" | "updatedAt"
+  "id" | "name" | "icon" | "isDefaultUser" | "createdAt" | "updatedAt"
 >;
 
-export type ReadUserData = Pick<UserData, "id" | "name" | "icon">;
+export type ReadUserData = Pick<
+  UserData,
+  "id" | "name" | "icon" | "isDefaultUser"
+>;
