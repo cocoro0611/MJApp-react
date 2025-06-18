@@ -18,7 +18,7 @@ export const USER_LIST: UserListData[] = [
   { name: "魔物12", icon: "/users-icon/monster12.png" },
   { name: "アルパカ", icon: "/users-icon/animal_arupaka.png" },
   { name: "ぶた", icon: "/users-icon/animal_buta.png" },
-  { name: "ハムスター", icon: "/users-icon/animal_hamster.png" },
+  { name: "ハムスタ", icon: "/users-icon/animal_hamster.png" },
   { name: "ひよこ", icon: "/users-icon/animal_hiyoko.png" },
   { name: "いぬ", icon: "/users-icon/animal_inu.png" },
   { name: "くま", icon: "/users-icon/animal_kuma.png" },

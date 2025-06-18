@@ -32,7 +32,7 @@ const ToastButton = ({
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
-    reason?: SnackbarCloseReason,
+    reason?: SnackbarCloseReason
   ) => {
     if (reason === "clickaway") {
       return;
@@ -57,7 +57,12 @@ const ToastButton = ({
         onClose={handleClose}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
-        <Alert onClose={handleClose} severity={alertColor} variant="filled">
+        <Alert
+          onClose={handleClose}
+          severity={alertColor}
+          variant="filled"
+          className="z-20"
+        >
           {alertMessage}
         </Alert>
       </Snackbar>

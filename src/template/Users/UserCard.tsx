@@ -5,20 +5,20 @@ interface UserCardProps {
   href?: string;
   name: string;
   icon: string;
-  size?: "sm" | "md" | "lg";
+  size?: "mdWf" | "md" | "lg";
   className?: string;
 }
 
 const cardSizeClassName = {
-  sm: {
-    card: "h-16 w-full",
+  md: {
+    card: "h-16 w-16",
     image: { width: 30, height: 30 },
     text: "text-sm mt-1",
   },
-  md: {
-    card: "h-20 w-20",
-    image: { width: 50, height: 50 },
-    text: "text-sm",
+  mdWf: {
+    card: "h-16 w-full",
+    image: { width: 30, height: 30 },
+    text: "text-sm mt-1",
   },
   lg: {
     card: "h-40 w-40",

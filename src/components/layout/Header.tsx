@@ -21,7 +21,7 @@ const Header = ({
         <Link href={href} className="w-1/12 py-2">
           {isBackIcon && <ArrowBackIosIcon />}
         </Link>
-        <div className="w-5/6 py-2">{title}</div>
+        <div className="w-5/6 py-2 font-bold text-lg">{title}</div>
         <div className="w-1/12 py-2">{children}</div>
       </header>
       <div className="pb-20"></div>

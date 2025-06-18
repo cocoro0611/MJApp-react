@@ -32,7 +32,6 @@ const SelectRoomUsers = ({ users }: SelectRoomUsersProps) => {
               <UserCard
                 name={user.name}
                 icon={user.icon}
-                size="sm"
                 className={
                   isUserSelected(user.id)
                     ? "secondary card-border"

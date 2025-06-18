@@ -1,9 +1,8 @@
 "use server";
 
 import { v4 } from "uuid";
-import { db } from "../db";
-import type { RoomData, RoomUserData } from "./type";
-import type { ScoreData } from "../scores/type";
+import { db } from "../../db";
+import type { RoomData, RoomUserData, ScoreData } from "../type";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
 

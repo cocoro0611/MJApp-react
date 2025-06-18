@@ -1,44 +1,48 @@
 import Card from "@/src/components/ui/Card";
 import { Fragment } from "react";
 
-interface ScoreItem {
+interface ChipItem {
   position: number;
-  score: number;
+  chip: number;
 }
 
-interface GameScore {
+interface GameChip {
   gameCount: number;
-  scores: ScoreItem[];
+  chips: ChipItem[];
 }
 
-interface ScoreBoardProps {
-  scores: GameScore[];
+interface ChipBoardProps {
+  chips: GameChip[];
 }
 
-const ScoreBoard = ({ scores }: ScoreBoardProps) => {
+const ChipBoard = ({ chips }: ChipBoardProps) => {
+  if (!chips || chips.length === 0) {
+    return null;
+  }
+
   return (
     <>
       <div className="bg-gray-300 text-gray-600 grid-5">
-        <div className="center font-bold">各スコア</div>
+        <div className="center font-bold">各チップ</div>
       </div>
       <div className="grid-5">
-        {scores.map((gameScore) => (
-          <Fragment key={gameScore.gameCount}>
+        {chips.map((gameChip) => (
+          <Fragment key={gameChip.gameCount}>
             <div className="grid-5-inner">
               <div className="center flex-col p-2 h-18">
                 <Card href="" className="secondary card-border w-full p-3">
-                  {gameScore.gameCount}回戦
+                  {gameChip.gameCount}回分
                 </Card>
               </div>
             </div>
-            {gameScore.scores.map((scoreItem) => (
-              <div className="grid-5-inner" key={scoreItem.position}>
+            {gameChip.chips.map((chipItem) => (
+              <div className="grid-5-inner" key={chipItem.position}>
                 <div className="center flex-col p-0.5 h-18">
                   <Card href="" className="secondary card-border w-full p-1">
                     <p className="flex justify-start text-[0.6rem]">点数</p>
                     <p>
                       <span className="px-1 border-b-2 border-blue-400">
-                        {scoreItem.score}
+                        {chipItem.chip}
                       </span>
                       <span>00</span>
                     </p>
@@ -54,4 +58,4 @@ const ScoreBoard = ({ scores }: ScoreBoardProps) => {
   );
 };
 
-export default ScoreBoard;
+export default ChipBoard;

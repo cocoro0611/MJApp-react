@@ -2,30 +2,26 @@
   /* 固定するために container mx-auto fixed を指定する必要あり */
   .header-container {
     @apply container mx-auto fixed top-0 z-10;
-    @apply font-bold text-lg;
     @apply bg-blue-800 text-white;
   }
   .footer-container {
     @apply container mx-auto fixed bottom-0 z-10;
     @apply font-bold text-sm;
   }
-  .room-container {
+  /* GameBoard */
+  .board-container {
     @apply container mx-auto fixed top-11 z-10;
-    @apply text-sm;
     @apply bg-blue-800 text-white;
   }
-  .score-container {
-    @apply container mx-auto fixed top-48;
-    @apply text-sm;
-  }
-  .room-container-border {
+  /* ScoreBoard用のgrid-5 */
+  .grid-5 {
     @apply grid grid-cols-5;
-    @apply border border-gray-300;
+    @apply border border-gray-300 text-sm;
   }
-  .room-container-inner-border {
+  .grid-5-inner {
     @apply border-x border-gray-300;
   }
-  .room-container-inner-border > * {
+  .grid-5-inner > * {
     @apply border-y border-gray-300;
   }
 }
