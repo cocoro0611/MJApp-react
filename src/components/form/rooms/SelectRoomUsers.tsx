@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/src/components/ui/Button";
-import UserCard from "../../../template/Users/UserCard";
+import { UserCard } from "@/src/template/Users";
 import useUserSelect from "@/src/hooks/useUserSelect";
 import type { ReadUserData } from "@/src/lib/models/users/type";
 import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";

@@ -25,8 +25,8 @@ const ScoreBoard = ({ scores }: ScoreBoardProps) => {
         {scores.map((gameScore) => (
           <Fragment key={gameScore.gameCount}>
             <div className="grid-5-inner">
-              <div className="center flex-col p-2 h-18">
-                <Card href="" className="secondary card-border w-full p-3">
+              <div className="center flex-col p-1 h-18">
+                <Card href="" className="secondary card-border w-full py-3">
                   {gameScore.gameCount}回戦
                 </Card>
               </div>

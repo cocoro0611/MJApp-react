@@ -1,7 +1,7 @@
 "use server";
 
-import { db } from "../../db";
-import type { ReadScoreData } from "../type";
+import { db } from "../../../db";
+import type { ReadScoreData } from "../../type";
 
 export const readScores = async (roomId: string): Promise<ReadScoreData[]> => {
   const scoresData: ReadScoreData[] = [];

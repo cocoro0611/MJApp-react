@@ -1,14 +1,19 @@
 import Header from "@/src/components/layout/Header";
 import DeleteForm from "@/src/components/form/DeleteForm";
-import GameBoard from "@/src/template/Rooms/GameBoard";
-import PointBoard from "@/src/template/Rooms/PointBoard";
-import ScoreBoard from "@/src/template/Rooms/ScoreBoard";
-import ChipBoard from "@/src/template/Rooms/ChipBoard";
+import {
+  GameBoard,
+  PointBoard,
+  ScoreBoard,
+  ChipBoard,
+  InputBoard,
+} from "@/src/template/Rooms";
 import AddDataDialog from "@/src/components/nav/AddDataDialog";
-import { readRoom } from "@/src/lib/models/rooms/read/read-room";
-import { readScores } from "@/src/lib/models/rooms/read/read-scores";
-import { readChips } from "@/src/lib/models/rooms/read/read-chips";
-import { deleteRoom } from "@/src/lib/models/rooms/delete";
+import {
+  readRoom,
+  readScores,
+  readChips,
+  deleteRoom,
+} from "@/src/lib/models/rooms";
 
 interface RoomEditPageProps {
   params: Promise<{ uuid: string }>;
@@ -37,6 +42,7 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
         <ScoreBoard scores={scores} />
         <ChipBoard chips={chips} />
       </main>
+      <InputBoard />
       <AddDataDialog roomId={uuid} />
     </>
   );

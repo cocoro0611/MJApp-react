@@ -1,7 +1,7 @@
 "use server";
 
-import { db } from "../../db";
-import type { ReadUserData } from "../type";
+import { db } from "../../../db";
+import type { ReadUserData } from "../../type";
 
 export const readUsers = async (): Promise<ReadUserData[]> => {
   const users = await db

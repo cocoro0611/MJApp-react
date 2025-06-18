@@ -1,7 +1,7 @@
 "use server";
 
-import { db } from "../db";
-import type { UserData } from "./type";
+import { db } from "../../../db";
+import type { UserData } from "../../type";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
 
@@ -20,23 +20,4 @@ export const updateUser = async (data: FormData) => {
   // Toastの都合上遅延を設定
   await new Promise((resolve) => setTimeout(resolve, TOAST_TIME));
   redirect("/users");
-};
-
-export const updateDefaultUser = async (data: FormData) => {
-  const selectedUserIds = data.getAll("userIds").map((id) => String(id));
-
-  await db.transaction().execute(async (trx) => {
-    await trx.updateTable("User").set({ isDefaultUser: false }).execute();
-
-    if (selectedUserIds.length > 0) {
-      await trx
-        .updateTable("User")
-        .set({ isDefaultUser: true })
-        .where("id", "in", selectedUserIds)
-        .execute();
-    }
-  });
-
-  // これは瞬時に反映してほしいので、Toastの設定はなし
-  redirect("/rooms/new");
 };

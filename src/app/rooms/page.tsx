@@ -2,8 +2,8 @@ import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import RoomCard from "@/src/template/Rooms/RoomCard";
 import ButtonFixed from "@/src/components/ui/ButtonFixed";
-import { readRooms } from "@/src/lib/models/rooms/read/read-rooms";
-import { readDefaultUsers } from "@/src/lib/models/users/read/read-default-users";
+import { readRooms } from "@/src/lib/models/rooms";
+import { readDefaultUsers } from "@/src/lib/models/users";
 
 const RoomsPage = async () => {
   const rooms = await readRooms();

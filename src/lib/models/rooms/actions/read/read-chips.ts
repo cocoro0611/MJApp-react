@@ -1,7 +1,7 @@
 "use server";
 
-import { db } from "../../db";
-import type { ReadChipData } from "../type";
+import { db } from "../../../db";
+import type { ReadChipData } from "../../type";
 
 export const readChips = async (roomId: string): Promise<ReadChipData[]> => {
   const chipsData: ReadChipData[] = [];

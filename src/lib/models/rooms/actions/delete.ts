@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "../db";
+import { db } from "../../db";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
 

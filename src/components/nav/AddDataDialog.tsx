@@ -6,8 +6,7 @@ import ButtonFixed from "@/src/components/ui/ButtonFixed";
 import Button from "../ui/Button";
 import ToastButton from "@/src/components/nav/ToastButton";
 import { useState } from "react";
-import { createScore } from "@/src/lib/models/rooms/create/create-score";
-import { createChip } from "@/src/lib/models/rooms/create/create-chip";
+import { createScore, createChip } from "@/src/lib/models/rooms";
 
 interface AddDataDialogProps {
   roomId: string;

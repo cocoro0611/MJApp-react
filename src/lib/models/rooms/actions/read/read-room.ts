@@ -1,7 +1,7 @@
 "use server";
 
-import { db } from "../../db";
-import type { ReadRoomDetailData } from "../type";
+import { db } from "../../../db";
+import type { ReadRoomDetailData } from "../../type";
 
 export const readRoom = async (
   roomId: string

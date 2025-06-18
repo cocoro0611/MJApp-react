@@ -1,8 +1,8 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import RoomForm from "@/src/template/Rooms/RoomForm";
-import { createRoom } from "@/src/lib/models/rooms/create/create-room";
-import { readDefaultUsers } from "@/src/lib/models/users/read/read-default-users";
+import { createRoom } from "@/src/lib/models/rooms";
+import { readDefaultUsers } from "@/src/lib/models/users";
 
 const RoomNewPage = async () => {
   const roomUsers = await readDefaultUsers();

@@ -1,7 +1,7 @@
 "use server";
 
-import { db } from "../../db";
-import type { ReadRoomData } from "../type";
+import { db } from "../../../db";
+import type { ReadRoomData } from "../../type";
 
 // N+1問題はあるが一旦はよし
 export const readRooms = async (): Promise<ReadRoomData[]> => {

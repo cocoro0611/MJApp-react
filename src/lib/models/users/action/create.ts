@@ -1,8 +1,8 @@
 "use server";
 
 import { v4 } from "uuid";
-import { db } from "../db";
-import type { UserData } from "./type";
+import { db } from "../../db";
+import type { UserData } from "../type";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
 import { readDefaultUsers } from "./read/read-default-users";

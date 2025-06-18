@@ -1,7 +1,7 @@
 "use server";
 
-import { db } from "../../db";
-import type { ReadUserData } from "../type";
+import { db } from "../../../db";
+import type { ReadUserData } from "../../type";
 
 export const readUser = async (
   userId: string

@@ -1,8 +1,8 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
-import UserCard from "@/src/template/Users/UserCard";
+import { UserCard } from "@/src/template/Users";
 import ButtonFixed from "@/src/components/ui/ButtonFixed";
-import { readUsers } from "@/src/lib/models/users/read/read-users";
+import { readUsers } from "@/src/lib/models/users";
 
 const UsersPage = async () => {
   const users = await readUsers();

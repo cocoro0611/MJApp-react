@@ -1,7 +1,7 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import UserForm from "@/src/template/Users/UserForm";
-import { createUser } from "@/src/lib/models/users/create";
+import { createUser } from "@/src/lib/models/users";
 
 const UserNewPage = () => {
   return (

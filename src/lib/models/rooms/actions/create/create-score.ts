@@ -1,13 +1,13 @@
 "use server";
 
-import { db } from "../../db";
-import type { ChipData } from "../type";
+import { db } from "../../../db";
+import type { ScoreData } from "../../type";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
 
-type ChipCreateData = Omit<ChipData, "createdAt" | "updatedAt">;
+type ScoreCreateData = Omit<ScoreData, "createdAt" | "updatedAt">;
 
-export const createChip = async (data: FormData) => {
+export const createScore = async (data: FormData) => {
   const roomId = String(data.get("roomId"));
 
   // ルームのユーザー一覧を取得
@@ -19,19 +19,19 @@ export const createChip = async (data: FormData) => {
 
   // 最大gameCountを取得
   const maxGameCount = await db
-    .selectFrom("Chip")
+    .selectFrom("Score")
     .select((eb) => eb.fn.max("gameCount").as("maxGameCount"))
     .where("roomId", "=", roomId)
     .executeTakeFirst();
 
-  const chipData: ChipCreateData[] = roomUsers.map((user) => ({
-    chip: 0,
+  const scoreData: ScoreCreateData[] = roomUsers.map((user) => ({
+    score: 0,
     gameCount: (maxGameCount?.maxGameCount ?? 0) + 1,
     roomId: roomId,
     userId: user.userId,
   }));
 
-  await db.insertInto("Chip").values(chipData).execute();
+  await db.insertInto("Score").values(scoreData).execute();
 
   // Toast通知の都合上遅延を設定
   await new Promise((resolve) => setTimeout(resolve, TOAST_TIME));
