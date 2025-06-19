@@ -10,7 +10,7 @@ const UsersPage = async () => {
   return (
     <>
       <Header title="ユーザー一覧" isBackIcon={false} />
-      <Main>
+      <Main isBlank={true}>
         <div className="grid-4">
           {users.map((user) => (
             <UserCard

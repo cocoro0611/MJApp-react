@@ -34,6 +34,8 @@ const UserForm = ({ action, btnText, user }: UserFormProps) => {
         disabled={name.length === 0}
         alertMessage={`${btnText}しました`}
         alertColor="success"
+        custom={true}
+        className="w-full rounded px-4 py-2"
       >
         {btnText}
       </ToastButton>

@@ -42,7 +42,7 @@ const UserCard = ({
     <Card
       href={href}
       isColor={isColor}
-      className={`center flex-col ${cardSize.card} ${className}`}
+      className={`center flex-col center ${cardSize.card} ${className}`}
     >
       <Image
         src={icon}

@@ -19,9 +19,9 @@ const DeleteDialog = () => {
 
   return (
     <>
-      <button type="button" onClick={handleOpen}>
+      <div onClick={handleOpen}>
         <DeleteOutlineIcon />
-      </button>
+      </div>
 
       <Dialog
         open={open}
@@ -29,22 +29,26 @@ const DeleteDialog = () => {
         title="確認"
         message="本当に削除しますか？"
       >
-        <Button
-          type="button"
-          onClick={handleClose}
-          color="cancel"
-          className="w-32"
-        >
-          キャンセル
-        </Button>
-        <ToastButton
-          alertMessage="削除しました"
-          alertColor="success"
-          color="danger"
-          className="w-32"
-        >
-          削除する
-        </ToastButton>
+        <div className="center gap-4">
+          <Button
+            type="button"
+            onClick={handleClose}
+            color="cancel"
+            custom={true}
+            className="rounded px-4 py-2 w-32"
+          >
+            閉じる
+          </Button>
+          <ToastButton
+            alertMessage="削除しました"
+            alertColor="success"
+            color="danger"
+            custom={true}
+            className="rounded px-4 py-2 w-32"
+          >
+            削除する
+          </ToastButton>
+        </div>
       </Dialog>
     </>
   );

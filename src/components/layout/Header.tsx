@@ -7,6 +7,7 @@ interface HeaderProps {
   href?: string;
   isBackIcon?: boolean;
   children?: ReactNode;
+  addContent?: ReactNode;
 }
 
 const Header = ({
@@ -14,17 +15,22 @@ const Header = ({
   href = "",
   isBackIcon = true,
   children,
+  addContent,
 }: HeaderProps) => {
   return (
     <>
-      <header className="fixed-container top-0 z-10 primary-color center">
-        <Link href={href} className="w-1/12 py-2">
-          {isBackIcon && <ArrowBackIosIcon />}
-        </Link>
-        <div className="w-5/6 py-2 font-bold text-lg">{title}</div>
-        <div className="w-1/12 py-2">{children}</div>
+      <header className="fixed-container top-0 z-20 primary-color">
+        <div className="center">
+          <Link href={href} className="w-1/12 py-2">
+            {isBackIcon && <ArrowBackIosIcon />}
+          </Link>
+          <div className="w-5/6 py-2 font-bold text-lg">{title}</div>
+          <div className="w-1/12 py-2">{children}</div>
+        </div>
+        <div>{addContent}</div>
       </header>
-      <div className="pb-20"></div>
+      {/* Headerを固定しているためスペースを確保 */}
+      <div className={addContent ? "pb-45.5" : "pb-20"} />
     </>
   );
 };

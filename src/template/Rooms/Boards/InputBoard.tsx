@@ -103,7 +103,7 @@ const InputBoard = ({
   };
 
   return (
-    <div className="fixed-container bottom-0 z-20">
+    <div className="fixed-container bottom-0 z-30">
       {/* <div className="bg-white p-4 rounded-lg mb-4 shadow-sm">
         {selectedPlayer && (
           <div className="text-sm text-gray-600 mb-2">

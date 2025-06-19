@@ -25,9 +25,9 @@ const AddDataDialog = ({ roomId }: AddDataDialogProps) => {
 
   return (
     <>
-      <button type="button" onClick={handleOpen}>
-        <ButtonFixed href="" />
-      </button>
+      <div onClick={handleOpen}>
+        <ButtonFixed />
+      </div>
 
       <Dialog
         open={open}
@@ -35,34 +35,39 @@ const AddDataDialog = ({ roomId }: AddDataDialogProps) => {
         title="追加"
         message="以下の情報を追加しますか？"
       >
+        <div className="center gap-4 mb-4">
+          <Form action={createScore}>
+            <input type="hidden" name="roomId" value={roomId} />
+            <ToastButton
+              alertMessage="スコアを追加しました"
+              alertColor="success"
+              custom={true}
+              className="rounded px-4 py-2 w-32"
+            >
+              スコア
+            </ToastButton>
+          </Form>
+          <Form action={createChip}>
+            <input type="hidden" name="roomId" value={roomId} />
+            <ToastButton
+              alertMessage="チップを追加しました"
+              alertColor="success"
+              custom={true}
+              className="rounded px-4 py-2 w-32"
+            >
+              チップ
+            </ToastButton>
+          </Form>
+        </div>
         <Button
           type="button"
           onClick={handleClose}
           color="cancel"
-          className="w-32"
+          custom={true}
+          className="rounded px-4 py-1 w-68"
         >
           閉じる
         </Button>
-        <Form action={createScore}>
-          <input type="hidden" name="roomId" value={roomId} />
-          <ToastButton
-            alertMessage="スコアを追加しました"
-            alertColor="success"
-            className="w-32"
-          >
-            スコア
-          </ToastButton>
-        </Form>
-        <Form action={createChip}>
-          <input type="hidden" name="roomId" value={roomId} />
-          <ToastButton
-            alertMessage="チップを追加しました"
-            alertColor="success"
-            className="w-32"
-          >
-            チップ
-          </ToastButton>
-        </Form>
       </Dialog>
     </>
   );

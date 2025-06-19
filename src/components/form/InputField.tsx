@@ -6,7 +6,6 @@ interface InputFieldProps {
   placeholder?: string;
   value: string;
   onChange?: (value: string) => void;
-  className?: string;
 }
 
 const InputField = ({
@@ -17,10 +16,9 @@ const InputField = ({
   placeholder = "",
   value,
   onChange,
-  className = "form-width",
 }: InputFieldProps) => {
   return (
-    <div className={className}>
+    <div className="w-full">
       <label htmlFor={name} className="flex text-blue-800 font-bold">
         {label}
       </label>

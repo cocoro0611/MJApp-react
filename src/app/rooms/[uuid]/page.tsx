@@ -1,4 +1,5 @@
 import Header from "@/src/components/layout/Header";
+import Main from "@/src/components/layout/Main";
 import DeleteForm from "@/src/components/form/DeleteForm";
 import AddDataDialog from "@/src/components/nav/AddDataDialog";
 import {
@@ -25,6 +26,7 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
   const scores = await readScores(uuid);
   const chips = await readChips(uuid);
 
+  // FIXME: 実際の場代を呼び出し
   const PointData = [0, 0, 0, 0];
 
   if (!room) {
@@ -33,17 +35,20 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
 
   return (
     <>
-      <Header title={room.name} href="/rooms">
+      <Header
+        title={room.name}
+        href="/rooms"
+        addContent={<GameBoard room={room} />}
+      >
         <DeleteForm action={deleteRoom} name="id" value={room?.id} />
       </Header>
-      <GameBoard room={room} />
-      <main>
+      <Main isBlank={false}>
         <PointBoard points={PointData} />
         <ScoreBoard scores={scores} />
         <ChipBoard chips={chips} />
-      </main>
+        <AddDataDialog roomId={uuid} />
+      </Main>
       {/* <InputBoard /> */}
-      <AddDataDialog roomId={uuid} />
     </>
   );
 };

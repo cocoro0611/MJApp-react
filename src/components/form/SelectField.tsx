@@ -13,7 +13,6 @@ interface SelectFieldProps {
   name: string;
   options: optionsType[];
   defaultValue: number | string;
-  className?: string;
 }
 
 const SelectField = ({
@@ -21,14 +20,13 @@ const SelectField = ({
   name,
   options,
   defaultValue,
-  className = "form-width",
 }: SelectFieldProps) => {
   const [selectedValue, setSelectedValue] = useState<number | string>(
     defaultValue
   );
 
   return (
-    <div className={className}>
+    <div className="w-full">
       <label htmlFor={name} className="flex text-blue-800 font-bold">
         {label}
       </label>

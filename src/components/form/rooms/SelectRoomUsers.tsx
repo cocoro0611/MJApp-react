@@ -15,7 +15,7 @@ const SelectRoomUsers = ({ users }: SelectRoomUsersProps) => {
     useUserSelect(users);
 
   return (
-    <div className="form-width">
+    <div className="w-full">
       <label className="center text-blue-800 font-bold">
         {MAX_ROOM_PLAYERS}人選択してください ({selectedUsers.length}/
         {MAX_ROOM_PLAYERS})
@@ -38,7 +38,11 @@ const SelectRoomUsers = ({ users }: SelectRoomUsersProps) => {
           ))}
         </div>
       </div>
-      <Button disabled={!isReady()} className="form-width">
+      <Button
+        disabled={!isReady()}
+        custom={true}
+        className="w-full rounded px-4 py-2"
+      >
         選択
       </Button>
     </div>

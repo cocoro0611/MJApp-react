@@ -3,16 +3,16 @@
 import Button from "../ui/Button";
 import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { ReactNode } from "react";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { TOAST_TIME } from "@/src/constants/toastTime";
 
 interface ToastButtonProps {
   children: ReactNode;
+  color?: "primary" | "secondary" | "danger" | "cancel" | "white";
+  custom?: boolean;
+  disabled?: boolean;
   alertMessage: string;
   alertColor: "error" | "info" | "success" | "warning";
-  color?: "primary" | "secondary" | "danger" | "cancel" | "white";
-  disabled?: boolean;
   className?: string;
 }
 
@@ -21,8 +21,9 @@ const ToastButton = ({
   alertMessage,
   alertColor,
   color = "primary",
+  custom = false,
   disabled = false,
-  className = "form-width",
+  className = "",
 }: ToastButtonProps) => {
   const [open, setOpen] = useState(false);
 
@@ -44,10 +45,11 @@ const ToastButton = ({
   return (
     <>
       <Button
+        onClick={handleClick}
         color={color}
         disabled={disabled}
+        custom={custom}
         className={className}
-        onClick={handleClick}
       >
         {children}
       </Button>

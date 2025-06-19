@@ -14,7 +14,7 @@ interface DefaultRoomUsersProps {
 
 const DefaultRoomUsers = ({ roomUsers }: DefaultRoomUsersProps) => {
   return (
-    <div className="form-width">
+    <div className="w-full">
       <div className="flex justify-between font-bold">
         <label className="flex text-blue-800">ユーザー</label>
         <Link href="/rooms/new/users">

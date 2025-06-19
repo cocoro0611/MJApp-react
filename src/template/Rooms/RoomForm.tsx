@@ -82,7 +82,12 @@ const RoomForm = ({ action, btnText, roomUsers }: RoomFormProps) => {
         value={amount}
         onChange={(value) => setAmount(value)}
       />
-      <ToastButton alertMessage={`${btnText}しました`} alertColor="success">
+      <ToastButton
+        alertMessage={`${btnText}しました`}
+        alertColor="success"
+        custom={true}
+        className="w-full rounded px-4 py-2"
+      >
         {btnText}
       </ToastButton>
     </Form>

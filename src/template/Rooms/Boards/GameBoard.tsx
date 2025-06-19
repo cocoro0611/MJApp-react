@@ -42,7 +42,6 @@ const GameBoard = ({ room }: GameBoardProps) => {
           </div>
         ))}
       </div>
-      <div className="pb-25.5"></div>
     </>
   );
 };

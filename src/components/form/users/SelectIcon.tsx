@@ -17,7 +17,7 @@ const SelectIcon = ({ name, value }: SelectIconProps) => {
   const [selectedIcon, setSelectedIcon] = useState(initialIcon);
 
   return (
-    <div className="form-width">
+    <div className="w-full">
       <label className={`flex text-blue-800 font-bold `}>アイコン</label>
       <input type="hidden" name="icon" value={selectedIcon} />
       <div className="center py-4">

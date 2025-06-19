@@ -18,7 +18,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <AppRouterCacheProvider>
-        <body className="bg-blue-50 min-h-screen">
+        <body className="bg-blue-50 text-gray-800 min-h-screen">
           <div className="container mx-auto bg-white min-h-screen shadow-xl">
             <div className="pb-20">{children}</div>
             <Footer />

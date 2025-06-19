@@ -2,11 +2,11 @@ import Link from "next/link";
 import Button from "./Button";
 
 interface ButtonFixedProps {
-  href: string;
+  href?: string;
   disabled?: boolean;
 }
 
-const ButtonFixed = ({ href, disabled = false }: ButtonFixedProps) => {
+const ButtonFixed = ({ href = "", disabled = false }: ButtonFixedProps) => {
   return (
     <Link href={href}>
       <Button
