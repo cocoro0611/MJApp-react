@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Button from "../../ui/Button";
 
 type UserType = {
   id: string;
@@ -14,13 +15,16 @@ interface DefaultRoomUsersProps {
 const DefaultRoomUsers = ({ roomUsers }: DefaultRoomUsersProps) => {
   return (
     <div className="form-width">
-      <div className="flex justify-between">
-        <label className="flex text-blue-800 font-bold">ユーザー</label>
-        <Link
-          href="/rooms/new/users"
-          className="center setting-custom-btn scale-effect"
-        >
-          カスタム
+      <div className="flex justify-between font-bold">
+        <label className="flex text-blue-800">ユーザー</label>
+        <Link href="/rooms/new/users">
+          <Button
+            color="secondary"
+            custom={true}
+            className="px-4 py-1 rounded-lg text-sm"
+          >
+            カスタム
+          </Button>
         </Link>
       </div>
       <div className="center gap-6 mt-2">

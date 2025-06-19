@@ -2,6 +2,9 @@
   .center {
     @apply flex justify-center items-center text-center;
   }
+  .fixed-container {
+    @apply container mx-auto fixed;
+  }
   .form-width {
     @apply w-[19.4rem] md:w-[39.2rem];
   }
@@ -13,5 +16,16 @@
   }
   .grid-6 {
     @apply grid grid-cols-6 md:grid-cols-12 gap-2;
+  }
+  /* border-grid-5 */
+  .grid-5 {
+    @apply grid grid-cols-5;
+    @apply border border-gray-300 text-sm;
+  }
+  .grid-5-inner {
+    @apply border-x border-gray-300;
+  }
+  .grid-5-inner > * {
+    @apply border-y border-gray-300;
   }
 }

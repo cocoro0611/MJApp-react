@@ -1,4 +1,6 @@
 "use client";
+
+import Button from "../ui/Button";
 import { useState } from "react";
 
 type optionsType = {
@@ -34,20 +36,18 @@ const SelectField = ({
       <div className="center gap-2 mt-2 text-sm">
         <div className="grid-2">
           {options.map((option) => (
-            <button
+            <Button
               key={option.value}
               type="button"
-              className={`scale-effect
-                ${
-                  selectedValue === option.value
-                    ? "setting-btn-on"
-                    : "setting-btn-off"
-                }
-                `}
+              color={
+                selectedValue === option.value ? "setting-on" : "setting-off"
+              }
+              custom={true}
+              className="p-1 rounded-2xl w-30"
               onClick={() => setSelectedValue(option.value)}
             >
               {option.label}
-            </button>
+            </Button>
           ))}
         </div>
       </div>

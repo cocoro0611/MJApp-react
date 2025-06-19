@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Button from "./Button";
 
 interface ButtonFixedProps {
   href: string;
@@ -6,15 +7,17 @@ interface ButtonFixedProps {
 }
 
 const ButtonFixed = ({ href, disabled = false }: ButtonFixedProps) => {
-  if (disabled) {
-    return (
-      <div className="fixed-btn primary cursor-not-allowed opacity-50">+</div>
-    );
-  }
-
   return (
-    <Link href={href} className="fixed-btn primary scale-effect">
-      +
+    <Link href={href}>
+      <Button
+        custom={true}
+        className="px-5 py-3 text-3xl rounded-xl hover:scale-105
+        fixed bottom-[10vh] z-10 
+        right-[4vh] md:right-[8vh] lg:right-[12vh] xl:right-[16vh] "
+        disabled={disabled}
+      >
+        +
+      </Button>
     </Link>
   );
 };

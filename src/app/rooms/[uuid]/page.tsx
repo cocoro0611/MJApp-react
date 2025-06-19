@@ -1,5 +1,6 @@
 import Header from "@/src/components/layout/Header";
 import DeleteForm from "@/src/components/form/DeleteForm";
+import AddDataDialog from "@/src/components/nav/AddDataDialog";
 import {
   GameBoard,
   PointBoard,
@@ -7,7 +8,6 @@ import {
   ChipBoard,
   InputBoard,
 } from "@/src/template/Rooms";
-import AddDataDialog from "@/src/components/nav/AddDataDialog";
 import {
   readRoom,
   readScores,
@@ -42,7 +42,7 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
         <ScoreBoard scores={scores} />
         <ChipBoard chips={chips} />
       </main>
-      <InputBoard />
+      {/* <InputBoard /> */}
       <AddDataDialog roomId={uuid} />
     </>
   );

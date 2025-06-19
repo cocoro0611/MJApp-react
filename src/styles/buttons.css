@@ -1,20 +1,37 @@
-@layer SpecialButton {
-  .setting-btn-on {
-    @apply bg-blue-500  hover:bg-blue-600 active:bg-blue-700 text-white;
-    @apply p-1 rounded-2xl w-30;
+@layer Style {
+  .primary {
+    @apply bg-blue-800  hover:bg-blue-900 active:bg-blue-950 text-white shadow;
   }
-  .setting-btn-off {
-    @apply bg-white  hover:bg-blue-50 active:bg-blue-100 text-blue-500;
+  .danger {
+    @apply bg-red-700  hover:bg-red-800 active:bg-red-900 text-white shadow;
+  }
+  .white {
+    @apply bg-white hover:bg-gray-100 active:bg-gray-200 text-gray-800 shadow;
+  }
+  .secondary {
+    @apply bg-blue-100 hover:bg-blue-200 active:bg-blue-300 text-blue-800 shadow;
+    @apply border-2 border-blue-300;
+  }
+  .cancel {
+    @apply bg-gray-100  hover:bg-gray-200 active:bg-gray-300 text-gray-800 shadow;
+    @apply border-2 border-gray-300;
+  }
+  .setting-on {
+    @apply bg-blue-500  hover:bg-blue-600 active:bg-blue-700 text-white shadow;
+  }
+  .setting-off {
+    @apply bg-white  hover:bg-blue-50 active:bg-blue-100 text-blue-500 shadow;
     @apply border border-blue-500;
-    @apply p-1 rounded-2xl w-30;
   }
-  .setting-custom-btn {
-    @apply bg-blue-100  hover:bg-blue-200 active:bg-blue-300 text-blue-500;
-    @apply px-4 rounded-lg font-bold text-sm;
+}
+@layer Effect {
+  .scale-effect {
+    @apply active:scale-97 transition-all duration-150;
   }
-  .fixed-btn {
-    @apply fixed bottom-[10vh] z-10;
-    @apply right-[4vh] md:right-[8vh] lg:right-[12vh] xl:right-[16vh];
-    @apply px-5 py-3 text-3xl rounded-xl;
+  .disabled-effect {
+    @apply cursor-not-allowed opacity-50;
+  }
+  .revolution-effect {
+    @apply hover:rotate-12 duration-150;
   }
 }

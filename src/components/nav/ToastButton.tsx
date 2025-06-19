@@ -11,7 +11,7 @@ interface ToastButtonProps {
   children: ReactNode;
   alertMessage: string;
   alertColor: "error" | "info" | "success" | "warning";
-  color?: "primary" | "secondary" | "danger" | "cancel" | "inactive";
+  color?: "primary" | "secondary" | "danger" | "cancel" | "white";
   disabled?: boolean;
   className?: string;
 }

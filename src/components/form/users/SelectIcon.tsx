@@ -30,11 +30,8 @@ const SelectIcon = ({ name, value }: SelectIconProps) => {
             src={icon}
             alt={icon}
             onClick={() => setSelectedIcon(icon)}
-            className={
-              selectedIcon === icon
-                ? "secondary revolution-effect icon-border"
-                : "rounded-full"
-            }
+            className={`rounded-full revolution-effect
+              ${selectedIcon === icon ? "secondary" : "white"}`}
             width={45}
             height={45}
           />

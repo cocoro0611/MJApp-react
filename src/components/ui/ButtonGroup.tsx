@@ -27,7 +27,7 @@ const ButtonGroup = ({ tabs, className = "" }: ButtonGroupProps) => {
           className={`border-y border-r border-gray-500 
         ${index === 0 ? "rounded-l-lg border-l" : ""}
         ${index === tabs.length - 1 ? "rounded-r-lg" : ""}
-        ${pathname.startsWith(tab.id) ? "primary" : "inactive"}
+        ${pathname.startsWith(tab.id) ? "primary" : "white"}
         ${className}`}
         >
           <span>{tab.icon && tab.icon}</span>

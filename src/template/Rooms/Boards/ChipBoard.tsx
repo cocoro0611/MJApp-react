@@ -30,7 +30,7 @@ const ChipBoard = ({ chips }: ChipBoardProps) => {
           <Fragment key={gameChip.gameCount}>
             <div className="grid-5-inner">
               <div className="center flex-col p-1 h-18">
-                <Card href="" className="secondary card-border w-full py-1.5">
+                <Card href="" className="w-full py-1.5">
                   {gameChip.gameCount}回分
                   <div className="text-[0.6rem]">(1人/20枚)</div>
                 </Card>
@@ -39,7 +39,7 @@ const ChipBoard = ({ chips }: ChipBoardProps) => {
             {gameChip.chips.map((chipItem) => (
               <div className="grid-5-inner" key={chipItem.position}>
                 <div className="center flex-col p-0.5 h-18">
-                  <Card href="" className="secondary card-border w-full p-1">
+                  <Card href="" className="w-full p-1">
                     <p className="flex justify-start text-[0.6rem]">点数</p>
                     <p>
                       <span className="px-1 border-b-2 border-blue-400">

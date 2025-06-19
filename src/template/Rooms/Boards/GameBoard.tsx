@@ -9,13 +9,10 @@ interface GameBoardProps {
 const GameBoard = ({ room }: GameBoardProps) => {
   return (
     <>
-      <div className="board-container grid-5 center">
+      <div className="fixed-container top-11 z-10 primary-color center grid-5">
         <div className="grid-5-inner">
           <div className="center p-0.5 bg-white">
-            <Card
-              href=""
-              className="secondary card-border h-16 w-full center flex-col"
-            >
+            <Card className="w-full center flex-col h-16">
               <span>設定</span>
               <span>変更</span>
             </Card>

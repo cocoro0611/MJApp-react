@@ -32,7 +32,7 @@ const InputField = ({
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange?.(e.target.value)}
-        className="input-border p-2 w-full"
+        className="border border-blue-500 rounded p-2 w-full"
       />
     </div>
   );

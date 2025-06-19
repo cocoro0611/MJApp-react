@@ -17,7 +17,7 @@ const Header = ({
 }: HeaderProps) => {
   return (
     <>
-      <header className="header-container center">
+      <header className="fixed-container top-0 z-10 primary-color center">
         <Link href={href} className="w-1/12 py-2">
           {isBackIcon && <ArrowBackIosIcon />}
         </Link>
