@@ -1,4 +1,5 @@
 import type { ReadRoomData } from "@/src/lib/models/rooms/type";
+import { Fragment } from "react";
 
 interface PointBoardProps {
   room: ReadRoomData;
@@ -14,10 +15,12 @@ const PointBoard = ({ room }: PointBoardProps) => {
   return (
     <>
       <div className="bg-gray-300 text-gray-600 grid-5">
-        <div className="center font-bold">場代割勘</div>
+        <div className="center font-bold ">場代割勘</div>
       </div>
       <div className="grid-5">
-        <div className="grid-5-inner h-8"></div>
+        <div className="grid-5-inner">
+          <div className="h-8 center" />
+        </div>
         {Array.from({ length: 4 }, (_, index) => (
           <div key={index} className="grid-5-inner">
             <div className="font-bold text-red-500 h-8 center relative">
