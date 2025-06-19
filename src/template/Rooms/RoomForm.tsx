@@ -14,6 +14,7 @@ import {
   DEFAULT_GAME_RULES,
 } from "@/src/constants/gameRules";
 import { useState } from "react";
+import type { ReadRoomData } from "@/src/lib/models/rooms/type";
 
 type UserType = {
   id: string;
@@ -24,15 +25,24 @@ type UserType = {
 interface RoomFormProps {
   action: (formData: FormData) => void;
   btnText: string;
-  roomUsers: UserType[];
+  room?: ReadRoomData;
+  roomUsers?: UserType[];
 }
 
-const RoomForm = ({ action, btnText, roomUsers }: RoomFormProps) => {
-  const [name, setName] = useState(new Date().toLocaleDateString("ja-JP"));
-  const [amount, setAmount] = useState("");
+const RoomForm = ({ action, btnText, room, roomUsers }: RoomFormProps) => {
+  const today = new Date().toLocaleDateString("ja-JP");
+
+  const [name, setName] = useState(room?.name ?? today);
+  const initialPoint = room?.initialPoint ?? DEFAULT_GAME_RULES.initialPoint;
+  const returnPoint = room?.returnPoint ?? DEFAULT_GAME_RULES.returnPoint;
+  const bonusPoint = room?.bonusPoint ?? DEFAULT_GAME_RULES.bonusPoint;
+  const scoreRate = room?.scoreRate ?? DEFAULT_GAME_RULES.scoreRate;
+  const chipRate = room?.chipRate ?? DEFAULT_GAME_RULES.chipRate;
+  const [amount, setAmount] = useState(room?.gameAmount ?? "");
 
   return (
     <Form action={action} className="center flex-col space-y-8">
+      <input type="hidden" name="roomId" value={room?.id} />
       <InputField
         label="部屋名"
         name="name"
@@ -42,36 +52,36 @@ const RoomForm = ({ action, btnText, roomUsers }: RoomFormProps) => {
         value={name}
         onChange={(value) => setName(value)}
       />
-      <DefaultRoomUsers roomUsers={roomUsers} />
+      {roomUsers && <DefaultRoomUsers roomUsers={roomUsers} />}
       <SelectField
         label="持ち点"
         name="initialPoint"
         options={INITIAL_POINT_OPTIONS}
-        defaultValue={DEFAULT_GAME_RULES.initialPoint}
+        defaultValue={initialPoint}
       />
       <SelectField
         label="返し点"
         name="returnPoint"
         options={RETURN_POINT_OPTIONS}
-        defaultValue={DEFAULT_GAME_RULES.returnPoint}
+        defaultValue={returnPoint}
       />
       <SelectField
         label="ウマ"
         name="bonusPoint"
         options={BONUS_POINT_OPTIONS}
-        defaultValue={DEFAULT_GAME_RULES.bonusPoint}
+        defaultValue={bonusPoint}
       />
       <SelectField
         label="レート"
         name="scoreRate"
         options={SCORE_RATE_OPTIONS}
-        defaultValue={DEFAULT_GAME_RULES.scoreRate}
+        defaultValue={scoreRate}
       />
       <SelectField
         label="チップ"
         name="chipRate"
         options={CHIP_RATE_OPTIONS}
-        defaultValue={DEFAULT_GAME_RULES.chipRate}
+        defaultValue={chipRate}
       />
       <InputField
         label="場代（後ほど更新できます）"

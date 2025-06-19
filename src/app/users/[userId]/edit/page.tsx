@@ -5,12 +5,12 @@ import { UserForm } from "@/src/template/Users";
 import { readUser, updateUser, deleteUser } from "@/src/lib/models/users";
 
 interface UserEditPageProps {
-  params: Promise<{ uuid: string }>;
+  params: Promise<{ userId: string }>;
 }
 
 const UserEditPage = async ({ params }: UserEditPageProps) => {
-  const { uuid } = await params;
-  const user = await readUser(uuid);
+  const { userId } = await params;
+  const user = await readUser(userId);
 
   if (!user) {
     throw new Error("ユーザーが見つかりません");

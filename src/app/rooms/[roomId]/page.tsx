@@ -7,48 +7,47 @@ import {
   PointBoard,
   ScoreBoard,
   ChipBoard,
-  InputBoard,
+  // InputBoard,
 } from "@/src/template/Rooms";
 import {
   readRoom,
+  readRoomBoard,
   readScores,
   readChips,
   deleteRoom,
 } from "@/src/lib/models/rooms";
 
 interface RoomEditPageProps {
-  params: Promise<{ uuid: string }>;
+  params: Promise<{ roomId: string }>;
 }
 
 const RoomEditPage = async ({ params }: RoomEditPageProps) => {
-  const { uuid } = await params;
-  const room = await readRoom(uuid);
-  const scores = await readScores(uuid);
-  const chips = await readChips(uuid);
+  const { roomId } = await params;
+  const room = await readRoom(roomId);
+  const roomBoard = await readRoomBoard(roomId);
+  const scores = await readScores(roomId);
+  const chips = await readChips(roomId);
 
-  // FIXME: 実際の場代を呼び出し
-  const PointData = [0, 0, 0, 0];
-
-  if (!room) {
+  if (!room || !roomBoard) {
     throw new Error("ルームが見つかりません");
   }
 
   return (
     <>
       <Header
-        title={room.name}
+        title={roomBoard.name}
         href="/rooms"
-        addContent={<GameBoard room={room} />}
+        addContent={<GameBoard roomBoard={roomBoard} />}
       >
-        <DeleteForm action={deleteRoom} name="id" value={room?.id} />
+        <DeleteForm action={deleteRoom} name="id" value={roomId} />
       </Header>
       <Main isBlank={false}>
-        <PointBoard points={PointData} />
+        <PointBoard room={room} />
         <ScoreBoard scores={scores} />
         <ChipBoard chips={chips} />
-        <AddDataDialog roomId={uuid} />
+        <AddDataDialog roomId={roomId} />
       </Main>
-      <InputBoard />
+      {/* <InputBoard /> */}
     </>
   );
 };

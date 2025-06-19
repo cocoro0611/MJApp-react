@@ -1,18 +1,21 @@
 import Card from "@/src/components/ui/Card";
 import { UserCard } from "../../Users";
-import { ReadRoomDetailData } from "@/src/lib/models/rooms/type";
+import { ReadRoomBoardData } from "@/src/lib/models/rooms/type";
 
 interface GameBoardProps {
-  room: ReadRoomDetailData;
+  roomBoard: ReadRoomBoardData;
 }
 
-const GameBoard = ({ room }: GameBoardProps) => {
+const GameBoard = ({ roomBoard }: GameBoardProps) => {
   return (
     <>
       <div className="fixed-container top-11 z-10 primary-color center grid-5">
         <div className="grid-5-inner">
           <div className="center p-0.5 bg-white">
-            <Card className="w-full center flex-col h-16">
+            <Card
+              href={`/rooms/${roomBoard.id}/room-edit`}
+              className="w-full center flex-col h-16"
+            >
               <span>設定</span>
               <span>変更</span>
             </Card>
@@ -21,10 +24,15 @@ const GameBoard = ({ room }: GameBoardProps) => {
           <div>チップ</div>
           <div>収支</div>
         </div>
-        {room.users.map((user) => (
+        {roomBoard.users.map((user) => (
           <div className="grid-5-inner" key={user.id}>
             <div className="center p-0.5 bg-white">
-              <UserCard href="" name={user.name} icon={user.icon} size="mdWf" />
+              <UserCard
+                href={`/rooms/${roomBoard.id}/user-edit/${user.id}`}
+                name={user.name}
+                icon={user.icon}
+                size="mdWf"
+              />
             </div>
             <div>{user.totalScore}</div>
             <div className="relative">

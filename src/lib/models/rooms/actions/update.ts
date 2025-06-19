@@ -1,23 +1,29 @@
-// "use server";
+"use server";
 
-// import { db } from "../db";
-// import type { UserData } from "./type";
-// import { redirect } from "next/navigation";
-// import { TOAST_TIME } from "@/src/constants";
+import { db } from "../../db";
+import type { RoomData } from "../type";
+import { redirect } from "next/navigation";
+import { TOAST_TIME } from "@/src/constants/toastTime";
 
-// type UserUpdateData = Omit<UserData, "createdAt">;
+type RoomUpdateData = Omit<RoomData, "id" | "createdAt">;
 
-// export const updateUser = async (data: FormData) => {
-//   const userId = data.get("id") as string;
-//   const userData: UserUpdateData = {
-//     id: userId,
-//     name: data.get("name") as string,
-//     icon: data.get("icon") as string,
-//     updatedAt: new Date(),
-//   };
-//   await db.updateTable("User").set(userData).where("id", "=", userId).execute();
+export const updateRoom = async (data: FormData) => {
+  const roomId = String(data.get("roomId"));
 
-//   // Toastの都合上遅延を設定
-//   await new Promise((resolve) => setTimeout(resolve, TOAST_TIME));
-//   redirect("/users");
-// };
+  const roomData: RoomUpdateData = {
+    name: String(data.get("name")),
+    initialPoint: Number(data.get("initialPoint")),
+    returnPoint: Number(data.get("returnPoint")),
+    bonusPoint: String(data.get("bonusPoint")),
+    scoreRate: Number(data.get("scoreRate")),
+    chipRate: Number(data.get("chipRate")),
+    gameAmount: Number(data.get("gameAmount")),
+    updatedAt: new Date(),
+  };
+
+  await db.updateTable("Room").set(roomData).where("id", "=", roomId).execute();
+
+  // Toast通知の都合上遅延を設定
+  await new Promise((resolve) => setTimeout(resolve, TOAST_TIME));
+  redirect(`/rooms/${roomId}`);
+};

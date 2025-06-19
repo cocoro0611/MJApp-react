@@ -11,15 +11,17 @@ interface UserFormProps {
   action: (formData: FormData) => void;
   btnText: string;
   user?: ReadUserData;
+  roomId?: string;
 }
 
-const UserForm = ({ action, btnText, user }: UserFormProps) => {
-  const [name, setName] = useState(user?.name || "");
-  const icon = user?.icon || "";
+const UserForm = ({ action, btnText, user, roomId }: UserFormProps) => {
+  const [name, setName] = useState(user?.name ?? "");
+  const icon = user?.icon ?? "";
 
   return (
     <Form action={action} className="center flex-col space-y-8">
-      <input type="hidden" name="id" value={user?.id} />
+      <input type="hidden" name="roomId" value={roomId} />
+      <input type="hidden" name="userId" value={user?.id} />
       <InputField
         label="名前"
         name="name"

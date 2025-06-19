@@ -31,13 +31,25 @@ export type RoomUserData = Pick<
   "position" | "userId" | "roomId" | "createdAt" | "updatedAt"
 >;
 
-export type ReadRoomData = Pick<RoomData, "id" | "name"> & {
+export type ReadRoomData = Pick<
+  RoomData,
+  | "id"
+  | "name"
+  | "initialPoint"
+  | "returnPoint"
+  | "bonusPoint"
+  | "scoreRate"
+  | "chipRate"
+  | "gameAmount"
+>;
+
+export type ReadRoomCardData = Pick<RoomData, "id" | "name"> & {
   users: (Pick<UserData, "id" | "name" | "icon"> & {
     totalScore: number;
   })[];
 };
 
-export type ReadRoomDetailData = Pick<RoomData, "id" | "name"> & {
+export type ReadRoomBoardData = Pick<RoomData, "id" | "name"> & {
   users: (Pick<UserData, "id" | "name" | "icon"> & {
     totalScore: number;
     totalChip: number;

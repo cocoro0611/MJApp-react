@@ -5,12 +5,13 @@ import type { UserData } from "../../type";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
 
-type UserUpdateData = Omit<UserData, "isDefaultUser" | "createdAt">;
+type UserUpdateData = Omit<UserData, "id" | "isDefaultUser" | "createdAt">;
 
 export const updateUser = async (data: FormData) => {
-  const userId = String(data.get("id"));
+  const roomId = String(data.get("roomId"));
+  const userId = String(data.get("userId"));
+
   const userData: UserUpdateData = {
-    id: userId,
     name: String(data.get("name")),
     icon: String(data.get("icon")),
     updatedAt: new Date(),
@@ -19,5 +20,8 @@ export const updateUser = async (data: FormData) => {
 
   // Toastの都合上遅延を設定
   await new Promise((resolve) => setTimeout(resolve, TOAST_TIME));
-  redirect("/users");
+
+  // roomPageかuserPageかによってリダイレクト先を変更
+  const redirectUrl = roomId ? `/rooms/${roomId}` : "/users";
+  redirect(redirectUrl);
 };

@@ -1,11 +1,15 @@
+import type { ReadRoomData } from "@/src/lib/models/rooms/type";
+
 interface PointBoardProps {
-  points: number[];
+  room: ReadRoomData;
 }
 
-const PointBoard = ({ points }: PointBoardProps) => {
-  if (points.includes(0)) {
+const PointBoard = ({ room }: PointBoardProps) => {
+  if (room.gameAmount == 0) {
     return null;
   }
+
+  const pointPerPlayer = room.gameAmount / 4;
 
   return (
     <>
@@ -14,10 +18,10 @@ const PointBoard = ({ points }: PointBoardProps) => {
       </div>
       <div className="grid-5">
         <div className="grid-5-inner h-8"></div>
-        {points.map((point, index) => (
-          <div className="grid-5-inner" key={index}>
+        {Array.from({ length: 4 }, (_, index) => (
+          <div key={index} className="grid-5-inner">
             <div className="font-bold text-red-500 h-8 center relative">
-              -{point}
+              -{pointPerPlayer}
               <span className="absolute right-0.5">P</span>
             </div>
           </div>
