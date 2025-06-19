@@ -48,7 +48,7 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
         <ChipBoard chips={chips} />
         <AddDataDialog roomId={uuid} />
       </Main>
-      {/* <InputBoard /> */}
+      <InputBoard />
     </>
   );
 };

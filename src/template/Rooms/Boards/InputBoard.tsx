@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import Form from "next/form";
 import Button from "@/src/components/ui/Button";
+import { useInputBoard } from "@/src/hooks/useInputBoard";
 
 interface InputBoardProps {
   onCalculate?: (value: number) => void;
@@ -9,128 +10,59 @@ interface InputBoardProps {
   selectedPlayer?: string;
 }
 
-const InputBoard = ({
-  onCalculate,
-  onClose,
-  selectedPlayer,
-}: InputBoardProps) => {
-  const [display, setDisplay] = useState("0");
-  const [operation, setOperation] = useState<"+" | "-" | null>(null);
-  const [previousValue, setPreviousValue] = useState<number | null>(null);
-  const [waitingForValue, setWaitingForValue] = useState(false);
-
-  const inputNumber = (num: string) => {
-    if (waitingForValue) {
-      setDisplay(num);
-      setWaitingForValue(false);
-    } else {
-      setDisplay(display === "0" ? num : display + num);
-    }
-  };
-
-  const inputOperation = (nextOperation: "+" | "-") => {
-    const inputValue = parseFloat(display);
-
-    if (previousValue === null) {
-      setPreviousValue(inputValue);
-    } else if (operation) {
-      const currentValue = previousValue || 0;
-      const newValue = calculate(currentValue, inputValue, operation);
-
-      setDisplay(String(newValue));
-      setPreviousValue(newValue);
-    }
-
-    setWaitingForValue(true);
-    setOperation(nextOperation);
-  };
-
-  const calculate = (
-    firstValue: number,
-    secondValue: number,
-    operation: "+" | "-"
-  ) => {
-    switch (operation) {
-      case "+":
-        return firstValue + secondValue;
-      case "-":
-        return firstValue - secondValue;
-      default:
-        return secondValue;
-    }
-  };
-
-  const performCalculation = () => {
-    const inputValue = parseFloat(display);
-    let result = inputValue;
-
-    if (operation && previousValue !== null) {
-      result = calculate(previousValue, inputValue, operation);
-    }
-
-    onCalculate?.(result);
-
-    // リセット
-    setDisplay("0");
-    setOperation(null);
-    setPreviousValue(null);
-    setWaitingForValue(false);
-  };
-
-  const clear = () => {
-    setDisplay("0");
-    setOperation(null);
-    setPreviousValue(null);
-    setWaitingForValue(false);
-  };
-
-  const deleteLastDigit = () => {
-    if (display.length > 1) {
-      setDisplay(display.slice(0, -1));
-    } else {
-      setDisplay("0");
-    }
-  };
-
-  const toggleSign = () => {
-    if (operation === "+") {
-      setOperation("-");
-    } else if (operation === "-") {
-      setOperation("+");
-    } else {
-      inputOperation(display.startsWith("-") ? "+" : "-");
-    }
-  };
+const InputBoard = ({ onClose, selectedPlayer }: InputBoardProps) => {
+  const { display, inputNumber, left, right, signNum, deleteNum } =
+    useInputBoard();
 
   return (
     <div className="fixed-container bottom-0 z-30">
-      {/* <div className="bg-white p-4 rounded-lg mb-4 shadow-sm">
-        {selectedPlayer && (
-          <div className="text-sm text-gray-600 mb-2">
-            選択中: {selectedPlayer}
-          </div>
-        )}
-        <div className="text-right">
-          <div className="text-3xl font-mono font-bold text-gray-800">
-            {display}
-          </div>
-          {operation && (
-            <div className="text-lg text-blue-600">{operation} 待機中...</div>
-          )}
-        </div>
-      </div> */}
+      {selectedPlayer && <div>選択中: {selectedPlayer}</div>}
+      <div>{display}</div>
 
-      <div className="flex items-center justify-between py-2 bg-gray-100 ">
-        <div className="flex gap-2 ml-2">
-          <Button onClick={clear}>←</Button>
-          <Button onClick={clear}>→</Button>
+      <div className="flex items-center justify-between py-2 bg-gray-100">
+        <div className="flex ml-2">
+          <Button
+            onClick={left}
+            type="button"
+            color="white"
+            custom={true}
+            className="rounded-l-full w-15 py-1 border-2 border-gray-300"
+          >
+            ←
+          </Button>
+          <Button
+            onClick={right}
+            type="button"
+            color="white"
+            custom={true}
+            className="rounded-r-full -ml-1 w-15 py-1 border-2 border-gray-300"
+          >
+            →
+          </Button>
         </div>
         <div className="flex gap-2 mr-2">
-          <Button onClick={toggleSign}>+/-</Button>
-          <Button custom={true} onClick={performCalculation}>
-            計算
+          <Button
+            onClick={signNum}
+            type="button"
+            color="white"
+            custom={true}
+            className="rounded-2xl w-15 py-1 border-2 border-gray-300"
+          >
+            + / -
           </Button>
-          <Button color="cancel" onClick={onClose}>
+          <Form action="">
+            <input type="hidden" name="hogehoge" value="hogehoge" />
+            <Button custom={true} className="rounded text-sm w-16 py-2 ">
+              計算
+            </Button>
+          </Form>
+          <Button
+            onClick={onClose}
+            color="cancel"
+            type="button"
+            custom={true}
+            className="rounded text-sm w-16 py-1"
+          >
             閉じる
           </Button>
         </div>
@@ -139,22 +71,25 @@ const InputBoard = ({
       <div className="grid grid-cols-3 gap-2 bg-gray-200 p-2 pb-10">
         <div className="flex flex-col gap-2">
           <Button
+            type="button"
             custom={true}
-            className="white rounded-lg text-lg py-1.5"
+            className="white rounded-lg text-lg py-1"
             onClick={() => inputNumber("1")}
           >
             1
           </Button>
           <Button
+            type="button"
             custom={true}
-            className="white rounded-lg text-lg py-1.5"
+            className="white rounded-lg text-lg py-1"
             onClick={() => inputNumber("4")}
           >
             4
           </Button>
           <Button
+            type="button"
             custom={true}
-            className="white rounded-lg text-lg py-1.5"
+            className="white rounded-lg text-lg py-1"
             onClick={() => inputNumber("7")}
           >
             7
@@ -162,29 +97,33 @@ const InputBoard = ({
         </div>
         <div className="flex flex-col gap-2">
           <Button
+            type="button"
             custom={true}
-            className="white rounded-lg text-lg py-1.5"
+            className="white rounded-lg text-lg py-1"
             onClick={() => inputNumber("2")}
           >
             2
           </Button>
           <Button
+            type="button"
             custom={true}
-            className="white rounded-lg text-lg py-1.5"
+            className="white rounded-lg text-lg py-1"
             onClick={() => inputNumber("5")}
           >
             5
           </Button>
           <Button
+            type="button"
             custom={true}
-            className="white rounded-lg text-lg py-1.5"
+            className="white rounded-lg text-lg py-1"
             onClick={() => inputNumber("8")}
           >
             8
           </Button>
           <Button
+            type="button"
             custom={true}
-            className="white rounded-lg text-lg py-1.5"
+            className="white rounded-lg text-lg py-1"
             onClick={() => inputNumber("0")}
           >
             0
@@ -192,30 +131,33 @@ const InputBoard = ({
         </div>
         <div className="flex flex-col gap-2">
           <Button
+            type="button"
             custom={true}
-            className="white rounded-lg text-lg py-1.5"
+            className="white rounded-lg text-lg py-1"
             onClick={() => inputNumber("3")}
           >
             3
           </Button>
           <Button
             custom={true}
-            className="white rounded-lg text-lg py-1.5"
+            className="white rounded-lg text-lg py-1"
             onClick={() => inputNumber("6")}
           >
             6
           </Button>
           <Button
+            type="button"
             custom={true}
-            className="white rounded-lg text-lg py-1.5"
+            className="white rounded-lg text-lg py-1"
             onClick={() => inputNumber("9")}
           >
             9
           </Button>
           <Button
+            type="button"
             custom={true}
-            className="white rounded-lg text-lg py-1.5"
-            onClick={deleteLastDigit}
+            className="white rounded-lg text-lg py-1"
+            onClick={deleteNum}
           >
             ☒
           </Button>
