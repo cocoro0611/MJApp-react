@@ -1,10 +1,10 @@
 "use server";
 
 import { db } from "../../../db";
-import type { ReadChipData } from "../../type";
+import type { ReadChip } from "../../type";
 
-export const readChips = async (roomId: string): Promise<ReadChipData[]> => {
-  const chipsData: ReadChipData[] = [];
+export const readChips = async (roomId: string): Promise<ReadChip[]> => {
+  const chips: ReadChip[] = [];
 
   const gameCounts = await db
     .selectFrom("Chip")
@@ -28,11 +28,11 @@ export const readChips = async (roomId: string): Promise<ReadChipData[]> => {
       .orderBy("RoomUser.position", "asc")
       .execute();
 
-    chipsData.push({
+    chips.push({
       gameCount: game.gameCount,
       chips: gameChips,
     });
   }
 
-  return chipsData;
+  return chips;
 };

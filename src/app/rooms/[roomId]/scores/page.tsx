@@ -1,6 +1,6 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
-import { readRoom, readScores } from "@/src/lib/models/rooms";
+import { readRoomDetail, readScores } from "@/src/lib/models/rooms";
 
 interface RoomScoresPageProps {
   params: Promise<{ roomId: string }>;
@@ -8,7 +8,7 @@ interface RoomScoresPageProps {
 
 const RoomScorePage = async ({ params }: RoomScoresPageProps) => {
   const { roomId } = await params;
-  const room = await readRoom(roomId);
+  const room = await readRoomDetail(roomId);
   const score = await readScores(roomId);
 
   return (

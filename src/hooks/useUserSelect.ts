@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { MAX_ROOM_PLAYERS } from "../constants/gameRules";
-import type { ReadUserData } from "@/src/lib/models/users/type";
+import type { ReadUser } from "@/src/lib/models/users/type";
 
-const useUserSelect = (users: ReadUserData[]) => {
+const useUserSelect = (users: ReadUser[]) => {
   // 初期値：isDefaultUserがtrueのユーザーを取得
   const getDefaultUsers = () => {
     return users.filter((user) => user.isDefaultUser).map((user) => user.id);

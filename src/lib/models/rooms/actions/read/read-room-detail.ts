@@ -1,13 +1,13 @@
 "use server";
 
 import { db } from "../../../db";
-import type { ReadRoomDetailData } from "../../type";
+import type { ReadRoomDetail } from "../../type";
 import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
-import { calculateBonusPoints } from "@/src/utils/score-result";
+// import { calculateBonusPoints } from "@/src/utils/score-result";
 
 export const readRoomDetail = async (
   roomId: string
-): Promise<ReadRoomDetailData | null> => {
+): Promise<ReadRoomDetail | null> => {
   const room = await db
     .selectFrom("Room")
     .select([
@@ -28,11 +28,11 @@ export const readRoomDetail = async (
   }
 
   // ボーナスポイントを計算
-  const bonusPoints = calculateBonusPoints(
-    room.initialPoint,
-    room.returnPoint,
-    room.bonusPoint
-  );
+  // const bonusPoints = calculateBonusPoints(
+  //   room.initialPoint,
+  //   room.returnPoint,
+  //   room.bonusPoint
+  // );
 
   const roomUsers = await db
     .selectFrom("RoomUser")

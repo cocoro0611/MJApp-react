@@ -1,11 +1,9 @@
 "use server";
 
 import { db } from "../../../db";
-import type { ChipData } from "../../type";
+import type { CreateChip } from "../../type";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
-
-type ChipCreateData = Omit<ChipData, "createdAt" | "updatedAt">;
 
 export const createChip = async (data: FormData) => {
   const roomId = String(data.get("roomId"));
@@ -24,14 +22,14 @@ export const createChip = async (data: FormData) => {
     .where("roomId", "=", roomId)
     .executeTakeFirst();
 
-  const chipData: ChipCreateData[] = roomUsers.map((user) => ({
+  const chips: CreateChip[] = roomUsers.map((user) => ({
     chip: 0,
     gameCount: (maxGameCount?.maxGameCount ?? 0) + 1,
     roomId: roomId,
     userId: user.userId,
   }));
 
-  await db.insertInto("Chip").values(chipData).execute();
+  await db.insertInto("Chip").values(chips).execute();
 
   // Toast通知の都合上遅延を設定
   await new Promise((resolve) => setTimeout(resolve, TOAST_TIME));

@@ -3,7 +3,7 @@ import { createScore } from "./actions/create/create-score";
 import { createChip } from "./actions/create/create-chip";
 
 import { readRooms } from "./actions/read/read-rooms";
-import { readRoomDetail } from "./actions/read/read-room-board";
+import { readRoomDetail } from "./actions/read/read-room-detail";
 import { readScores } from "./actions/read/read-scores";
 import { readChips } from "./actions/read/read-chips";
 

@@ -1,8 +1,16 @@
-import type { Room, RoomUser, Score, Chip } from "../types";
-import type { UserData } from "../users/type";
-import { TS } from "../types-utils";
+import type { User, Room, RoomUser, Score, Chip } from "../types";
+import { TS } from "../kysely-utils";
 
-export type RoomData = Pick<
+// ReadData
+export type ReadRoom = Pick<TS<Room>, "id" | "name"> & {
+  users: RoomUserData[];
+};
+
+type RoomUserData = Pick<TS<User>, "id" | "name" | "icon"> & {
+  totalScore: number;
+};
+
+export type ReadRoomDetail = Pick<
   TS<Room>,
   | "id"
   | "name"
@@ -12,64 +20,39 @@ export type RoomData = Pick<
   | "scoreRate"
   | "chipRate"
   | "gameAmount"
-  | "createdAt"
-  | "updatedAt"
->;
-
-export type ScoreData = Pick<
-  TS<Score>,
-  | "score"
-  | "gameCount"
-  | "order"
-  | "userId"
-  | "roomId"
-  | "createdAt"
-  | "updatedAt"
->;
-
-export type ChipData = Pick<
-  TS<Chip>,
-  "chip" | "gameCount" | "userId" | "roomId" | "createdAt" | "updatedAt"
->;
-
-export type RoomUserData = Pick<
-  TS<RoomUser>,
-  "position" | "userId" | "roomId" | "createdAt" | "updatedAt"
->;
-
-export type ReadRoomData = Pick<RoomData, "id" | "name"> & {
-  users: (Pick<UserData, "id" | "name" | "icon"> & {
-    totalScore: number;
-  })[];
+> & {
+  users: ReadRoomDetailUser[];
 };
 
-export type RoomDetailUserData = Pick<UserData, "id" | "name" | "icon"> & {
+export type ReadRoomDetailUser = Pick<TS<User>, "id" | "name" | "icon"> & {
   totalScore: number;
   totalChip: number;
   totalPoint: number;
 };
 
-export type ReadRoomDetailData = Pick<
-  RoomData,
-  | "id"
-  | "name"
-  | "initialPoint"
-  | "returnPoint"
-  | "bonusPoint"
-  | "scoreRate"
-  | "chipRate"
-  | "gameAmount"
-> & {
-  users: RoomDetailUserData[];
+export type ReadScore = Pick<TS<Score>, "gameCount"> & {
+  scores: ScoreData[];
 };
 
-export type ReadScoreData = Pick<ScoreData, "gameCount"> & {
-  scores: (Pick<RoomUserData, "position"> &
-    Pick<ScoreData, "score"> & {
-      scoreResult: number;
-    })[];
+type ScoreData = Pick<TS<RoomUser>, "position"> &
+  Pick<TS<Score>, "score"> & {
+    scoreResult: number;
+  };
+
+export type ReadChip = Pick<TS<Chip>, "gameCount"> & {
+  chips: ChipData[];
 };
 
-export type ReadChipData = Pick<ChipData, "gameCount"> & {
-  chips: (Pick<RoomUserData, "position"> & Pick<ChipData, "chip">)[];
-};
+type ChipData = Pick<TS<RoomUser>, "position"> & Pick<TS<Chip>, "chip">;
+
+// CreateData
+export type CreateRoom = Omit<TS<Room>, "createdAt" | "updatedAt">;
+
+export type CreateRoomUser = Omit<TS<RoomUser>, "createdAt" | "updatedAt">;
+
+export type CreateScore = Omit<TS<Score>, "createdAt" | "updatedAt">;
+
+export type CreateChip = Omit<TS<Chip>, "createdAt" | "updatedAt">;
+
+// UpdateData
+export type UpdateRoom = Omit<TS<Room>, "id" | "createdAt">;

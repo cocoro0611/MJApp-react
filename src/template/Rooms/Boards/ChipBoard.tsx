@@ -1,9 +1,9 @@
 import Card from "@/src/components/ui/Card";
-import type { ReadChipData } from "@/src/lib/models/rooms/type";
+import type { ReadChip } from "@/src/lib/models/rooms/type";
 import { Fragment } from "react";
 
 interface ChipBoardProps {
-  chips: ReadChipData[];
+  chips: ReadChip[];
   chipRate: number;
   roomId: string;
 }

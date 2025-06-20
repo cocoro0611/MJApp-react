@@ -1,11 +1,9 @@
 "use server";
 
 import { db } from "../../../db";
-import type { ScoreData } from "../../type";
+import type { CreateScore } from "../../type";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
-
-type ScoreCreateData = Omit<ScoreData, "createdAt" | "updatedAt">;
 
 export const createScore = async (data: FormData) => {
   const roomId = String(data.get("roomId"));
@@ -24,7 +22,7 @@ export const createScore = async (data: FormData) => {
     .where("roomId", "=", roomId)
     .executeTakeFirst();
 
-  const scoreData: ScoreCreateData[] = roomUsers.map((user, index) => ({
+  const scores: CreateScore[] = roomUsers.map((user, index) => ({
     score: 0,
     gameCount: (maxGameCount?.maxGameCount ?? 0) + 1,
     order: index + 1,
@@ -32,7 +30,7 @@ export const createScore = async (data: FormData) => {
     userId: user.userId,
   }));
 
-  await db.insertInto("Score").values(scoreData).execute();
+  await db.insertInto("Score").values(scores).execute();
 
   // Toast通知の都合上遅延を設定
   await new Promise((resolve) => setTimeout(resolve, TOAST_TIME));

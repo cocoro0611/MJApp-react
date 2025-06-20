@@ -5,12 +5,12 @@ import InputField from "@/src/components/form/InputField";
 import SelectIcon from "@/src/components/form/users/SelectIcon";
 import ToastButton from "@/src/components/nav/ToastButton";
 import { useState } from "react";
-import type { ReadUserData } from "@/src/lib/models/users/type";
+import type { ReadUser } from "@/src/lib/models/users/type";
 
 interface UserFormProps {
   action: (formData: FormData) => void;
   btnText: string;
-  user?: ReadUserData;
+  user?: ReadUser;
   roomId?: string;
 }
 

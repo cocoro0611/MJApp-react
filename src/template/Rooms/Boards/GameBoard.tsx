@@ -1,9 +1,9 @@
 import Card from "@/src/components/ui/Card";
 import { UserCard } from "../../Users";
-import { RoomDetailUserData } from "@/src/lib/models/rooms/type";
+import { ReadRoomDetailUser } from "@/src/lib/models/rooms/type";
 
 interface GameDetailProps {
-  roomDetailUser: RoomDetailUserData[];
+  roomDetailUser: ReadRoomDetailUser[];
   roomId: string;
 }
 

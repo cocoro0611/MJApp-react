@@ -1,6 +1,6 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
-import { readRoom, readChips } from "@/src/lib/models/rooms";
+import { readRoomDetail, readChips } from "@/src/lib/models/rooms";
 
 interface RoomChipsPageProps {
   params: Promise<{ roomId: string }>;
@@ -8,7 +8,7 @@ interface RoomChipsPageProps {
 
 const RoomChipsPage = async ({ params }: RoomChipsPageProps) => {
   const { roomId } = await params;
-  const room = await readRoom(roomId);
+  const room = await readRoomDetail(roomId);
   const chips = await readChips(roomId);
 
   return (

@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../../ui/Button";
-import type { ReadUserData } from "@/src/lib/models/users/type";
+import type { ReadUser } from "@/src/lib/models/users/type";
 
 interface DefaultRoomUsersProps {
-  roomUsers: ReadUserData[];
+  roomUsers: ReadUser[];
 }
 
 const DefaultRoomUsers = ({ roomUsers }: DefaultRoomUsersProps) => {

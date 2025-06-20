@@ -1,10 +1,10 @@
 import Card from "@/src/components/ui/Card";
-import type { ReadScoreData } from "@/src/lib/models/rooms/type";
+import type { ReadScore } from "@/src/lib/models/rooms/type";
 import { Fragment } from "react";
 import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
 
 interface ScoreBoardProps {
-  scores: ReadScoreData[];
+  scores: ReadScore[];
   initialPoint: number;
   roomId: string;
 }

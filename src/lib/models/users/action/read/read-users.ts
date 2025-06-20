@@ -1,9 +1,9 @@
 "use server";
 
 import { db } from "../../../db";
-import type { ReadUserData } from "../../type";
+import type { ReadUser } from "../../type";
 
-export const readUsers = async (): Promise<ReadUserData[]> => {
+export const readUsers = async (): Promise<ReadUser[]> => {
   const users = await db
     .selectFrom("User")
     .select(["id", "name", "icon", "isDefaultUser"])

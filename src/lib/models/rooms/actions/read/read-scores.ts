@@ -1,10 +1,10 @@
 "use server";
 
 import { db } from "../../../db";
-import type { ReadScoreData } from "../../type";
+import type { ReadScore } from "../../type";
 import { calculateBonusPoints } from "@/src/utils/score-result";
 
-export const readScores = async (roomId: string): Promise<ReadScoreData[]> => {
+export const readScores = async (roomId: string): Promise<ReadScore[]> => {
   const room = await db
     .selectFrom("Room")
     .select(["initialPoint", "returnPoint", "bonusPoint"])
@@ -15,7 +15,7 @@ export const readScores = async (roomId: string): Promise<ReadScoreData[]> => {
     throw new Error("Room not found");
   }
 
-  const scoresData: ReadScoreData[] = [];
+  const scores: ReadScore[] = [];
 
   const gameCounts = await db
     .selectFrom("Score")
@@ -66,11 +66,11 @@ export const readScores = async (roomId: string): Promise<ReadScoreData[]> => {
       };
     });
 
-    scoresData.push({
+    scores.push({
       gameCount: game.gameCount,
       scores: scoresWithResult,
     });
   }
 
-  return scoresData;
+  return scores;
 };

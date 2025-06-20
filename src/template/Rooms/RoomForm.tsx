@@ -14,14 +14,14 @@ import {
   DEFAULT_GAME_RULES,
 } from "@/src/constants/gameRules";
 import { useState } from "react";
-import type { ReadRoomData } from "@/src/lib/models/rooms/type";
-import type { ReadUserData } from "@/src/lib/models/users/type";
+import type { ReadRoomDetail } from "@/src/lib/models/rooms/type";
+import type { ReadUser } from "@/src/lib/models/users/type";
 
 interface RoomFormProps {
   action: (formData: FormData) => void;
   btnText: string;
-  room?: ReadRoomData;
-  roomUsers?: ReadUserData[];
+  room?: ReadRoomDetail;
+  roomUsers?: ReadUser[];
 }
 
 const RoomForm = ({ action, btnText, room, roomUsers }: RoomFormProps) => {

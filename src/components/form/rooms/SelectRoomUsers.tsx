@@ -3,11 +3,11 @@
 import Button from "@/src/components/ui/Button";
 import { UserCard } from "@/src/template/Users";
 import useUserSelect from "@/src/hooks/useUserSelect";
-import type { ReadUserData } from "@/src/lib/models/users/type";
+import type { ReadUser } from "@/src/lib/models/users/type";
 import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
 
 interface SelectRoomUsersProps {
-  users: ReadUserData[];
+  users: ReadUser[];
 }
 
 const SelectRoomUsers = ({ users }: SelectRoomUsersProps) => {
