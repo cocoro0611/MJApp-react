@@ -6,7 +6,7 @@ export type UserData = Pick<
   "id" | "name" | "icon" | "isDefaultUser" | "createdAt" | "updatedAt"
 >;
 
-export type ReadUserData = Pick<
+export type  ReadUserData= Pick<
   UserData,
   "id" | "name" | "icon" | "isDefaultUser"
 >;

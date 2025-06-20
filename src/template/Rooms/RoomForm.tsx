@@ -15,18 +15,13 @@ import {
 } from "@/src/constants/gameRules";
 import { useState } from "react";
 import type { ReadRoomData } from "@/src/lib/models/rooms/type";
-
-type UserType = {
-  id: string;
-  name: string;
-  icon: string;
-};
+import type { ReadUserData } from "@/src/lib/models/users/type";
 
 interface RoomFormProps {
   action: (formData: FormData) => void;
   btnText: string;
   room?: ReadRoomData;
-  roomUsers?: UserType[];
+  roomUsers?: ReadUserData[];
 }
 
 const RoomForm = ({ action, btnText, room, roomUsers }: RoomFormProps) => {

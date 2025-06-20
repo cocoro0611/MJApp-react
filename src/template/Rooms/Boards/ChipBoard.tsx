@@ -1,22 +1,17 @@
 import Card from "@/src/components/ui/Card";
+import type { ReadChipData } from "@/src/lib/models/rooms/type";
 import { Fragment } from "react";
 
-interface ChipItem {
-  position: number;
-  chip: number;
-}
-
-interface GameChip {
-  gameCount: number;
-  chips: ChipItem[];
-}
-
 interface ChipBoardProps {
-  chips: GameChip[];
+  chips: ReadChipData[];
   chipRate: number;
+  roomId: string;
 }
 
-const ChipBoard = ({ chips, chipRate }: ChipBoardProps) => {
+const ChipBoard = ({ chips, chipRate, roomId }: ChipBoardProps) => {
+  const INITIAL_TOTAL_CHIP = 80;
+  const INITIAL_CHIP = 20;
+
   if (!chips || chips.length === 0) {
     return null;
   }
@@ -32,29 +27,35 @@ const ChipBoard = ({ chips, chipRate }: ChipBoardProps) => {
             (sum, chipItem) => sum + chipItem.chip,
             0
           );
-          const isComplete = totalChips === 80;
+          const isComplete = totalChips === INITIAL_TOTAL_CHIP;
 
           return (
             <Fragment key={gameChip.gameCount}>
               <div className="grid-5-inner">
                 <div className="center flex-col p-1 h-18">
                   {isComplete ? (
-                    <Card href="" className="w-full py-1.5">
+                    <Card
+                      href={`/rooms/${roomId}/chips/`}
+                      className="w-full py-1.5"
+                    >
                       {gameChip.gameCount}回分
                       <div className="text-[0.6rem]">(1人/20枚)</div>
                     </Card>
                   ) : (
-                    <div className="font-bold">
+                    <div className="font-bold text-xs">
                       <p>-チップ-</p>
                       <p className="text-red-500">あと</p>
-                      <p className="text-red-500">{80 - totalChips} 枚</p>
+                      <p className="text-red-500">
+                        {INITIAL_TOTAL_CHIP - totalChips} 枚
+                      </p>
                     </div>
                   )}
                 </div>
               </div>
               {gameChip.chips.map((chipItem) => {
-                const isChipPositive = chipItem.chip - 20 < 0;
-                const chipPoint = (chipItem.chip - 20) * chipRate;
+                // チップポイントの計算
+                const chipPoint = (chipItem.chip - INITIAL_CHIP) * chipRate;
+                const isChipPositive = chipPoint < 0;
 
                 return (
                   <div className="grid-5-inner" key={chipItem.position}>

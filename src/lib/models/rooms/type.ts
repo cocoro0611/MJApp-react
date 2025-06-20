@@ -57,6 +57,7 @@ export type ReadRoomBoardData = Pick<RoomData, "id" | "name"> & {
   })[];
 };
 
+//FIXME: 型の定義から
 export type ReadScoreData = Pick<ScoreData, "gameCount"> & {
   scores: (Pick<RoomUserData, "position"> & Pick<ScoreData, "score">)[];
 };
