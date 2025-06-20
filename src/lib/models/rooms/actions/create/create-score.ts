@@ -24,9 +24,10 @@ export const createScore = async (data: FormData) => {
     .where("roomId", "=", roomId)
     .executeTakeFirst();
 
-  const scoreData: ScoreCreateData[] = roomUsers.map((user) => ({
+  const scoreData: ScoreCreateData[] = roomUsers.map((user, index) => ({
     score: 0,
     gameCount: (maxGameCount?.maxGameCount ?? 0) + 1,
+    order: index + 1,
     roomId: roomId,
     userId: user.userId,
   }));

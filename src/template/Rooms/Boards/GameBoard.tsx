@@ -1,19 +1,20 @@
 import Card from "@/src/components/ui/Card";
 import { UserCard } from "../../Users";
-import { ReadRoomBoardData } from "@/src/lib/models/rooms/type";
+import { RoomDetailUserData } from "@/src/lib/models/rooms/type";
 
-interface GameBoardProps {
-  roomBoard: ReadRoomBoardData;
+interface GameDetailProps {
+  roomDetailUser: RoomDetailUserData[];
+  roomId: string;
 }
 
-const GameBoard = ({ roomBoard }: GameBoardProps) => {
+const GameDetail = ({ roomDetailUser, roomId }: GameDetailProps) => {
   return (
     <>
       <div className="fixed-container top-11 z-10 primary-color center grid-5">
         <div className="grid-5-inner">
           <div className="center p-0.5 bg-white">
             <Card
-              href={`/rooms/${roomBoard.id}/room-edit`}
+              href={`/rooms/${roomId}/room-edit`}
               className="w-full center flex-col h-16"
             >
               <span>設定</span>
@@ -24,11 +25,11 @@ const GameBoard = ({ roomBoard }: GameBoardProps) => {
           <div>チップ</div>
           <div>収支</div>
         </div>
-        {roomBoard.users.map((user) => (
+        {roomDetailUser.map((user) => (
           <div className="grid-5-inner" key={user.id}>
             <div className="center p-0.5 bg-white">
               <UserCard
-                href={`/rooms/${roomBoard.id}/user-edit/${user.id}`}
+                href={`/rooms/${roomId}/user-edit/${user.id}`}
                 name={user.name}
                 icon={user.icon}
                 size="mdWf"
@@ -54,4 +55,4 @@ const GameBoard = ({ roomBoard }: GameBoardProps) => {
   );
 };
 
-export default GameBoard;
+export default GameDetail;

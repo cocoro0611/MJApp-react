@@ -15,7 +15,7 @@ const ScoreBoard = ({ scores, initialPoint, roomId }: ScoreBoardProps) => {
   return (
     <>
       <div className="bg-gray-300 text-gray-600 grid-5">
-        <div className="center font-bold">各スコア{INITIAL_TOTAL_SCORE}</div>
+        <div className="center font-bold">各スコア</div>
       </div>
       <div className="grid-5">
         {scores.map((gameScore) => {
@@ -47,34 +47,27 @@ const ScoreBoard = ({ scores, initialPoint, roomId }: ScoreBoardProps) => {
                   )}
                 </div>
               </div>
-              {gameScore.scores.map((scoreItem) => {
-                // スコア結果の計算
-                //FIXME: 計算式結果はサーバ側で計算
-                const scoreResult = scoreItem.score / 1000;
-                const isScorePositive = scoreResult < 0;
-
-                return (
-                  <div className="grid-5-inner" key={scoreItem.position}>
-                    <div className="center flex-col p-0.5 h-18">
-                      <Card className="w-full p-1">
-                        <p className="flex justify-start text-[0.6rem]">点数</p>
-                        <p>
-                          <span className="px-1 border-b-2 border-blue-400">
-                            {scoreItem.score / 100}
-                          </span>
-                          <span>00</span>
-                        </p>
-                      </Card>
-                      <div
-                        className={`font-bold center w-full mt-0.5
-                        ${isScorePositive ? "text-red-500" : "text-blue-500"}`}
-                      >
-                        {scoreResult}
-                      </div>
+              {gameScore.scores.map((scoreItem) => (
+                <div className="grid-5-inner" key={scoreItem.position}>
+                  <div className="center flex-col p-0.5 h-18">
+                    <Card className="w-full p-1">
+                      <p className="flex justify-start text-[0.6rem]">点数</p>
+                      <p>
+                        <span className="px-1 border-b-2 border-blue-400">
+                          {scoreItem.score / 100}
+                        </span>
+                        <span>00</span>
+                      </p>
+                    </Card>
+                    <div
+                      className={`font-bold center w-full mt-0.5
+                        ${scoreItem.scoreResult < 0 ? "text-red-500" : "text-blue-500"}`}
+                    >
+                      {scoreItem.scoreResult}
                     </div>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </Fragment>
           );
         })}

@@ -1,6 +1,7 @@
 model Score {
     score     Int
     gameCount Int
+    order     Int // 同点数時のウマの処理に使用
     createdAt DateTime @default(now())
     updatedAt DateTime @default(now())
 

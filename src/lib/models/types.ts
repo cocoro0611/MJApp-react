@@ -34,6 +34,7 @@ export type RoomUser = {
 export type Score = {
     score: number;
     gameCount: number;
+    order: number;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
     userId: string;

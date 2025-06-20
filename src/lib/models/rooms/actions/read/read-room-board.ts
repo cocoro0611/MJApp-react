@@ -1,15 +1,25 @@
 "use server";
 
 import { db } from "../../../db";
-import type { ReadRoomBoardData } from "../../type";
+import type { ReadRoomDetailData } from "../../type";
 import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
+import { calculateBonusPoints } from "@/src/utils/score-result";
 
-export const readRoomBoard = async (
+export const readRoomDetail = async (
   roomId: string
-): Promise<ReadRoomBoardData | null> => {
+): Promise<ReadRoomDetailData | null> => {
   const room = await db
     .selectFrom("Room")
-    .select(["id", "name", "scoreRate", "chipRate", "gameAmount"])
+    .select([
+      "id",
+      "name",
+      "initialPoint",
+      "returnPoint",
+      "bonusPoint",
+      "scoreRate",
+      "chipRate",
+      "gameAmount",
+    ])
     .where("id", "=", roomId)
     .executeTakeFirst();
 
@@ -17,7 +27,14 @@ export const readRoomBoard = async (
     return null;
   }
 
-  const roomUsersNotScore = await db
+  // ボーナスポイントを計算
+  const bonusPoints = calculateBonusPoints(
+    room.initialPoint,
+    room.returnPoint,
+    room.bonusPoint
+  );
+
+  const roomUsers = await db
     .selectFrom("RoomUser")
     .innerJoin("User", "User.id", "RoomUser.userId")
     .select(["User.id", "User.name", "User.icon"])
@@ -25,11 +42,14 @@ export const readRoomBoard = async (
     .orderBy("RoomUser.position", "asc")
     .execute();
 
-  const roomUsers = await Promise.all(
-    roomUsersNotScore.map(async (user) => {
+  const roomUsersScore = await Promise.all(
+    roomUsers.map(async (user) => {
       const scoreSum = await db
         .selectFrom("Score")
-        .select((eb) => eb.fn.sum("score").as("total"))
+        .select((eb) => [
+          eb.fn.sum("score").as("total"),
+          eb.fn.max("gameCount").as("maxGameCount"),
+        ])
         .where("userId", "=", user.id)
         .where("roomId", "=", roomId)
         .executeTakeFirst();
@@ -67,6 +87,6 @@ export const readRoomBoard = async (
 
   return {
     ...room,
-    users: roomUsers,
+    users: roomUsersScore,
   };
 };

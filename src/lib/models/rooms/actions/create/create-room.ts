@@ -30,9 +30,10 @@ export const createRoom = async (data: FormData) => {
     roomId: roomData.id,
   }));
 
-  const scoreData: ScoreCreateData[] = userIds.map((userId) => ({
+  const scoreData: ScoreCreateData[] = userIds.map((userId, index) => ({
     score: 0,
     gameCount: 1,
+    order: index + 1,
     userId: String(userId),
     roomId: roomData.id,
   }));

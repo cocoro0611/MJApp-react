@@ -10,8 +10,7 @@ import {
   // InputBoard,
 } from "@/src/template/Rooms";
 import {
-  readRoom,
-  readRoomBoard,
+  readRoomDetail,
   readScores,
   readChips,
   deleteRoom,
@@ -23,32 +22,37 @@ interface RoomEditPageProps {
 
 const RoomEditPage = async ({ params }: RoomEditPageProps) => {
   const { roomId } = await params;
-  const room = await readRoom(roomId);
-  const roomBoard = await readRoomBoard(roomId);
+  const roomDetail = await readRoomDetail(roomId);
   const scores = await readScores(roomId);
   const chips = await readChips(roomId);
 
-  if (!room || !roomBoard) {
+  if (!roomDetail) {
     throw new Error("ルームが見つかりません");
   }
 
   return (
     <>
       <Header
-        title={room.name}
+        title={roomDetail.name}
         href="/rooms"
-        addContent={<GameBoard roomBoard={roomBoard} />}
+        addContent={
+          <GameBoard roomDetailUser={roomDetail.users} roomId={roomId} />
+        }
       >
         <DeleteForm action={deleteRoom} name="id" value={roomId} />
       </Header>
       <Main isBlank={false}>
-        <PointBoard amount={room.gameAmount} />
+        <PointBoard amount={roomDetail.gameAmount} />
         <ScoreBoard
           scores={scores}
-          initialPoint={room.initialPoint}
+          initialPoint={roomDetail.initialPoint}
           roomId={roomId}
         />
-        <ChipBoard chips={chips} chipRate={room.chipRate} roomId={roomId} />
+        <ChipBoard
+          chips={chips}
+          chipRate={roomDetail.chipRate}
+          roomId={roomId}
+        />
         <AddDataDialog roomId={roomId} />
       </Main>
       {/* <InputBoard /> */}

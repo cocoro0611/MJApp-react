@@ -18,7 +18,13 @@ export type RoomData = Pick<
 
 export type ScoreData = Pick<
   TS<Score>,
-  "score" | "gameCount" | "userId" | "roomId" | "createdAt" | "updatedAt"
+  | "score"
+  | "gameCount"
+  | "order"
+  | "userId"
+  | "roomId"
+  | "createdAt"
+  | "updatedAt"
 >;
 
 export type ChipData = Pick<
@@ -31,7 +37,19 @@ export type RoomUserData = Pick<
   "position" | "userId" | "roomId" | "createdAt" | "updatedAt"
 >;
 
-export type ReadRoomData = Pick<
+export type ReadRoomData = Pick<RoomData, "id" | "name"> & {
+  users: (Pick<UserData, "id" | "name" | "icon"> & {
+    totalScore: number;
+  })[];
+};
+
+export type RoomDetailUserData = Pick<UserData, "id" | "name" | "icon"> & {
+  totalScore: number;
+  totalChip: number;
+  totalPoint: number;
+};
+
+export type ReadRoomDetailData = Pick<
   RoomData,
   | "id"
   | "name"
@@ -41,25 +59,15 @@ export type ReadRoomData = Pick<
   | "scoreRate"
   | "chipRate"
   | "gameAmount"
->;
-
-export type ReadRoomCardData = Pick<RoomData, "id" | "name"> & {
-  users: (Pick<UserData, "id" | "name" | "icon"> & {
-    totalScore: number;
-  })[];
+> & {
+  users: RoomDetailUserData[];
 };
 
-export type ReadRoomBoardData = Pick<RoomData, "id" | "name"> & {
-  users: (Pick<UserData, "id" | "name" | "icon"> & {
-    totalScore: number;
-    totalChip: number;
-    totalPoint: number;
-  })[];
-};
-
-//FIXME: 型の定義から
 export type ReadScoreData = Pick<ScoreData, "gameCount"> & {
-  scores: (Pick<RoomUserData, "position"> & Pick<ScoreData, "score">)[];
+  scores: (Pick<RoomUserData, "position"> &
+    Pick<ScoreData, "score"> & {
+      scoreResult: number;
+    })[];
 };
 
 export type ReadChipData = Pick<ChipData, "gameCount"> & {
