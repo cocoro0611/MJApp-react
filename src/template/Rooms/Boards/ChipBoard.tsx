@@ -13,9 +13,10 @@ interface GameChip {
 
 interface ChipBoardProps {
   chips: GameChip[];
+  chipRate: number;
 }
 
-const ChipBoard = ({ chips }: ChipBoardProps) => {
+const ChipBoard = ({ chips, chipRate }: ChipBoardProps) => {
   if (!chips || chips.length === 0) {
     return null;
   }
@@ -26,34 +27,61 @@ const ChipBoard = ({ chips }: ChipBoardProps) => {
         <div className="center font-bold">各チップ</div>
       </div>
       <div className="grid-5">
-        {chips.map((gameChip) => (
-          <Fragment key={gameChip.gameCount}>
-            <div className="grid-5-inner">
-              <div className="center flex-col p-1 h-18">
-                <Card href="" className="w-full py-1.5">
-                  {gameChip.gameCount}回分
-                  <div className="text-[0.6rem]">(1人/20枚)</div>
-                </Card>
-              </div>
-            </div>
-            {gameChip.chips.map((chipItem) => (
-              <div className="grid-5-inner" key={chipItem.position}>
-                <div className="center flex-col p-0.5 h-18">
-                  <Card href="" className="w-full p-1">
-                    <p className="flex justify-start text-[0.6rem]">点数</p>
-                    <p>
-                      <span className="px-1 border-b-2 border-blue-400">
-                        {chipItem.chip}
-                      </span>
-                      <span>00</span>
-                    </p>
-                  </Card>
-                  <div className="font-bold text-blue-500">12</div>
+        {chips.map((gameChip) => {
+          const totalChips = gameChip.chips.reduce(
+            (sum, chipItem) => sum + chipItem.chip,
+            0
+          );
+          const isComplete = totalChips === 80;
+
+          return (
+            <Fragment key={gameChip.gameCount}>
+              <div className="grid-5-inner">
+                <div className="center flex-col p-1 h-18">
+                  {isComplete ? (
+                    <Card href="" className="w-full py-1.5">
+                      {gameChip.gameCount}回分
+                      <div className="text-[0.6rem]">(1人/20枚)</div>
+                    </Card>
+                  ) : (
+                    <div className="font-bold">
+                      <p>-チップ-</p>
+                      <p className="text-red-500">あと</p>
+                      <p className="text-red-500">{80 - totalChips} 枚</p>
+                    </div>
+                  )}
                 </div>
               </div>
-            ))}
-          </Fragment>
-        ))}
+              {gameChip.chips.map((chipItem) => {
+                const isChipPositive = chipItem.chip - 20 < 0;
+                const chipPoint = (chipItem.chip - 20) * chipRate;
+
+                return (
+                  <div className="grid-5-inner" key={chipItem.position}>
+                    <div className="center flex-col p-0.5 h-18">
+                      <Card href="" className="w-full p-1">
+                        <p className="flex justify-start text-[0.6rem]">枚数</p>
+                        <p>
+                          <span className="px-1 border-b-2 border-blue-400">
+                            {chipItem.chip}
+                          </span>
+                          <span>枚</span>
+                        </p>
+                      </Card>
+                      <div
+                        className={`font-bold center w-full relative mt-0.5
+                        ${isChipPositive ? "text-red-500" : "text-blue-500"}`}
+                      >
+                        {chipPoint}
+                        <span className="absolute right-0.5">P</span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </Fragment>
+          );
+        })}
       </div>
     </>
   );

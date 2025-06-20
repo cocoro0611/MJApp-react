@@ -35,16 +35,16 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
   return (
     <>
       <Header
-        title={roomBoard.name}
+        title={room.name}
         href="/rooms"
         addContent={<GameBoard roomBoard={roomBoard} />}
       >
         <DeleteForm action={deleteRoom} name="id" value={roomId} />
       </Header>
       <Main isBlank={false}>
-        <PointBoard room={room} />
+        <PointBoard amount={room.gameAmount} />
         <ScoreBoard scores={scores} />
-        <ChipBoard chips={chips} />
+        <ChipBoard chips={chips} chipRate={room.chipRate} />
         <AddDataDialog roomId={roomId} />
       </Main>
       {/* <InputBoard /> */}

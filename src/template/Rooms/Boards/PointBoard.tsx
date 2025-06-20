@@ -1,16 +1,15 @@
-import type { ReadRoomData } from "@/src/lib/models/rooms/type";
-import { Fragment } from "react";
+import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
 
 interface PointBoardProps {
-  room: ReadRoomData;
+  amount: number;
 }
 
-const PointBoard = ({ room }: PointBoardProps) => {
-  if (room.gameAmount == 0) {
+const PointBoard = ({ amount }: PointBoardProps) => {
+  if (amount == 0) {
     return null;
   }
 
-  const pointPerPlayer = room.gameAmount / 4;
+  const pointPerPlayer = amount / MAX_ROOM_PLAYERS;
 
   return (
     <>
