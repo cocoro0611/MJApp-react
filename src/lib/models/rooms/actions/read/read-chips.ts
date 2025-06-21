@@ -4,33 +4,37 @@ import { db } from "../../../db";
 import type { ReadChip } from "../../type";
 
 export const readChips = async (roomId: string): Promise<ReadChip[]> => {
-  const chips: ReadChip[] = [];
-
-  const gameCounts = await db
+  const allChips = await db
     .selectFrom("Chip")
-    .select("gameCount")
-    .where("roomId", "=", roomId)
-    .groupBy("gameCount")
-    .orderBy("gameCount", "asc")
+    .innerJoin("RoomUser", (join) =>
+      join
+        .onRef("Chip.userId", "=", "RoomUser.userId")
+        .onRef("Chip.roomId", "=", "RoomUser.roomId"),
+    )
+    .select(["Chip.gameCount", "Chip.chip"])
+    .where("Chip.roomId", "=", roomId)
+    .orderBy("Chip.gameCount", "asc")
+    .orderBy("RoomUser.position", "asc")
     .execute();
 
-  for (const game of gameCounts) {
-    const gameChips = await db
-      .selectFrom("Chip")
-      .innerJoin("RoomUser", (join) =>
-        join
-          .onRef("Chip.userId", "=", "RoomUser.userId")
-          .onRef("Chip.roomId", "=", "RoomUser.roomId")
-      )
-      .select(["RoomUser.position", "Chip.chip"])
-      .where("Chip.roomId", "=", roomId)
-      .where("Chip.gameCount", "=", game.gameCount)
-      .orderBy("RoomUser.position", "asc")
-      .execute();
+  const chips: ReadChip[] = [];
 
-    chips.push({
-      gameCount: game.gameCount,
-      chips: gameChips,
+  for (const chipData of allChips) {
+    // そのゲーム回数が既にあるか探す
+    let gameChip = chips.find((c) => c.gameCount === chipData.gameCount);
+
+    // なければ新しく作る
+    if (!gameChip) {
+      gameChip = {
+        gameCount: chipData.gameCount,
+        chips: [],
+      };
+      chips.push(gameChip);
+    }
+
+    // チップを追加
+    gameChip.chips.push({
+      chip: chipData.chip,
     });
   }
 

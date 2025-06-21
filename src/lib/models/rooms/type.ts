@@ -31,19 +31,12 @@ export type ReadRoomDetailUser = Pick<TS<User>, "id" | "name" | "icon"> & {
 };
 
 export type ReadScore = Pick<TS<Score>, "gameCount"> & {
-  scores: ScoreData[];
+  scores: Pick<TS<Score>, "score" | "scoreResult">[];
 };
-
-type ScoreData = Pick<TS<RoomUser>, "position"> &
-  Pick<TS<Score>, "score"> & {
-    scoreResult: number;
-  };
 
 export type ReadChip = Pick<TS<Chip>, "gameCount"> & {
-  chips: ChipData[];
+  chips: Pick<TS<Chip>, "chip">[];
 };
-
-type ChipData = Pick<TS<RoomUser>, "position"> & Pick<TS<Chip>, "chip">;
 
 // CreateData
 export type CreateRoom = Omit<TS<Room>, "createdAt" | "updatedAt">;
@@ -56,3 +49,5 @@ export type CreateChip = Omit<TS<Chip>, "createdAt" | "updatedAt">;
 
 // UpdateData
 export type UpdateRoom = Omit<TS<Room>, "id" | "createdAt">;
+
+export type UpdateScore = Omit<TS<Score>, "createdAt">;

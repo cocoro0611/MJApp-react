@@ -26,7 +26,7 @@ export const readRooms = async (): Promise<ReadRoom[]> => {
       roomUsersNotScore.map(async (user) => {
         const scoreSum = await db
           .selectFrom("Score")
-          .select((eb) => eb.fn.sum("score").as("total"))
+          .select((eb) => eb.fn.sum("scoreResult").as("total"))
           .where("userId", "=", user.id)
           .where("roomId", "=", room.id)
           .executeTakeFirst();
@@ -37,7 +37,7 @@ export const readRooms = async (): Promise<ReadRoom[]> => {
           icon: user.icon,
           totalScore: Number(scoreSum?.total || 0),
         };
-      })
+      }),
     );
 
     roomsUsers.push({

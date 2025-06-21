@@ -30,6 +30,7 @@ export const createRoom = async (data: FormData) => {
     score: 0,
     gameCount: 1,
     order: index + 1,
+    scoreResult: 0,
     userId: String(userId),
     roomId: room.id,
   }));

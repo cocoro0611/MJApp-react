@@ -22,7 +22,7 @@ const SelectField = ({
   defaultValue,
 }: SelectFieldProps) => {
   const [selectedValue, setSelectedValue] = useState<number | string>(
-    defaultValue
+    defaultValue,
   );
 
   return (

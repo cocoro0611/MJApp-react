@@ -21,7 +21,7 @@ const ScoreBoard = ({ scores, initialPoint, roomId }: ScoreBoardProps) => {
         {scores.map((gameScore) => {
           const totalScore = gameScore.scores.reduce(
             (sum, scoreItem) => sum + scoreItem.score,
-            0
+            0,
           );
           const isComplete = totalScore === INITIAL_TOTAL_SCORE;
 
@@ -47,8 +47,8 @@ const ScoreBoard = ({ scores, initialPoint, roomId }: ScoreBoardProps) => {
                   )}
                 </div>
               </div>
-              {gameScore.scores.map((scoreItem) => (
-                <div className="grid-5-inner" key={scoreItem.position}>
+              {gameScore.scores.map((scoreItem, index) => (
+                <div className="grid-5-inner" key={index}>
                   <div className="center flex-col p-0.5 h-18">
                     <Card className="w-full p-1">
                       <p className="flex justify-start text-[0.6rem]">点数</p>

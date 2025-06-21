@@ -3,10 +3,9 @@
 import { db } from "../../../db";
 import type { ReadRoomDetail } from "../../type";
 import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
-// import { calculateBonusPoints } from "@/src/utils/score-result";
 
 export const readRoomDetail = async (
-  roomId: string
+  roomId: string,
 ): Promise<ReadRoomDetail | null> => {
   const room = await db
     .selectFrom("Room")
@@ -27,13 +26,6 @@ export const readRoomDetail = async (
     return null;
   }
 
-  // ボーナスポイントを計算
-  // const bonusPoints = calculateBonusPoints(
-  //   room.initialPoint,
-  //   room.returnPoint,
-  //   room.bonusPoint
-  // );
-
   const roomUsers = await db
     .selectFrom("RoomUser")
     .innerJoin("User", "User.id", "RoomUser.userId")
@@ -47,7 +39,7 @@ export const readRoomDetail = async (
       const scoreSum = await db
         .selectFrom("Score")
         .select((eb) => [
-          eb.fn.sum("score").as("total"),
+          eb.fn.sum("scoreResult").as("total"),
           eb.fn.max("gameCount").as("maxGameCount"),
         ])
         .where("userId", "=", user.id)
@@ -82,7 +74,7 @@ export const readRoomDetail = async (
         totalChip: totalChip,
         totalPoint: totalPoint,
       };
-    })
+    }),
   );
 
   return {

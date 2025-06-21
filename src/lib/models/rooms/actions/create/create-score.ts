@@ -26,6 +26,7 @@ export const createScore = async (data: FormData) => {
     score: 0,
     gameCount: (maxGameCount?.maxGameCount ?? 0) + 1,
     order: index + 1,
+    scoreResult: 0,
     roomId: roomId,
     userId: user.userId,
   }));

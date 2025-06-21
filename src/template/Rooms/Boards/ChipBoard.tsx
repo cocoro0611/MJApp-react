@@ -25,7 +25,7 @@ const ChipBoard = ({ chips, chipRate, roomId }: ChipBoardProps) => {
         {chips.map((gameChip) => {
           const totalChips = gameChip.chips.reduce(
             (sum, chipItem) => sum + chipItem.chip,
-            0
+            0,
           );
           const isComplete = totalChips === INITIAL_TOTAL_CHIP;
 
@@ -52,13 +52,13 @@ const ChipBoard = ({ chips, chipRate, roomId }: ChipBoardProps) => {
                   )}
                 </div>
               </div>
-              {gameChip.chips.map((chipItem) => {
+              {gameChip.chips.map((chipItem, index) => {
                 // チップポイントの計算
                 const chipPoint = (chipItem.chip - INITIAL_CHIP) * chipRate;
                 const isChipPositive = chipPoint < 0;
 
                 return (
-                  <div className="grid-5-inner" key={chipItem.position}>
+                  <div className="grid-5-inner" key={index}>
                     <div className="center flex-col p-0.5 h-18">
                       <Card href="" className="w-full p-1">
                         <p className="flex justify-start text-[0.6rem]">枚数</p>
