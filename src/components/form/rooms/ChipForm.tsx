@@ -2,13 +2,13 @@ import Card from "@/src/components/ui/Card";
 import type { ReadChip } from "@/src/lib/models/rooms/type";
 import { Fragment } from "react";
 
-interface ChipBoardProps {
+interface ChipFormProps {
   chips: ReadChip[];
   chipRate: number;
   roomId: string;
 }
 
-const ChipBoard = ({ chips, chipRate, roomId }: ChipBoardProps) => {
+const ChipForm = ({ chips, chipRate, roomId }: ChipFormProps) => {
   const INITIAL_TOTAL_CHIP = 80;
   const INITIAL_CHIP = 20;
 
@@ -25,7 +25,7 @@ const ChipBoard = ({ chips, chipRate, roomId }: ChipBoardProps) => {
         {chips.map((gameChip) => {
           const totalChips = gameChip.chips.reduce(
             (sum, chipItem) => sum + chipItem.chip,
-            0,
+            0
           );
           const isComplete = totalChips === INITIAL_TOTAL_CHIP;
 
@@ -88,4 +88,4 @@ const ChipBoard = ({ chips, chipRate, roomId }: ChipBoardProps) => {
   );
 };
 
-export default ChipBoard;
+export default ChipForm;

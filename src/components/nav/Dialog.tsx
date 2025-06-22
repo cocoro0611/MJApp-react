@@ -19,7 +19,7 @@ const Dialog = ({
     <>
       {open && (
         <div
-          className="center fixed z-20 inset-0 bg-black/50 backdrop-blur-xs"
+          className="center fixed z-30 inset-0 bg-black/50 backdrop-blur-xs"
           onClick={close}
         >
           <div

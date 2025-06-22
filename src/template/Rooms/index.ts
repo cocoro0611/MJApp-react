@@ -1,11 +1,7 @@
-import GameBoard from "./Boards/GameBoard";
-import PointBoard from "./Boards/PointBoard";
-import ScoreBoard from "./Boards/ScoreBoard";
-import ChipBoard from "./Boards/ChipBoard";
-import InputBoard from "./Boards/InputBoard";
-
+import GameBoard from "./GameBoard";
+import AmountBoard from "./AmountBoard";
 import RoomCard from "./RoomCard";
 import RoomForm from "./RoomForm";
+import ScoreChipForm from "./ScoreChipForm";
 
-export { GameBoard, PointBoard, ScoreBoard, ChipBoard, InputBoard };
-export { RoomCard, RoomForm };
+export { GameBoard, AmountBoard, RoomCard, RoomForm, ScoreChipForm };

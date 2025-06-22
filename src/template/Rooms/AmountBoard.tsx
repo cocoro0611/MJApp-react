@@ -1,10 +1,10 @@
 import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
 
-interface PointBoardProps {
+interface AmountBoardProps {
   amount: number;
 }
 
-const PointBoard = ({ amount }: PointBoardProps) => {
+const AmountBoard = ({ amount }: AmountBoardProps) => {
   if (amount == 0) {
     return null;
   }
@@ -33,4 +33,4 @@ const PointBoard = ({ amount }: PointBoardProps) => {
   );
 };
 
-export default PointBoard;
+export default AmountBoard;

@@ -2,4 +2,10 @@
   .primary-color {
     @apply bg-blue-800 text-white;
   }
+  .border-b-color {
+    @apply border-blue-300;
+  }
+  .pulse-border-b-color {
+    @apply border-yellow-500;
+  }
 }

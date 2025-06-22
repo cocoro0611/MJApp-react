@@ -1,13 +1,13 @@
 import Card from "@/src/components/ui/Card";
-import { UserCard } from "../../Users";
+import { UserCard } from "../Users";
 import { ReadRoomDetailUser } from "@/src/lib/models/rooms/type";
 
-interface GameDetailProps {
+interface GameBoardProps {
   roomDetailUser: ReadRoomDetailUser[];
   roomId: string;
 }
 
-const GameDetail = ({ roomDetailUser, roomId }: GameDetailProps) => {
+const GameBoard = ({ roomDetailUser, roomId }: GameBoardProps) => {
   return (
     <>
       <div className="fixed-container top-11 z-10 primary-color center grid-5">
@@ -55,4 +55,4 @@ const GameDetail = ({ roomDetailUser, roomId }: GameDetailProps) => {
   );
 };
 
-export default GameDetail;
+export default GameBoard;

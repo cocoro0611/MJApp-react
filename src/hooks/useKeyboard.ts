@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export const useInputBoard = () => {
+export const useKeyboard = () => {
   const [display, setDisplay] = useState("0");
   const [waitingForValue, setWaitingForValue] = useState(false);
 
@@ -38,6 +38,7 @@ export const useInputBoard = () => {
 
   return {
     display,
+    setDisplay,
     waitingForValue,
     inputNumber,
     left,
