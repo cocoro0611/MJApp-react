@@ -22,8 +22,24 @@ const Keyboard = ({
   currentScore = 0,
   onScoreUpdate,
 }: KeyboardProps) => {
-  const { display, inputNumber, signNum, deleteNum, setDisplay } =
+  const { display, setDisplay, inputNumber, signNum, deleteNum } =
     useKeyboard();
+
+  // キーボードレイアウトを配列で定義
+  const keyboardLayout = [
+    ["1", "2", "3"],
+    ["4", "5", "6"],
+    ["7", "8", "9"],
+    ["", "0", "delete"],
+  ];
+
+  const handleKeyPress = (key: string) => {
+    if (key === "delete") {
+      handleDeleteNum();
+    } else {
+      handleInputNumber(key);
+    }
+  };
 
   // カードが変更された時にキーボードの表示を更新
   useEffect(() => {
@@ -118,7 +134,7 @@ const Keyboard = ({
             + / -
           </Button>
           <Form action="">
-            <input type="hidden" name="hogehoge" value="hogehoge" />
+            <input type="hidden" name="" value="" />
             <Button custom={true} className="rounded text-sm w-16 py-2 ">
               計算
             </Button>
@@ -136,99 +152,19 @@ const Keyboard = ({
       </div>
 
       <div className="grid grid-cols-3 gap-2 bg-gray-200 p-2 pb-10">
-        <div className="flex flex-col gap-2">
-          <Button
-            type="button"
-            custom={true}
-            className="white rounded-lg text-lg py-1"
-            onClick={() => handleInputNumber("1")}
-          >
-            1
-          </Button>
-          <Button
-            type="button"
-            custom={true}
-            className="white rounded-lg text-lg py-1"
-            onClick={() => handleInputNumber("4")}
-          >
-            4
-          </Button>
-          <Button
-            type="button"
-            custom={true}
-            className="white rounded-lg text-lg py-1"
-            onClick={() => handleInputNumber("7")}
-          >
-            7
-          </Button>
-        </div>
-        <div className="flex flex-col gap-2">
-          <Button
-            type="button"
-            custom={true}
-            className="white rounded-lg text-lg py-1"
-            onClick={() => handleInputNumber("2")}
-          >
-            2
-          </Button>
-          <Button
-            type="button"
-            custom={true}
-            className="white rounded-lg text-lg py-1"
-            onClick={() => handleInputNumber("5")}
-          >
-            5
-          </Button>
-          <Button
-            type="button"
-            custom={true}
-            className="white rounded-lg text-lg py-1"
-            onClick={() => handleInputNumber("8")}
-          >
-            8
-          </Button>
-          <Button
-            type="button"
-            custom={true}
-            className="white rounded-lg text-lg py-1"
-            onClick={() => handleInputNumber("0")}
-          >
-            0
-          </Button>
-        </div>
-        <div className="flex flex-col gap-2">
-          <Button
-            type="button"
-            custom={true}
-            className="white rounded-lg text-lg py-1"
-            onClick={() => handleInputNumber("3")}
-          >
-            3
-          </Button>
-          <Button
-            custom={true}
-            className="white rounded-lg text-lg py-1"
-            onClick={() => handleInputNumber("6")}
-          >
-            6
-          </Button>
-          <Button
-            type="button"
-            custom={true}
-            className="white rounded-lg text-lg py-1"
-            onClick={() => handleInputNumber("9")}
-          >
-            9
-          </Button>
-          <Button
-            type="button"
-            custom={true}
-            className="white rounded-lg text-lg py-1"
-            onClick={handleDeleteNum}
-          >
-            ☒
-          </Button>
-        </div>
+        {keyboardLayout.map((row, index) =>
+          row.map((key) => (
+            <Button
+              key={`${index}-${key}`}
+              type="button"
+              custom={true}
+              className={`${key === "" ? "invisible" : "white rounded-lg text-lg py-1 "}`}
+              onClick={() => handleKeyPress(key)}
+            >
+              {key === "delete" ? "☒" : key}
+            </Button>
+          ))
+        )}
       </div>
     </div>
   );

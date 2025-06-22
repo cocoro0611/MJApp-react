@@ -15,9 +15,6 @@ export const useKeyboard = () => {
     }
   };
 
-  const left = () => {};
-  const right = () => {};
-
   const signNum = () => {
     if (display === "0") return;
 
@@ -39,12 +36,8 @@ export const useKeyboard = () => {
   return {
     display,
     setDisplay,
-    waitingForValue,
     inputNumber,
-    left,
-    right,
     signNum,
     deleteNum,
-    setWaitingForValue, // 必要に応じて
   };
 };
