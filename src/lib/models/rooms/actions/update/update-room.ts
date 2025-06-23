@@ -36,6 +36,7 @@ export const updateRoom = async (data: FormData) => {
       .selectFrom("Score")
       .select(["userId", "gameCount", "score", "order"])
       .where("roomId", "=", roomId)
+      .whereRef("createdAt", "!=", "updatedAt") // 初期値のscoreResultは更新しない
       .execute();
 
     // 4. 各スコアを更新
