@@ -89,7 +89,7 @@ export const updateScore = async (data: FormData) => {
     for (const scoreData of updatedScores) {
       const rawScore = (scoreData.score - room.returnPoint) / 1000;
       const bonus = bonusPoints[scoreData.order - 1] || 0; // order 1 → index 0
-      const scoreResult = Math.round(rawScore + bonus);
+      const scoreResult = rawScore + bonus;
 
       await trx
         .updateTable("Score")

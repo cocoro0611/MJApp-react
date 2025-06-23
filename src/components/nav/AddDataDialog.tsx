@@ -35,14 +35,14 @@ const AddDataDialog = ({ roomId }: AddDataDialogProps) => {
         title="追加"
         message="以下の情報を追加しますか？"
       >
-        <div className="center gap-4 mb-4">
+        <div className="grid grid-cols-2  gap-4 mb-4">
           <Form action={createScore}>
             <input type="hidden" name="roomId" value={roomId} />
             <ToastButton
               alertMessage="スコアを追加しました"
               alertColor="success"
               custom={true}
-              className="rounded px-4 py-2 w-32"
+              className="rounded px-4 py-2 w-full"
             >
               スコア
             </ToastButton>
@@ -53,7 +53,7 @@ const AddDataDialog = ({ roomId }: AddDataDialogProps) => {
               alertMessage="チップを追加しました"
               alertColor="success"
               custom={true}
-              className="rounded px-4 py-2 w-32"
+              className="rounded px-4 py-2 w-full"
             >
               チップ
             </ToastButton>
@@ -64,7 +64,7 @@ const AddDataDialog = ({ roomId }: AddDataDialogProps) => {
           onClick={handleClose}
           color="cancel"
           custom={true}
-          className="rounded px-4 py-1 w-68"
+          className="rounded px-4 py-1 w-full"
         >
           閉じる
         </Button>

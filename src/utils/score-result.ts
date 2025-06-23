@@ -2,7 +2,7 @@
 export const calculateBonusPoints = (
   initialPoint: number,
   returnPoint: number,
-  bonusPoint: string,
+  bonusPoint: string
 ): number[] => {
   // "10-30" や "05-10" のような形式から数値を抽出
   const parts = bonusPoint.split("-");
