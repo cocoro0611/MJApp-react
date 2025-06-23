@@ -12,6 +12,7 @@ interface KeyboardProps {
   value?: number;
   setValue?: (newValue: number) => void;
   isComplete: boolean;
+  maxLength: number;
 }
 
 const Keyboard = ({
@@ -22,6 +23,7 @@ const Keyboard = ({
   value = 0,
   setValue,
   isComplete,
+  maxLength,
 }: KeyboardProps) => {
   const { initScore, inputNumber, signNum, deleteNum } = useKeyboard(setValue);
 
@@ -36,7 +38,7 @@ const Keyboard = ({
     if (key === "delete") {
       deleteNum();
     } else {
-      inputNumber(Number(key));
+      inputNumber(Number(key), maxLength);
     }
   };
 

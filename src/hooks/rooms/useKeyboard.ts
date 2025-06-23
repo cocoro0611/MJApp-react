@@ -15,9 +15,14 @@ export const useKeyboard = (onScoreUpdate?: (updateScore: number) => void) => {
     }
   };
 
-  const inputNumber = (num: number) => {
+  const inputNumber = (num: number, maxLength: number) => {
     const scoreStr = String(Math.abs(score)); // 絶対値で処理
     const isNegative = score < 0;
+
+    // 桁数チェック
+    if (scoreStr.length >= maxLength && scoreStr !== "0") {
+      return;
+    }
 
     const newScoreStr = scoreStr === "0" ? String(num) : scoreStr + String(num);
     const newScore = isNegative ? -Number(newScoreStr) : Number(newScoreStr);
@@ -49,10 +54,5 @@ export const useKeyboard = (onScoreUpdate?: (updateScore: number) => void) => {
     updateScore(newScore);
   };
 
-  return {
-    initScore,
-    inputNumber,
-    signNum,
-    deleteNum,
-  };
+  return { initScore, inputNumber, signNum, deleteNum };
 };

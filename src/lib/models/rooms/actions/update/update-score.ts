@@ -9,24 +9,13 @@ export const updateScore = async (data: FormData) => {
   const roomId = String(data.get("roomId"));
   const gameCount = Number(data.get("gameCount"));
 
-  // 各プレイヤーのスコアを取得し、整数に変換
-  const player0Score = Math.round(Number(data.get("score-0")));
-  const player1Score = Math.round(Number(data.get("score-1")));
-  const player2Score = Math.round(Number(data.get("score-2")));
-  const player3Score = Math.round(Number(data.get("score-3")));
+  const player0Score = Number(data.get("score-0")) * 100;
+  const player1Score = Number(data.get("score-1")) * 100;
+  const player2Score = Number(data.get("score-2")) * 100;
+  const player3Score = Number(data.get("score-3")) * 100;
 
   const scores = [player0Score, player1Score, player2Score, player3Score];
 
-  // デバッグ用ログ（本番では削除）
-  console.log("Received scores:", {
-    player0Score,
-    player1Score,
-    player2Score,
-    player3Score,
-    scores,
-  });
-
-  // Room設定を取得
   const room = await db
     .selectFrom("Room")
     .selectAll()
@@ -37,14 +26,6 @@ export const updateScore = async (data: FormData) => {
     throw new Error("Room not found");
   }
 
-  // ボーナスポイントを計算
-  const bonusPoints = calculateBonusPoints(
-    room.initialPoint,
-    room.returnPoint,
-    room.bonusPoint
-  );
-
-  // RoomUserを取得
   const roomUsers = await db
     .selectFrom("RoomUser")
     .select(["userId", "position"])
@@ -53,31 +34,68 @@ export const updateScore = async (data: FormData) => {
     .execute();
 
   await db.transaction().execute(async (trx) => {
+    // 1. スコアを更新
     for (let i = 0; i < roomUsers.length; i++) {
       const user = roomUsers[i];
       const score = scores[i];
 
-      // scoreが整数であることを確認
-      if (!Number.isInteger(score)) {
-        throw new Error(`Score must be an integer, got: ${score}`);
-      }
+      await trx
+        .updateTable("Score")
+        .set({ score, updatedAt: new Date() })
+        .where("roomId", "=", roomId)
+        .where("userId", "=", user.userId)
+        .where("gameCount", "=", gameCount)
+        .execute();
+    }
 
-      // scoreResultを計算
-      const rawScore = (score - room.returnPoint) / 1000;
-      const bonus = bonusPoints[i] || 0;
-      const scoreResult = Math.round(rawScore + bonus); // scoreResultも整数化
+    // 2. スコアを取得してorder設定
+    const gameScores = await trx
+      .selectFrom("Score")
+      .select(["userId", "score"])
+      .where("roomId", "=", roomId)
+      .where("gameCount", "=", gameCount)
+      .orderBy("score", "desc") // スコア高い順
+      .execute();
 
-      console.log(`Player ${i}: score=${score}, scoreResult=${scoreResult}`); // デバッグ用
+    // 3. order（順位）を設定
+    for (let i = 0; i < gameScores.length; i++) {
+      const scoreData = gameScores[i];
+      const order = i + 1;
 
       await trx
         .updateTable("Score")
-        .set({
-          score,
-          scoreResult,
-          updatedAt: new Date(),
-        })
+        .set({ order })
         .where("roomId", "=", roomId)
-        .where("userId", "=", user.userId)
+        .where("userId", "=", scoreData.userId)
+        .where("gameCount", "=", gameCount)
+        .execute();
+    }
+
+    // 4. ボーナスポイントを計算
+    const bonusPoints = calculateBonusPoints(
+      room.initialPoint,
+      room.returnPoint,
+      room.bonusPoint
+    );
+
+    // 5. scoreResultを計算して更新
+    const updatedScores = await trx
+      .selectFrom("Score")
+      .select(["userId", "score", "order"])
+      .where("roomId", "=", roomId)
+      .where("gameCount", "=", gameCount)
+      .execute();
+
+    for (const scoreData of updatedScores) {
+      const rawScore = (scoreData.score - room.returnPoint) / 1000;
+      const bonus = bonusPoints[scoreData.order - 1] || 0; // order 1 → index 0
+      const scoreResult = Math.round(rawScore + bonus);
+
+      await trx
+        .updateTable("Score")
+        .set({ scoreResult })
+        .where("roomId", "=", roomId)
+        .where("userId", "=", scoreData.userId)
         .where("gameCount", "=", gameCount)
         .execute();
     }

@@ -61,7 +61,7 @@ const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
                 key={`player-${index}`}
                 type="hidden"
                 name={`score-${index}`}
-                value={Math.round(getScore(select.gameCount, index) * 100)}
+                value={Math.round(getScore(select.gameCount, index))}
               />
             ))}
           <Keyboard
@@ -72,6 +72,7 @@ const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
             value={getScore(select.gameCount, select.playerIndex)}
             setValue={onSetScore}
             isComplete={isComplete(select.gameCount)}
+            maxLength={4}
           />
         </Form>
       )}

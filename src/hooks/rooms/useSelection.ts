@@ -28,11 +28,5 @@ export const useSelect = () => {
     setSelect({ ...select, playerIndex: newIndex });
   };
 
-  return {
-    select,
-    open,
-    close,
-    left,
-    right,
-  };
+  return { select, open, close, left, right };
 };

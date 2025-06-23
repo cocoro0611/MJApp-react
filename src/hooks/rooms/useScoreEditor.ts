@@ -28,7 +28,7 @@ export const useScoreEditor = (scores: ReadScore[], initialPoint: number) => {
     const gameScore = scores.find((s) => s.gameCount === gameCount);
     const scoreItem = gameScore?.scores[playerIndex];
 
-    return scoreItem ? scoreItem.score : 0;
+    return scoreItem ? scoreItem.score / 100 : 0;
   };
 
   // 合計スコア計算を追加
@@ -37,7 +37,7 @@ export const useScoreEditor = (scores: ReadScore[], initialPoint: number) => {
     if (!gameScore) return 0;
 
     return gameScore.scores.reduce((sum, scoreItem, index) => {
-      return sum + getScore(gameCount, index);
+      return sum + getScore(gameCount, index) * 100;
     }, 0);
   };
 
