@@ -2,40 +2,52 @@
 
 import { useState } from "react";
 
-export const useKeyboard = () => {
-  const [display, setDisplay] = useState("0");
+export const useKeyboard = (onScoreUpdate?: (updateScore: number) => void) => {
+  const [score, setScore] = useState("0");
   const [waitingForValue, setWaitingForValue] = useState(false);
 
-  const inputNumber = (num: string) => {
+  // 共通の更新処理
+  const updateScore = (newScore: string) => {
+    if (onScoreUpdate) {
+      const updateScore = Number(newScore) * 100;
+      onScoreUpdate(updateScore);
+    }
+  };
+
+  const inputNumber = (num: number) => {
+    const numStr = String(num);
+    let newScore;
+
     if (waitingForValue) {
-      setDisplay(num);
+      newScore = numStr;
       setWaitingForValue(false);
     } else {
-      setDisplay(display === "0" ? num : display + num);
+      newScore = score === "0" ? numStr : score + numStr;
     }
+
+    setScore(newScore);
+    updateScore(newScore); // 共通処理を使用
   };
 
   const signNum = () => {
-    if (display === "0") return;
+    if (score === "0") return;
 
-    if (display.startsWith("-")) {
-      setDisplay(display.slice(1));
-    } else {
-      setDisplay("-" + display);
-    }
+    const newScore = score.startsWith("-") ? score.slice(1) : "-" + score;
+
+    setScore(newScore);
+    updateScore(newScore); // 共通処理を使用
   };
 
   const deleteNum = () => {
-    if (display.length > 1) {
-      setDisplay(display.slice(0, -1));
-    } else {
-      setDisplay("0");
-    }
+    const newScore = score.length > 1 ? score.slice(0, -1) : "0";
+
+    setScore(newScore);
+    updateScore(newScore); // 共通処理を使用
   };
 
   return {
-    display,
-    setDisplay,
+    score,
+    setScore,
     inputNumber,
     signNum,
     deleteNum,

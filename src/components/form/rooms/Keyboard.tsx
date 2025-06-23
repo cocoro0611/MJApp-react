@@ -11,7 +11,7 @@ interface KeyboardProps {
   onLeft?: () => void;
   onRight?: () => void;
   currentScore?: number;
-  onScoreUpdate?: (newScore: number) => void;
+  onScoreUpdate?: (updateScore: number) => void;
 }
 
 const Keyboard = ({
@@ -22,10 +22,9 @@ const Keyboard = ({
   currentScore = 0,
   onScoreUpdate,
 }: KeyboardProps) => {
-  const { display, setDisplay, inputNumber, signNum, deleteNum } =
-    useKeyboard();
+  const { score, setScore, inputNumber, signNum, deleteNum } =
+    useKeyboard(onScoreUpdate);
 
-  // キーボードレイアウトを配列で定義
   const keyboardLayout = [
     ["1", "2", "3"],
     ["4", "5", "6"],
@@ -35,70 +34,17 @@ const Keyboard = ({
 
   const handleKeyPress = (key: string) => {
     if (key === "delete") {
-      handleDeleteNum();
+      deleteNum();
     } else {
-      handleInputNumber(key);
+      inputNumber(Number(key));
     }
   };
 
-  // カードが変更された時にキーボードの表示を更新
   useEffect(() => {
     if (currentScore) {
-      setDisplay(String(currentScore / 100));
+      setScore(String(currentScore / 100));
     }
-  }, [currentScore, selectedCard, setDisplay]);
-
-  // キーボード入力時にスコアを更新する関数を作成
-  const handleInputNumber = (num: string) => {
-    inputNumber(num); // 元の関数を実行
-
-    // 新しい表示値を計算
-    const currentDisplay = display === "0" ? num : display + num;
-    const newScore = Number(currentDisplay) * 100;
-
-    // スコアを更新
-    if (onScoreUpdate) {
-      onScoreUpdate(newScore);
-    }
-  };
-
-  const handleSignNum = () => {
-    signNum(); // 元の関数を実行
-
-    // 符号変更後の値を計算
-    let newDisplay;
-    if (display === "0") return;
-
-    if (display.startsWith("-")) {
-      newDisplay = display.slice(1);
-    } else {
-      newDisplay = "-" + display;
-    }
-
-    const newScore = Number(newDisplay) * 100;
-
-    if (onScoreUpdate) {
-      onScoreUpdate(newScore);
-    }
-  };
-
-  const handleDeleteNum = () => {
-    deleteNum(); // 元の関数を実行
-
-    // 削除後の値を計算
-    let newDisplay;
-    if (display.length > 1) {
-      newDisplay = display.slice(0, -1);
-    } else {
-      newDisplay = "0";
-    }
-
-    const newScore = Number(newDisplay) * 100;
-
-    if (onScoreUpdate) {
-      onScoreUpdate(newScore);
-    }
-  };
+  }, [currentScore, selectedCard, setScore]);
 
   return (
     <div className="fixed-container bottom-0 z-20">
@@ -125,7 +71,7 @@ const Keyboard = ({
         </div>
         <div className="flex gap-2 mr-2">
           <Button
-            onClick={handleSignNum}
+            onClick={signNum}
             type="button"
             color="white"
             custom={true}

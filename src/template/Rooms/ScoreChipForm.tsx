@@ -78,13 +78,13 @@ const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
   };
 
   // キーボードからスコア値を更新する関数
-  const updateScore = (newScore: number) => {
+  const updateScore = (updateScore: number) => {
     if (!selectedCard) return;
 
     const key = `${selectedCard.gameCount}-${selectedCard.playerIndex}`;
     setEditingScores((prev) => ({
       ...prev,
-      [key]: newScore,
+      [key]: updateScore,
     }));
   };
 
