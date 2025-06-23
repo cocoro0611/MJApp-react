@@ -94,7 +94,6 @@ const Keyboard = ({
           </Button>
         </div>
       </div>
-
       <div className="grid grid-cols-3 gap-2 bg-gray-200 p-2 pb-10">
         {keyboardLayout.map((row, index) =>
           row.map((key) => (

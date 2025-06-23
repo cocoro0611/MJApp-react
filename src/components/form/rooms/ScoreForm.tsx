@@ -10,7 +10,7 @@ interface ScoreFormProps {
   // 状態管理
   selectedCard?: { gameCount: number; playerIndex: number } | null;
   onClick: (gameCount: number, playerIndex: number) => void;
-  getDisplayScore: (gameCount: number, playerIndex: number) => number;
+  getScore: (gameCount: number, playerIndex: number) => number;
 }
 
 const ScoreForm = ({
@@ -19,7 +19,7 @@ const ScoreForm = ({
   roomId,
   selectedCard,
   onClick,
-  getDisplayScore,
+  getScore,
 }: ScoreFormProps) => {
   const INITIAL_TOTAL_SCORE = initialPoint * MAX_ROOM_PLAYERS;
 
@@ -65,10 +65,7 @@ const ScoreForm = ({
                   selectedCard?.playerIndex === index;
 
                 // スコアを取得
-                const displayScore = getDisplayScore(
-                  gameScore.gameCount,
-                  index
-                );
+                const displayScore = getScore(gameScore.gameCount, index);
                 return (
                   <div className="grid-5-inner" key={index}>
                     <div className="center flex-col p-0.5 h-18">
