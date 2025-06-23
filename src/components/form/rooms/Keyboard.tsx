@@ -2,14 +2,14 @@
 
 import Form from "next/form";
 import Button from "@/src/components/ui/Button";
-import { useKeyboard } from "@/src/hooks/useKeyboard";
+import { useKeyboard } from "@/src/hooks/rooms/useKeyboard";
 import { useEffect } from "react";
 
 interface KeyboardProps {
   selectedCard?: { gameCount: number; playerIndex: number } | null;
   onClose?: () => void;
-  onLeft?: () => void;
-  onRight?: () => void;
+  moveLeft?: () => void;
+  moveRight?: () => void;
   currentScore?: number;
   onScoreUpdate?: (updateScore: number) => void;
 }
@@ -17,8 +17,8 @@ interface KeyboardProps {
 const Keyboard = ({
   selectedCard,
   onClose,
-  onLeft,
-  onRight,
+  moveLeft,
+  moveRight,
   currentScore = 0,
   onScoreUpdate,
 }: KeyboardProps) => {
@@ -49,7 +49,7 @@ const Keyboard = ({
       <div className="flex items-center justify-between py-2 bg-gray-100">
         <div className="flex ml-2">
           <Button
-            onClick={onLeft}
+            onClick={moveLeft}
             type="button"
             color="white"
             custom={true}
@@ -58,7 +58,7 @@ const Keyboard = ({
             ←
           </Button>
           <Button
-            onClick={onRight}
+            onClick={moveRight}
             type="button"
             color="white"
             custom={true}

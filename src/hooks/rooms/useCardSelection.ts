@@ -8,7 +8,7 @@ export const useSelectedCard = () => {
     playerIndex: number;
   } | null>(null);
 
-  const onClick = (gameCount: number, playerIndex: number) => {
+  const onOpen = (gameCount: number, playerIndex: number) => {
     setSelectedCard({ gameCount, playerIndex });
   };
 
@@ -16,14 +16,14 @@ export const useSelectedCard = () => {
     setSelectedCard(null);
   };
 
-  const onLeft = () => {
+  const moveLeft = () => {
     if (!selectedCard) return;
     const newIndex =
       selectedCard.playerIndex === 0 ? 3 : selectedCard.playerIndex - 1;
     setSelectedCard({ ...selectedCard, playerIndex: newIndex });
   };
 
-  const onRight = () => {
+  const moveRight = () => {
     if (!selectedCard) return;
     const newIndex =
       selectedCard.playerIndex === 3 ? 0 : selectedCard.playerIndex + 1;
@@ -32,9 +32,9 @@ export const useSelectedCard = () => {
 
   return {
     selectedCard,
-    onClick,
+    onOpen,
     onClose,
-    onLeft,
-    onRight,
+    moveLeft,
+    moveRight,
   };
 };

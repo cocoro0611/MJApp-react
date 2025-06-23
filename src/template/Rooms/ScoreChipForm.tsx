@@ -9,7 +9,8 @@ import type {
   ReadChip,
   ReadRoomDetail,
 } from "@/src/lib/models/rooms/type";
-import { useSelectedCard } from "@/src/hooks/useSelectedCard";
+import { useSelectedCard } from "@/src/hooks/rooms/useCardSelection";
+import { useScoreEditor } from "@/src/hooks/rooms/useScoreEditor";
 
 interface ScoreChipFormProps {
   scores: ReadScore[];
@@ -18,27 +19,13 @@ interface ScoreChipFormProps {
 }
 
 const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
-  const { selectedCard, onClick, onClose, onLeft, onRight } = useSelectedCard();
-  const [editScores, setEditScores] = useState<{ [key: string]: number }>({});
+  const { selectedCard, onOpen, onClose, moveLeft, moveRight } =
+    useSelectedCard();
+  const { updateScore, getScore } = useScoreEditor(scores);
 
-  const updateScore = (updateScore: number) => {
-    const key = `${selectedCard?.gameCount}-${selectedCard?.playerIndex}`;
-    setEditScores((prev) => ({ ...prev, [key]: updateScore }));
-  };
-
-  const getScore = (gameCount: number, playerIndex: number) => {
-    const key = `${gameCount}-${playerIndex}`;
-
-    // 編集中の値があればそれを返す
-    if (editScores[key] !== undefined) {
-      return editScores[key];
-    } else {
-      // なければ元の値を返す
-      const gameScore = scores.find((s) => s.gameCount === gameCount);
-      const scoreItem = gameScore?.scores[playerIndex];
-
-      return scoreItem ? scoreItem.score : 0;
-    }
+  const handleScoreUpdate = (newScore: number) => {
+    if (!selectedCard) return;
+    updateScore(selectedCard.gameCount, selectedCard.playerIndex, newScore);
   };
 
   return (
@@ -48,7 +35,7 @@ const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
         initialPoint={roomDetail.initialPoint}
         roomId={roomDetail.id}
         selectedCard={selectedCard}
-        onClick={onClick}
+        onOpen={onOpen}
         getScore={getScore}
       />
       <ChipForm
@@ -60,13 +47,13 @@ const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
         <Keyboard
           selectedCard={selectedCard}
           onClose={onClose}
-          onLeft={onLeft}
-          onRight={onRight}
+          moveLeft={moveLeft}
+          moveRight={moveRight}
           currentScore={getScore(
             selectedCard.gameCount,
             selectedCard.playerIndex
           )}
-          onScoreUpdate={updateScore}
+          onScoreUpdate={handleScoreUpdate}
         />
       )}
     </>

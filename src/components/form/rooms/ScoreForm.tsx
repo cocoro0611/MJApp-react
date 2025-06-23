@@ -9,7 +9,7 @@ interface ScoreFormProps {
   roomId: string;
   // 状態管理
   selectedCard?: { gameCount: number; playerIndex: number } | null;
-  onClick: (gameCount: number, playerIndex: number) => void;
+  onOpen: (gameCount: number, playerIndex: number) => void;
   getScore: (gameCount: number, playerIndex: number) => number;
 }
 
@@ -18,7 +18,7 @@ const ScoreForm = ({
   initialPoint,
   roomId,
   selectedCard,
-  onClick,
+  onOpen,
   getScore,
 }: ScoreFormProps) => {
   const INITIAL_TOTAL_SCORE = initialPoint * MAX_ROOM_PLAYERS;
@@ -73,7 +73,7 @@ const ScoreForm = ({
                         isColor={!isCardSelected}
                         className={`w-full p-1
                         ${isCardSelected ? "pulse-effect" : ""} `}
-                        onClick={() => onClick(gameScore.gameCount, index)}
+                        onClick={() => onOpen(gameScore.gameCount, index)}
                       >
                         <p className="flex justify-start text-[0.6rem]">点数</p>
                         <p>

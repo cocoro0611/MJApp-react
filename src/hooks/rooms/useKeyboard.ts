@@ -50,8 +50,6 @@ export const useKeyboard = (onScoreUpdate?: (updateScore: number) => void) => {
   };
 
   return {
-    score,
-    setScore,
     initScore,
     inputNumber,
     signNum,

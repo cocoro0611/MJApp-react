@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MAX_ROOM_PLAYERS } from "../constants/gameRules";
+import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
 import type { ReadUser } from "@/src/lib/models/users/type";
 
 const useUserSelect = (users: ReadUser[]) => {
