@@ -3,6 +3,7 @@
 import ScoreForm from "@/src/components/form/rooms/ScoreForm";
 import ChipForm from "@/src/components/form/rooms/ChipForm";
 import Keyboard from "@/src/components/form/rooms/Keyboard";
+import Form from "next/form";
 import type {
   ReadScore,
   ReadChip,
@@ -10,6 +11,7 @@ import type {
 } from "@/src/lib/models/rooms/type";
 import { useSelect } from "@/src/hooks/rooms/useSelection";
 import { useScoreEditor } from "@/src/hooks/rooms/useScoreEditor";
+import { updateScore } from "@/src/lib/models/rooms";
 
 interface ScoreChipFormProps {
   scores: ReadScore[];
@@ -19,8 +21,10 @@ interface ScoreChipFormProps {
 
 const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
   const { select, open, close, left, right } = useSelect();
-  const { setScore, getScore, getRemainingScore, isComplete } =
-    useScoreEditor(scores, roomDetail.initialPoint);
+  const { setScore, getScore, getRemainingScore, isComplete } = useScoreEditor(
+    scores,
+    roomDetail.initialPoint
+  );
 
   const onSetScore = (newScore: number) => {
     if (!select) return;
@@ -44,15 +48,32 @@ const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
         roomId={roomDetail.id}
       />
       {select !== null && (
-        <Keyboard
-          select={select}
-          close={close}
-          left={left}
-          right={right}
-          value={getScore(select.gameCount, select.playerIndex)}
-          setValue={onSetScore}
-          isComplete={isComplete(select.gameCount)}
-        />
+        <Form action={updateScore}>
+          <input type="hidden" name="roomId" value={roomDetail.id} />
+          <input
+            type="hidden"
+            name="gameCount"
+            value={select?.gameCount || ""}
+          />
+          {select &&
+            [0, 1, 2, 3].map((index) => (
+              <input
+                key={`player-${index}`}
+                type="hidden"
+                name={`score-${index}`}
+                value={Math.round(getScore(select.gameCount, index) * 100)}
+              />
+            ))}
+          <Keyboard
+            select={select}
+            close={close}
+            left={left}
+            right={right}
+            value={getScore(select.gameCount, select.playerIndex)}
+            setValue={onSetScore}
+            isComplete={isComplete(select.gameCount)}
+          />
+        </Form>
       )}
     </>
   );

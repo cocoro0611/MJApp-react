@@ -1,6 +1,5 @@
 "use client";
 
-import Form from "next/form";
 import Button from "@/src/components/ui/Button";
 import { useKeyboard } from "@/src/hooks/rooms/useKeyboard";
 import { useEffect } from "react";
@@ -78,16 +77,13 @@ const Keyboard = ({
           >
             + / -
           </Button>
-          <Form action="">
-            <input type="hidden" name="" value="" />
-            <Button
-              custom={true}
-              className="rounded text-sm w-16 py-2"
-              disabled={!isComplete}
-            >
-              計算
-            </Button>
-          </Form>
+          <Button
+            custom={true}
+            className="rounded text-sm w-16 py-2"
+            disabled={!isComplete}
+          >
+            計算
+          </Button>
           <Button
             onClick={close}
             color="cancel"

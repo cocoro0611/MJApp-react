@@ -1,7 +1,7 @@
 "use server";
 
-import { db } from "../../db";
-import type { UpdateRoom } from "../type";
+import { db } from "../../../db";
+import type { UpdateRoom } from "../../type";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
 import { calculateBonusPoints } from "@/src/utils/score-result";
@@ -28,7 +28,7 @@ export const updateRoom = async (data: FormData) => {
     const bonusPoints = calculateBonusPoints(
       room.initialPoint,
       room.returnPoint,
-      room.bonusPoint,
+      room.bonusPoint
     );
 
     // 3. roomの全スコアを取得

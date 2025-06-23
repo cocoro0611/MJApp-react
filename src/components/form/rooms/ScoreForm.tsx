@@ -1,7 +1,6 @@
 import Card from "@/src/components/ui/Card";
 import type { ReadScore } from "@/src/lib/models/rooms/type";
 import { Fragment } from "react";
-import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
 
 interface ScoreFormProps {
   scores: ReadScore[];

@@ -7,11 +7,12 @@ import { readRoomDetail } from "./actions/read/read-room-detail";
 import { readScores } from "./actions/read/read-scores";
 import { readChips } from "./actions/read/read-chips";
 
-import { updateRoom } from "./actions/update";
+import { updateRoom } from "./actions/update/update-room";
+import { updateScore } from "./actions/update/update-score";
 
 import { deleteRoom } from "./actions/delete";
 
 export { createRoom, createScore, createChip };
 export { readRooms, readRoomDetail, readScores, readChips };
-export { updateRoom };
+export { updateRoom, updateScore };
 export { deleteRoom };

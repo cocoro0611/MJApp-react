@@ -37,7 +37,7 @@ export const useScoreEditor = (scores: ReadScore[], initialPoint: number) => {
     if (!gameScore) return 0;
 
     return gameScore.scores.reduce((sum, scoreItem, index) => {
-      return sum + getScore(gameCount, index) * 100; // 100倍も考慮
+      return sum + getScore(gameCount, index);
     }, 0);
   };
 
