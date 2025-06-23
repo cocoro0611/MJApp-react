@@ -12,6 +12,7 @@ interface KeyboardProps {
   right?: () => void;
   value?: number;
   setValue?: (newValue: number) => void;
+  isComplete: boolean;
 }
 
 const Keyboard = ({
@@ -21,6 +22,7 @@ const Keyboard = ({
   right,
   value = 0,
   setValue,
+  isComplete,
 }: KeyboardProps) => {
   const { initScore, inputNumber, signNum, deleteNum } = useKeyboard(setValue);
 
@@ -78,7 +80,11 @@ const Keyboard = ({
           </Button>
           <Form action="">
             <input type="hidden" name="" value="" />
-            <Button custom={true} className="rounded text-sm w-16 py-2 ">
+            <Button
+              custom={true}
+              className="rounded text-sm w-16 py-2"
+              disabled={!isComplete}
+            >
               計算
             </Button>
           </Form>

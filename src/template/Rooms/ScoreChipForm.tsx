@@ -19,7 +19,8 @@ interface ScoreChipFormProps {
 
 const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
   const { select, open, close, left, right } = useSelect();
-  const { setScore, getScore } = useScoreEditor(scores);
+  const { setScore, getScore, getRemainingScore, isComplete } =
+    useScoreEditor(scores, roomDetail.initialPoint);
 
   const onSetScore = (newScore: number) => {
     if (!select) return;
@@ -30,11 +31,12 @@ const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
     <>
       <ScoreForm
         scores={scores}
-        initialPoint={roomDetail.initialPoint}
         roomId={roomDetail.id}
         select={select}
         open={open}
         getScore={getScore}
+        getRemainingScore={getRemainingScore}
+        isComplete={isComplete}
       />
       <ChipForm
         chips={chips}
@@ -49,6 +51,7 @@ const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
           right={right}
           value={getScore(select.gameCount, select.playerIndex)}
           setValue={onSetScore}
+          isComplete={isComplete(select.gameCount)}
         />
       )}
     </>

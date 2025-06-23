@@ -5,24 +5,24 @@ import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
 
 interface ScoreFormProps {
   scores: ReadScore[];
-  initialPoint: number;
   roomId: string;
   // 状態管理
   select?: { gameCount: number; playerIndex: number } | null;
   open: (gameCount: number, playerIndex: number) => void;
   getScore: (gameCount: number, playerIndex: number) => number;
+  getRemainingScore: (gameCount: number) => number;
+  isComplete: (gameCount: number) => boolean;
 }
 
 const ScoreForm = ({
   scores,
-  initialPoint,
   roomId,
   select,
   open,
   getScore,
+  getRemainingScore,
+  isComplete,
 }: ScoreFormProps) => {
-  const INITIAL_TOTAL_SCORE = initialPoint * MAX_ROOM_PLAYERS;
-
   return (
     <>
       <div className="bg-gray-300 text-gray-600 grid-5">
@@ -30,17 +30,14 @@ const ScoreForm = ({
       </div>
       <div className="grid-5">
         {scores.map((gameScore) => {
-          const totalScore = gameScore.scores.reduce(
-            (sum, scoreItem) => sum + scoreItem.score,
-            0
-          );
-          const isComplete = totalScore === INITIAL_TOTAL_SCORE;
+          const complete = isComplete(gameScore.gameCount);
+          const remainingScore = getRemainingScore(gameScore.gameCount);
 
           return (
             <Fragment key={gameScore.gameCount}>
               <div className="grid-5-inner">
                 <div className="center flex-col p-1 h-18">
-                  {isComplete ? (
+                  {complete ? (
                     <Card
                       href={`/rooms/${roomId}/scores/`}
                       className="w-full py-3"
@@ -51,9 +48,7 @@ const ScoreForm = ({
                     <div className="font-bold text-xs">
                       <p>-点数-</p>
                       <p className="text-red-500">あと</p>
-                      <p className="text-red-500">
-                        {INITIAL_TOTAL_SCORE - totalScore}
-                      </p>
+                      <p className="text-red-500">{remainingScore}</p>
                     </div>
                   )}
                 </div>
