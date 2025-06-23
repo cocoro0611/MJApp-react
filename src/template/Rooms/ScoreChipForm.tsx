@@ -8,7 +8,7 @@ import type {
   ReadChip,
   ReadRoomDetail,
 } from "@/src/lib/models/rooms/type";
-import { useSelectedCard } from "@/src/hooks/rooms/useCardSelection";
+import { useSelect } from "@/src/hooks/rooms/useSelection";
 import { useScoreEditor } from "@/src/hooks/rooms/useScoreEditor";
 
 interface ScoreChipFormProps {
@@ -18,13 +18,12 @@ interface ScoreChipFormProps {
 }
 
 const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
-  const { selectedCard, onOpen, onClose, moveLeft, moveRight } =
-    useSelectedCard();
-  const { updateScore, getScore } = useScoreEditor(scores);
+  const { select, open, close, left, right } = useSelect();
+  const { setScore, getScore } = useScoreEditor(scores);
 
-  const handleScoreUpdate = (newScore: number) => {
-    if (!selectedCard) return;
-    updateScore(selectedCard.gameCount, selectedCard.playerIndex, newScore);
+  const onSetScore = (newScore: number) => {
+    if (!select) return;
+    setScore(select.gameCount, select.playerIndex, newScore);
   };
 
   return (
@@ -33,8 +32,8 @@ const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
         scores={scores}
         initialPoint={roomDetail.initialPoint}
         roomId={roomDetail.id}
-        selectedCard={selectedCard}
-        onOpen={onOpen}
+        select={select}
+        open={open}
         getScore={getScore}
       />
       <ChipForm
@@ -42,17 +41,14 @@ const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
         chipRate={roomDetail.chipRate}
         roomId={roomDetail.id}
       />
-      {selectedCard !== null && (
+      {select !== null && (
         <Keyboard
-          selectedCard={selectedCard}
-          onClose={onClose}
-          moveLeft={moveLeft}
-          moveRight={moveRight}
-          currentScore={getScore(
-            selectedCard.gameCount,
-            selectedCard.playerIndex
-          )}
-          onScoreUpdate={handleScoreUpdate}
+          select={select}
+          close={close}
+          left={left}
+          right={right}
+          value={getScore(select.gameCount, select.playerIndex)}
+          setValue={onSetScore}
         />
       )}
     </>

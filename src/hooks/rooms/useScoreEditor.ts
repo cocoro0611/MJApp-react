@@ -7,7 +7,7 @@ export const useScoreEditor = (scores: ReadScore[]) => {
   const [editScores, setEditScores] = useState<{ [key: string]: number }>({});
 
   // 書き込み
-  const updateScore = (
+  const setScore = (
     gameCount: number,
     playerIndex: number,
     newScore: number
@@ -32,5 +32,5 @@ export const useScoreEditor = (scores: ReadScore[]) => {
     return scoreItem ? scoreItem.score : 0;
   };
 
-  return { updateScore, getScore };
+  return { setScore, getScore };
 };

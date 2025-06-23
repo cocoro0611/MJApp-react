@@ -8,8 +8,8 @@ interface ScoreFormProps {
   initialPoint: number;
   roomId: string;
   // 状態管理
-  selectedCard?: { gameCount: number; playerIndex: number } | null;
-  onOpen: (gameCount: number, playerIndex: number) => void;
+  select?: { gameCount: number; playerIndex: number } | null;
+  open: (gameCount: number, playerIndex: number) => void;
   getScore: (gameCount: number, playerIndex: number) => number;
 }
 
@@ -17,8 +17,8 @@ const ScoreForm = ({
   scores,
   initialPoint,
   roomId,
-  selectedCard,
-  onOpen,
+  select,
+  open,
   getScore,
 }: ScoreFormProps) => {
   const INITIAL_TOTAL_SCORE = initialPoint * MAX_ROOM_PLAYERS;
@@ -60,27 +60,27 @@ const ScoreForm = ({
               </div>
               {gameScore.scores.map((scoreItem, index) => {
                 // カードの選択チェック
-                const isCardSelected =
-                  selectedCard?.gameCount === gameScore.gameCount &&
-                  selectedCard?.playerIndex === index;
+                const isSelected =
+                  select?.gameCount === gameScore.gameCount &&
+                  select?.playerIndex === index;
 
                 // スコアを取得
-                const displayScore = getScore(gameScore.gameCount, index);
+                const score = getScore(gameScore.gameCount, index);
                 return (
                   <div className="grid-5-inner" key={index}>
                     <div className="center flex-col p-0.5 h-18">
                       <Card
-                        isColor={!isCardSelected}
+                        isColor={!isSelected}
                         className={`w-full p-1
-                        ${isCardSelected ? "pulse-effect" : ""} `}
-                        onClick={() => onOpen(gameScore.gameCount, index)}
+                        ${isSelected ? "pulse-effect" : ""} `}
+                        onClick={() => open(gameScore.gameCount, index)}
                       >
                         <p className="flex justify-start text-[0.6rem]">点数</p>
                         <p>
                           <span
-                            className={`px-1 border-b-2 ${isCardSelected ? "pulse-border-b-color" : "border-b-color"}`}
+                            className={`px-1 border-b-2 ${isSelected ? "pulse-border-b-color" : "border-b-color"}`}
                           >
-                            {displayScore}
+                            {score}
                           </span>
                           <span>00</span>
                         </p>

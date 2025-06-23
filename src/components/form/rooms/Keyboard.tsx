@@ -6,24 +6,23 @@ import { useKeyboard } from "@/src/hooks/rooms/useKeyboard";
 import { useEffect } from "react";
 
 interface KeyboardProps {
-  selectedCard?: { gameCount: number; playerIndex: number } | null;
-  onClose?: () => void;
-  moveLeft?: () => void;
-  moveRight?: () => void;
-  currentScore?: number;
-  onScoreUpdate?: (updateScore: number) => void;
+  select?: { gameCount: number; playerIndex: number } | null;
+  close?: () => void;
+  left?: () => void;
+  right?: () => void;
+  value?: number;
+  setValue?: (newValue: number) => void;
 }
 
 const Keyboard = ({
-  selectedCard,
-  onClose,
-  moveLeft,
-  moveRight,
-  currentScore = 0,
-  onScoreUpdate,
+  select,
+  close,
+  left,
+  right,
+  value = 0,
+  setValue,
 }: KeyboardProps) => {
-  const { initScore, inputNumber, signNum, deleteNum } =
-    useKeyboard(onScoreUpdate);
+  const { initScore, inputNumber, signNum, deleteNum } = useKeyboard(setValue);
 
   const keyboardLayout = [
     ["1", "2", "3"],
@@ -41,15 +40,15 @@ const Keyboard = ({
   };
 
   useEffect(() => {
-    initScore(currentScore);
-  }, [currentScore, selectedCard, initScore]);
+    initScore(value);
+  }, [value, select, initScore]);
 
   return (
     <div className="fixed-container bottom-0 z-20">
       <div className="flex items-center justify-between py-2 bg-gray-100">
         <div className="flex ml-2">
           <Button
-            onClick={moveLeft}
+            onClick={left}
             type="button"
             color="white"
             custom={true}
@@ -58,7 +57,7 @@ const Keyboard = ({
             ←
           </Button>
           <Button
-            onClick={moveRight}
+            onClick={right}
             type="button"
             color="white"
             custom={true}
@@ -84,7 +83,7 @@ const Keyboard = ({
             </Button>
           </Form>
           <Button
-            onClick={onClose}
+            onClick={close}
             color="cancel"
             type="button"
             custom={true}
