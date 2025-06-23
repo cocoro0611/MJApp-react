@@ -3,51 +3,56 @@
 import { useState } from "react";
 
 export const useKeyboard = (onScoreUpdate?: (updateScore: number) => void) => {
-  const [score, setScore] = useState("0");
-  const [waitingForValue, setWaitingForValue] = useState(false);
+  const [score, setScore] = useState(0);
 
-  // 共通の更新処理
-  const updateScore = (newScore: string) => {
+  const initScore = (initScore: number) => {
+    setScore(initScore);
+  };
+
+  const updateScore = (newScore: number) => {
     if (onScoreUpdate) {
-      const updateScore = Number(newScore) * 100;
-      onScoreUpdate(updateScore);
+      onScoreUpdate(newScore);
     }
   };
 
   const inputNumber = (num: number) => {
-    const numStr = String(num);
-    let newScore;
+    const scoreStr = String(Math.abs(score)); // 絶対値で処理
+    const isNegative = score < 0;
 
-    if (waitingForValue) {
-      newScore = numStr;
-      setWaitingForValue(false);
-    } else {
-      newScore = score === "0" ? numStr : score + numStr;
-    }
+    const newScoreStr = scoreStr === "0" ? String(num) : scoreStr + String(num);
+    const newScore = isNegative ? -Number(newScoreStr) : Number(newScoreStr);
 
     setScore(newScore);
-    updateScore(newScore); // 共通処理を使用
+    updateScore(newScore);
   };
 
   const signNum = () => {
-    if (score === "0") return;
+    if (score === 0) return;
 
-    const newScore = score.startsWith("-") ? score.slice(1) : "-" + score;
+    const newScore = -score;
 
     setScore(newScore);
-    updateScore(newScore); // 共通処理を使用
+    updateScore(newScore);
   };
 
   const deleteNum = () => {
-    const newScore = score.length > 1 ? score.slice(0, -1) : "0";
+    const scoreStr = String(Math.abs(score)); // 絶対値で処理
+    const isNegative = score < 0;
+
+    const newScoreStr = scoreStr.length > 1 ? scoreStr.slice(0, -1) : "0";
+    const newScore =
+      isNegative && newScoreStr !== "0"
+        ? -Number(newScoreStr)
+        : Number(newScoreStr);
 
     setScore(newScore);
-    updateScore(newScore); // 共通処理を使用
+    updateScore(newScore);
   };
 
   return {
     score,
     setScore,
+    initScore,
     inputNumber,
     signNum,
     deleteNum,

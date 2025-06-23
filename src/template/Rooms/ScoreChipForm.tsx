@@ -9,6 +9,7 @@ import type {
   ReadChip,
   ReadRoomDetail,
 } from "@/src/lib/models/rooms/type";
+import { useSelectedCard } from "@/src/hooks/useSelectedCard";
 
 interface ScoreChipFormProps {
   scores: ReadScore[];
@@ -17,45 +18,12 @@ interface ScoreChipFormProps {
 }
 
 const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
-  const [selectedCard, setSelectedCard] = useState<{
-    gameCount: number;
-    playerIndex: number;
-  } | null>(null);
+  const { selectedCard, onClick, onClose, onLeft, onRight } = useSelectedCard();
 
   // 編集中のスコアの状態管理
   const [editingScores, setEditingScores] = useState<{
     [key: string]: number;
   }>({});
-
-  const onClick = (gameCount: number, playerIndex: number) => {
-    setSelectedCard({ gameCount, playerIndex });
-  };
-
-  const onClose = () => {
-    setSelectedCard(null);
-  };
-
-  const onLeft = () => {
-    if (!selectedCard) return;
-
-    const newIndex =
-      selectedCard.playerIndex === 0 ? 3 : selectedCard.playerIndex - 1;
-    setSelectedCard({
-      ...selectedCard,
-      playerIndex: newIndex,
-    });
-  };
-
-  const onRight = () => {
-    if (!selectedCard) return;
-
-    const newIndex =
-      selectedCard.playerIndex === 3 ? 0 : selectedCard.playerIndex + 1;
-    setSelectedCard({
-      ...selectedCard,
-      playerIndex: newIndex,
-    });
-  };
 
   // FIXME: なぜ動くのか不明
   const getCurrentScore = () => {

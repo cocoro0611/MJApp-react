@@ -22,7 +22,7 @@ const Keyboard = ({
   currentScore = 0,
   onScoreUpdate,
 }: KeyboardProps) => {
-  const { score, setScore, inputNumber, signNum, deleteNum } =
+  const { initScore, inputNumber, signNum, deleteNum } =
     useKeyboard(onScoreUpdate);
 
   const keyboardLayout = [
@@ -41,10 +41,8 @@ const Keyboard = ({
   };
 
   useEffect(() => {
-    if (currentScore) {
-      setScore(String(currentScore / 100));
-    }
-  }, [currentScore, selectedCard, setScore]);
+    initScore(currentScore);
+  }, [currentScore, selectedCard, initScore]);
 
   return (
     <div className="fixed-container bottom-0 z-20">

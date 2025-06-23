@@ -83,7 +83,7 @@ const ScoreForm = ({
                           <span
                             className={`px-1 border-b-2 ${isCardSelected ? "pulse-border-b-color" : "border-b-color"}`}
                           >
-                            {displayScore / 100}
+                            {displayScore}
                           </span>
                           <span>00</span>
                         </p>
