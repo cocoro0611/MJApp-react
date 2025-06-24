@@ -9,7 +9,7 @@ export const readScores = async (roomId: string): Promise<ReadScore[]> => {
     .innerJoin("RoomUser", (join) =>
       join
         .onRef("Score.userId", "=", "RoomUser.userId")
-        .onRef("Score.roomId", "=", "RoomUser.roomId"),
+        .onRef("Score.roomId", "=", "RoomUser.roomId")
     )
     .select(["Score.gameCount", "Score.score", "Score.scoreResult"])
     .where("Score.roomId", "=", roomId)
@@ -35,7 +35,7 @@ export const readScores = async (roomId: string): Promise<ReadScore[]> => {
     // スコアを追加
     gameScore.scores.push({
       score: scoreData.score,
-      scoreResult: scoreData.scoreResult,
+      scoreResult: Math.round(scoreData.scoreResult * 10) / 10, // 小数第1位で丸める
     });
   }
 
