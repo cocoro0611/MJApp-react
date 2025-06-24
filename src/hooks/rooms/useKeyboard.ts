@@ -2,57 +2,57 @@
 
 import { useState } from "react";
 
-export const useKeyboard = (onScoreUpdate?: (updateScore: number) => void) => {
-  const [score, setScore] = useState(0);
+export const useKeyboard = (onValueChange?: (newValue: number) => void) => {
+  const [currentValue, setCurrentValue] = useState(0);
 
-  const initScore = (initScore: number) => {
-    setScore(initScore);
+  const resetValue = (initialValue: number) => {
+    setCurrentValue(initialValue);
   };
 
-  const updateScore = (newScore: number) => {
-    if (onScoreUpdate) {
-      onScoreUpdate(newScore);
+  const notifyChange = (newValue: number) => {
+    if (onValueChange) {
+      onValueChange(newValue);
     }
   };
 
-  const inputNumber = (num: number, maxLength: number) => {
-    const scoreStr = String(Math.abs(score)); // 絶対値で処理
-    const isNegative = score < 0;
+  const addDigit = (digit: number, maxLength: number) => {
+    const valueStr = String(Math.abs(currentValue)); // 絶対値で処理
+    const isNegative = currentValue < 0;
 
     // 桁数チェック
-    if (scoreStr.length >= maxLength && scoreStr !== "0") {
+    if (valueStr.length >= maxLength && valueStr !== "0") {
       return;
     }
 
-    const newScoreStr = scoreStr === "0" ? String(num) : scoreStr + String(num);
-    const newScore = isNegative ? -Number(newScoreStr) : Number(newScoreStr);
+    const newValueStr =
+      valueStr === "0" ? String(digit) : valueStr + String(digit);
+    const newValue = isNegative ? -Number(newValueStr) : Number(newValueStr);
 
-    setScore(newScore);
-    updateScore(newScore);
+    setCurrentValue(newValue);
+    notifyChange(newValue);
   };
 
-  const signNum = () => {
-    if (score === 0) return;
+  const toggleSign = () => {
+    if (currentValue === 0) return;
 
-    const newScore = -score;
-
-    setScore(newScore);
-    updateScore(newScore);
+    const newValue = -currentValue;
+    setCurrentValue(newValue);
+    notifyChange(newValue);
   };
 
-  const deleteNum = () => {
-    const scoreStr = String(Math.abs(score)); // 絶対値で処理
-    const isNegative = score < 0;
+  const removeDigit = () => {
+    const valueStr = String(Math.abs(currentValue)); // 絶対値で処理
+    const isNegative = currentValue < 0;
 
-    const newScoreStr = scoreStr.length > 1 ? scoreStr.slice(0, -1) : "0";
-    const newScore =
-      isNegative && newScoreStr !== "0"
-        ? -Number(newScoreStr)
-        : Number(newScoreStr);
+    const newValueStr = valueStr.length > 1 ? valueStr.slice(0, -1) : "0";
+    const newValue =
+      isNegative && newValueStr !== "0"
+        ? -Number(newValueStr)
+        : Number(newValueStr);
 
-    setScore(newScore);
-    updateScore(newScore);
+    setCurrentValue(newValue);
+    notifyChange(newValue);
   };
 
-  return { initScore, inputNumber, signNum, deleteNum };
+  return { resetValue, addDigit, toggleSign, removeDigit };
 };

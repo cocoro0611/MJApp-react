@@ -2,41 +2,56 @@
 
 import { useState } from "react";
 
+export type SelectType = "score" | "chip";
+
+export interface SelectState {
+  gameCount: number;
+  index: number;
+  type: SelectType;
+}
+
 export const useSelect = () => {
-  const [select, setSelect] = useState<{
-    gameCount: number;
-    playerIndex: number;
-  } | null>(null);
+  const [selected, setSelected] = useState<SelectState | null>(null);
 
-  const open = (gameCount: number, playerIndex: number) => {
-    setSelect({ gameCount, playerIndex });
+  const openSelect = (
+    gameCount: number,
+    index: number,
+    type: SelectType = "score"
+  ) => {
+    setSelected({ gameCount, index, type });
 
-    // gameCountが4以上の時、少し遅延を入れてスクロール
-    if (gameCount >= 4) {
+    // gameCountが4より上の時のみスクロール
+    if (gameCount > 4) {
       setTimeout(() => {
         window.scrollTo({
           top: document.body.scrollHeight,
           behavior: "smooth",
         });
-      }, 300); // 300ms
+      }, 100);
     }
   };
 
-  const close = () => {
-    setSelect(null);
+  const closeSelect = () => {
+    setSelected(null);
   };
 
-  const left = () => {
-    if (!select) return;
-    const newIndex = select.playerIndex === 0 ? 3 : select.playerIndex - 1;
-    setSelect({ ...select, playerIndex: newIndex });
+  const moveLeft = () => {
+    if (!selected) return;
+    const newIndex = selected.index === 0 ? 3 : selected.index - 1;
+    setSelected({ ...selected, index: newIndex });
   };
 
-  const right = () => {
-    if (!select) return;
-    const newIndex = select.playerIndex === 3 ? 0 : select.playerIndex + 1;
-    setSelect({ ...select, playerIndex: newIndex });
+  const moveRight = () => {
+    if (!selected) return;
+    const newIndex = selected.index === 3 ? 0 : selected.index + 1;
+    setSelected({ ...selected, index: newIndex });
   };
 
-  return { select, open, close, left, right };
+  return {
+    selected,
+    openSelect,
+    closeSelect,
+    moveLeft,
+    moveRight,
+  };
 };

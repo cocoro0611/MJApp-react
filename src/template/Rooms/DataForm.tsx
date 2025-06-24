@@ -20,26 +20,32 @@ interface DataFormProps {
 }
 
 const DataForm = ({ scores, chips, roomDetail }: DataFormProps) => {
-  const { select, open, close, left, right } = useSelect();
-  const { setScore, getScore, getRemainingScore, isComplete } = useScoreEditor(
-    scores,
-    roomDetail.initialPoint
-  );
+  const { selected, openSelect, closeSelect, moveLeft, moveRight } =
+    useSelect();
+  const {
+    updateScore: editScore,
+    getScore,
+    getRemaining,
+    isComplete,
+  } = useScoreEditor(scores, roomDetail.initialPoint);
 
-  const onSetScore = (newScore: number) => {
-    if (!select) return;
-    setScore(select.gameCount, select.playerIndex, newScore);
+  const handleScoreChange = (newScore: number) => {
+    if (!selected || selected.type !== "score") return;
+    editScore(selected.gameCount, selected.index, newScore);
   };
+
+  // スコア選択時のみキーボードを表示
+  const isScoreSelected = selected !== null && selected.type === "score";
 
   return (
     <>
       <ScoreForm
         scores={scores}
         roomId={roomDetail.id}
-        select={select}
-        open={open}
+        selected={selected}
+        onOpen={openSelect}
         getScore={getScore}
-        getRemainingScore={getRemainingScore}
+        getRemaining={getRemaining}
         isComplete={isComplete}
       />
       <ChipForm
@@ -47,32 +53,32 @@ const DataForm = ({ scores, chips, roomDetail }: DataFormProps) => {
         chipRate={roomDetail.chipRate}
         roomId={roomDetail.id}
       />
-      {select !== null && (
+      {isScoreSelected && (
         <Form action={updateScore}>
           <input type="hidden" name="roomId" value={roomDetail.id} />
           <input
             type="hidden"
             name="gameCount"
-            value={select?.gameCount || ""}
+            value={selected?.gameCount || ""}
           />
-          {select &&
+          {selected &&
             [0, 1, 2, 3].map((index) => (
               <input
                 key={`player-${index}`}
                 type="hidden"
                 name={`score-${index}`}
-                value={Math.round(getScore(select.gameCount, index))}
+                value={Math.round(getScore(selected.gameCount, index))}
               />
             ))}
-          <div className="h-47" /> {/* キーボード高さの調整 */}
+          <div className="h-47" />
           <Keyboard
-            select={select}
-            close={close}
-            left={left}
-            right={right}
-            value={getScore(select.gameCount, select.playerIndex)}
-            setValue={onSetScore}
-            isComplete={isComplete(select.gameCount)}
+            selected={selected}
+            onClose={closeSelect}
+            onMoveLeft={moveLeft}
+            onMoveRight={moveRight}
+            value={getScore(selected.gameCount, selected.index)}
+            onValueChange={handleScoreChange}
+            isComplete={isComplete(selected.gameCount)}
             maxLength={4}
           />
         </Form>

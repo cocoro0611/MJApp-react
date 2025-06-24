@@ -5,24 +5,24 @@ import type { ReadScore } from "@/src/lib/models/rooms/type";
 import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
 
 export const useScoreEditor = (scores: ReadScore[], initialPoint: number) => {
-  const [editScores, setEditScores] = useState<{ [key: string]: number }>({});
+  const [scoreEdits, setScoreEdits] = useState<{ [key: string]: number }>({});
 
-  // 書き込み
-  const setScore = (
+  // スコア更新
+  const updateScore = (
     gameCount: number,
     playerIndex: number,
     newScore: number
   ) => {
     const key = `${gameCount}-${playerIndex}`;
-    setEditScores((prev) => ({ ...prev, [key]: newScore }));
+    setScoreEdits((prev) => ({ ...prev, [key]: newScore }));
   };
 
-  // 読み込み
+  // スコア取得
   const getScore = (gameCount: number, playerIndex: number) => {
     const key = `${gameCount}-${playerIndex}`;
 
-    if (editScores[key] !== undefined) {
-      return editScores[key];
+    if (scoreEdits[key] !== undefined) {
+      return scoreEdits[key];
     }
 
     const gameScore = scores.find((s) => s.gameCount === gameCount);
@@ -31,8 +31,8 @@ export const useScoreEditor = (scores: ReadScore[], initialPoint: number) => {
     return scoreItem ? scoreItem.score / 100 : 0;
   };
 
-  // 合計スコア計算を追加
-  const getTotalScore = (gameCount: number) => {
+  // ゲーム合計スコア計算
+  const getGameTotal = (gameCount: number) => {
     const gameScore = scores.find((s) => s.gameCount === gameCount);
     if (!gameScore) return 0;
 
@@ -42,17 +42,17 @@ export const useScoreEditor = (scores: ReadScore[], initialPoint: number) => {
   };
 
   // 残り必要な点数を計算
-  const getRemainingScore = (gameCount: number) => {
+  const getRemaining = (gameCount: number) => {
     const TOTAL_SCORE = initialPoint * MAX_ROOM_PLAYERS;
-    const currentTotal = getTotalScore(gameCount);
+    const currentTotal = getGameTotal(gameCount);
     return TOTAL_SCORE - currentTotal;
   };
 
   // 完成状況チェック
   const isComplete = (gameCount: number) => {
     const TOTAL_SCORE = initialPoint * MAX_ROOM_PLAYERS;
-    return getTotalScore(gameCount) === TOTAL_SCORE;
+    return getGameTotal(gameCount) === TOTAL_SCORE;
   };
 
-  return { setScore, getScore, getTotalScore, getRemainingScore, isComplete };
+  return { updateScore, getScore, getGameTotal, getRemaining, isComplete };
 };

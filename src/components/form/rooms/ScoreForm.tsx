@@ -1,26 +1,27 @@
 import Card from "@/src/components/ui/Card";
 import DeleteCardDialog from "../../nav/DeleteCardDialog";
-import type { ReadScore } from "@/src/lib/models/rooms/type";
 import { Fragment } from "react";
+import type { ReadScore } from "@/src/lib/models/rooms/type";
+import type { SelectState, SelectType } from "@/src/hooks/rooms/useSelection";
 
 interface ScoreFormProps {
   scores: ReadScore[];
   roomId: string;
   // 状態管理
-  select?: { gameCount: number; playerIndex: number } | null;
-  open: (gameCount: number, playerIndex: number) => void;
-  getScore: (gameCount: number, playerIndex: number) => number;
-  getRemainingScore: (gameCount: number) => number;
+  selected?: SelectState | null;
+  onOpen: (gameCount: number, index: number, type?: SelectType) => void;
+  getScore: (gameCount: number, index: number) => number;
+  getRemaining: (gameCount: number) => number;
   isComplete: (gameCount: number) => boolean;
 }
 
 const ScoreForm = ({
   scores,
   roomId,
-  select,
-  open,
+  selected,
+  onOpen,
   getScore,
-  getRemainingScore,
+  getRemaining,
   isComplete,
 }: ScoreFormProps) => {
   return (
@@ -37,15 +38,16 @@ const ScoreForm = ({
                   complete={isComplete(gameScore.gameCount)}
                   roomId={roomId}
                   gameCount={gameScore.gameCount}
-                  remainingScore={getRemainingScore(gameScore.gameCount)}
+                  remainingScore={getRemaining(gameScore.gameCount)}
                 />
               </div>
             </div>
             {gameScore.scores.map((scoreItem, index) => {
               // カードの選択チェック
               const isSelected =
-                select?.gameCount === gameScore.gameCount &&
-                select?.playerIndex === index;
+                selected?.gameCount === gameScore.gameCount &&
+                selected?.index === index &&
+                selected?.type === "score";
 
               // スコアを取得
               const score = getScore(gameScore.gameCount, index);
@@ -56,7 +58,7 @@ const ScoreForm = ({
                       isColor={!isSelected}
                       className={`w-full p-1
                         ${isSelected ? "pulse-effect" : ""} `}
-                      onClick={() => open(gameScore.gameCount, index)}
+                      onClick={() => onOpen(gameScore.gameCount, index)}
                     >
                       <p className="flex justify-start text-[0.6rem]">点数</p>
                       <p>

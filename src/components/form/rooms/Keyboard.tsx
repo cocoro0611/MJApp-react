@@ -3,29 +3,31 @@
 import Button from "@/src/components/ui/Button";
 import { useKeyboard } from "@/src/hooks/rooms/useKeyboard";
 import { useEffect } from "react";
+import type { SelectState } from "@/src/hooks/rooms/useSelection";
 
 interface KeyboardProps {
-  select?: { gameCount: number; playerIndex: number } | null;
-  close?: () => void;
-  left?: () => void;
-  right?: () => void;
+  selected?: SelectState | null;
+  onClose?: () => void;
+  onMoveLeft?: () => void;
+  onMoveRight?: () => void;
   value?: number;
-  setValue?: (newValue: number) => void;
+  onValueChange?: (newValue: number) => void;
   isComplete: boolean;
   maxLength: number;
 }
 
 const Keyboard = ({
-  select,
-  close,
-  left,
-  right,
+  selected,
+  onClose,
+  onMoveLeft,
+  onMoveRight,
   value = 0,
-  setValue,
+  onValueChange,
   isComplete,
   maxLength,
 }: KeyboardProps) => {
-  const { initScore, inputNumber, signNum, deleteNum } = useKeyboard(setValue);
+  const { resetValue, addDigit, toggleSign, removeDigit } =
+    useKeyboard(onValueChange);
 
   const keyboardLayout = [
     ["1", "2", "3"],
@@ -36,22 +38,22 @@ const Keyboard = ({
 
   const handleKeyPress = (key: string) => {
     if (key === "delete") {
-      deleteNum();
+      removeDigit();
     } else {
-      inputNumber(Number(key), maxLength);
+      addDigit(Number(key), maxLength);
     }
   };
 
   useEffect(() => {
-    initScore(value);
-  }, [value, select, initScore]);
+    resetValue(value);
+  }, [value, selected, resetValue]);
 
   return (
     <div className="fixed-container bottom-0 z-20">
       <div className="flex items-center justify-between py-2 bg-gray-100">
         <div className="flex ml-2">
           <Button
-            onClick={left}
+            onClick={onMoveLeft}
             type="button"
             color="white"
             custom={true}
@@ -60,7 +62,7 @@ const Keyboard = ({
             ←
           </Button>
           <Button
-            onClick={right}
+            onClick={onMoveRight}
             type="button"
             color="white"
             custom={true}
@@ -71,7 +73,7 @@ const Keyboard = ({
         </div>
         <div className="flex gap-2 mr-2">
           <Button
-            onClick={signNum}
+            onClick={toggleSign}
             type="button"
             color="white"
             custom={true}
@@ -87,7 +89,7 @@ const Keyboard = ({
             計算
           </Button>
           <Button
-            onClick={close}
+            onClick={onClose}
             color="cancel"
             type="button"
             custom={true}
