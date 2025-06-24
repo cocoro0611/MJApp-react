@@ -1,15 +1,31 @@
 import Card from "@/src/components/ui/Card";
-import type { ReadChip } from "@/src/lib/models/rooms/type";
+import DeleteChipDialog from "../../nav/DeleteChipDialog";
 import { Fragment } from "react";
+import type { ReadChip } from "@/src/lib/models/rooms/type";
+import type { SelectState, SelectType } from "@/src/hooks/rooms/useSelection";
 
 interface ChipFormProps {
   chips: ReadChip[];
   chipRate: number;
   roomId: string;
+  // 状態管理
+  selected?: SelectState | null;
+  onOpen: (gameCount: number, index: number, type?: SelectType) => void;
+  getChip: (gameCount: number, index: number) => number;
+  getRemaining: (gameCount: number) => number;
+  isComplete: (gameCount: number) => boolean;
 }
 
-const ChipForm = ({ chips, chipRate, roomId }: ChipFormProps) => {
-  const INITIAL_TOTAL_CHIP = 80;
+const ChipForm = ({
+  chips,
+  chipRate,
+  roomId,
+  selected,
+  onOpen,
+  getChip,
+  getRemaining,
+  isComplete,
+}: ChipFormProps) => {
   const INITIAL_CHIP = 20;
 
   if (!chips || chips.length === 0) {
@@ -22,67 +38,70 @@ const ChipForm = ({ chips, chipRate, roomId }: ChipFormProps) => {
         <div className="center font-bold">各チップ</div>
       </div>
       <div className="grid-5">
-        {chips.map((gameChip) => {
-          const totalChips = gameChip.chips.reduce(
-            (sum, chipItem) => sum + chipItem.chip,
-            0
-          );
-          const isComplete = totalChips === INITIAL_TOTAL_CHIP;
-
-          return (
-            <Fragment key={gameChip.gameCount}>
-              <div className="grid-5-inner">
-                <div className="center flex-col p-1 h-18">
-                  {isComplete ? (
-                    <Card
-                      href={`/rooms/${roomId}/chips/`}
-                      className="w-full py-1.5"
-                    >
-                      {gameChip.gameCount}回分
-                      <div className="text-[0.6rem]">(1人/20枚)</div>
-                    </Card>
-                  ) : (
-                    <div className="font-bold text-xs">
-                      <p>-チップ-</p>
-                      <p className="text-red-500">あと</p>
-                      <p className="text-red-500">
-                        {INITIAL_TOTAL_CHIP - totalChips} 枚
-                      </p>
-                    </div>
-                  )}
-                </div>
+        {chips.map((gameChip) => (
+          <Fragment key={gameChip.gameCount}>
+            <div className="grid-5-inner">
+              <div className="center flex-col p-1 h-18">
+                <DeleteChipDialog
+                  complete={isComplete(gameChip.gameCount)}
+                  roomId={roomId}
+                  gameCount={gameChip.gameCount}
+                  remaining={getRemaining(gameChip.gameCount)}
+                />
               </div>
-              {gameChip.chips.map((chipItem, index) => {
-                // チップポイントの計算
-                const chipPoint = (chipItem.chip - INITIAL_CHIP) * chipRate;
-                const isChipPositive = chipPoint < 0;
+            </div>
 
-                return (
-                  <div className="grid-5-inner" key={index}>
-                    <div className="center flex-col p-0.5 h-18">
-                      <Card href="" className="w-full p-1">
-                        <p className="flex justify-start text-[0.6rem]">枚数</p>
-                        <p>
-                          <span className="px-1 border-b-2 border-blue-400">
-                            {chipItem.chip}
-                          </span>
-                          <span>枚</span>
-                        </p>
-                      </Card>
-                      <div
-                        className={`font-bold center w-full relative mt-0.5
-                        ${isChipPositive ? "text-red-500" : "text-blue-500"}`}
-                      >
-                        {chipPoint}
-                        <span className="absolute right-0.5">P</span>
-                      </div>
+            {/* 各プレイヤーのチップ */}
+            {gameChip.chips.map((chipItem, index) => {
+              // カードの選択チェック
+              const isSelected =
+                selected?.gameCount === gameChip.gameCount &&
+                selected?.index === index &&
+                selected?.type === "chip";
+
+              // チップを取得
+              const chip = getChip(gameChip.gameCount, index);
+
+              // チップポイントの計算
+              const chipPoint = (chipItem.chip - INITIAL_CHIP) * chipRate;
+              const isChipNegative = chipPoint < 0;
+
+              return (
+                <div className="grid-5-inner" key={index}>
+                  <div className="center flex-col p-0.5 h-18">
+                    <Card
+                      isColor={!isSelected}
+                      className={`w-full p-1 ${isSelected ? "pulse-effect" : ""}`}
+                      onClick={() => onOpen(gameChip.gameCount, index, "chip")}
+                    >
+                      <p className="flex justify-start text-[0.6rem]">枚数</p>
+                      <p>
+                        <span
+                          className={`px-1 border-b-2 ${
+                            isSelected
+                              ? "pulse-border-b-color"
+                              : "border-blue-400"
+                          }`}
+                        >
+                          {chip}
+                        </span>
+                        <span>枚</span>
+                      </p>
+                    </Card>
+                    <div
+                      className={`font-bold center w-full relative mt-0.5 ${
+                        isChipNegative ? "text-red-500" : "text-blue-500"
+                      }`}
+                    >
+                      {chipPoint}
+                      <span className="absolute right-0.5">P</span>
                     </div>
                   </div>
-                );
-              })}
-            </Fragment>
-          );
-        })}
+                </div>
+              );
+            })}
+          </Fragment>
+        ))}
       </div>
     </>
   );

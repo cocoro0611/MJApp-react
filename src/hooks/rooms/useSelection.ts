@@ -19,16 +19,6 @@ export const useSelect = () => {
     type: SelectType = "score"
   ) => {
     setSelected({ gameCount, index, type });
-
-    // gameCountが4より上の時のみスクロール
-    if (gameCount > 4) {
-      setTimeout(() => {
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: "smooth",
-        });
-      }, 100);
-    }
   };
 
   const closeSelect = () => {

@@ -41,18 +41,18 @@ export const useScoreEditor = (scores: ReadScore[], initialPoint: number) => {
     }, 0);
   };
 
-  // 残り必要な点数を計算
-  const getRemaining = (gameCount: number) => {
+  // 残り必要なスコアを計算
+  const getRemainingScore = (gameCount: number) => {
     const TOTAL_SCORE = initialPoint * MAX_ROOM_PLAYERS;
     const currentTotal = getGameTotal(gameCount);
     return TOTAL_SCORE - currentTotal;
   };
 
   // 完成状況チェック
-  const isComplete = (gameCount: number) => {
+  const isCompleteScore = (gameCount: number) => {
     const TOTAL_SCORE = initialPoint * MAX_ROOM_PLAYERS;
     return getGameTotal(gameCount) === TOTAL_SCORE;
   };
 
-  return { updateScore, getScore, getGameTotal, getRemaining, isComplete };
+  return { updateScore, getScore, getRemainingScore, isCompleteScore };
 };

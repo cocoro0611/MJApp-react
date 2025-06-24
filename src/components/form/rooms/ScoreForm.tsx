@@ -1,5 +1,5 @@
 import Card from "@/src/components/ui/Card";
-import DeleteCardDialog from "../../nav/DeleteCardDialog";
+import DeleteScoreDialog from "../../nav/DeleteScoreDialog";
 import { Fragment } from "react";
 import type { ReadScore } from "@/src/lib/models/rooms/type";
 import type { SelectState, SelectType } from "@/src/hooks/rooms/useSelection";
@@ -34,14 +34,16 @@ const ScoreForm = ({
           <Fragment key={gameScore.gameCount}>
             <div className="grid-5-inner">
               <div className="center flex-col p-1 h-18">
-                <DeleteCardDialog
+                <DeleteScoreDialog
                   complete={isComplete(gameScore.gameCount)}
                   roomId={roomId}
                   gameCount={gameScore.gameCount}
-                  remainingScore={getRemaining(gameScore.gameCount)}
+                  remaining={getRemaining(gameScore.gameCount)}
                 />
               </div>
             </div>
+
+            {/* 各プレイヤーのスコア */}
             {gameScore.scores.map((scoreItem, index) => {
               // カードの選択チェック
               const isSelected =

@@ -6,21 +6,21 @@ import Card from "@/src/components/ui/Card";
 import ToastButton from "@/src/components/nav/ToastButton";
 import Form from "next/form";
 import { useState } from "react";
-import { deleteScore } from "@/src/lib/models/rooms";
+import { deleteChip } from "@/src/lib/models/rooms";
 
-interface DeleteCardDialogProps {
+interface DeleteChipDialogProps {
   complete: boolean;
   roomId?: string;
   gameCount?: number;
-  remainingScore?: number;
+  remaining?: number;
 }
 
-const DeleteCardDialog = ({
+const DeleteChipDialog = ({
   complete,
   roomId,
   gameCount,
-  remainingScore,
-}: DeleteCardDialogProps) => {
+  remaining,
+}: DeleteChipDialogProps) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -40,7 +40,7 @@ const DeleteCardDialog = ({
   );
 
   const DeleleButton = () => (
-    <Form action={deleteScore}>
+    <Form action={deleteChip}>
       <input type="hidden" name="roomId" value={roomId} />
       <input type="hidden" name="gameCount" value={gameCount} />
       <ToastButton
@@ -78,17 +78,20 @@ const DeleteCardDialog = ({
         isColor={complete}
         className={
           complete
-            ? "w-full py-3"
+            ? "w-full py-1.5"
             : "p-1.5 font-bold text-xs bg-gray-100 w-full"
         }
       >
         {complete ? (
-          `${gameCount}回戦`
+          <>
+            {gameCount}回分
+            <div className="text-[0.6rem]">(1人/20枚)</div>
+          </>
         ) : (
           <>
-            <p>-点数-</p>
+            <p>-チップ-</p>
             <p className="text-red-500">あと</p>
-            <p className="text-red-500">{remainingScore}</p>
+            <p className="text-red-500">{remaining}</p>
           </>
         )}
       </Card>
@@ -118,4 +121,4 @@ const DeleteCardDialog = ({
   );
 };
 
-export default DeleteCardDialog;
+export default DeleteChipDialog;

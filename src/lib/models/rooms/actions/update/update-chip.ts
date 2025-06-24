@@ -3,7 +3,6 @@
 import { db } from "../../../db";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
-import { updateScoreResults } from "./update-score-results";
 
 export const updateChip = async (data: FormData) => {
   const roomId = String(data.get("roomId"));
