@@ -70,7 +70,7 @@ export const readRoomDetail = async (
       const scorePoint = totalScore * room.scoreRate;
       const chipPoint = (totalChip - INITIAL_CHIPS) * room.chipRate;
       const gamePoint = room.gameAmount / MAX_ROOM_PLAYERS;
-      const totalPoint = scorePoint + chipPoint + gamePoint;
+      const totalPoint = Math.round(scorePoint + chipPoint + gamePoint);
 
       return {
         id: user.id,

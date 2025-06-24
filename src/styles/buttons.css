@@ -29,7 +29,7 @@
     @apply hover:scale-102 active:scale-97 transition-all duration-150;
   }
   .disabled-effect {
-    @apply cursor-not-allowed opacity-50;
+    @apply cursor-not-allowed opacity-20;
   }
   .revolution-effect {
     @apply hover:rotate-12 duration-150;
