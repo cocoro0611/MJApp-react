@@ -14,6 +14,7 @@ interface ToastButtonProps {
   alertMessage: string;
   alertColor: "error" | "info" | "success" | "warning";
   className?: string;
+  onClick?: () => void;
 }
 
 const ToastButton = ({
@@ -24,16 +25,21 @@ const ToastButton = ({
   custom = false,
   disabled = false,
   className = "",
+  onClick,
 }: ToastButtonProps) => {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     setOpen(true);
+    // 外部から渡されたonClickがあれば実行
+    if (onClick) {
+      onClick();
+    }
   };
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
-    reason?: SnackbarCloseReason,
+    reason?: SnackbarCloseReason
   ) => {
     if (reason === "clickaway") {
       return;

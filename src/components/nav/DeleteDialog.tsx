@@ -9,13 +9,8 @@ import { useState } from "react";
 const DeleteDialog = () => {
   const [open, setOpen] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
@@ -29,13 +24,13 @@ const DeleteDialog = () => {
         title="削除の確認"
         message="本当に削除しますか？"
       >
-        <div className="center gap-4">
+        <div className="grid grid-cols-2 gap-4">
           <Button
             type="button"
             onClick={handleClose}
             color="cancel"
             custom={true}
-            className="rounded px-4 py-2 w-32"
+            className="rounded px-4 py-2 w-full"
           >
             キャンセル
           </Button>
@@ -44,7 +39,7 @@ const DeleteDialog = () => {
             alertColor="success"
             color="danger"
             custom={true}
-            className="rounded px-4 py-2 w-32"
+            className="rounded px-4 py-2 w-full"
           >
             削除する
           </ToastButton>

@@ -15,13 +15,8 @@ interface AddDataDialogProps {
 const AddDataDialog = ({ roomId }: AddDataDialogProps) => {
   const [open, setOpen] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
@@ -44,7 +39,7 @@ const AddDataDialog = ({ roomId }: AddDataDialogProps) => {
               custom={true}
               className="rounded px-4 py-2 w-full"
             >
-              スコア情報
+              スコア
             </ToastButton>
           </Form>
           <Form action={createChip}>
@@ -55,7 +50,7 @@ const AddDataDialog = ({ roomId }: AddDataDialogProps) => {
               custom={true}
               className="rounded px-4 py-2 w-full"
             >
-              チップ情報
+              チップ
             </ToastButton>
           </Form>
         </div>

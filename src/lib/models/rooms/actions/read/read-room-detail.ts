@@ -56,7 +56,7 @@ export const readRoomDetail = async (
         .where("roomId", "=", roomId)
         .executeTakeFirst();
 
-      const totalScore = Number(scoreSum?.total || 0);
+      const totalScore = Math.round(Number(scoreSum?.total || 0) * 10) / 10; // 小数第1位で丸める
       const totalChip = Number(chipSum?.total || 0);
 
       // 収支計算
@@ -64,7 +64,7 @@ export const readRoomDetail = async (
       const scorePoint = totalScore * room.scoreRate;
       const chipPoint = (totalChip - INITIAL_CHIPS) * room.chipRate;
       const gamePoint = room.gameAmount / MAX_ROOM_PLAYERS;
-      const totalPoint = Math.round(scorePoint + chipPoint + gamePoint); // 四捨五入で整数化
+      const totalPoint = scorePoint + chipPoint + gamePoint;
 
       return {
         id: user.id,

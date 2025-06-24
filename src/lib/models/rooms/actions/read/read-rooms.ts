@@ -35,9 +35,9 @@ export const readRooms = async (): Promise<ReadRoom[]> => {
           id: user.id,
           name: user.name,
           icon: user.icon,
-          totalScore: Number(scoreSum?.total || 0),
+          totalScore: Math.round(Number(scoreSum?.total || 0) * 10) / 10, // 小数第1位で丸める
         };
-      }),
+      })
     );
 
     roomsUsers.push({
