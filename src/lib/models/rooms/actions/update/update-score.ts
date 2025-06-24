@@ -33,6 +33,8 @@ export const updateScore = async (data: FormData) => {
     .orderBy("position", "asc")
     .execute();
 
+  let hasTiedScores = false;
+
   await db.transaction().execute(async (trx) => {
     // 1. scoreのみを更新
     for (let i = 0; i < roomUsers.length; i++) {
@@ -48,40 +50,51 @@ export const updateScore = async (data: FormData) => {
         .execute();
     }
 
-    // 2. 更新したscoreを取得してorderを再設定
-    const gameScores = await trx
-      .selectFrom("Score")
-      .select(["userId"])
-      .where("roomId", "=", roomId)
-      .where("gameCount", "=", gameCount)
-      .orderBy("score", "desc") // スコア高い順
-      .execute();
+    // 同点チェック
+    const uniqueScores = [...new Set(scores)];
+    hasTiedScores = uniqueScores.length < scores.length;
 
-    for (let i = 0; i < gameScores.length; i++) {
-      const scoreData = gameScores[i];
-      const order = i + 1;
-
-      await trx
-        .updateTable("Score")
-        .set({ order })
+    if (!hasTiedScores) {
+      // 同点がない場合は通常の処理
+      const gameScores = await trx
+        .selectFrom("Score")
+        .select(["userId"])
         .where("roomId", "=", roomId)
-        .where("userId", "=", scoreData.userId)
         .where("gameCount", "=", gameCount)
+        .orderBy("score", "desc")
         .execute();
-    }
 
-    // 3. scoreResultを計算して更新
-    await updateScoreResults(
-      trx,
-      roomId,
-      room.initialPoint,
-      room.returnPoint,
-      room.bonusPoint,
-      { gameCount }
-    );
+      for (let i = 0; i < gameScores.length; i++) {
+        const scoreData = gameScores[i];
+        const order = i + 1;
+
+        await trx
+          .updateTable("Score")
+          .set({ order })
+          .where("roomId", "=", roomId)
+          .where("userId", "=", scoreData.userId)
+          .where("gameCount", "=", gameCount)
+          .execute();
+      }
+
+      // scoreResultを計算して更新
+      await updateScoreResults(
+        trx,
+        roomId,
+        room.initialPoint,
+        room.returnPoint,
+        room.bonusPoint,
+        { gameCount }
+      );
+    }
   });
 
-  // Toast通知の都合上遅延を設定
-  await new Promise((resolve) => setTimeout(resolve, TOAST_TIME));
-  redirect(`/rooms/${roomId}`);
+  if (hasTiedScores) {
+    // 同点がある場合は順位編集ページへ
+    redirect(`/rooms/${roomId}/order-edit?gameCount=${gameCount}`);
+  } else {
+    // 同点がない場合は通常のページへ
+    await new Promise((resolve) => setTimeout(resolve, TOAST_TIME));
+    redirect(`/rooms/${roomId}`);
+  }
 };

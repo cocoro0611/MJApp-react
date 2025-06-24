@@ -1,28 +1,39 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
-import RoomForm from "@/src/template/Rooms/RoomForm";
-import { readRoomDetail, updateRoom } from "@/src/lib/models/rooms";
+import OrderEditForm from "@/src/components/form/rooms/OrderEditForm";
+import { readTiedScores } from "@/src/lib/models/rooms";
 
-interface RoomEditPageProps {
+interface OrderEditPageProps {
   params: Promise<{ roomId: string }>;
+  searchParams: Promise<{ gameCount?: string }>;
 }
 
-const RoomEditPage = async ({ params }: RoomEditPageProps) => {
+const OrderEditPage = async ({ params, searchParams }: OrderEditPageProps) => {
   const { roomId } = await params;
-  const room = await readRoomDetail(roomId);
+  const { gameCount } = await searchParams;
 
-  if (!room) {
-    throw new Error("ルームが見つかりません");
+  if (!gameCount) {
+    throw new Error("ゲーム回数が指定されていません");
+  }
+
+  const tiedScores = await readTiedScores(roomId, Number(gameCount));
+
+  if (!tiedScores || tiedScores.length === 0) {
+    throw new Error("同点データが見つかりません");
   }
 
   return (
     <>
-      <Header title="順位の編集" isBackIcon={false} />
+      <Header title="　" isBackIcon={false} />
       <Main>
-        <RoomForm action={updateRoom} btnText="更新" room={room} />
+        <OrderEditForm
+          roomId={roomId}
+          gameCount={Number(gameCount)}
+          tiedScores={tiedScores}
+        />
       </Main>
     </>
   );
 };
 
-export default RoomEditPage;
+export default OrderEditPage;
