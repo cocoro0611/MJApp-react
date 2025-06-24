@@ -5,6 +5,7 @@ import Main from "@/src/components/layout/Main";
 import ButtonCount from "@/src/components/ui/ButtonCount";
 import { useCalculator } from "@/src/hooks/calculation/useCalculator";
 import { MAHJONG_BUTTON_CONFIG } from "@/src/constants/calculation/mahjongButtonConfig";
+import { getAllScores } from "@/src/utils/mahjong-calculation";
 
 /**
  * 麻雀点数計算ページ
@@ -20,6 +21,9 @@ const CalculationPage = () => {
     handleButtonClick, // ボタンクリック処理
     resetAllButtons, // 全リセット処理
   } = useCalculator(MAHJONG_BUTTON_CONFIG);
+
+  // 点数計算の関数
+  const tokuten = getAllScores(totalHan, totalFu);
 
   return (
     <>
@@ -60,6 +64,12 @@ const CalculationPage = () => {
             </div>
             <div className="text-xl font-bold">
               符: <span className="text-green-600">{totalFu}</span>
+            </div>
+            <div className="font-bold flex flex-col">
+              <span className="text-red-600">親ロン：{tokuten.oyaRon}</span>
+              <span className="text-red-600">親ツモ：{tokuten.oyaTsumo}</span>
+              <span className="text-red-600">子ロン；{tokuten.coRon}</span>
+              <span className="text-red-600">子ツモ：{tokuten.coTsumo}</span>
             </div>
           </div>
 
