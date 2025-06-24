@@ -1,13 +1,13 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 
-const HanCountPage = () => {
+const SettingPage = () => {
   return (
     <>
       <Header title="　" isBackIcon={false} />
-      <Main>翻数のカウントページ</Main>
+      <Main>設定ページ</Main>
     </>
   );
 };
 
-export default HanCountPage;
+export default SettingPage;

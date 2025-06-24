@@ -1,13 +1,14 @@
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import CalculateOutlinedIcon from "@mui/icons-material/CalculateOutlined";
+import SettingsIcon from "@mui/icons-material/Settings";
 import ButtonGroup from "../ui/ButtonGroup";
 
 const tabs = [
   { id: "/rooms", label: "ルーム", icon: <HomeIcon /> },
   { id: "/users", label: "ユーザー", icon: <PersonIcon /> },
-  { id: "/fu-count", label: "符数計算", icon: <CalculateOutlinedIcon /> },
-  { id: "/han-count", label: "翻数計算", icon: <CalculateOutlinedIcon /> },
+  { id: "/calculation", label: "計算", icon: <CalculateOutlinedIcon /> },
+  { id: "/setting", label: "設定", icon: <SettingsIcon /> },
 ];
 
 const Footer = () => {
