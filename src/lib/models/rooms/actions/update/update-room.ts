@@ -4,7 +4,7 @@ import { db } from "../../../db";
 import type { UpdateRoom } from "../../type";
 import { redirect } from "next/navigation";
 import { TOAST_TIME } from "@/src/constants/toastTime";
-import { calculateBonusPoints } from "@/src/utils/score-result";
+import { updateScoreResults } from "./update-score-results";
 
 export const updateRoom = async (data: FormData) => {
   const roomId = String(data.get("roomId"));
@@ -24,35 +24,15 @@ export const updateRoom = async (data: FormData) => {
     // 1. Roomを更新
     await trx.updateTable("Room").set(room).where("id", "=", roomId).execute();
 
-    // 2. ボーナスポイントを計算
-    const bonusPoints = calculateBonusPoints(
+    // 2. scoreResultを計算して更新
+    await updateScoreResults(
+      trx,
+      roomId,
       room.initialPoint,
       room.returnPoint,
-      room.bonusPoint
+      room.bonusPoint,
+      { skipDefaults: true }
     );
-
-    // 3. roomの全スコアを取得
-    const allScores = await trx
-      .selectFrom("Score")
-      .select(["userId", "gameCount", "score", "order"])
-      .where("roomId", "=", roomId)
-      .whereRef("createdAt", "!=", "updatedAt") // 初期値のscoreResultは更新しない
-      .execute();
-
-    // 4. 各スコアを更新
-    for (const scoreData of allScores) {
-      const rawScore = (scoreData.score - room.returnPoint) / 1000;
-      const bonus = bonusPoints[scoreData.order - 1] || 0; // order 1 → index 0
-      const scoreResult = rawScore + bonus;
-
-      await trx
-        .updateTable("Score")
-        .set({ scoreResult })
-        .where("roomId", "=", roomId)
-        .where("userId", "=", scoreData.userId)
-        .where("gameCount", "=", scoreData.gameCount)
-        .execute();
-    }
   });
 
   // Toast通知の都合上遅延を設定

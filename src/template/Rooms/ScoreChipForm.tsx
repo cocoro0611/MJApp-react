@@ -64,6 +64,7 @@ const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
                 value={Math.round(getScore(select.gameCount, index))}
               />
             ))}
+          <div className="h-47" /> {/* キーボード高さの調整 */}
           <Keyboard
             select={select}
             close={close}

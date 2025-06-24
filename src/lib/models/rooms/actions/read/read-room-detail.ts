@@ -5,7 +5,7 @@ import type { ReadRoomDetail } from "../../type";
 import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
 
 export const readRoomDetail = async (
-  roomId: string,
+  roomId: string
 ): Promise<ReadRoomDetail | null> => {
   const room = await db
     .selectFrom("Room")
@@ -64,7 +64,7 @@ export const readRoomDetail = async (
       const scorePoint = totalScore * room.scoreRate;
       const chipPoint = (totalChip - INITIAL_CHIPS) * room.chipRate;
       const gamePoint = room.gameAmount / MAX_ROOM_PLAYERS;
-      const totalPoint = scorePoint + chipPoint + gamePoint;
+      const totalPoint = Math.round(scorePoint + chipPoint + gamePoint); // 四捨五入で整数化
 
       return {
         id: user.id,
@@ -74,7 +74,7 @@ export const readRoomDetail = async (
         totalChip: totalChip,
         totalPoint: totalPoint,
       };
-    }),
+    })
   );
 
   return {

@@ -10,6 +10,16 @@ export const useSelect = () => {
 
   const open = (gameCount: number, playerIndex: number) => {
     setSelect({ gameCount, playerIndex });
+
+    // gameCountが4以上の時、少し遅延を入れてスクロール
+    if (gameCount >= 4) {
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
+      }, 300); // 300ms
+    }
   };
 
   const close = () => {

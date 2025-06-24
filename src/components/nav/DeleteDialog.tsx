@@ -26,7 +26,7 @@ const DeleteDialog = () => {
       <Dialog
         open={open}
         close={handleClose}
-        title="確認"
+        title="削除の確認"
         message="本当に削除しますか？"
       >
         <div className="center gap-4">
@@ -37,7 +37,7 @@ const DeleteDialog = () => {
             custom={true}
             className="rounded px-4 py-2 w-32"
           >
-            閉じる
+            キャンセル
           </Button>
           <ToastButton
             alertMessage="削除しました"

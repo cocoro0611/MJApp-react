@@ -56,18 +56,18 @@ const DeleteCardDialog = ({
       <Dialog
         open={open}
         close={handleClose}
-        title="ゲーム管理"
-        message="削除するか、入力値をリセットできます"
+        title="データの操作"
+        message="この情報をどうしますか？"
       >
         <div className="grid grid-cols-2 gap-4 mb-4">
           <Button
             type="button"
             onClick={handleReset}
-            color="secondary"
+            color="setting-on"
             custom={true}
             className="rounded px-4 w-full"
           >
-            リセット
+            やり直し
           </Button>
 
           <Form action={deleteScore}>
@@ -92,7 +92,7 @@ const DeleteCardDialog = ({
           custom={true}
           className="rounded px-4 py-1 w-full "
         >
-          閉じる
+          キャンセル
         </Button>
       </Dialog>
     </>
