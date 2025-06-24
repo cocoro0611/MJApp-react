@@ -13,13 +13,13 @@ import { useSelect } from "@/src/hooks/rooms/useSelection";
 import { useScoreEditor } from "@/src/hooks/rooms/useScoreEditor";
 import { updateScore } from "@/src/lib/models/rooms";
 
-interface ScoreChipFormProps {
+interface DataFormProps {
   scores: ReadScore[];
   chips: ReadChip[];
   roomDetail: ReadRoomDetail;
 }
 
-const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
+const DataForm = ({ scores, chips, roomDetail }: DataFormProps) => {
   const { select, open, close, left, right } = useSelect();
   const { setScore, getScore, getRemainingScore, isComplete } = useScoreEditor(
     scores,
@@ -81,4 +81,4 @@ const ScoreChipForm = ({ scores, chips, roomDetail }: ScoreChipFormProps) => {
   );
 };
 
-export default ScoreChipForm;
+export default DataForm;

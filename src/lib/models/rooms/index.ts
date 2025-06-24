@@ -9,11 +9,13 @@ import { readChips } from "./actions/read/read-chips";
 
 import { updateRoom } from "./actions/update/update-room";
 import { updateScore } from "./actions/update/update-score";
+import { updateChip } from "./actions/update/update-chip";
 
 import { deleteRoom } from "./actions/delete/delete-room";
 import { deleteScore } from "./actions/delete/delete-score";
+import { deleteChip } from "./actions/delete/delete-chip";
 
 export { createRoom, createScore, createChip };
 export { readRooms, readRoomDetail, readScores, readChips };
-export { updateRoom, updateScore };
-export { deleteRoom, deleteScore };
+export { updateRoom, updateScore, updateChip };
+export { deleteRoom, deleteScore, deleteChip };

@@ -28,7 +28,7 @@ export const updateScore = async (data: FormData) => {
 
   const roomUsers = await db
     .selectFrom("RoomUser")
-    .select(["userId", "position"])
+    .select(["userId"])
     .where("roomId", "=", roomId)
     .orderBy("position", "asc")
     .execute();
@@ -51,7 +51,7 @@ export const updateScore = async (data: FormData) => {
     // 2. 更新したscoreを取得してorderを再設定
     const gameScores = await trx
       .selectFrom("Score")
-      .select(["userId", "score"])
+      .select(["userId"])
       .where("roomId", "=", roomId)
       .where("gameCount", "=", gameCount)
       .orderBy("score", "desc") // スコア高い順
