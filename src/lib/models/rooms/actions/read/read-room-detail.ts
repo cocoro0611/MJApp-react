@@ -3,10 +3,16 @@
 import { db } from "../../../db";
 import type { ReadRoomDetail } from "../../type";
 import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
+import { isUUID } from "@/src/utils/uuid-check";
+import { notFound } from "next/navigation";
 
 export const readRoomDetail = async (
   roomId: string
 ): Promise<ReadRoomDetail | null> => {
+  if (!isUUID(roomId)) {
+    notFound();
+  }
+
   const room = await db
     .selectFrom("Room")
     .select([
