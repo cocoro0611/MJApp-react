@@ -13,14 +13,14 @@ const CalculationPage = () => {
           <div className="text-gray-600 text-sm mb-8 font-semibold">
             <p>計算したい内容を選択してください。</p>
           </div>
-          <Link href="/calculation/fu-count" className="w-full">
-            <Button custom={true} className="rounded px-4 py-2 w-full">
-              符数計算
-            </Button>
-          </Link>
           <Link href="/calculation/han-count" className="w-full">
             <Button custom={true} className="rounded px-4 py-2 w-full">
               飜数計算
+            </Button>
+          </Link>
+          <Link href="/calculation/fu-count" className="w-full">
+            <Button custom={true} className="rounded px-4 py-2 w-full">
+              符数計算
             </Button>
           </Link>
         </div>

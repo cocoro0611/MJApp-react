@@ -4,7 +4,7 @@ import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import ButtonCount from "@/src/components/ui/ButtonCount";
 import { useCalculator } from "@/src/hooks/calculation/useCalculator";
-import { MAHJONG_BUTTON_CONFIG } from "@/src/constants/calculation/mahjongButtonConfig";
+import { FU_CONFIG } from "@/src/constants/calculation/fu-config";
 import { getAllScores } from "@/src/utils/mahjong-calculation";
 
 /**
@@ -20,7 +20,7 @@ const CalculationPage = () => {
     selectedItems, // 選択された項目の詳細
     handleButtonClick, // ボタンクリック処理
     resetAllButtons, // 全リセット処理
-  } = useCalculator(MAHJONG_BUTTON_CONFIG);
+  } = useCalculator(FU_CONFIG);
 
   // 点数計算の関数
   const tokuten = getAllScores(totalHan, totalFu);
@@ -31,12 +31,12 @@ const CalculationPage = () => {
       <Main>
         {/* 役・符選択ボタングリッド */}
         <div className="grid-6">
-          {MAHJONG_BUTTON_CONFIG.map((buttonConfig, index) => (
+          {FU_CONFIG.map((buttonConfig, index) => (
             <ButtonCount
               key={index}
               className="text-xs"
-              maxCount={buttonConfig.maxCount}
-              count={buttonCounts[index]} // 外部からcount値を制御
+              count={buttonConfig.count}
+              effectCount={buttonCounts[index]} // 外部からcount値を制御
               onClick={(count) => handleButtonClick(index, count)}
             >
               {buttonConfig.label}

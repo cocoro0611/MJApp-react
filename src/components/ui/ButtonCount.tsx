@@ -7,9 +7,9 @@ interface ButtonCountProps {
   initialSelected?: boolean;
   disabled?: boolean;
   className?: string;
-  maxCount?: number; //（1なら通常のtrue/false、2以上なら複数回クリック）
-  count?: number; // 外部から制御するためのcount値
-  onClick?: (count: number, isSelected: boolean) => void; // countとisSelectedの両方を返す
+  count?: number; //（1なら通常のtrue/false、2以上なら複数回クリック）
+  effectCount?: number; // 外部から制御するためのcount値
+  onClick?: (effectCount: number, isSelected: boolean) => void; // countとisSelectedの両方を返す
 }
 
 const ButtonCount = ({
@@ -17,8 +17,8 @@ const ButtonCount = ({
   initialSelected = false,
   disabled = false,
   className = "",
-  maxCount = 1, // デフォルトは1（通常のtrue/falseモード）
-  count, // 外部から制御するcount
+  count = 1, // デフォルトは1（通常のtrue/falseモード）
+  effectCount, // 外部から制御するcount
   onClick,
 }: ButtonCountProps) => {
   const [internalCount, setInternalCount] = useState<number>(
@@ -27,19 +27,19 @@ const ButtonCount = ({
 
   // 外部からcountが渡された場合、内部状態を同期
   useEffect(() => {
-    if (count !== undefined) {
-      setInternalCount(count);
+    if (effectCount !== undefined) {
+      setInternalCount(effectCount);
     }
-  }, [count]);
+  }, [effectCount]);
 
-  const currentCount = count !== undefined ? count : internalCount;
+  const currentCount = effectCount !== undefined ? effectCount : internalCount;
 
   const handleClick = () => {
     if (!disabled) {
-      const newCount = currentCount >= maxCount ? 0 : currentCount + 1;
+      const newCount = currentCount >= count ? 0 : currentCount + 1;
 
       // 外部制御されていない場合のみ内部状態を更新
-      if (count === undefined) {
+      if (effectCount === undefined) {
         setInternalCount(newCount);
       }
 
@@ -68,7 +68,7 @@ const ButtonCount = ({
       `}
     >
       {children}
-      {maxCount !== 1 && currentCount > 0 ? (
+      {count !== 1 && currentCount > 0 ? (
         <div className="text-xs font-bold">×{currentCount}</div>
       ) : (
         ""

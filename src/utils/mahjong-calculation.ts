@@ -1,23 +1,106 @@
-import {
-  MAHJONG_SCORE_TABLE,
-  ScoreInfo,
-} from "../constants/calculation/mahjongScoreTable";
-
 /**
- * 麻雀点数計算ユーティリティ
- * 翻数と符数から点数表を参照して点数を取得
+ * 麻雀点数計算関数
+ * 点数表を参照して計算を行う
  */
 
-// 全ての点数情報を含む結果型
-export interface AllScoreResult {
+import {
+  koRonPointMaps,
+  koTsumoKoPointMaps,
+  koTsumoOyaPointMaps,
+  oyaRonPointMaps,
+  oyaTsumoPointMaps,
+  limitHanPoints,
+  limitNames,
+} from "../constants/calculation/score-table";
+
+// 点数情報の型定義
+export interface ScoreInfo {
   oyaRon: string; // 親のロン
   oyaTsumo: string; // 親のツモ
   coRon: string; // 子のロン
   coTsumo: string; // 子のツモ
-  han: number; // 翻数
-  fu: number; // 符数
-  isValid: boolean; // 有効な組み合わせかどうか
-  limitName?: string; // 満貫、跳満などの名称
+}
+
+/**
+ * 符数を調整する
+ * @param fu 入力された符数
+ * @returns 調整された符数
+ */
+function adjustFu(fu: number): number {
+  if (fu === 0) {
+    return 20; // 平和ツモ
+  }
+
+  if (fu === 25) {
+    return 25; // 七対子
+  }
+
+  // 10符単位で切り上げ、最低30符
+  return Math.max(30, Math.ceil(fu / 10) * 10);
+}
+
+/**
+ * 満貫以上の点数を取得
+ * @param han 翻数
+ * @returns 満貫以上の点数情報、該当しない場合はnull
+ */
+function getLimitHandScore(han: number): ScoreInfo | null {
+  for (const [
+    minHan,
+    maxHan,
+    coRon,
+    coTsumoKo,
+    coTsumoOya,
+    oyaRon,
+    oyaTsumo,
+  ] of limitHanPoints) {
+    if (han >= minHan && han <= maxHan) {
+      return {
+        oyaRon: oyaRon.toLocaleString(),
+        oyaTsumo: `${oyaTsumo.toLocaleString()}オール`,
+        coRon: coRon.toLocaleString(),
+        coTsumo: `${coTsumoOya.toLocaleString()}/${coTsumoKo.toLocaleString()}`,
+      };
+    }
+  }
+  return null;
+}
+
+/**
+ * 通常の点数（1-4翻）を取得
+ * @param han 翻数
+ * @param adjustedFu 調整済み符数
+ * @returns 点数情報、無効な場合はnull
+ */
+function getNormalScore(han: number, adjustedFu: number): ScoreInfo | null {
+  const coRon = koRonPointMaps[han]?.[adjustedFu];
+  const coTsumoKo = koTsumoKoPointMaps[han]?.[adjustedFu];
+  const coTsumoOya = koTsumoOyaPointMaps[han]?.[adjustedFu];
+  const oyaRon = oyaRonPointMaps[han]?.[adjustedFu];
+  const oyaTsumo = oyaTsumoPointMaps[han]?.[adjustedFu];
+
+  // いずれかがnullの場合は無効
+  if (
+    coRon === null ||
+    coTsumoKo === null ||
+    coTsumoOya === null ||
+    oyaRon === null ||
+    oyaTsumo === null ||
+    coRon === undefined ||
+    coTsumoKo === undefined ||
+    coTsumoOya === undefined ||
+    oyaRon === undefined ||
+    oyaTsumo === undefined
+  ) {
+    return null;
+  }
+
+  return {
+    oyaRon: oyaRon.toLocaleString(),
+    oyaTsumo: `${oyaTsumo.toLocaleString()}オール`,
+    coRon: coRon.toLocaleString(),
+    coTsumo: `${coTsumoOya.toLocaleString()}/${coTsumoKo.toLocaleString()}`,
+  };
 }
 
 /**
@@ -26,176 +109,182 @@ export interface AllScoreResult {
  * @param fu 符数
  * @returns 全ての点数情報
  */
-export const getAllScores = (han: number, fu: number): AllScoreResult => {
-  // 翻数が0の場合は無効
+export function getAllScores(han: number, fu: number): ScoreInfo {
+  // 翻数が0の場合
   if (han === 0) {
     return {
       oyaRon: "0",
       oyaTsumo: "0",
       coRon: "0",
       coTsumo: "0",
-      han,
-      fu,
-      isValid: false,
     };
   }
 
   // 満貫以上の場合（5翻以上）
   if (han >= 5) {
-    const limitName = getLimitName(han);
-    const scoreInfo =
-      MAHJONG_SCORE_TABLE[han]?.[0] || MAHJONG_SCORE_TABLE[13][0]; // 13翻以上は数え役満
-
-    return {
-      ...scoreInfo,
-      han,
-      fu,
-      isValid: true,
-      limitName,
-    };
+    const limitScore = getLimitHandScore(han);
+    if (limitScore) {
+      return limitScore;
+    }
   }
 
   // 通常の点数（1-4翻）
-  const hanScores = MAHJONG_SCORE_TABLE[han];
-  if (!hanScores) {
-    return {
-      oyaRon: "0",
-      oyaTsumo: "0",
-      coRon: "0",
-      coTsumo: "0",
-      han,
-      fu,
-      isValid: false,
-    };
+  const adjustedFu = adjustFu(fu);
+  const normalScore = getNormalScore(han, adjustedFu);
+
+  if (normalScore) {
+    return normalScore;
   }
 
-  // 符数の調整
-  let adjustedFu = fu;
-
-  // 符数が0の場合、平和ツモとして20符を設定
-  if (fu === 0) {
-    adjustedFu = 20;
-  }
-
-  // 符数が25でない場合、10符単位に切り上げ
-  if (adjustedFu !== 25) {
-    adjustedFu = Math.ceil(adjustedFu / 10) * 10;
-    // 最低30符（平和ツモ除く）
-    if (adjustedFu < 30 && fu !== 0) {
-      adjustedFu = 30;
-    }
-  }
-
-  // 該当する符数の点数を取得
-  const scoreInfo = hanScores[adjustedFu];
-  if (!scoreInfo) {
-    // 該当する符数がない場合、最も近い符数を探す
-    const availableFus = Object.keys(hanScores)
-      .map(Number)
-      .sort((a, b) => a - b);
-
-    const closestFu =
-      availableFus.find((f) => f >= adjustedFu) ||
-      availableFus[availableFus.length - 1];
-    const closestScoreInfo = hanScores[closestFu];
-
-    if (!closestScoreInfo) {
-      return {
-        oyaRon: "0",
-        oyaTsumo: "0",
-        coRon: "0",
-        coTsumo: "0",
-        han,
-        fu,
-        isValid: false,
-      };
-    }
-
-    return {
-      ...closestScoreInfo,
-      han,
-      fu: closestFu,
-      isValid: true,
-    };
-  }
-
-  // 3翻60符以上、4翻70符以上は満貫
-  const limitName = checkLimitHand(han, adjustedFu);
-
+  // 無効な組み合わせ
   return {
-    ...scoreInfo,
-    han,
-    fu: adjustedFu,
-    isValid: true,
-    limitName,
+    oyaRon: "0",
+    oyaTsumo: "0",
+    coRon: "0",
+    coTsumo: "0",
   };
-};
+}
 
 /**
  * 満貫以上の名称を取得
  * @param han 翻数
  * @returns 満貫、跳満などの名称
  */
-const getLimitName = (han: number): string => {
-  if (han >= 13) return "数え役満";
-  if (han >= 11) return "三倍満";
-  if (han >= 8) return "倍満";
-  if (han >= 6) return "跳満";
-  if (han >= 5) return "満貫";
+export function getLimitName(han: number): string {
+  if (han === 0) return "";
+
+  // 満貫以上の名称を逆順で確認（高い翻数から）
+  const sortedLimits = Object.entries(limitNames)
+    .map(([hanStr, name]) => [parseInt(hanStr), name] as const)
+    .sort(([a], [b]) => b - a);
+
+  for (const [limitHan, name] of sortedLimits) {
+    if (han >= limitHan) {
+      return name;
+    }
+  }
+
   return "";
-};
+}
 
 /**
- * 通常の翻数でも満貫になるケースをチェック
+ * 子のロン点数のみを取得
  * @param han 翻数
  * @param fu 符数
- * @returns 満貫以上の名称（該当しない場合は空文字）
+ * @returns 子のロン点数（数値）、無効な場合はnull
  */
-const checkLimitHand = (han: number, fu: number): string | undefined => {
-  // 3翻60符以上は満貫
-  if (han === 3 && fu >= 60) return "満貫";
-  // 4翻70符以上は満貫
-  if (han === 4 && fu >= 70) return "満貫";
+export function getKoRonScore(han: number, fu: number): number | null {
+  if (han === 0) return null;
 
-  return undefined;
-};
-
-/**
- * 点数情報を表示用の文字列に整形
- * @param scoreResult 点数計算結果
- * @returns 表示用の文字列
- */
-export const formatScoreForDisplay = (scoreResult: AllScoreResult): string => {
-  if (!scoreResult.isValid) {
-    return "無効な組み合わせ";
+  if (han >= 5) {
+    const limitScore = getLimitHandScore(han);
+    if (limitScore) {
+      return parseInt(limitScore.coRon.replace(/,/g, ""));
+    }
   }
 
-  const parts = [];
-
-  // 翻数・符数の表示
-  if (scoreResult.limitName) {
-    parts.push(`${scoreResult.han}翻 ${scoreResult.limitName}`);
-  } else {
-    parts.push(`${scoreResult.han}翻${scoreResult.fu}符`);
-  }
-
-  // 点数の表示
-  parts.push(`親: ロン${scoreResult.oyaRon} ツモ${scoreResult.oyaTsumo}`);
-  parts.push(`子: ロン${scoreResult.coRon} ツモ${scoreResult.coTsumo}`);
-
-  return parts.join("\n");
-};
+  const adjustedFu = adjustFu(fu);
+  return koRonPointMaps[han]?.[adjustedFu] ?? null;
+}
 
 /**
- * 点数表に存在する有効な符数一覧を取得
+ * 親のロン点数のみを取得
+ * @param han 翻数
+ * @param fu 符数
+ * @returns 親のロン点数（数値）、無効な場合はnull
+ */
+export function getOyaRonScore(han: number, fu: number): number | null {
+  if (han === 0) return null;
+
+  if (han >= 5) {
+    const limitScore = getLimitHandScore(han);
+    if (limitScore) {
+      return parseInt(limitScore.oyaRon.replace(/,/g, ""));
+    }
+  }
+
+  const adjustedFu = adjustFu(fu);
+  return oyaRonPointMaps[han]?.[adjustedFu] ?? null;
+}
+
+/**
+ * 子のツモ点数（親の支払い分）のみを取得
+ * @param han 翻数
+ * @param fu 符数
+ * @returns 子のツモ時の親の支払い点数（数値）、無効な場合はnull
+ */
+export function getKoTsumoOyaScore(han: number, fu: number): number | null {
+  if (han === 0) return null;
+
+  if (han >= 5) {
+    for (const [minHan, maxHan, , , coTsumoOya] of limitHanPoints) {
+      if (han >= minHan && han <= maxHan) {
+        return coTsumoOya;
+      }
+    }
+  }
+
+  const adjustedFu = adjustFu(fu);
+  return koTsumoOyaPointMaps[han]?.[adjustedFu] ?? null;
+}
+
+/**
+ * 子のツモ点数（子の支払い分）のみを取得
+ * @param han 翻数
+ * @param fu 符数
+ * @returns 子のツモ時の子の支払い点数（数値）、無効な場合はnull
+ */
+export function getKoTsumoKoScore(han: number, fu: number): number | null {
+  if (han === 0) return null;
+
+  if (han >= 5) {
+    for (const [minHan, maxHan, , coTsumoKo] of limitHanPoints) {
+      if (han >= minHan && han <= maxHan) {
+        return coTsumoKo;
+      }
+    }
+  }
+
+  const adjustedFu = adjustFu(fu);
+  return koTsumoKoPointMaps[han]?.[adjustedFu] ?? null;
+}
+
+/**
+ * 親のツモ点数のみを取得
+ * @param han 翻数
+ * @param fu 符数
+ * @returns 親のツモ点数（数値）、無効な場合はnull
+ */
+export function getOyaTsumoScore(han: number, fu: number): number | null {
+  if (han === 0) return null;
+
+  if (han >= 5) {
+    for (const [minHan, maxHan, , , , , oyaTsumo] of limitHanPoints) {
+      if (han >= minHan && han <= maxHan) {
+        return oyaTsumo;
+      }
+    }
+  }
+
+  const adjustedFu = adjustFu(fu);
+  return oyaTsumoPointMaps[han]?.[adjustedFu] ?? null;
+}
+
+/**
+ * 有効な符数一覧を取得
  * @param han 翻数
  * @returns 有効な符数の配列
  */
-export const getValidFuList = (han: number): number[] => {
-  const hanScores = MAHJONG_SCORE_TABLE[han];
-  if (!hanScores) return [];
+export function getValidFuList(han: number): number[] {
+  if (han >= 5) {
+    return [0]; // 満貫以上は符数関係なし
+  }
 
-  return Object.keys(hanScores)
+  const hanMap = koRonPointMaps[han];
+  if (!hanMap) return [];
+
+  return Object.keys(hanMap)
     .map(Number)
+    .filter((fu) => hanMap[fu] !== null)
     .sort((a, b) => a - b);
-};
+}

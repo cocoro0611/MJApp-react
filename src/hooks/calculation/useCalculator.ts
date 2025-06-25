@@ -5,8 +5,8 @@ export interface MahjongButtonItem {
   label: string; // ボタンに表示されるラベル
   han: number; // 翻数
   fu: number; // 符数
-  maxCount: number; // 最大クリック回数
-  exclusiveGroup?: string; // 排他制御グループ名（同じグループ内は1つのみ選択可能）
+  count: number; // 最大クリック回数
+  group?: string; // 排他制御グループ名（同じグループ内は1つのみ選択可能）
   initialHanBonus?: number; // 初回クリック時の翻ボーナス
   fuFixed?: boolean; // 符を固定するか（クリック回数で増えない）
 }
@@ -88,12 +88,9 @@ export const useCalculator = (buttonList: MahjongButtonItem[]) => {
 
         // 排他制御: 同じグループの他のボタンを0にリセット
         // 例：「白」を選択したら「發」「中」は自動的に0になる
-        if (clickedItem.exclusiveGroup && count > 0) {
+        if (clickedItem.group && count > 0) {
           buttonList.forEach((item, i) => {
-            if (
-              i !== index &&
-              item.exclusiveGroup === clickedItem.exclusiveGroup
-            ) {
+            if (i !== index && item.group === clickedItem.group) {
               newButtonCounts[i] = 0;
             }
           });
