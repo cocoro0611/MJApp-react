@@ -1,58 +1,54 @@
 "use client";
 
-import { ReactNode, useState, useEffect } from "react";
+import { ReactNode, useState } from "react";
 
 interface ButtonCountProps {
   children: ReactNode;
-  initialSelected?: boolean;
-  disabled?: boolean;
-  className?: string;
-  count?: number; //（1なら通常のtrue/false、2以上なら複数回クリック）
-  effectCount?: number; // 外部から制御するためのcount値
-  onClick?: (effectCount: number, isSelected: boolean) => void; // countとisSelectedの両方を返す
+  count?: number;
+  externalCount?: number;
+  onClick?: (externalCount: number, isSelected: boolean) => void;
+  // ボタンに飜数を表示したい時
+  group?: string;
+  totalHan?: number;
 }
 
 const ButtonCount = ({
   children,
-  initialSelected = false,
-  disabled = false,
-  className = "",
-  count = 1, // デフォルトは1（通常のtrue/falseモード）
-  effectCount, // 外部から制御するcount
+  count = 1,
+  externalCount,
   onClick,
+  group,
+  totalHan,
 }: ButtonCountProps) => {
-  const [internalCount, setInternalCount] = useState<number>(
-    initialSelected ? 1 : 0
-  );
+  const [internalCount, setInternalCount] = useState<number>(0);
 
-  // 外部からcountが渡された場合、内部状態を同期
-  useEffect(() => {
-    if (effectCount !== undefined) {
-      setInternalCount(effectCount);
-    }
-  }, [effectCount]);
-
-  const currentCount = effectCount !== undefined ? effectCount : internalCount;
+  // 親コンポーネントのbuttonCountsと子コンポーネントのnternalCountを連携
+  const currentCount =
+    externalCount !== undefined ? externalCount : internalCount;
 
   const handleClick = () => {
-    if (!disabled) {
-      const newCount = currentCount >= count ? 0 : currentCount + 1;
+    const newCount = currentCount >= count ? 0 : currentCount + 1;
+    onClick?.(newCount, newCount > 0);
 
-      // 外部制御されていない場合のみ内部状態を更新
-      if (effectCount === undefined) {
-        setInternalCount(newCount);
-      }
-
-      onClick?.(newCount, newCount > 0);
+    if (externalCount === undefined) {
+      setInternalCount(newCount);
     }
   };
 
-  // カウントに応じてボタンの表示を変更
-  const getButtonClass = () => {
+  // 追加の表示内容
+  const getDisplayContent = () => {
     if (currentCount === 0) {
-      return "setting-off";
-    } else {
-      return "setting-on";
+      return null;
+    }
+
+    // agariグループの場合は翻数表示
+    if (group === "agari" && totalHan !== undefined) {
+      return <div className="text-[0.6rem]">{totalHan}翻</div>;
+    }
+
+    // 通常は×回数表示（count=1の場合は表示しない）
+    if (count !== 1) {
+      return <div className="text-[0.6rem]">×{currentCount}</div>;
     }
   };
 
@@ -60,19 +56,13 @@ const ButtonCount = ({
     <button
       type="button"
       onClick={handleClick}
-      disabled={disabled}
-      className={`scale-effect rounded h-14 w-14 relative
-      ${getButtonClass()}
-      ${className}
-      ${disabled ? "disabled-effect" : ""}  
+      className={`
+        scale-effect rounded h-12 w-12 p-0.5 text-[0.7rem]
+        ${currentCount === 0 ? "setting-off" : "setting-on"}
       `}
     >
       {children}
-      {count !== 1 && currentCount > 0 ? (
-        <div className="text-xs font-bold">×{currentCount}</div>
-      ) : (
-        ""
-      )}
+      {getDisplayContent()}
     </button>
   );
 };

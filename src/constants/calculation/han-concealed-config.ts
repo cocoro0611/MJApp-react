@@ -1,6 +1,6 @@
-import { MahjongButtonItem } from "@/src/hooks/calculation/useCalculator";
+import { MahjongItem } from "@/src/hooks/calculation/useCalculator";
 
-export const HAN_CONCEALED_CONFIG: MahjongButtonItem[] = [
+export const HAN_CONCEALED_CONFIG: MahjongItem[] = [
   // === １飜役 ===
   { label: "立直", han: 1, fu: 0, count: 1 },
   { label: "一発", han: 1, fu: 0, count: 1 },
@@ -59,4 +59,14 @@ export const HAN_CONCEALED_CONFIG: MahjongButtonItem[] = [
   { label: "大四喜", han: 26, fu: 0, count: 1 },
   { label: "純正九蓮宝燈", han: 26, fu: 0, count: 1 },
   { label: "国士無双十三面待ち", han: 26, fu: 0, count: 1 },
+];
+
+// 翻数別グループの設定
+export const HAN_CONCEALED_GROUPS = [
+  { han: 1, label: "１翻役" },
+  { han: 2, label: "２翻役" },
+  { han: 3, label: "３翻役" },
+  { han: 6, label: "６翻役" },
+  { han: 13, label: "役満" },
+  { han: 26, label: "ダブル役満" },
 ];

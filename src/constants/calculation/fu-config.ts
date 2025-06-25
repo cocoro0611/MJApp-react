@@ -1,6 +1,6 @@
-import { MahjongButtonItem } from "@/src/hooks/calculation/useCalculator";
+import { MahjongItem } from "@/src/hooks/calculation/useCalculator";
 
-export const FU_CONFIG: MahjongButtonItem[] = [
+export const FU_CONFIG: MahjongItem[] = [
   // === 和了 + 飜数 ===
   {
     label: "門前ロン",
@@ -24,15 +24,16 @@ export const FU_CONFIG: MahjongButtonItem[] = [
     fu: 25,
     count: 3,
     group: "agari",
-    initialHanBonus: 1, // 2翻から
+    initialHan: 1, // 2翻から
     fuFixed: true, //　符の固定
   },
   {
     label: "平和ツモ",
     han: 1,
     fu: 20,
-    count: 4,
+    count: 3,
     group: "agari",
+    initialHan: 1, // 2翻から
     fuFixed: true, //　符の固定
   },
   // === 面子（2-8） ===
@@ -53,4 +54,10 @@ export const FU_CONFIG: MahjongButtonItem[] = [
   { label: "辺張", han: 0, fu: 2, count: 1, group: "wait" },
   { label: "間張", han: 0, fu: 2, count: 1, group: "wait" },
   { label: "延べ単", han: 0, fu: 2, count: 1, group: "wait" },
+];
+
+// グループの設定
+export const FU_GROUPS = [
+  { han: 1, label: "和了 + 飜数" },
+  { han: 0, label: "それ以外" },
 ];

@@ -3,11 +3,15 @@ import { ReactNode } from "react";
 interface MainProps {
   children: ReactNode;
   isBlank?: boolean;
+  className?: string;
 }
 
-const Main = ({ children, isBlank = true }: MainProps) => {
+const Main = ({ children, isBlank = true, className = "" }: MainProps) => {
   return (
-    <main className={isBlank ? "center mx-8 sm:mx-16 md:mx-32" : ""}>
+    <main
+      className={`${className} 
+      ${isBlank ? "center mx-8 sm:mx-16 md:mx-32" : ""}`}
+    >
       {children}
     </main>
   );
