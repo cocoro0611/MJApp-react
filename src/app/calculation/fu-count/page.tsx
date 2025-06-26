@@ -28,6 +28,7 @@ const FuCalculationPage = () => {
             tokuten={tokuten}
           />
         }
+        bottomSpace="pb-40"
       >
         <button type="button" onClick={resetButton}>
           <CachedIcon />

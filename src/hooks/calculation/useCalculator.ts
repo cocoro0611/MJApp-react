@@ -1,10 +1,11 @@
 import { useState, useCallback } from "react";
 
 export interface MahjongItem {
-  label: string; // ボタンに表示されるラベル
-  han: number; // 翻数
-  fu: number; // 符数
-  count: number; // 最大クリック回数
+  label: string;
+  han: number;
+  fu: number;
+  count: number;
+  category: string;
   group?: string; // 排他制御グループ名（同じグループ内は1つのみ選択可能）
   initialHan?: number; // 初回クリック時の翻ボーナス
   fuFixed?: boolean; // 符を固定するか（クリック回数で増えない）

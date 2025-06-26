@@ -16,7 +16,7 @@ export interface ScoreInfo {
 }
 
 // 符数の調整
-const adjustFu = (fu: number): number => {
+export const adjustFu = (fu: number): number => {
   if (fu === 20) {
     return 20; // 平和ツモ
   }

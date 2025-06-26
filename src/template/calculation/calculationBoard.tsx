@@ -1,3 +1,4 @@
+import { adjustFu } from "@/src/utils/mahjong-calculation";
 import type { ScoreInfo } from "@/src/utils/mahjong-calculation";
 
 interface CalculationBoardProps {
@@ -12,17 +13,27 @@ const CalculationBoard = ({
   tokuten,
 }: CalculationBoardProps) => {
   return (
-    <div className="fixed-container top-11 z-10 center bg-white text-gray-800">
-      <div className="center flex-col">
+    <div className="bg-white text-gray-800 font-bold text-sm center flex-col">
+      <div className="flex justify-betweenl w-full text-blue-500">
+        <div className="w-full">
+          <div>{adjustFu(totalFu)} 符</div>
+          <div className="text-xs">（{totalFu} 符）</div>
+        </div>
+        <div className="center w-full">{totalHan} 翻</div>
+      </div>
+      <div className="w-full">
+        {tokuten.coRon !== "null" && (
+          <div className="text-xl">{tokuten.coRon} 点</div>
+        )}
         <div>
-          <span>翻: {totalHan}</span>
-          <span>符: {totalFu}</span>
+          <span>親：</span>
+          {tokuten.oyaRon !== "null" && <span>{tokuten.oyaRon}</span>}
+          {tokuten.oyaTsumo !== "null" && <span>（{tokuten.oyaTsumo}）</span>}
         </div>
         <div>
-          <span>親ロン：{tokuten.oyaRon}</span>
-          <span>親ツモ：{tokuten.oyaTsumo}</span>
-          <span>子ロン；{tokuten.coRon}</span>
-          <span>子ツモ：{tokuten.coTsumo}</span>
+          <span>子：</span>
+          {tokuten.coRon !== "null" && <span>{tokuten.coRon}</span>}
+          {tokuten.coTsumo !== "null" && <span>（{tokuten.coTsumo}）</span>}
         </div>
       </div>
     </div>

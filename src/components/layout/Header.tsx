@@ -8,6 +8,7 @@ interface HeaderProps {
   isBackIcon?: boolean;
   children?: ReactNode;
   addContent?: ReactNode;
+  bottomSpace?: string;
 }
 
 const Header = ({
@@ -16,6 +17,7 @@ const Header = ({
   isBackIcon = true,
   children,
   addContent,
+  bottomSpace = "pb-20",
 }: HeaderProps) => {
   return (
     <>
@@ -30,7 +32,7 @@ const Header = ({
         <div>{addContent}</div>
       </header>
       {/* Headerを固定しているためスペースを確保 */}
-      <div className={addContent ? "pb-45.5" : "pb-20"} />
+      <div className={bottomSpace} />
     </>
   );
 };

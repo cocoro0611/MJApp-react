@@ -20,11 +20,13 @@ const HanOpenList = ({
 }: HanOpenListProps) => {
   return (
     <>
-      {HAN_OPEN_GROUPS.map(({ han, label }) => {
-        const buttons = HAN_OPEN_CONFIG.filter((config) => config.han === han);
+      {HAN_OPEN_GROUPS.map(({ category, label }) => {
+        const buttons = HAN_OPEN_CONFIG.filter(
+          (config) => config.category === category
+        );
 
         return (
-          <div key={han} className="mb-4">
+          <div key={category} className="mb-4">
             <div className="flex justify-start font-bold mb-2">{label}</div>
             <div className="grid-6">
               {buttons.map((buttonConfig) => {

@@ -1,9 +1,10 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useEffect } from "react";
 
 interface ButtonCountProps {
   children: ReactNode;
+  size?: "md" | "lg";
   count?: number;
   externalCount?: number;
   onClick?: (externalCount: number, isSelected: boolean) => void;
@@ -14,6 +15,7 @@ interface ButtonCountProps {
 
 const ButtonCount = ({
   children,
+  size = "md",
   count = 1,
   externalCount,
   onClick,
@@ -21,6 +23,13 @@ const ButtonCount = ({
   totalHan,
 }: ButtonCountProps) => {
   const [internalCount, setInternalCount] = useState<number>(0);
+
+  // 外部からexternalCountが渡された場合、内部状態を同期
+  // useEffect(() => {
+  //   if (externalCount !== undefined) {
+  //     setInternalCount(externalCount);
+  //   }
+  // }, [externalCount]);
 
   // 親コンポーネントのbuttonCountsと子コンポーネントのnternalCountを連携
   const currentCount =
@@ -57,8 +66,9 @@ const ButtonCount = ({
       type="button"
       onClick={handleClick}
       className={`
-        scale-effect rounded h-12 w-12 p-0.5 text-[0.7rem]
+        scale-effect p-0.5 rounded text-[0.7rem]
         ${currentCount === 0 ? "setting-off" : "setting-on"}
+        ${size === "md" ? "h-12 w-12" : "h-12 w-18"}
       `}
     >
       {children}
