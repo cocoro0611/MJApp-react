@@ -1,0 +1,73 @@
+"use client";
+
+import { ReactNode, useState, useEffect } from "react";
+
+interface ButtonCountProps {
+  children: ReactNode;
+  size?: "md" | "lg";
+  count?: number;
+  externalCount?: number;
+  onClick?: (externalCount: number, isSelected: boolean) => void;
+  // ボタンに飜数を表示したい時
+  group?: string;
+  totalHan?: number;
+}
+
+const ButtonCount = ({
+  children,
+  size = "md",
+  count = 1,
+  externalCount,
+  onClick,
+  group,
+  totalHan,
+}: ButtonCountProps) => {
+  const [internalCount, setInternalCount] = useState<number>(0);
+
+  // 親コンポーネントのbuttonCountsと子コンポーネントのnternalCountを連携
+  const currentCount =
+    externalCount !== undefined ? externalCount : internalCount;
+
+  const handleClick = () => {
+    const newCount = currentCount >= count ? 0 : currentCount + 1;
+    onClick?.(newCount, newCount > 0);
+
+    if (externalCount === undefined) {
+      setInternalCount(newCount);
+    }
+  };
+
+  // 追加の表示内容
+  const getDisplayContent = () => {
+    if (currentCount === 0) {
+      return null;
+    }
+
+    // agariグループの場合は翻数表示
+    if (group === "agari" && totalHan !== undefined) {
+      return <div className="text-[0.6rem]">{totalHan}翻</div>;
+    }
+
+    // 通常は×回数表示（count=1の場合は表示しない）
+    if (count !== 1) {
+      return <div className="text-[0.6rem]">×{currentCount}</div>;
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleClick}
+      className={`
+        scale-effect p-0.5 rounded text-[0.7rem]
+        ${currentCount === 0 ? "setting-off" : "setting-on"}
+        ${size === "md" ? "h-12 w-12" : "h-12 w-18"}
+      `}
+    >
+      {children}
+      {getDisplayContent()}
+    </button>
+  );
+};
+
+export default ButtonCount;

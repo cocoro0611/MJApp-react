@@ -80,7 +80,7 @@ const ChipForm = ({
                           className={`px-1 border-b-2 ${
                             isSelected
                               ? "pulse-border-b-color"
-                              : "border-blue-400"
+                              : "border-b-color"
                           }`}
                         >
                           {chip}
