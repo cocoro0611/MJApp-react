@@ -21,7 +21,7 @@ const UsersPage = async () => {
             />
           ))}
         </div>
-        <Button href="/users/new" color="fixed" />
+        <Button href="/users/new" isFixed={true} />
       </Main>
     </>
   );

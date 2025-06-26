@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 interface ButtonProps {
   children?: ReactNode;
   href?: string;
+  isFixed?: boolean;
   color?:
     | "primary"
     | "secondary"
@@ -13,38 +14,46 @@ interface ButtonProps {
     | "cancel"
     | "white"
     | "toggle-active"
-    | "toggle-inactive"
-    | "fixed";
+    | "toggle-inactive";
   type?: "button" | "submit";
   disabled?: boolean;
   className?: string;
-  size?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button = ({
   children,
   href,
+  isFixed = false,
   color = "primary",
   type = "button",
   disabled = false,
   className = "rounded px-4 py-2 w-full",
   onClick = () => {},
 }: ButtonProps) => {
-  // colorがfixedの場合はclassNameを空文字に+を表示
-  const finalClassName = color === "fixed" ? "" : className;
-  const displayContent = color === "fixed" ? "+" : children;
+  const btnClass = `effect-scale ${color} ${className} ${disabled ? "effect-disabled" : ""} `;
 
-  const btnClass = `effect-scale 
-  ${color}
-  ${disabled ? "effect-disabled" : ""} 
-  ${finalClassName}`;
+  // isFixed Button
+  if (href && isFixed) {
+    return (
+      <Link href={href}>
+        <button
+          onClick={disabled ? undefined : onClick}
+          type={type}
+          disabled={disabled}
+          className={`fixed effect-scale ${disabled ? "effect-disabled" : ""}`}
+        >
+          +
+        </button>
+      </Link>
+    );
+  }
 
   // Link ボタン
   if (href && !disabled) {
     return (
       <Link href={href}>
-        <div className={btnClass}>{displayContent}</div>
+        <div className={btnClass}>{children}</div>
       </Link>
     );
   }
@@ -57,7 +66,7 @@ const Button = ({
       disabled={disabled}
       className={btnClass}
     >
-      {displayContent}
+      {children}
     </button>
   );
 };

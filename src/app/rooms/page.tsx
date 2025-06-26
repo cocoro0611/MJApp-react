@@ -24,7 +24,7 @@ const RoomsPage = async () => {
         </div>
         <Button
           href="/rooms/new"
-          color="fixed"
+          isFixed={true}
           disabled={defaultUsers.length < 4}
         />
       </Main>

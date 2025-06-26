@@ -16,8 +16,7 @@ interface ToastButtonProps {
     | "cancel"
     | "white"
     | "toggle-active"
-    | "toggle-inactive"
-    | "fixed";
+    | "toggle-inactive";
   type?: "button" | "submit";
   disabled?: boolean;
   className?: string;

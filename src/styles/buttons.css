@@ -31,10 +31,10 @@
     @apply text-primary-500;
   }
   /* Fixed Button */
-  .fixed {
+  /* .fixed {
     @apply bg-primary-800 hover:bg-primary-900 active:bg-primary-950 shadow;
     @apply text-white;
     @apply px-5 py-3 text-3xl rounded-xl fixed z-10;
     @apply bottom-[10vh] right-[4vh] md:right-[8vh] lg:right-[12vh] xl:right-[16vh];
-  }
+  } */
 }

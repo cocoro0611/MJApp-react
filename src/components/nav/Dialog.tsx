@@ -23,13 +23,11 @@ const Dialog = ({
           onClick={close}
         >
           <div
-            className="bg-white rounded-xl p-8 w-7/8 max-w-md"
+            className="bg-white text-gray-800 rounded-xl p-6 w-9/10 max-w-lg"
             onClick={(e) => e.stopPropagation()} // モーダル内のクリックでダイアログが閉じないように制御
           >
-            <div className="text-gray-800 text-xl font-bold mb-2">{title}</div>
-            <div className="text-gray-600 text-sm mb-8 font-semibold">
-              {message}
-            </div>
+            <div className="text-xl font-bold mb-2">{title}</div>
+            <div className="text-sm font-bold mb-8">{message}</div>
             <div>{children}</div>
           </div>
         </div>

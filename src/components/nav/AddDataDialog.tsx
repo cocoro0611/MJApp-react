@@ -19,7 +19,7 @@ const AddDataDialog = ({ roomId }: AddDataDialogProps) => {
 
   return (
     <>
-      <Button color="fixed" onClick={handleOpen} />
+      <Button isFixed={true} onClick={handleOpen} />
 
       <Dialog
         open={open}

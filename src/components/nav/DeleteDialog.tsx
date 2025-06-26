@@ -25,19 +25,10 @@ const DeleteDialog = () => {
         message="本当に削除しますか？"
       >
         <div className="grid grid-cols-2 gap-4">
-          <Button
-            color="cancel"
-            className="rounded px-4 py-2"
-            onClick={handleClose}
-          >
+          <Button color="cancel" onClick={handleClose}>
             キャンセル
           </Button>
-          <ToastButton
-            color="danger"
-            type="submit"
-            className="rounded px-4 py-2"
-            alertMessage="削除しました"
-          >
+          <ToastButton color="danger" type="submit" alertMessage="削除しました">
             削除する
           </ToastButton>
         </div>
