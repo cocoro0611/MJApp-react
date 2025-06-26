@@ -18,7 +18,7 @@ const SelectIcon = ({ name, value }: SelectIconProps) => {
 
   return (
     <div className="w-full">
-      <label className={`flex text-blue-800 font-bold `}>アイコン</label>
+      <label className={`flex text-primary-800 font-bold `}>アイコン</label>
       <input type="hidden" name="icon" value={selectedIcon} />
       <div className="center py-4">
         <UserCard name={name} icon={selectedIcon} size="lg" />
@@ -30,7 +30,7 @@ const SelectIcon = ({ name, value }: SelectIconProps) => {
             src={icon}
             alt={icon}
             onClick={() => setSelectedIcon(icon)}
-            className={`rounded-full revolution-effect
+            className={`rounded-full effect-rotate
               ${selectedIcon === icon ? "secondary" : "white"}`}
             width={45}
             height={45}

@@ -1,0 +1,14 @@
+@layer utilities {
+  .effect-scale {
+    @apply transition-all duration-150 hover:scale-102 active:scale-97;
+  }
+  .effect-rotate {
+    @apply transition-all duration-150 hover:rotate-12 active:rotate-12;
+  }
+  .effect-pulse {
+    @apply transition-all duration-150 scale-102 animate-pulse;
+  }
+  .effect-disabled {
+    @apply cursor-not-allowed opacity-20;
+  }
+}

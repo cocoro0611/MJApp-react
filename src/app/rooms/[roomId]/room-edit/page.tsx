@@ -11,10 +11,6 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
   const { roomId } = await params;
   const room = await readRoomDetail(roomId);
 
-  if (!room) {
-    throw new Error("ルームが見つかりません");
-  }
-
   return (
     <>
       <Header title="ルームの編集" href={`/rooms/${room.id}`} />

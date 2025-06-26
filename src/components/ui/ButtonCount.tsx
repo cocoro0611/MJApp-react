@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useState, useEffect } from "react";
+import { ReactNode, useState } from "react";
 
 interface ButtonCountProps {
   children: ReactNode;
@@ -59,8 +59,8 @@ const ButtonCount = ({
       type="button"
       onClick={handleClick}
       className={`
-        scale-effect p-0.5 rounded text-[0.7rem]
-        ${currentCount === 0 ? "setting-off" : "setting-on"}
+        effect-scale p-0.5 rounded text-[0.7rem]
+        ${currentCount === 0 ? "toggle-inactive" : "toggle-active"}
         ${size === "md" ? "h-12 w-12" : "h-12 w-18"}
       `}
     >

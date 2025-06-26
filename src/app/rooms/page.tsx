@@ -12,7 +12,7 @@ const RoomsPage = async () => {
     <>
       <Header title="ルーム一覧" isBackIcon={false} />
       <Main>
-        <div className="center flex-col space-y-4">
+        <div className="space-y-4">
           {rooms.map((room) => (
             <RoomCard
               key={room.id}

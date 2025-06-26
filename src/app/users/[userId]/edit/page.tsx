@@ -12,10 +12,6 @@ const UserEditPage = async ({ params }: UserEditPageProps) => {
   const { userId } = await params;
   const user = await readUser(userId);
 
-  if (!user) {
-    throw new Error("ユーザーが見つかりません");
-  }
-
   return (
     <>
       <Header title="ユーザー編集" href="/users">

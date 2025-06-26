@@ -31,8 +31,7 @@ const DeleteChipDialog = ({
     <Button
       type="button"
       onClick={handleReset}
-      color="setting-on"
-      custom={true}
+      color="toggle-active"
       className="rounded px-4 w-full"
     >
       やり直し
@@ -44,15 +43,13 @@ const DeleteChipDialog = ({
       <input type="hidden" name="roomId" value={roomId} />
       <input type="hidden" name="gameCount" value={gameCount} />
       <ToastButton
-        alertMessage="削除しました"
-        alertColor="success"
         color="danger"
-        custom={true}
-        className="rounded px-4 py-2 w-full"
+        type="submit"
         onClick={() => {
           // 削除後ダイアログがCloseしない時があるので強制的に閉じる
           setTimeout(() => setOpen(false), 700);
         }}
+        alertMessage="削除しました"
       >
         削除する
       </ToastButton>
@@ -60,13 +57,7 @@ const DeleteChipDialog = ({
   );
 
   const CancelButton = () => (
-    <Button
-      type="button"
-      onClick={handleClose}
-      color="cancel"
-      custom={true}
-      className="rounded px-4 py-1 w-full "
-    >
+    <Button color="cancel" onClick={handleClose}>
       キャンセル
     </Button>
   );
@@ -90,8 +81,8 @@ const DeleteChipDialog = ({
         ) : (
           <>
             <p>-チップ-</p>
-            <p className="text-red-500">あと</p>
-            <p className="text-red-500">{remaining}</p>
+            <p className="text-negative">あと</p>
+            <p className="text-negative">{remaining}</p>
           </>
         )}
       </Card>

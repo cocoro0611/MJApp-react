@@ -73,7 +73,7 @@ const DataForm = ({ scores, chips, roomDetail }: DataFormProps) => {
           top: document.body.scrollHeight,
           behavior: "smooth",
         });
-      }, 200);
+      }, 300);
     }
   }, [selected]); // selectedが変更された時に実行
 

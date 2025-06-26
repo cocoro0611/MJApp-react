@@ -19,7 +19,7 @@ const UserForm = ({ action, btnText, user, roomId }: UserFormProps) => {
   const icon = user?.icon ?? "";
 
   return (
-    <Form action={action} className="center flex-col space-y-8">
+    <Form action={action} className="space-y-8">
       <input type="hidden" name="roomId" value={roomId} />
       <input type="hidden" name="userId" value={user?.id} />
       <InputField
@@ -33,11 +33,9 @@ const UserForm = ({ action, btnText, user, roomId }: UserFormProps) => {
       />
       <SelectIcon name={name} value={icon} />
       <ToastButton
+        type="submit"
         disabled={name.length === 0}
         alertMessage={`${btnText}しました`}
-        alertColor="success"
-        custom={true}
-        className="w-full rounded px-4 py-2"
       >
         {btnText}
       </ToastButton>
