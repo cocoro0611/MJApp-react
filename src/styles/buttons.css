@@ -1,43 +1,33 @@
 @layer Style {
   .primary {
-    @apply bg-blue-800  hover:bg-blue-900 active:bg-blue-950 text-white shadow;
-  }
-  .danger {
-    @apply bg-red-700  hover:bg-red-800 active:bg-red-900 text-white shadow;
-  }
-  .white {
-    @apply bg-white hover:bg-gray-100 active:bg-gray-200 text-gray-800 shadow;
+    @apply bg-primary-800 hover:bg-primary-900 active:bg-primary-950 shadow;
+    @apply text-white;
   }
   .secondary {
-    @apply bg-blue-100 hover:bg-blue-200 active:bg-blue-300 text-blue-800 shadow;
-    @apply border-2 border-blue-300;
+    @apply bg-primary-100 hover:bg-primary-200 active:bg-primary-300 shadow;
+    @apply border border-primary-300;
+    @apply text-primary-800;
+  }
+  .danger {
+    @apply bg-red-700 hover:bg-red-800 active:bg-red-900 shadow;
+    @apply text-white;
   }
   .cancel {
-    @apply bg-gray-100  hover:bg-gray-200 active:bg-gray-300 text-gray-800 shadow;
-    @apply border-2 border-gray-300;
+    @apply bg-gray-100 hover:bg-gray-200 active:bg-gray-300 shadow;
+    @apply border border-gray-300;
+    @apply text-gray-800;
+  }
+  .white {
+    @apply bg-white hover:bg-gray-100 active:bg-gray-200 shadow-xl;
+    @apply text-gray-800;
   }
   .setting-on {
-    @apply bg-blue-500  hover:bg-blue-600 active:bg-blue-700 text-white shadow;
+    @apply bg-primary-500 hover:bg-primary-600 active:bg-primary-700;
+    @apply text-white;
   }
   .setting-off {
-    @apply bg-white  hover:bg-blue-50 active:bg-blue-100 text-blue-500 shadow;
-    @apply border border-blue-500;
-  }
-  .input-form {
-    @apply border-2 border-blue-500 rounded p-2 w-full;
-  }
-}
-@layer Effect {
-  .scale-effect {
-    @apply hover:scale-102 active:scale-97 transition-all duration-150;
-  }
-  .disabled-effect {
-    @apply cursor-not-allowed opacity-20;
-  }
-  .revolution-effect {
-    @apply hover:rotate-12 duration-150;
-  }
-  .pulse-effect {
-    @apply transition-all scale-102 shadow animate-pulse duration-150;
+    @apply bg-white hover:bg-primary-50 active:bg-primary-100;
+    @apply border border-primary-500;
+    @apply text-primary-500;
   }
 }

@@ -59,13 +59,13 @@ const ScoreForm = ({
                     <Card
                       isColor={!isSelected}
                       className={`w-full p-1
-                        ${isSelected ? "pulse-color pulse-effect" : ""} `}
+                        ${isSelected ? "bg-accent-100 border-accent-400 text-accent-800 effect-pulse" : ""} `}
                       onClick={() => onOpen(gameScore.gameCount, index)}
                     >
                       <p className="flex justify-start text-[0.6rem]">点数</p>
                       <p>
                         <span
-                          className={`px-1 border-b-2 ${isSelected ? "pulse-border-b-color" : "border-b-color"}`}
+                          className={`px-1 border-b-2 ${isSelected ? "border-accent-500" : "border-primary-300"}`}
                         >
                           {score}
                         </span>

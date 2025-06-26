@@ -27,7 +27,7 @@ const SelectField = ({
 
   return (
     <div className="w-full">
-      <label htmlFor={name} className="flex primary-text font-bold">
+      <label htmlFor={name} className="flex text-primary-800 font-bold">
         {label}
       </label>
       <input id={name} name={name} type="hidden" value={selectedValue} />

@@ -38,8 +38,8 @@ const Button = ({
       className={`
       ${color}
       ${custom ? className : "rounded px-4 py-2"} 
-      ${effect ? "scale-effect" : ""} 
-      ${disabled ? "disabled-effect" : ""}  
+      ${effect ? "effect-scale" : ""} 
+      ${disabled ? "effect-disabled" : ""}  
       `}
     >
       {children}

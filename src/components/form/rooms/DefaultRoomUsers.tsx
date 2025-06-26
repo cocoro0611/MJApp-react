@@ -11,7 +11,7 @@ const DefaultRoomUsers = ({ roomUsers }: DefaultRoomUsersProps) => {
   return (
     <div className="w-full">
       <div className="flex justify-between font-bold">
-        <label className="flex primary-text">ユーザー</label>
+        <label className="flex text-primary-800">ユーザー</label>
         <Link href="/rooms/new/users">
           <Button
             color="secondary"
@@ -27,7 +27,7 @@ const DefaultRoomUsers = ({ roomUsers }: DefaultRoomUsersProps) => {
           <div key={user.id}>
             <input type="hidden" name="userIds" value={user.id} />
             <Image src={user.icon} alt="user-icon" width={50} height={50} />
-            <div className="text-sm primary-text font-bold mt-2">
+            <div className="text-sm text-primary-800 font-bold mt-2">
               {user.name}
             </div>
           </div>

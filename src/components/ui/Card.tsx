@@ -19,8 +19,8 @@ const Card = ({
   return (
     <Link
       href={href}
-      className={`scale-effect rounded-lg font-bold 
-      ${isColor ? "secondary" : "border-2 border-gray-200"} ${className}`}
+      className={`effect-scale rounded-lg font-bold 
+      ${isColor ? "secondary" : "border border-gray-200"} ${className}`}
       onClick={onClick}
     >
       {children}

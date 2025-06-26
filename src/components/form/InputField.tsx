@@ -30,7 +30,7 @@ const InputField = <T extends string | number>({
 
   return (
     <div className="w-full">
-      <label htmlFor={name} className="flex primary-text font-bold">
+      <label htmlFor={name} className="flex text-primary-800 font-bold">
         {label}
       </label>
       <input
@@ -41,7 +41,8 @@ const InputField = <T extends string | number>({
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
-        className="input-form"
+        className="border-2 border-primary-500 rounded p-2 w-full          
+        focus:ring-4 focus:ring-primary-100"
       />
     </div>
   );
