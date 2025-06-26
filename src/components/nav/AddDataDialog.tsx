@@ -3,6 +3,7 @@
 import Form from "next/form";
 import Dialog from "./Dialog";
 import Button from "../ui/Button";
+import ButtonFixed from "../ui/ButtonFixed";
 import ToastButton from "@/src/components/nav/ToastButton";
 import { useState } from "react";
 import { createScore, createChip } from "@/src/lib/models/rooms";
@@ -19,7 +20,7 @@ const AddDataDialog = ({ roomId }: AddDataDialogProps) => {
 
   return (
     <>
-      <Button isFixed={true} onClick={handleOpen} />
+      <ButtonFixed onClick={handleOpen} />
 
       <Dialog
         open={open}

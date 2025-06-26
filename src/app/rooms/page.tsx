@@ -1,7 +1,7 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import RoomCard from "@/src/template/Rooms/RoomCard";
-import Button from "@/src/components/ui/Button";
+import ButtonFixed from "@/src/components/ui/ButtonFixed";
 import { readRooms } from "@/src/lib/models/rooms";
 import { readDefaultUsers } from "@/src/lib/models/users";
 
@@ -22,11 +22,7 @@ const RoomsPage = async () => {
             />
           ))}
         </div>
-        <Button
-          href="/rooms/new"
-          isFixed={true}
-          disabled={defaultUsers.length < 4}
-        />
+        <ButtonFixed href="/rooms/new" disabled={defaultUsers.length < 4} />
       </Main>
     </>
   );

@@ -4,9 +4,8 @@ import Link from "next/link";
 import { ReactNode } from "react";
 
 interface ButtonProps {
-  children?: ReactNode;
+  children: ReactNode;
   href?: string;
-  isFixed?: boolean;
   color?:
     | "primary"
     | "secondary"
@@ -24,7 +23,6 @@ interface ButtonProps {
 const Button = ({
   children,
   href,
-  isFixed = false,
   color = "primary",
   type = "button",
   disabled = false,
@@ -32,22 +30,6 @@ const Button = ({
   onClick = () => {},
 }: ButtonProps) => {
   const btnClass = `effect-scale ${color} ${className} ${disabled ? "effect-disabled" : ""} `;
-
-  // isFixed Button
-  if (href && isFixed) {
-    return (
-      <Link href={href}>
-        <button
-          onClick={disabled ? undefined : onClick}
-          type={type}
-          disabled={disabled}
-          className={`fixed effect-scale ${disabled ? "effect-disabled" : ""}`}
-        >
-          +
-        </button>
-      </Link>
-    );
-  }
 
   // Link ボタン
   if (href && !disabled) {
