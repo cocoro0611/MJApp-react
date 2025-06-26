@@ -12,15 +12,7 @@ const OrderEditPage = async ({ params, searchParams }: OrderEditPageProps) => {
   const { roomId } = await params;
   const { gameCount } = await searchParams;
 
-  if (!gameCount) {
-    throw new Error("ゲーム回数が指定されていません");
-  }
-
   const tiedScores = await readTiedScores(roomId, Number(gameCount));
-
-  if (!tiedScores || tiedScores.length === 0) {
-    throw new Error("同点データが見つかりません");
-  }
 
   return (
     <>

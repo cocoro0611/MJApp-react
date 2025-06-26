@@ -51,7 +51,7 @@ const OrderEditForm = ({
       <div className="text-xl font-bold mb-2">
         {`${gameCount} 回戦 順位調整`}
       </div>
-      <div className="text-gray-600 text-sm mb-8 font-semibold">
+      <div className="text-sm mb-8 font-bold">
         <p>同じ点数のプレイヤーがいます。</p>
         <p>順位を調整してください。</p>
       </div>

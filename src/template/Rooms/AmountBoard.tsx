@@ -13,16 +13,16 @@ const AmountBoard = ({ amount }: AmountBoardProps) => {
 
   return (
     <>
-      <div className="bg-gray-300 text-gray-600 grid-5">
-        <div className="center font-bold ">場代割勘</div>
+      <div className="bg-gray-300 text-gray-600 font-bold grid-5">
+        <div className="center">場代割勘</div>
       </div>
-      <div className="grid-5">
+      <div className="grid-5 font-bold">
         <div className="grid-5-inner">
-          <div className="h-8 center" />
+          <div className="h-8" />
         </div>
         {Array.from({ length: 4 }, (_, index) => (
           <div key={index} className="grid-5-inner">
-            <div className="font-bold text-negative h-8 center relative">
+            <div className="text-negative h-8 center relative">
               -{pointPerPlayer}
               <span className="absolute right-0.5">P</span>
             </div>

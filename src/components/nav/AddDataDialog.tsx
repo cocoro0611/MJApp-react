@@ -27,7 +27,7 @@ const AddDataDialog = ({ roomId }: AddDataDialogProps) => {
         title="情報を追加"
         message="どちらの情報を追加しますか？"
       >
-        <div className="grid grid-cols-2  gap-4 mb-4">
+        <div className="grid grid-cols-2 gap-4 mb-4">
           <Form action={createScore}>
             <input type="hidden" name="roomId" value={roomId} />
             <ToastButton type="submit" alertMessage="スコアを追加しました">

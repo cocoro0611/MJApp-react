@@ -34,8 +34,8 @@ const DeleteDialog = () => {
           </Button>
           <ToastButton
             color="danger"
-            className="rounded px-4 py-2"
             type="submit"
+            className="rounded px-4 py-2"
             alertMessage="削除しました"
           >
             削除する
