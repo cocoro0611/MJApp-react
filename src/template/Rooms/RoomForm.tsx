@@ -36,7 +36,7 @@ const RoomForm = ({ action, btnText, room, roomUsers }: RoomFormProps) => {
   const [amount, setAmount] = useState(room?.gameAmount ?? "");
 
   return (
-    <Form action={action} className="center flex-col space-y-8">
+    <Form action={action} className="space-y-8">
       <input type="hidden" name="roomId" value={room?.id} />
       <InputField
         label="部屋名"
@@ -88,9 +88,9 @@ const RoomForm = ({ action, btnText, room, roomUsers }: RoomFormProps) => {
         onChange={(value) => setAmount(value)}
       />
       <ToastButton
+        type="submit"
         alertMessage={`${btnText}しました`}
         alertColor="success"
-        custom={true}
         className="w-full rounded px-4 py-2"
       >
         {btnText}

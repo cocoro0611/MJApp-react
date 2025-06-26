@@ -1,48 +1,63 @@
 "use client";
 
+import Link from "next/link";
 import { ReactNode } from "react";
 
 interface ButtonProps {
-  children: ReactNode;
+  children?: ReactNode;
+  href?: string;
   color?:
     | "primary"
     | "secondary"
     | "danger"
     | "cancel"
     | "white"
-    | "setting-on"
-    | "setting-off";
-  custom?: boolean;
-  effect?: boolean;
+    | "toggle-active"
+    | "toggle-inactive"
+    | "fixed";
   type?: "button" | "submit";
   disabled?: boolean;
   className?: string;
-  onClick?: () => void;
+  size?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button = ({
   children,
+  href,
   color = "primary",
-  custom = false,
-  effect = true,
-  type = "submit",
+  type = "button",
   disabled = false,
-  className = "",
+  className = "rounded px-4 py-2 w-full",
   onClick = () => {},
 }: ButtonProps) => {
+  // colorがfixedの場合はclassNameを空文字に+を表示
+  const finalClassName = color === "fixed" ? "" : className;
+  const displayContent = color === "fixed" ? "+" : children;
+
+  const btnClass = `effect-scale 
+  ${color}
+  ${disabled ? "effect-disabled" : ""} 
+  ${finalClassName}`;
+
+  // Link ボタン
+  if (href && !disabled) {
+    return (
+      <Link href={href}>
+        <div className={btnClass}>{displayContent}</div>
+      </Link>
+    );
+  }
+
+  // 通常のボタン
   return (
     <button
       onClick={disabled ? undefined : onClick}
       type={type}
       disabled={disabled}
-      className={`
-      ${color}
-      ${custom ? className : "rounded px-4 py-2"} 
-      ${effect ? "effect-scale" : ""} 
-      ${disabled ? "effect-disabled" : ""}  
-      `}
+      className={btnClass}
     >
-      {children}
+      {displayContent}
     </button>
   );
 };

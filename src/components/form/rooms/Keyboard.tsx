@@ -53,47 +53,39 @@ const Keyboard = ({
       <div className="flex items-center justify-between py-2 bg-gray-100">
         <div className="flex ml-2">
           <Button
-            onClick={onMoveLeft}
-            type="button"
             color="white"
-            custom={true}
             className="rounded-l-full w-15 py-1 border-2 border-gray-300"
+            onClick={onMoveLeft}
           >
             ←
           </Button>
           <Button
-            onClick={onMoveRight}
-            type="button"
             color="white"
-            custom={true}
             className="rounded-r-full -ml-1 w-15 py-1 border-2 border-gray-300"
+            onClick={onMoveRight}
           >
             →
           </Button>
         </div>
         <div className="flex gap-2 mr-2">
           <Button
-            onClick={toggleSign}
-            type="button"
             color="white"
-            custom={true}
             className="rounded-2xl w-15 py-1 border-2 border-gray-300"
+            onClick={toggleSign}
           >
             + / -
           </Button>
           <Button
-            custom={true}
-            className="rounded text-sm w-16 py-2"
+            type="submit"
             disabled={!isComplete}
+            className="rounded text-sm w-16 py-2"
           >
             計算
           </Button>
           <Button
-            onClick={onClose}
             color="cancel"
-            type="button"
-            custom={true}
             className="rounded text-sm w-16 py-1"
+            onClick={onClose}
           >
             閉じる
           </Button>
@@ -104,8 +96,6 @@ const Keyboard = ({
           row.map((key) => (
             <Button
               key={`${index}-${key}`}
-              type="button"
-              custom={true}
               className={`${key === "" ? "invisible" : "white rounded-lg text-lg py-1 "}`}
               onClick={() => handleKeyPress(key)}
             >

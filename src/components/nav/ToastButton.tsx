@@ -8,24 +8,36 @@ import { TOAST_TIME } from "@/src/constants/toastTime";
 
 interface ToastButtonProps {
   children: ReactNode;
-  color?: "primary" | "secondary" | "danger" | "cancel" | "white";
-  custom?: boolean;
+  href?: string;
+  color?:
+    | "primary"
+    | "secondary"
+    | "danger"
+    | "cancel"
+    | "white"
+    | "toggle-active"
+    | "toggle-inactive"
+    | "fixed";
+  type?: "button" | "submit";
   disabled?: boolean;
-  alertMessage: string;
-  alertColor: "error" | "info" | "success" | "warning";
   className?: string;
   onClick?: () => void;
+  // message関係
+  alertMessage: string;
+  alertColor?: "error" | "info" | "success" | "warning";
 }
 
 const ToastButton = ({
   children,
-  alertMessage,
-  alertColor,
+  href,
   color = "primary",
-  custom = false,
+  type = "button",
   disabled = false,
-  className = "",
+  className = "rounded px-4 py-2 w-full", // defaultのsize
   onClick,
+  // message関係
+  alertMessage,
+  alertColor = "success",
 }: ToastButtonProps) => {
   const [open, setOpen] = useState(false);
 
@@ -51,11 +63,12 @@ const ToastButton = ({
   return (
     <>
       <Button
-        onClick={handleClick}
+        href={href}
         color={color}
+        type={type}
         disabled={disabled}
-        custom={custom}
         className={className}
+        onClick={handleClick}
       >
         {children}
       </Button>

@@ -5,7 +5,7 @@ import type { ReadUser } from "../../type";
 import { isUUID } from "@/src/utils/uuid-check";
 import { notFound } from "next/navigation";
 
-export const readUser = async (userId: string): Promise<ReadUser | null> => {
+export const readUser = async (userId: string): Promise<ReadUser> => {
   if (!isUUID(userId)) {
     notFound();
   }
@@ -16,5 +16,9 @@ export const readUser = async (userId: string): Promise<ReadUser | null> => {
     .where("id", "=", userId)
     .executeTakeFirst();
 
-  return user || null;
+  if (!user) {
+    throw new Error("ユーザーが見つかりません");
+  }
+
+  return user;
 };

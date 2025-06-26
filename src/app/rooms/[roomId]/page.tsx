@@ -20,10 +20,6 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
   const scores = await readScores(roomId);
   const chips = await readChips(roomId);
 
-  if (!roomDetail) {
-    throw new Error("ルームが見つかりません");
-  }
-
   return (
     <>
       <Header

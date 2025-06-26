@@ -28,14 +28,14 @@ const DeleteScoreDialog = ({
   const handleReset = () => window.location.reload();
 
   const ResetButton = () => (
-    <Button
-      type="button"
-      onClick={handleReset}
-      color="setting-on"
-      custom={true}
-      className="rounded px-4 w-full"
-    >
+    <Button color="toggle-active" onClick={handleReset}>
       やり直し
+    </Button>
+  );
+
+  const CancelButton = () => (
+    <Button color="cancel" onClick={handleClose}>
+      キャンセル
     </Button>
   );
 
@@ -44,11 +44,9 @@ const DeleteScoreDialog = ({
       <input type="hidden" name="roomId" value={roomId} />
       <input type="hidden" name="gameCount" value={gameCount} />
       <ToastButton
-        alertMessage="削除しました"
-        alertColor="success"
         color="danger"
-        custom={true}
-        className="rounded px-4 py-2 w-full"
+        type="submit"
+        alertMessage="削除しました"
         onClick={() => {
           // 削除後ダイアログがCloseしない時があるので強制的に閉じる
           setTimeout(() => setOpen(false), 700);
@@ -57,18 +55,6 @@ const DeleteScoreDialog = ({
         削除する
       </ToastButton>
     </Form>
-  );
-
-  const CancelButton = () => (
-    <Button
-      type="button"
-      onClick={handleClose}
-      color="cancel"
-      custom={true}
-      className="rounded px-4 py-1 w-full "
-    >
-      キャンセル
-    </Button>
   );
 
   return (

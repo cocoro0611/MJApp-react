@@ -1,7 +1,7 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import RoomCard from "@/src/template/Rooms/RoomCard";
-import ButtonFixed from "@/src/components/ui/ButtonFixed";
+import Button from "@/src/components/ui/Button";
 import { readRooms } from "@/src/lib/models/rooms";
 import { readDefaultUsers } from "@/src/lib/models/users";
 
@@ -12,7 +12,7 @@ const RoomsPage = async () => {
     <>
       <Header title="ルーム一覧" isBackIcon={false} />
       <Main>
-        <div className="center flex-col space-y-4">
+        <div className="space-y-4">
           {rooms.map((room) => (
             <RoomCard
               key={room.id}
@@ -22,7 +22,11 @@ const RoomsPage = async () => {
             />
           ))}
         </div>
-        <ButtonFixed href="/rooms/new" disabled={defaultUsers.length < 4} />
+        <Button
+          href="/rooms/new"
+          color="fixed"
+          disabled={defaultUsers.length < 4}
+        />
       </Main>
     </>
   );

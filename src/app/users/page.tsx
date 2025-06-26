@@ -1,6 +1,6 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
-import ButtonFixed from "@/src/components/ui/ButtonFixed";
+import Button from "@/src/components/ui/Button";
 import { UserCard } from "@/src/template/Users";
 import { readUsers } from "@/src/lib/models/users";
 
@@ -21,7 +21,7 @@ const UsersPage = async () => {
             />
           ))}
         </div>
-        <ButtonFixed href="/users/new" />
+        <Button href="/users/new" color="fixed" />
       </Main>
     </>
   );

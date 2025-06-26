@@ -60,7 +60,7 @@ const ButtonCount = ({
       onClick={handleClick}
       className={`
         effect-scale p-0.5 rounded text-[0.7rem]
-        ${currentCount === 0 ? "setting-off" : "setting-on"}
+        ${currentCount === 0 ? "toggle-inactive" : "toggle-active"}
         ${size === "md" ? "h-12 w-12" : "h-12 w-18"}
       `}
     >

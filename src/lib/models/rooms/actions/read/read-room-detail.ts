@@ -8,7 +8,7 @@ import { notFound } from "next/navigation";
 
 export const readRoomDetail = async (
   roomId: string
-): Promise<ReadRoomDetail | null> => {
+): Promise<ReadRoomDetail> => {
   if (!isUUID(roomId)) {
     notFound();
   }
@@ -29,7 +29,7 @@ export const readRoomDetail = async (
     .executeTakeFirst();
 
   if (!room) {
-    return null;
+    throw new Error("ルームが見つかりません");
   }
 
   const roomUsers = await db

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
-import Button from "@/src/components/ui/Button";
+import ConcealedToggle from "@/src/template/calculation/ConcealedToggle";
 import CalculationBoard from "@/src/template/calculation/calculationBoard";
 import HanConcealedList from "@/src/template/calculation/hanConcealedList";
 import HanOpenList from "@/src/template/calculation/hanOpenList";
@@ -25,42 +25,22 @@ const HanCalculationPage = () => {
 
   return (
     <>
+      {/* 一旦強引にヘッダーの上に置いている */}
+      <ConcealedToggle
+        isConcealed={isConcealed}
+        setIsConcealed={setIsConcealed}
+      />
       <Header
         title="　"
         href="/calculation"
-        addContent={
-          <>
-            <div
-              className="fixed -mt-[2.3rem] setting-on rounded p-0.5
-              xl:ml-[19rem] lg:ml-[11rem] md:ml-[8rem] sm:ml-[9rem] ml-[4rem]"
-            >
-              <Button
-                onClick={() => setIsConcealed(true)}
-                custom={true}
-                className={`rounded-l px-4 font-bold
-              ${isConcealed ? "setting-on" : "setting-off"}
-            `}
-              >
-                門前
-              </Button>
-              <Button
-                onClick={() => setIsConcealed(false)}
-                custom={true}
-                className={`rounded-r px-4 font-bold
-              ${isConcealed ? "setting-off" : "setting-on"}
-            `}
-              >
-                鳴き
-              </Button>
-            </div>
-            <CalculationBoard
-              totalHan={currentState.totalHan}
-              totalFu={currentState.totalFu}
-              tokuten={tokuten}
-            />
-          </>
-        }
         bottomSpace="pb-40"
+        addContent={
+          <CalculationBoard
+            totalHan={currentState.totalHan}
+            totalFu={currentState.totalFu}
+            tokuten={tokuten}
+          />
+        }
       >
         <button
           type="button"

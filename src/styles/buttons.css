@@ -21,13 +21,20 @@
     @apply bg-white hover:bg-gray-100 active:bg-gray-200 shadow-xl;
     @apply text-gray-800;
   }
-  .setting-on {
+  .toggle-active {
     @apply bg-primary-500 hover:bg-primary-600 active:bg-primary-700;
     @apply text-white;
   }
-  .setting-off {
+  .toggle-inactive {
     @apply bg-white hover:bg-primary-50 active:bg-primary-100;
     @apply border border-primary-500;
     @apply text-primary-500;
+  }
+  /* Fixed Button */
+  .fixed {
+    @apply bg-primary-800 hover:bg-primary-900 active:bg-primary-950 shadow;
+    @apply text-white;
+    @apply px-5 py-3 text-3xl rounded-xl fixed z-10;
+    @apply bottom-[10vh] right-[4vh] md:right-[8vh] lg:right-[12vh] xl:right-[16vh];
   }
 }

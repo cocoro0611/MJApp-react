@@ -66,7 +66,7 @@ const OrderEditForm = ({
             />
             <div className="grid grid-cols-10">
               <div className="col-span-1 center">
-                <div className="center w-8 h-8 setting-on rounded-lg">
+                <div className="center w-8 h-8 toggle-active rounded-lg">
                   {index + 1}
                 </div>
               </div>
@@ -84,22 +84,18 @@ const OrderEditForm = ({
               </div>
               <div className="col-span-4 center gap-2">
                 <Button
-                  type="button"
-                  onClick={() => moveUp(index)}
-                  disabled={index === 0}
                   color="white"
-                  custom={true}
+                  disabled={index === 0}
                   className="w-12 h-12 rounded"
+                  onClick={() => moveUp(index)}
                 >
                   ↑
                 </Button>
                 <Button
-                  type="button"
-                  onClick={() => moveDown(index)}
-                  disabled={index === orderedScores.length - 1}
                   color="white"
-                  custom={true}
+                  disabled={index === orderedScores.length - 1}
                   className="w-12 h-12 rounded"
+                  onClick={() => moveDown(index)}
                 >
                   ↓
                 </Button>
@@ -110,22 +106,10 @@ const OrderEditForm = ({
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <Button
-          type="button"
-          onClick={() => window.history.back()}
-          color="cancel"
-          custom={true}
-          className="rounded px-4 py-2 w-full"
-        >
+        <Button color="cancel" onClick={() => window.history.back()}>
           キャンセル
         </Button>
-        <Button
-          type="submit"
-          custom={true}
-          className="rounded px-4 py-2 w-full"
-        >
-          順位を確定
-        </Button>
+        <Button type="submit">順位を確定</Button>
       </div>
     </Form>
   );

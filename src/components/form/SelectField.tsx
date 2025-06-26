@@ -36,11 +36,11 @@ const SelectField = ({
           {options.map((option) => (
             <Button
               key={option.value}
-              type="button"
               color={
-                selectedValue === option.value ? "setting-on" : "setting-off"
+                selectedValue === option.value
+                  ? "toggle-active"
+                  : "toggle-inactive"
               }
-              custom={true}
               className="p-1 rounded-2xl w-30"
               onClick={() => setSelectedValue(option.value)}
             >
