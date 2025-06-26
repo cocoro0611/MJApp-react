@@ -22,12 +22,12 @@ const SelectField = ({
   defaultValue,
 }: SelectFieldProps) => {
   const [selectedValue, setSelectedValue] = useState<number | string>(
-    defaultValue,
+    defaultValue
   );
 
   return (
     <div className="w-full">
-      <label htmlFor={name} className="flex text-blue-800 font-bold">
+      <label htmlFor={name} className="flex primary-text font-bold">
         {label}
       </label>
       <input id={name} name={name} type="hidden" value={selectedValue} />

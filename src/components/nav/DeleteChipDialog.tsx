@@ -90,8 +90,8 @@ const DeleteChipDialog = ({
         ) : (
           <>
             <p>-チップ-</p>
-            <p className="text-red-500">あと</p>
-            <p className="text-red-500">{remaining}</p>
+            <p className="text-negative">あと</p>
+            <p className="text-negative">{remaining}</p>
           </>
         )}
       </Card>

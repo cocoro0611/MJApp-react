@@ -23,11 +23,11 @@ const Header = ({
     <>
       <header className="fixed-container top-0 z-30 primary-color">
         <div className="center">
-          <Link href={href} className="w-1/12 py-2">
+          <Link href={href} className="w-1/6 md:w-1/12 py-2">
             {isBackIcon && <ArrowBackIosIcon />}
           </Link>
-          <div className="w-5/6 py-2 font-bold text-lg">{title}</div>
-          <div className="w-1/12 py-2">{children}</div>
+          <div className="w-4/6 md:w-10/12 py-2 font-bold text-lg">{title}</div>
+          <div className="w-1/6 md:w-1/12 py-2">{children}</div>
         </div>
         <div>{addContent}</div>
       </header>

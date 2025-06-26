@@ -87,8 +87,8 @@ const DeleteScoreDialog = ({
         ) : (
           <>
             <p>-点数-</p>
-            <p className="text-red-500">あと</p>
-            <p className="text-red-500">{remaining}</p>
+            <p className="text-negative">あと</p>
+            <p className="text-negative">{remaining}</p>
           </>
         )}
       </Card>

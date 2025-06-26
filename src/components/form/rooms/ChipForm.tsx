@@ -71,7 +71,7 @@ const ChipForm = ({
                   <div className="center flex-col p-0.5 h-18">
                     <Card
                       isColor={!isSelected}
-                      className={`w-full p-1 ${isSelected ? "pulse-effect" : ""}`}
+                      className={`w-full p-1 ${isSelected ? "pulse-color pulse-effect" : ""}`}
                       onClick={() => onOpen(gameChip.gameCount, index, "chip")}
                     >
                       <p className="flex justify-start text-[0.6rem]">枚数</p>
@@ -90,7 +90,7 @@ const ChipForm = ({
                     </Card>
                     <div
                       className={`font-bold center w-full relative mt-0.5 ${
-                        isChipNegative ? "text-red-500" : "text-blue-500"
+                        isChipNegative ? "text-negative" : "text-positive"
                       }`}
                     >
                       {chipPoint}

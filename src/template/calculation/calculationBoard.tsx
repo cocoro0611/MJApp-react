@@ -14,7 +14,7 @@ const CalculationBoard = ({
 }: CalculationBoardProps) => {
   return (
     <div className="bg-white text-gray-800 font-bold text-sm center flex-col">
-      <div className="flex justify-betweenl w-full text-blue-500">
+      <div className="flex justify-betweenl w-full secondary-text">
         <div className="w-full">
           <div>{adjustFu(totalFu)} 符</div>
           <div className="text-xs">（{totalFu} 符）</div>

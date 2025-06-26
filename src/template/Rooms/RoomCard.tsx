@@ -30,7 +30,9 @@ const RoomCard = ({ href, name, users }: RoomCardProps) => {
             />
             <div>{user.name}</div>
             <div
-              className={user.totalScore < 0 ? "text-red-500" : "text-blue-500"}
+              className={
+                user.totalScore < 0 ? "text-negative" : "text-positive"
+              }
             >
               {user.totalScore}
             </div>

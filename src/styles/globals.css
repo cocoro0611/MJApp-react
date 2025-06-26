@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+  --color-positive: #2b80ff;
+  --color-negative: #ef4444;
+}
+
 @import "./base.css";
 @import "./colors.css";
 @import "./buttons.css";

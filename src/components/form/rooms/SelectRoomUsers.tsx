@@ -16,7 +16,7 @@ const SelectRoomUsers = ({ users }: SelectRoomUsersProps) => {
 
   return (
     <div className="w-full">
-      <label className="center text-blue-800 font-bold">
+      <label className="center primary-text font-bold">
         {MAX_ROOM_PLAYERS}人選択してください ({selectedUsers.length}/
         {MAX_ROOM_PLAYERS})
       </label>

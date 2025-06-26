@@ -22,7 +22,7 @@ const AmountBoard = ({ amount }: AmountBoardProps) => {
         </div>
         {Array.from({ length: 4 }, (_, index) => (
           <div key={index} className="grid-5-inner">
-            <div className="font-bold text-red-500 h-8 center relative">
+            <div className="font-bold text-negative h-8 center relative">
               -{pointPerPlayer}
               <span className="absolute right-0.5">P</span>
             </div>

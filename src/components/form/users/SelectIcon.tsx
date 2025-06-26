@@ -18,7 +18,7 @@ const SelectIcon = ({ name, value }: SelectIconProps) => {
 
   return (
     <div className="w-full">
-      <label className={`flex text-blue-800 font-bold `}>アイコン</label>
+      <label className={`flex primary-text font-bold `}>アイコン</label>
       <input type="hidden" name="icon" value={selectedIcon} />
       <div className="center py-4">
         <UserCard name={name} icon={selectedIcon} size="lg" />
