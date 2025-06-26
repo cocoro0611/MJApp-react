@@ -24,13 +24,6 @@ const ButtonCount = ({
 }: ButtonCountProps) => {
   const [internalCount, setInternalCount] = useState<number>(0);
 
-  // 外部からexternalCountが渡された場合、内部状態を同期
-  // useEffect(() => {
-  //   if (externalCount !== undefined) {
-  //     setInternalCount(externalCount);
-  //   }
-  // }, [externalCount]);
-
   // 親コンポーネントのbuttonCountsと子コンポーネントのnternalCountを連携
   const currentCount =
     externalCount !== undefined ? externalCount : internalCount;
