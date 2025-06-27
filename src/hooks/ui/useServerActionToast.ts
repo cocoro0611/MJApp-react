@@ -30,11 +30,18 @@ export const useServerActionToast = (action: ServerAction) => {
     });
   };
 
+  const resetToast = () => {
+    setToastMessage("");
+    setToastColor("success");
+    setRedirect("");
+  };
+
   return {
     isPending,
     toastMessage,
     toastColor,
     redirect,
     handleSubmit,
+    resetToast,
   };
 };

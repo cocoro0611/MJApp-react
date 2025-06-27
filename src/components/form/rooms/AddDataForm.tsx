@@ -15,12 +15,18 @@ interface AddDataFormProps {
 
 const AddDataForm = ({ roomId }: AddDataFormProps) => {
   const { isOpen, openDialog, closeDialog } = useDialog();
-  const { isPending, toastMessage, toastColor, redirect, handleSubmit } =
-    useServerActionToast(createScore);
+  const scoreAction = useServerActionToast(createScore);
+  const chipAction = useServerActionToast(createChip);
+
+  const handleOpenDialog = () => {
+    scoreAction.resetToast?.();
+    chipAction.resetToast?.();
+    openDialog();
+  };
 
   return (
     <>
-      <ButtonFixed onClick={openDialog} />
+      <ButtonFixed onClick={handleOpenDialog} />
 
       <Dialog
         open={isOpen}
@@ -29,26 +35,28 @@ const AddDataForm = ({ roomId }: AddDataFormProps) => {
         message="どちらの情報を追加しますか？"
       >
         <div className="grid grid-cols-2 gap-4 mb-4">
-          <Form action={handleSubmit}>
+          <Form action={scoreAction.handleSubmit}>
             <input type="hidden" name="roomId" value={roomId} />
             <ToastButton
-              toastMessage={toastMessage}
-              toastColor={toastColor}
-              redirect={redirect}
+              toastMessage={scoreAction.toastMessage}
+              toastColor={scoreAction.toastColor}
+              redirect={scoreAction.redirect}
+              onToastClose={closeDialog}
             >
-              {isPending ? "処理中..." : "スコア"}
+              {scoreAction.isPending ? "処理中..." : "スコア"}
             </ToastButton>
           </Form>
-          {/* <Form action={handleChipSubmit}>
+          <Form action={chipAction.handleSubmit}>
             <input type="hidden" name="roomId" value={roomId} />
             <ToastButton
               toastMessage={chipAction.toastMessage}
               toastColor={chipAction.toastColor}
               redirect={chipAction.redirect}
+              onToastClose={closeDialog}
             >
-              チップ
+              {chipAction.isPending ? "処理中..." : "チップ"}
             </ToastButton>
-          </Form> */}
+          </Form>
         </div>
         <Button color="cancel" onClick={closeDialog}>
           キャンセル

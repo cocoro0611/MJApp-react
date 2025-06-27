@@ -2,8 +2,6 @@
 
 import { db } from "../../../db";
 import type { CreateScore } from "../../type";
-import { redirect } from "next/navigation";
-import { TOAST_TIME } from "@/src/constants/toastTime";
 
 export const createScore = async (data: FormData) => {
   const roomId = String(data.get("roomId"));
@@ -34,7 +32,6 @@ export const createScore = async (data: FormData) => {
 
     await db.insertInto("Score").values(scores).execute();
 
-    redirect(`/rooms/${roomId}`);
     return {
       success: true,
       message: "スコアが作成されました",

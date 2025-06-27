@@ -35,7 +35,6 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
       <Main isBlank={false}>
         <AmountBoard amount={roomDetail.gameAmount} />
         <DataForm scores={scores} chips={chips} roomDetail={roomDetail} />
-        {/* FIXME: なぜかトーストとリロードができない */}
         <AddDataForm roomId={roomId} />
       </Main>
     </>

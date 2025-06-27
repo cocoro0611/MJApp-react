@@ -13,9 +13,10 @@ interface ToastButtonProps {
   disabled?: boolean;
   className?: string;
   // toast関係
-  toastMessage?: string;
-  toastColor?: "error" | "info" | "success" | "warning";
-  redirect?: string;
+  toastMessage: string;
+  toastColor: "error" | "info" | "success" | "warning";
+  redirect: string;
+  onToastClose?: () => void;
 }
 
 const ToastButton = ({
@@ -27,6 +28,7 @@ const ToastButton = ({
   toastMessage,
   toastColor = "success",
   redirect,
+  onToastClose,
 }: ToastButtonProps) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -46,6 +48,10 @@ const ToastButton = ({
       return;
     }
     setOpen(false);
+
+    if (onToastClose) {
+      onToastClose();
+    }
 
     if (redirect) {
       router.push(redirect);
