@@ -1,5 +1,5 @@
 import Card from "@/src/components/ui/Card";
-import { UserCard } from "../Users";
+import UserCard from "../users/UserCard";
 import { ReadRoomDetailUser } from "@/src/lib/models/rooms/type";
 
 interface GameBoardProps {

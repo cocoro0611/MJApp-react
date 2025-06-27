@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { UserCard } from "@/src/template/Users";
+import UserCard from "../UserCard";
 import { useState } from "react";
 import { USER_LIST } from "@/src/constants/iconList";
 

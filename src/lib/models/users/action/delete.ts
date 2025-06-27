@@ -1,14 +1,22 @@
 "use server";
 
 import { db } from "../../db";
-import { redirect } from "next/navigation";
-import { TOAST_TIME } from "@/src/constants/toastTime";
 
 export const deleteUser = async (data: FormData) => {
-  const userId = data.get("id") as string;
-  await db.deleteFrom("User").where("id", "=", userId).execute();
+  try {
+    const userId = data.get("id") as string;
+    await db.deleteFrom("User").where("id", "=", userId).execute();
 
-  // Toastの都合上遅延を設定
-  await new Promise((resolve) => setTimeout(resolve, TOAST_TIME));
-  redirect("/users");
+    return {
+      success: true,
+      message: "ユーザーが削除されました",
+      redirect: "/users",
+    };
+  } catch (_error) {
+    return {
+      success: false,
+      message: "ユーザーの削除に失敗しました",
+      redirect: "/users",
+    };
+  }
 };

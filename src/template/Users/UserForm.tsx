@@ -2,13 +2,15 @@
 
 import Form from "next/form";
 import InputField from "@/src/components/form/InputField";
-import SelectIcon from "@/src/components/form/users/SelectIcon";
+import SelectIcon from "./utils/SelectIcon";
 import ToastButton from "@/src/components/nav/ToastButton";
+import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import { useState } from "react";
 import type { ReadUser } from "@/src/lib/models/users/type";
+import type { ServerAction } from "@/src/hooks/ui/useServerActionToast";
 
 interface UserFormProps {
-  action: (formData: FormData) => void;
+  action: ServerAction;
   btnText: string;
   user?: ReadUser;
   roomId?: string;
@@ -18,8 +20,11 @@ const UserForm = ({ action, btnText, user, roomId }: UserFormProps) => {
   const [name, setName] = useState(user?.name ?? "");
   const icon = user?.icon ?? "";
 
+  const { isPending, toastMessage, toastColor, redirect, handleSubmit } =
+    useServerActionToast(action);
+
   return (
-    <Form action={action} className="space-y-8">
+    <Form action={handleSubmit} className="space-y-8">
       <input type="hidden" name="roomId" value={roomId} />
       <input type="hidden" name="userId" value={user?.id} />
       <InputField
@@ -33,11 +38,12 @@ const UserForm = ({ action, btnText, user, roomId }: UserFormProps) => {
       />
       <SelectIcon name={name} value={icon} />
       <ToastButton
-        type="submit"
         disabled={name.length === 0}
-        alertMessage={`${btnText}しました`}
+        toastMessage={toastMessage}
+        toastColor={toastColor}
+        redirect={redirect}
       >
-        {btnText}
+        {isPending ? `${btnText}中...` : btnText}
       </ToastButton>
     </Form>
   );

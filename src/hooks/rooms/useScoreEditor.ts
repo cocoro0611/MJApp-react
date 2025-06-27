@@ -7,8 +7,8 @@ import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
 export const useScoreEditor = (scores: ReadScore[], initialPoint: number) => {
   const [scoreEdits, setScoreEdits] = useState<{ [key: string]: number }>({});
 
-  // スコア更新
-  const updateScore = (
+  // スコア編集
+  const editScore = (
     gameCount: number,
     playerIndex: number,
     newScore: number
@@ -54,5 +54,5 @@ export const useScoreEditor = (scores: ReadScore[], initialPoint: number) => {
     return getGameTotal(gameCount) === TOTAL_SCORE;
   };
 
-  return { updateScore, getScore, getRemainingScore, isCompleteScore };
+  return { editScore, getScore, getRemainingScore, isCompleteScore };
 };

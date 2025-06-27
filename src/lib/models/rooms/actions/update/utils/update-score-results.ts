@@ -1,7 +1,7 @@
 "use server";
 
 import type { Transaction } from "kysely";
-import type { DB } from "../../../types";
+import type { DB } from "../../../../types";
 import { calculateBonusPoints } from "@/src/utils/score-result";
 
 interface UpdateScoreResultOptions {

@@ -1,23 +1,27 @@
 "use client";
 
-import Button from "@/src/components/ui/Button";
 import Form from "next/form";
-import { UserCard } from "@/src/template/Users";
-import useUserSelect from "@/src/hooks/user-data/useUserSelect";
-import type { ReadUser } from "@/src/lib/models/users/type";
+import ToastButton from "@/src/components/nav/ToastButton";
+import UserCard from "../users/UserCard";
+import { useUserSelect } from "@/src/hooks/user-data/useUserSelect";
+import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
+import type { ReadUser } from "@/src/lib/models/users/type";
+import type { ServerAction } from "@/src/hooks/ui/useServerActionToast";
 
 interface SelectRoomUsersFormProps {
-  action: (formData: FormData) => void;
+  action: ServerAction;
   users: ReadUser[];
 }
 
 const SelectRoomUsersForm = ({ action, users }: SelectRoomUsersFormProps) => {
   const { selectedUsers, toggleUser, isUserSelected, isReady } =
     useUserSelect(users);
+  const { isPending, toastMessage, toastColor, redirect, handleSubmit } =
+    useServerActionToast(action);
 
   return (
-    <Form action={action} className="center flex-col space-y-6">
+    <Form action={handleSubmit} className="center flex-col space-y-6">
       <label className=" text-primary-800 font-bold">
         {MAX_ROOM_PLAYERS}人選択してください ({selectedUsers.length}/
         {MAX_ROOM_PLAYERS})
@@ -38,9 +42,14 @@ const SelectRoomUsersForm = ({ action, users }: SelectRoomUsersFormProps) => {
           </div>
         ))}
       </div>
-      <Button type="submit" disabled={!isReady()}>
-        選択
-      </Button>
+      <ToastButton
+        disabled={!isReady()}
+        toastMessage={toastMessage}
+        toastColor={toastColor}
+        redirect={redirect}
+      >
+        {isPending ? "選択中..." : "選択"}
+      </ToastButton>
     </Form>
   );
 };

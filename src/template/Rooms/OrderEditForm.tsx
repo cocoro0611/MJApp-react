@@ -1,12 +1,14 @@
 "use client";
 
-import Button from "@/src/components/ui/Button";
-import Card from "@/src/components/ui/Card";
-import Image from "next/image";
 import Form from "next/form";
+import Image from "next/image";
+import Card from "@/src/components/ui/Card";
+import Button from "@/src/components/ui/Button";
+import ToastButton from "@/src/components/nav/ToastButton";
+import { useOrderEdit } from "@/src/hooks/rooms/useOrderEdit";
+import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import { updateScoreOrder } from "@/src/lib/models/rooms";
 import type { TiedScore } from "@/src/lib/models/rooms/actions/read/read-tied-scores";
-import { useState } from "react";
 
 interface OrderEditFormProps {
   roomId: string;
@@ -19,32 +21,12 @@ const OrderEditForm = ({
   gameCount,
   tiedScores,
 }: OrderEditFormProps) => {
-  const [orderedScores, setOrderedScores] = useState(tiedScores);
-
-  // ドラッグ&ドロップで順位変更
-  const movePlayer = (fromIndex: number, toIndex: number) => {
-    const newOrder = [...orderedScores];
-    const [movedItem] = newOrder.splice(fromIndex, 1);
-    newOrder.splice(toIndex, 0, movedItem);
-    setOrderedScores(newOrder);
-  };
-
-  // 上に移動
-  const moveUp = (index: number) => {
-    if (index > 0) {
-      movePlayer(index, index - 1);
-    }
-  };
-
-  // 下に移動
-  const moveDown = (index: number) => {
-    if (index < orderedScores.length - 1) {
-      movePlayer(index, index + 1);
-    }
-  };
+  const { orderedScores, moveUp, moveDown } = useOrderEdit(tiedScores);
+  const { isPending, toastMessage, toastColor, redirect, handleSubmit } =
+    useServerActionToast(updateScoreOrder);
 
   return (
-    <Form action={updateScoreOrder}>
+    <Form action={handleSubmit}>
       <input type="hidden" name="roomId" value={roomId} />
       <input type="hidden" name="gameCount" value={gameCount} />
 
@@ -109,7 +91,13 @@ const OrderEditForm = ({
         <Button color="cancel" onClick={() => window.history.back()}>
           キャンセル
         </Button>
-        <Button type="submit">順位を確定</Button>
+        <ToastButton
+          toastMessage={toastMessage}
+          toastColor={toastColor}
+          redirect={redirect}
+        >
+          {isPending ? "処理中..." : "順位を確定"}
+        </ToastButton>
       </div>
     </Form>
   );

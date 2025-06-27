@@ -3,8 +3,8 @@
 import Form from "next/form";
 import InputField from "@/src/components/form/InputField";
 import SelectField from "@/src/components/form/SelectField";
-import DefaultRoomUsers from "@/src/components/form/rooms/DefaultRoomUsers";
 import ToastButton from "@/src/components/nav/ToastButton";
+import DefaultRoomUsers from "./utils/DefaultRoomUsers";
 import {
   INITIAL_POINT_OPTIONS,
   RETURN_POINT_OPTIONS,
@@ -14,11 +14,13 @@ import {
   DEFAULT_GAME_RULES,
 } from "@/src/constants/gameRules";
 import { useState } from "react";
+import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import type { ReadRoomDetail } from "@/src/lib/models/rooms/type";
 import type { ReadUser } from "@/src/lib/models/users/type";
+import type { ServerAction } from "@/src/hooks/ui/useServerActionToast";
 
 interface RoomFormProps {
-  action: (formData: FormData) => void;
+  action: ServerAction;
   btnText: string;
   room?: ReadRoomDetail;
   roomUsers?: ReadUser[];
@@ -35,8 +37,11 @@ const RoomForm = ({ action, btnText, room, roomUsers }: RoomFormProps) => {
   const chipRate = room?.chipRate ?? DEFAULT_GAME_RULES.chipRate;
   const [amount, setAmount] = useState(room?.gameAmount ?? "");
 
+  const { isPending, toastMessage, toastColor, redirect, handleSubmit } =
+    useServerActionToast(action);
+
   return (
-    <Form action={action} className="space-y-8">
+    <Form action={handleSubmit} className="space-y-8">
       <input type="hidden" name="roomId" value={room?.id} />
       <InputField
         label="部屋名"
@@ -88,12 +93,11 @@ const RoomForm = ({ action, btnText, room, roomUsers }: RoomFormProps) => {
         onChange={(value) => setAmount(value)}
       />
       <ToastButton
-        type="submit"
-        alertMessage={`${btnText}しました`}
-        alertColor="success"
-        className="w-full rounded px-4 py-2"
+        toastMessage={toastMessage}
+        toastColor={toastColor}
+        redirect={redirect}
       >
-        {btnText}
+        {isPending ? `${btnText}中...` : btnText}
       </ToastButton>
     </Form>
   );

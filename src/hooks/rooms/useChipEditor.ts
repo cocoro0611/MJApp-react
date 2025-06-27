@@ -7,8 +7,8 @@ import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
 export const useChipEditor = (chips: ReadChip[]) => {
   const [chipEdits, setChipEdits] = useState<{ [key: string]: number }>({});
 
-  // チップ更新
-  const updateChip = (
+  // チップ編集
+  const editChip = (
     gameCount: number,
     playerIndex: number,
     newChip: number
@@ -54,5 +54,5 @@ export const useChipEditor = (chips: ReadChip[]) => {
     return getGameTotal(gameCount) === TOTAL_CHIP;
   };
 
-  return { updateChip, getChip, getRemainingChip, isCompleteChip };
+  return { editChip, getChip, getRemainingChip, isCompleteChip };
 };
