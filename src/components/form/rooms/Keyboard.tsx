@@ -1,29 +1,24 @@
 "use client";
 
 import Button from "@/src/components/ui/Button";
+import { ReactNode, useEffect } from "react";
 import { useKeyboard } from "@/src/hooks/rooms/useKeyboard";
-import { useEffect } from "react";
-import type { SelectState } from "@/src/hooks/rooms/useSelection";
 
 interface KeyboardProps {
-  selected?: SelectState | null;
-  onClose?: () => void;
+  children: ReactNode;
+  value?: number;
   onMoveLeft?: () => void;
   onMoveRight?: () => void;
-  value?: number;
   onValueChange?: (newValue: number) => void;
-  isComplete: boolean;
   maxLength: number;
 }
 
 const Keyboard = ({
-  selected,
-  onClose,
+  children,
+  value = 0,
   onMoveLeft,
   onMoveRight,
-  value = 0,
   onValueChange,
-  isComplete,
   maxLength,
 }: KeyboardProps) => {
   const { resetValue, addDigit, toggleSign, removeDigit } =
@@ -46,7 +41,7 @@ const Keyboard = ({
 
   useEffect(() => {
     resetValue(value);
-  }, [value, selected, resetValue]);
+  }, [value, resetValue]);
 
   return (
     <div className="fixed-container bottom-0 z-20">
@@ -67,28 +62,16 @@ const Keyboard = ({
             →
           </Button>
         </div>
-        <div className="flex gap-2 mr-2">
+        <div className="flex mr-2 gap-2">
           <Button
             color="white"
-            className="rounded-2xl w-15 py-1 border-2 border-gray-300"
+            className="rounded-2xl w-15 border-2 py-1 border-gray-300"
             onClick={toggleSign}
           >
             + / -
           </Button>
-          <Button
-            type="submit"
-            disabled={!isComplete}
-            className="rounded text-sm w-16 py-2"
-          >
-            計算
-          </Button>
-          <Button
-            color="cancel"
-            className="rounded text-sm w-16 py-1"
-            onClick={onClose}
-          >
-            閉じる
-          </Button>
+          {/* 計算ボタンと閉じるボタンは親で制御 */}
+          {children}
         </div>
       </div>
       <div className="grid grid-cols-3 gap-2 bg-gray-200 p-2 pb-10">

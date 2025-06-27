@@ -2,6 +2,6 @@ import GameBoard from "./GameBoard";
 import AmountBoard from "./AmountBoard";
 import RoomCard from "./RoomCard";
 import RoomForm from "./RoomForm";
-import DataForm from "./DataForm";
+import ScoreForm from "./ScoreForm";
 
-export { GameBoard, AmountBoard, RoomCard, RoomForm, DataForm };
+export { GameBoard, AmountBoard, RoomCard, RoomForm, ScoreForm };

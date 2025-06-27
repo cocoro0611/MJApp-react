@@ -2,7 +2,7 @@ import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import DeleteForm from "@/src/components/form/DeleteForm";
 import AddDataForm from "@/src/components/form/rooms/AddDataForm";
-import { GameBoard, AmountBoard, DataForm } from "@/src/template/Rooms";
+import { GameBoard, AmountBoard, ScoreForm } from "@/src/template/Rooms";
 import {
   readRoomDetail,
   readScores,
@@ -34,7 +34,11 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
       </Header>
       <Main isBlank={false}>
         <AmountBoard amount={roomDetail.gameAmount} />
-        <DataForm scores={scores} chips={chips} roomDetail={roomDetail} />
+        <ScoreForm
+          scores={scores}
+          roomId={roomId}
+          roomInitialPoint={roomDetail.initialPoint}
+        />
         <AddDataForm roomId={roomId} />
       </Main>
     </>
