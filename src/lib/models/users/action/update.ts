@@ -1,7 +1,7 @@
 "use server";
 
-import { db } from "../../../db";
-import type { UpdateUser } from "../../type";
+import { db } from "../../db";
+import type { UpdateUser } from "../type";
 
 export const updateUser = async (data: FormData) => {
   const roomId = String(data.get("roomId"));
