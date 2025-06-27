@@ -1,91 +1,75 @@
 "use client";
 
-import Button from "../ui/Button";
 import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { ReactNode, useState } from "react";
-import { TOAST_TIME } from "@/src/constants/toastTime";
+import { useRouter } from "next/navigation";
+import { ReactNode, useState, useEffect } from "react";
+
+const TOAST_TIME: number = 1000; //（ms)
 
 interface ToastButtonProps {
   children: ReactNode;
-  href?: string;
-  color?:
-    | "primary"
-    | "secondary"
-    | "danger"
-    | "cancel"
-    | "white"
-    | "toggle-active"
-    | "toggle-inactive";
-  type?: "button" | "submit";
+  color?: "primary" | "secondary" | "danger" | "cancel" | "white";
   disabled?: boolean;
   className?: string;
-  onClick?: () => void;
-  // message関係
-  alertMessage: string;
-  alertColor?: "error" | "info" | "success" | "warning";
+  // toast関係
+  toastMessage?: string;
+  toastColor?: "error" | "info" | "success" | "warning";
+  redirect?: string;
 }
 
 const ToastButton = ({
   children,
-  href,
   color = "primary",
-  type = "button",
   disabled = false,
   className = "rounded px-4 py-2 w-full", // defaultのsize
-  onClick,
-  // message関係
-  alertMessage,
-  alertColor = "success",
+  // toast関係
+  toastMessage,
+  toastColor = "success",
+  redirect,
 }: ToastButtonProps) => {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
-  const handleClick = () => {
-    setOpen(true);
-    // 外部から渡されたonClickがあれば実行
-    if (onClick) {
-      onClick();
+  useEffect(() => {
+    if (toastMessage) {
+      setOpen(true);
     }
-  };
+  }, [toastMessage]);
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: SnackbarCloseReason
   ) => {
+    // Toast以外の場所をクリックした時は閉じない
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
+
+    if (redirect) {
+      router.push(redirect);
+    }
   };
 
+  const btnClass = `effect-scale ${color} ${className} ${disabled ? "effect-disabled" : ""} `;
   return (
     <>
-      <Button
-        href={href}
-        color={color}
-        type={type}
-        disabled={disabled}
-        className={className}
-        onClick={handleClick}
-      >
+      <button type="submit" disabled={disabled} className={btnClass}>
         {children}
-      </Button>
-      <Snackbar
-        open={open}
-        autoHideDuration={TOAST_TIME}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      >
-        <Alert
+      </button>
+      {toastMessage && (
+        <Snackbar
+          open={open}
+          autoHideDuration={TOAST_TIME}
           onClose={handleClose}
-          severity={alertColor}
-          variant="filled"
-          className="z-20"
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
-          {alertMessage}
-        </Alert>
-      </Snackbar>
+          <Alert severity={toastColor} variant="filled" className="z-20">
+            {toastMessage}
+          </Alert>
+        </Snackbar>
+      )}
     </>
   );
 };

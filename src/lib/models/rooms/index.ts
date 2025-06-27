@@ -9,6 +9,7 @@ import { readChips } from "./actions/read/read-chips";
 import { readTiedScores } from "./actions/read/read-tied-scores";
 
 import { updateRoom } from "./actions/update/update-room";
+import { updateDefaultUser } from "./actions/update/update-default-user";
 import { updateScore } from "./actions/update/update-score";
 import { updateChip } from "./actions/update/update-chip";
 import { updateScoreOrder } from "./actions/update/update-score-order";
@@ -19,5 +20,11 @@ import { deleteChip } from "./actions/delete/delete-chip";
 
 export { createRoom, createScore, createChip };
 export { readRooms, readRoomDetail, readScores, readChips, readTiedScores };
-export { updateRoom, updateScore, updateChip, updateScoreOrder };
+export {
+  updateRoom,
+  updateDefaultUser,
+  updateScore,
+  updateChip,
+  updateScoreOrder,
+};
 export { deleteRoom, deleteScore, deleteChip };
