@@ -1,5 +1,5 @@
-import DataCard from "@/src/template/Rooms/DataCard";
-import DeleteScoreDialog from "../../nav/DeleteScoreDialog";
+import ScoreCard from "@/src/template/Rooms/ScoreCard";
+import ScoreHeadCard from "@/src/template/Rooms/ScoreHeadCard";
 import { Fragment } from "react";
 import type { ReadScore } from "@/src/lib/models/rooms/type";
 import type { SelectState, SelectType } from "@/src/hooks/rooms/useSelection";
@@ -34,7 +34,7 @@ const ScoreBoard = ({
           <Fragment key={gameScore.gameCount}>
             <div className="grid-5-inner">
               <div className="center flex-col p-1 h-18">
-                <DeleteScoreDialog
+                <ScoreHeadCard
                   roomId={roomId}
                   gameCount={gameScore.gameCount}
                   complete={isComplete(gameScore.gameCount)}
@@ -47,10 +47,10 @@ const ScoreBoard = ({
               return (
                 <div className="grid-5-inner" key={index}>
                   <div className="center flex-col p-0.5 h-18">
-                    <DataCard
+                    <ScoreCard
                       gameCount={gameScore.gameCount}
                       index={index}
-                      data={score}
+                      score={score}
                       scoreResult={scoreItem.scoreResult}
                       selected={selected}
                       onOpen={onOpen}

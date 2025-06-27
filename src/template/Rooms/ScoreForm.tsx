@@ -41,6 +41,10 @@ const ScoreForm = ({ scores, roomId, roomInitialPoint }: ScoreFormProps) => {
     closeSelect();
   };
 
+  if (scores.length === 0) {
+    return null;
+  }
+
   return (
     <>
       <ScoreBoard

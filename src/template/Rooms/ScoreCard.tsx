@@ -1,32 +1,25 @@
 import Card from "@/src/components/ui/Card";
 import type { SelectState } from "@/src/hooks/rooms/useSelection";
 
-interface DataCardProps {
+interface ScoreCardProps {
   gameCount: number;
   index: number;
   selected?: SelectState | null;
-  data: number;
+  score: number;
   scoreResult: number;
   onOpen: (gameCount: number, index: number) => void;
 }
 
-const DataCard = ({
+const ScoreCard = ({
   gameCount,
   index,
-  data,
+  score,
   scoreResult,
   selected,
   onOpen,
-}: DataCardProps) => {
+}: ScoreCardProps) => {
   const isSelectedScore =
-    selected?.gameCount === gameCount &&
-    selected?.index === index &&
-    selected?.type === "score";
-
-  const isSelectedChip =
-    selected?.gameCount === gameCount &&
-    selected?.index === index &&
-    selected?.type === "chip";
+    selected?.gameCount === gameCount && selected?.index === index;
 
   return (
     <>
@@ -47,7 +40,7 @@ const DataCard = ({
               isSelectedScore ? "border-accent-500" : "border-primary-300"
             }`}
           >
-            {data}
+            {score}
           </span>
           <span>00</span>
         </div>
@@ -63,4 +56,4 @@ const DataCard = ({
   );
 };
 
-export default DataCard;
+export default ScoreCard;
