@@ -1,112 +1,105 @@
-// // FIXME
-// import Card from "@/src/components/ui/Card";
-// import DeleteChipDialog from "../../nav/DeleteChipDialog";
-// import { Fragment } from "react";
-// import type { ReadChip } from "@/src/lib/models/rooms/type";
-// import type { SelectState, SelectType } from "@/src/hooks/rooms/useSelection";
+"use client";
 
-// interface ChipFormProps {
-//   chips: ReadChip[];
-//   chipRate: number;
-//   roomId: string;
-//   // 状態管理
-//   selected?: SelectState | null;
-//   onOpen: (gameCount: number, index: number, type?: SelectType) => void;
-//   getChip: (gameCount: number, index: number) => number;
-//   getRemaining: (gameCount: number) => number;
-//   isComplete: (gameCount: number) => boolean;
-// }
+import Form from "next/form";
+import Button from "@/src/components/ui/Button";
+import ToastButton from "@/src/components/nav/ToastButton";
+import ChipBoard from "./utils/ChipBoard";
+import Keyboard from "./utils/Keyboard";
+import { useSelect } from "@/src/hooks/rooms/useSelection";
+import { useChipEditor } from "@/src/hooks/rooms/useChipEditor";
+import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
+import { updateChip } from "@/src/lib/models/rooms";
+import type { ReadChip } from "@/src/lib/models/rooms/type";
 
-// const ChipForm = ({
-//   chips,
-//   chipRate,
-//   roomId,
-//   selected,
-//   onOpen,
-//   getChip,
-//   getRemaining,
-//   isComplete,
-// }: ChipFormProps) => {
-//   const INITIAL_CHIP = 20;
+interface ChipFormProps {
+  chips: ReadChip[];
+  roomId: string;
+  roomChipRate: number;
+}
 
-//   if (!chips || chips.length === 0) {
-//     return null;
-//   }
+const ChipForm = ({ chips, roomId, roomChipRate }: ChipFormProps) => {
+  const { selected, openSelect, closeSelect, moveLeft, moveRight } =
+    useSelect();
+  const {
+    isPending,
+    toastMessage,
+    toastColor,
+    redirect,
+    resetToast,
+    handleSubmit,
+  } = useServerActionToast(updateChip);
+  const { editChip, getChip, getRemainingChip, isCompleteChip } =
+    useChipEditor(chips);
 
-//   return (
-//     <>
-//       <div className="bg-gray-300 text-gray-600 grid-5">
-//         <div className="center font-bold">各チップ</div>
-//       </div>
-//       <div className="grid-5">
-//         {chips.map((gameChip) => (
-//           <Fragment key={gameChip.gameCount}>
-//             <div className="grid-5-inner">
-//               <div className="center flex-col p-1 h-18">
-//                 <DeleteChipDialog
-//                   complete={isComplete(gameChip.gameCount)}
-//                   roomId={roomId}
-//                   gameCount={gameChip.gameCount}
-//                   remaining={getRemaining(gameChip.gameCount)}
-//                 />
-//               </div>
-//             </div>
+  const handleChipChange = (newChip: number) => {
+    if (!selected) return;
+    editChip(selected.gameCount, selected.index, newChip);
+  };
 
-//             {/* 各プレイヤーのチップ */}
-//             {gameChip.chips.map((chipItem, index) => {
-//               // カードの選択チェック
-//               const isSelected =
-//                 selected?.gameCount === gameChip.gameCount &&
-//                 selected?.index === index &&
-//                 selected?.type === "chip";
+  const handleToastClose = () => {
+    resetToast();
+    closeSelect();
+  };
 
-//               // チップを取得
-//               const chip = getChip(gameChip.gameCount, index);
+  if (chips.length === 0) {
+    return null;
+  }
 
-//               // チップポイントの計算
-//               const chipPoint = (chipItem.chip - INITIAL_CHIP) * chipRate;
-//               const isChipNegative = chipPoint < 0;
+  return (
+    <>
+      <ChipBoard
+        chips={chips}
+        roomId={roomId}
+        roomChipRate={roomChipRate}
+        selected={selected}
+        onOpen={openSelect}
+        getChip={getChip}
+        getRemaining={getRemainingChip}
+        isComplete={isCompleteChip}
+      />
+      {selected !== null && (
+        <Form action={handleSubmit}>
+          <input type="hidden" name="roomId" value={roomId} />
+          <input type="hidden" name="gameCount" value={selected?.gameCount} />
+          {selected &&
+            [0, 1, 2, 3].map((index) => (
+              <input
+                key={`player-${index}`}
+                type="hidden"
+                name={`chip-${index}`}
+                value={Math.round(getChip(selected.gameCount, index))}
+              />
+            ))}
+          <div className="h-47" /> {/* キーボードの高さ調整 */}
+          <Keyboard
+            onMoveLeft={moveLeft}
+            onMoveRight={moveRight}
+            value={getChip(selected.gameCount, selected.index)}
+            onValueChange={handleChipChange}
+            maxLength={2}
+          >
+            <ToastButton
+              disabled={!isCompleteChip(selected.gameCount)}
+              toastMessage={toastMessage}
+              toastColor={toastColor}
+              redirect={redirect}
+              onToastClose={handleToastClose}
+              className="rounded text-sm w-16"
+            >
+              {isPending ? "計算中..." : "計算"}
+            </ToastButton>
+            <Button
+              color="cancel"
+              className="rounded text-sm w-16"
+              onClick={closeSelect}
+            >
+              閉じる
+            </Button>
+          </Keyboard>
+        </Form>
+      )}
+    </>
+  );
+};
 
-//               return (
-//                 <div className="grid-5-inner" key={index}>
-//                   <div className="center flex-col p-0.5 h-18">
-//                     <Card
-//                       isColor={!isSelected}
-//                       className={`w-full p-1
-//                         ${isSelected ? "bg-accent-100 border-accent-400 text-accent-800 effect-pulse" : ""}`}
-//                       onClick={() => onOpen(gameChip.gameCount, index, "chip")}
-//                     >
-//                       <p className="flex justify-start text-[0.6rem]">枚数</p>
-//                       <p>
-//                         <span
-//                           className={`px-1 border-b-2 ${
-//                             isSelected
-//                               ? "border-accent-500"
-//                               : "border-primary-300"
-//                           }`}
-//                         >
-//                           {chip}
-//                         </span>
-//                         <span>枚</span>
-//                       </p>
-//                     </Card>
-//                     <div
-//                       className={`font-bold center w-full relative mt-0.5 ${
-//                         isChipNegative ? "text-negative" : "text-positive"
-//                       }`}
-//                     >
-//                       {chipPoint}
-//                       <span className="absolute right-0.5">P</span>
-//                     </div>
-//                   </div>
-//                 </div>
-//               );
-//             })}
-//           </Fragment>
-//         ))}
-//       </div>
-//     </>
-//   );
-// };
-
-// export default ChipForm;
+export default ChipForm;

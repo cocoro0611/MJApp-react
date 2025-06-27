@@ -5,6 +5,7 @@ import AddDataForm from "@/src/template/rooms/AddDataForm";
 import GameBoard from "@/src/template/rooms/GameBoard";
 import AmountBoard from "@/src/template/rooms/AmountBoard";
 import ScoreForm from "@/src/template/rooms/ScoreForm";
+import ChipForm from "@/src/template/rooms/ChipForm";
 import {
   readRoomDetail,
   readScores,
@@ -40,6 +41,11 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
           scores={scores}
           roomId={roomId}
           roomInitialPoint={roomDetail.initialPoint}
+        />
+        <ChipForm
+          chips={chips}
+          roomId={roomId}
+          roomChipRate={roomDetail.chipRate}
         />
         <AddDataForm roomId={roomId} />
       </Main>

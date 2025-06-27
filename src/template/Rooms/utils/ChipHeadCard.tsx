@@ -1,71 +1,75 @@
 "use client";
 
-import Dialog from "./Dialog";
-import Button from "../ui/Button";
-import Card from "@/src/components/ui/Card";
-import ToastButton from "@/src/components/nav/ToastButton";
 import Form from "next/form";
-import { useState } from "react";
+import Dialog from "../../../components/nav/Dialog";
+import Button from "../../../components/ui/Button";
+import ToastButton from "@/src/components/nav/ToastButton";
+import Card from "@/src/components/ui/Card";
+import { useDialog } from "@/src/hooks/ui/useDialog";
+import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import { deleteChip } from "@/src/lib/models/rooms";
 
-interface DeleteChipDialogProps {
-  complete: boolean;
+interface ChipHeadCardProps {
   roomId?: string;
   gameCount?: number;
   remaining?: number;
+  complete: boolean;
 }
 
-const DeleteChipDialog = ({
-  complete,
+const ChipHeadCard = ({
   roomId,
   gameCount,
   remaining,
-}: DeleteChipDialogProps) => {
-  const [open, setOpen] = useState(false);
+  complete,
+}: ChipHeadCardProps) => {
+  const { isOpen, openDialog, closeDialog } = useDialog();
+  const {
+    isPending,
+    toastMessage,
+    toastColor,
+    redirect,
+    resetToast,
+    handleSubmit,
+  } = useServerActionToast(deleteChip);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const handleReset = () => window.location.reload();
+  const handleOpenDialog = () => {
+    resetToast();
+    openDialog();
+  };
 
+  // completeでボタンの表示を変えたいので関数で定義
   const ResetButton = () => (
-    <Button
-      type="button"
-      onClick={handleReset}
-      color="toggle-active"
-      className="rounded px-4 w-full"
-    >
+    <Button color="toggle-active" onClick={() => window.location.reload()}>
       やり直し
     </Button>
   );
 
+  const CancelButton = () => (
+    <Button color="cancel" onClick={closeDialog}>
+      キャンセル
+    </Button>
+  );
+
   const DeleleButton = () => (
-    <Form action={deleteChip}>
+    <Form action={handleSubmit}>
       <input type="hidden" name="roomId" value={roomId} />
       <input type="hidden" name="gameCount" value={gameCount} />
       <ToastButton
         color="danger"
-        type="submit"
-        onClick={() => {
-          // 削除後ダイアログがCloseしない時があるので強制的に閉じる
-          setTimeout(() => setOpen(false), 700);
-        }}
-        alertMessage="削除しました"
+        toastMessage={toastMessage}
+        toastColor={toastColor}
+        redirect={redirect}
+        onToastClose={closeDialog}
       >
-        削除する
+        {isPending ? "削除中..." : "削除する"}
       </ToastButton>
     </Form>
-  );
-
-  const CancelButton = () => (
-    <Button color="cancel" onClick={handleClose}>
-      キャンセル
-    </Button>
   );
 
   return (
     <>
       <Card
-        onClick={handleOpen}
+        onClick={handleOpenDialog}
         isColor={complete}
         className={
           complete
@@ -88,8 +92,8 @@ const DeleteChipDialog = ({
       </Card>
 
       <Dialog
-        open={open}
-        close={handleClose}
+        open={isOpen}
+        close={closeDialog}
         title={complete ? "削除の確認" : "データの操作"}
         message={complete ? "本当に削除しますか？" : "この情報をどうしますか？"}
       >
@@ -112,4 +116,4 @@ const DeleteChipDialog = ({
   );
 };
 
-export default DeleteChipDialog;
+export default ChipHeadCard;

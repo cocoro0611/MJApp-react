@@ -1,61 +1,62 @@
 import Card from "@/src/components/ui/Card";
 import type { SelectState } from "@/src/hooks/rooms/useSelection";
 
-interface ScoreCardProps {
+interface ChipCardProps {
   gameCount: number;
   index: number;
   selected?: SelectState | null;
-  scoreResult: number;
+  roomChipRate: number;
   onOpen: (gameCount: number, index: number) => void;
-  getScore: (gameCount: number, index: number) => number;
+  getChip: (gameCount: number, index: number) => number;
 }
 
-const ScoreCard = ({
+const ChipCard = ({
   gameCount,
   index,
-  scoreResult,
   selected,
+  roomChipRate,
   onOpen,
-  getScore,
-}: ScoreCardProps) => {
-  const isSelectedScore =
+  getChip,
+}: ChipCardProps) => {
+  const isSelectedChip =
     selected?.gameCount === gameCount && selected?.index === index;
 
-  const score = getScore(gameCount, index);
-
+  const chip = getChip(gameCount, index);
+  const chipPoint = (chip - 20) * roomChipRate;
   return (
     <>
       <Card
-        isColor={!isSelectedScore}
+        isColor={!isSelectedChip}
         className={`w-full p-1 
             ${
-              isSelectedScore
+              isSelectedChip
                 ? "bg-accent-100 border-accent-400 text-accent-800 effect-pulse"
                 : ""
             }`}
         onClick={() => onOpen(gameCount, index)}
       >
-        <div className="flex text-[0.6rem]">点数</div>
+        <div className="flex text-[0.6rem]">枚数</div>
         <div>
           <span
             className={`px-1 border-b-2 ${
-              isSelectedScore ? "border-accent-500" : "border-primary-300"
+              isSelectedChip ? "border-accent-500" : "border-primary-300"
             }`}
           >
-            {score}
+            {chip}
           </span>
-          <span>00</span>
+          <span>枚</span>
         </div>
       </Card>
       <div
-        className={`font-bold center w-full mt-0.5 ${
-          scoreResult < 0 ? "text-negative" : "text-positive"
+        className={`font-bold center w-full relative mt-0.5 ${
+          chipPoint < 0 ? "text-negative" : "text-positive"
         }`}
       >
-        {scoreResult}
+        {chipPoint}
+        <span className="absolute right-0.5">P</span>
       </div>
     </>
   );
 };
 
-export default ScoreCard;
+export default ChipCard;

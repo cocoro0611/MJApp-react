@@ -1,58 +1,60 @@
-import ScoreCard from "./ScoreCard";
-import ScoreHeadCard from "./ScoreHeadCard";
+import ChipCard from "./ChipCard";
+import ChipHeadCard from "./ChipHeadCard";
 import { Fragment } from "react";
-import type { ReadScore } from "@/src/lib/models/rooms/type";
+import type { ReadChip } from "@/src/lib/models/rooms/type";
 import type { SelectState, SelectType } from "@/src/hooks/rooms/useSelection";
 
-interface ScoreBoardProps {
-  scores: ReadScore[];
+interface ChipBoardProps {
+  chips: ReadChip[];
   roomId: string;
+  roomChipRate: number;
   // 状態管理
   selected?: SelectState | null;
   onOpen: (gameCount: number, index: number, type?: SelectType) => void;
-  getScore: (gameCount: number, index: number) => number;
+  getChip: (gameCount: number, index: number) => number;
   getRemaining: (gameCount: number) => number;
   isComplete: (gameCount: number) => boolean;
 }
 
-const ScoreBoard = ({
-  scores,
+const ChipBoard = ({
+  chips,
   roomId,
+  roomChipRate,
   selected,
   onOpen,
-  getScore,
+  getChip,
   getRemaining,
   isComplete,
-}: ScoreBoardProps) => {
+}: ChipBoardProps) => {
   return (
     <>
       <div className="bg-gray-300 text-gray-600 font-bold grid-5">
-        <div className="center">各スコア</div>
+        <div className="center">各チップ</div>
       </div>
       <div className="grid-5">
-        {scores.map((gameScore) => (
-          <Fragment key={gameScore.gameCount}>
+        {chips.map((gameChip) => (
+          <Fragment key={gameChip.gameCount}>
             <div className="grid-5-inner">
               <div className="center flex-col p-1 h-18">
-                <ScoreHeadCard
+                <ChipHeadCard
                   roomId={roomId}
-                  gameCount={gameScore.gameCount}
-                  remaining={getRemaining(gameScore.gameCount)}
-                  complete={isComplete(gameScore.gameCount)}
+                  gameCount={gameChip.gameCount}
+                  remaining={getRemaining(gameChip.gameCount)}
+                  complete={isComplete(gameChip.gameCount)}
                 />
               </div>
             </div>
-            {gameScore.scores.map((scoreItem, index) => {
+            {gameChip.chips.map((chipItem, index) => {
               return (
                 <div className="grid-5-inner" key={index}>
                   <div className="center flex-col p-0.5 h-18">
-                    <ScoreCard
-                      gameCount={gameScore.gameCount}
+                    <ChipCard
+                      gameCount={gameChip.gameCount}
                       index={index}
-                      scoreResult={scoreItem.scoreResult}
                       selected={selected}
+                      roomChipRate={roomChipRate}
                       onOpen={onOpen}
-                      getScore={getScore}
+                      getChip={getChip}
                     />
                   </div>
                 </div>
@@ -65,4 +67,4 @@ const ScoreBoard = ({
   );
 };
 
-export default ScoreBoard;
+export default ChipBoard;

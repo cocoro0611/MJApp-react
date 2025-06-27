@@ -12,15 +12,15 @@ import { deleteScore } from "@/src/lib/models/rooms";
 interface ScoreHeadCardProps {
   roomId?: string;
   gameCount?: number;
-  complete: boolean;
   remaining?: number;
+  complete: boolean;
 }
 
 const ScoreHeadCard = ({
   roomId,
   gameCount,
-  complete,
   remaining,
+  complete,
 }: ScoreHeadCardProps) => {
   const { isOpen, openDialog, closeDialog } = useDialog();
   const {
