@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateAll } from "../../../revalidate-wrapper";
 import { db } from "../../../db";
 import type { UpdateRoom } from "../../type";
 import { updateScoreResults } from "./utils/update-score-results";
@@ -38,6 +39,7 @@ export const updateRoom = async (data: FormData) => {
       );
     });
 
+    await revalidateAll();
     return {
       success: true,
       message: "ルームが更新されました",

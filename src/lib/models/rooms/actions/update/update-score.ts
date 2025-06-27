@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateAll } from "../../../revalidate-wrapper";
 import { db } from "../../../db";
 import { updateScoreResults } from "./utils/update-score-results";
 
@@ -87,6 +88,7 @@ export const updateScore = async (data: FormData) => {
         );
       }
     });
+    await revalidateAll();
 
     // タイの有無によるリダイレクト
     if (hasTiedScores) {

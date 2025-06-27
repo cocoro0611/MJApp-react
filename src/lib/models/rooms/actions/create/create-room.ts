@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateAll } from "../../../revalidate-wrapper";
 import { v4 } from "uuid";
 import { db } from "../../../db";
 import type { CreateRoom, CreateRoomUser, CreateScore } from "../../type";
@@ -39,6 +40,8 @@ export const createRoom = async (data: FormData) => {
       await trx.insertInto("RoomUser").values(roomUsers).execute();
       await trx.insertInto("Score").values(score).execute();
     });
+
+    await revalidateAll();
 
     return {
       success: true,

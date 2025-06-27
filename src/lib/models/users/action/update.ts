@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateAll } from "../../revalidate-wrapper";
 import { db } from "../../db";
 import type { UpdateUser } from "../type";
 
@@ -15,6 +16,7 @@ export const updateUser = async (data: FormData) => {
       updatedAt: new Date(),
     };
     await db.updateTable("User").set(user).where("id", "=", userId).execute();
+    await revalidateAll();
 
     return {
       success: true,

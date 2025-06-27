@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateAll } from "../../../revalidate-wrapper";
 import { db } from "../../../db";
 
 export const deleteScore = async (data: FormData) => {
@@ -36,6 +37,8 @@ export const deleteScore = async (data: FormData) => {
       }
     });
 
+    await revalidateAll();
+    
     return {
       success: true,
       message: "スコアが削除されました",

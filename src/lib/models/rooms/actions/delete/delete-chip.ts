@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateAll } from "../../../revalidate-wrapper";
 import { db } from "../../../db";
 
 export const deleteChip = async (data: FormData) => {
@@ -35,6 +36,8 @@ export const deleteChip = async (data: FormData) => {
           .execute();
       }
     });
+
+    await revalidateAll();
 
     return {
       success: true,

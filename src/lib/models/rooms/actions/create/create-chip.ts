@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateAll } from "../../../revalidate-wrapper";
 import { db } from "../../../db";
 import type { CreateChip } from "../../type";
 
@@ -29,6 +30,7 @@ export const createChip = async (data: FormData) => {
     }));
 
     await db.insertInto("Chip").values(chips).execute();
+    await revalidateAll();
 
     return {
       success: true,
