@@ -1,12 +1,12 @@
 import Card from "@/src/components/ui/Card";
-import type { SelectState } from "@/src/hooks/rooms/useSelection";
+import type { SelectState, SelectType } from "@/src/hooks/rooms/useSelection";
 
 interface ChipCardProps {
   gameCount: number;
   index: number;
   selected?: SelectState | null;
   roomChipRate: number;
-  onOpen: (gameCount: number, index: number) => void;
+  onOpen: (gameCount: number, index: number, type: SelectType) => void;
   getChip: (gameCount: number, index: number) => number;
 }
 
@@ -19,7 +19,9 @@ const ChipCard = ({
   getChip,
 }: ChipCardProps) => {
   const isSelectedChip =
-    selected?.gameCount === gameCount && selected?.index === index;
+    selected?.gameCount === gameCount &&
+    selected?.index === index &&
+    selected?.type === "chip";
 
   const chip = getChip(gameCount, index);
   const chipPoint = (chip - 20) * roomChipRate;
@@ -33,7 +35,7 @@ const ChipCard = ({
                 ? "bg-accent-100 border-accent-400 text-accent-800 effect-pulse"
                 : ""
             }`}
-        onClick={() => onOpen(gameCount, index)}
+        onClick={() => onOpen(gameCount, index, "chip")}
       >
         <div className="flex text-[0.6rem]">枚数</div>
         <div>

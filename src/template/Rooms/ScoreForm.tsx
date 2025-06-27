@@ -8,6 +8,7 @@ import Keyboard from "./utils/Keyboard";
 import { useSelect } from "@/src/hooks/rooms/useSelection";
 import { useScoreEditor } from "@/src/hooks/rooms/useScoreEditor";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
+import { useAutoScroll } from "@/src/hooks/rooms/useAutoScroll";
 import { updateScore } from "@/src/lib/models/rooms";
 import type { ReadScore } from "@/src/lib/models/rooms/type";
 
@@ -30,6 +31,9 @@ const ScoreForm = ({ scores, roomId, roomInitialPoint }: ScoreFormProps) => {
   } = useServerActionToast(updateScore);
   const { editScore, getScore, getRemainingScore, isCompleteScore } =
     useScoreEditor(scores, roomInitialPoint);
+
+  // 自動スクロール機能
+  useAutoScroll({ selected, scores });
 
   const handleScoreChange = (newScore: number) => {
     if (!selected) return;

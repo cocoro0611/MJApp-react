@@ -10,7 +10,7 @@ interface ChipBoardProps {
   roomChipRate: number;
   // 状態管理
   selected?: SelectState | null;
-  onOpen: (gameCount: number, index: number, type?: SelectType) => void;
+  onOpen: (gameCount: number, index: number, type: SelectType) => void;
   getChip: (gameCount: number, index: number) => number;
   getRemaining: (gameCount: number) => number;
   isComplete: (gameCount: number) => boolean;

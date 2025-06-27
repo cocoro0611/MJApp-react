@@ -8,16 +8,18 @@ import Keyboard from "./utils/Keyboard";
 import { useSelect } from "@/src/hooks/rooms/useSelection";
 import { useChipEditor } from "@/src/hooks/rooms/useChipEditor";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
+import { useAutoScroll } from "@/src/hooks/rooms/useAutoScroll";
 import { updateChip } from "@/src/lib/models/rooms";
-import type { ReadChip } from "@/src/lib/models/rooms/type";
+import type { ReadScore, ReadChip } from "@/src/lib/models/rooms/type";
 
 interface ChipFormProps {
+  scores: ReadScore[];
   chips: ReadChip[];
   roomId: string;
   roomChipRate: number;
 }
 
-const ChipForm = ({ chips, roomId, roomChipRate }: ChipFormProps) => {
+const ChipForm = ({ scores, chips, roomId, roomChipRate }: ChipFormProps) => {
   const { selected, openSelect, closeSelect, moveLeft, moveRight } =
     useSelect();
   const {
@@ -30,6 +32,9 @@ const ChipForm = ({ chips, roomId, roomChipRate }: ChipFormProps) => {
   } = useServerActionToast(updateChip);
   const { editChip, getChip, getRemainingChip, isCompleteChip } =
     useChipEditor(chips);
+
+  // 自動スクロール機能
+  useAutoScroll({ selected, scores });
 
   const handleChipChange = (newChip: number) => {
     if (!selected) return;

@@ -1,12 +1,12 @@
 import Card from "@/src/components/ui/Card";
-import type { SelectState } from "@/src/hooks/rooms/useSelection";
+import type { SelectState, SelectType } from "@/src/hooks/rooms/useSelection";
 
 interface ScoreCardProps {
   gameCount: number;
   index: number;
   selected?: SelectState | null;
   scoreResult: number;
-  onOpen: (gameCount: number, index: number) => void;
+  onOpen: (gameCount: number, index: number, type: SelectType) => void;
   getScore: (gameCount: number, index: number) => number;
 }
 
@@ -19,7 +19,9 @@ const ScoreCard = ({
   getScore,
 }: ScoreCardProps) => {
   const isSelectedScore =
-    selected?.gameCount === gameCount && selected?.index === index;
+    selected?.gameCount === gameCount &&
+    selected?.index === index &&
+    selected?.type === "score";
 
   const score = getScore(gameCount, index);
 
@@ -33,7 +35,7 @@ const ScoreCard = ({
                 ? "bg-accent-100 border-accent-400 text-accent-800 effect-pulse"
                 : ""
             }`}
-        onClick={() => onOpen(gameCount, index)}
+        onClick={() => onOpen(gameCount, index, "score")}
       >
         <div className="flex text-[0.6rem]">点数</div>
         <div>
