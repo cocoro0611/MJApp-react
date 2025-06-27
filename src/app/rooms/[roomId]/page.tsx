@@ -1,7 +1,7 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import DeleteForm from "@/src/components/form/DeleteForm";
-import AddDataDialog from "@/src/components/nav/AddDataDialog";
+import AddDataForm from "@/src/components/form/rooms/AddDataForm";
 import { GameBoard, AmountBoard, DataForm } from "@/src/template/Rooms";
 import {
   readRoomDetail,
@@ -35,7 +35,8 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
       <Main isBlank={false}>
         <AmountBoard amount={roomDetail.gameAmount} />
         <DataForm scores={scores} chips={chips} roomDetail={roomDetail} />
-        <AddDataDialog roomId={roomId} />
+        {/* FIXME: なぜかトーストとリロードができない */}
+        <AddDataForm roomId={roomId} />
       </Main>
     </>
   );
