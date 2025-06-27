@@ -1,6 +1,5 @@
 "use server";
 
-import { revalidateAll } from "../../../revalidate-wrapper";
 import { db } from "../../../db";
 
 export const deleteRoom = async (data: FormData) => {
@@ -14,7 +13,6 @@ export const deleteRoom = async (data: FormData) => {
       await trx.deleteFrom("Room").where("id", "=", roomId).execute();
     });
 
-    await revalidateAll();
     return {
       success: true,
       message: "ルームが削除されました",
