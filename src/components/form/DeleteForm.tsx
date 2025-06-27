@@ -3,22 +3,25 @@
 import Form from "next/form";
 import Dialog from "../nav/Dialog";
 import Button from "../ui/Button";
-import ToastButton from "@/src/components/nav/ToastButton";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { useDialog } from "@/src/hooks/ui/useDialog";
-import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
-import type { ServerAction } from "@/src/hooks/ui/useServerActionToast";
+import { useTransition } from "react";
 
 interface DeleteFormProps {
-  action: ServerAction;
+  action: (formData: FormData) => Promise<never>; // redirectするので戻り値なし
   name: string;
   value: string;
 }
 
 const DeleteForm = ({ action, name, value }: DeleteFormProps) => {
   const { isOpen, openDialog, closeDialog } = useDialog();
-  const { isPending, toastMessage, toastColor, redirect, handleSubmit } =
-    useServerActionToast(action);
+  const [isPending, startTransition] = useTransition();
+
+  const handleSubmit = async (formData: FormData) => {
+    startTransition(async () => {
+      await action(formData);
+    });
+  };
 
   return (
     <>
@@ -39,14 +42,9 @@ const DeleteForm = ({ action, name, value }: DeleteFormProps) => {
             <Button color="cancel" onClick={closeDialog}>
               キャンセル
             </Button>
-            <ToastButton
-              color="danger"
-              toastMessage={toastMessage}
-              toastColor={toastColor}
-              redirect={redirect}
-            >
+            <Button type="submit" color="danger">
               {isPending ? "削除中..." : "削除する"}
-            </ToastButton>
+            </Button>
           </div>
         </Form>
       </Dialog>
