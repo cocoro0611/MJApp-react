@@ -1,11 +1,11 @@
 "use client";
 
 import ButtonCount from "@/src/components/ui/ButtonCount";
+import FormatButtonText from "./utils/formatButtonText";
 import {
   HAN_OPEN_CONFIG,
   HAN_OPEN_GROUPS,
 } from "@/src/constants/calculation/han-open-config";
-import FormatButtonText from "@/src/components/format/formatButtonText";
 
 interface HanOpenListProps {
   buttonCounts: number[];

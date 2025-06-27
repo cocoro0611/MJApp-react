@@ -1,8 +1,10 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import DeleteForm from "@/src/components/form/DeleteForm";
-import AddDataForm from "@/src/components/form/rooms/AddDataForm";
-import { GameBoard, AmountBoard, ScoreForm } from "@/src/template/Rooms";
+import AddDataForm from "@/src/template/rooms/AddDataForm";
+import GameBoard from "@/src/template/rooms/GameBoard";
+import AmountBoard from "@/src/template/rooms/AmountBoard";
+import ScoreForm from "@/src/template/rooms/ScoreForm";
 import {
   readRoomDetail,
   readScores,

@@ -1,6 +1,6 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
-import SelectRoomUsersForm from "@/src/template/Rooms/SelectRoomUsersForm";
+import SelectRoomUsersForm from "@/src/template/rooms/SelectRoomUsersForm";
 import { readUsers } from "@/src/lib/models/users";
 import { updateDefaultUser } from "@/src/lib/models/rooms";
 

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Button from "../../ui/Button";
+import Button from "@/src/components/ui/Button";
 import type { ReadUser } from "@/src/lib/models/users/type";
 
 interface DefaultRoomUsersProps {

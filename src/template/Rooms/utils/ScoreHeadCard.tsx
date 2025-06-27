@@ -1,27 +1,27 @@
 "use client";
 
 import Form from "next/form";
-import Dialog from "../../components/nav/Dialog";
-import Button from "../../components/ui/Button";
+import Dialog from "../../../components/nav/Dialog";
+import Button from "../../../components/ui/Button";
 import ToastButton from "@/src/components/nav/ToastButton";
 import Card from "@/src/components/ui/Card";
 import { useDialog } from "@/src/hooks/ui/useDialog";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import { deleteScore } from "@/src/lib/models/rooms";
 
-interface ScoreHeadCardCardProps {
+interface ScoreHeadCardProps {
   roomId?: string;
   gameCount?: number;
   complete: boolean;
   remaining?: number;
 }
 
-const ScoreHeadCardCard = ({
+const ScoreHeadCard = ({
   roomId,
   gameCount,
   complete,
   remaining,
-}: ScoreHeadCardCardProps) => {
+}: ScoreHeadCardProps) => {
   const { isOpen, openDialog, closeDialog } = useDialog();
   const {
     isPending,
@@ -113,4 +113,4 @@ const ScoreHeadCardCard = ({
   );
 };
 
-export default ScoreHeadCardCard;
+export default ScoreHeadCard;

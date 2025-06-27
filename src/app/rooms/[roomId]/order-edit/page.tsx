@@ -1,6 +1,6 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
-import OrderEditForm from "@/src/components/form/rooms/OrderEditForm";
+import OrderEditForm from "@/src/template/rooms/OrderEditForm";
 import { readTiedScores } from "@/src/lib/models/rooms";
 
 interface OrderEditPageProps {

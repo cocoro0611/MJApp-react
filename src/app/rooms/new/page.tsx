@@ -1,6 +1,6 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
-import RoomForm from "@/src/template/Rooms/RoomForm";
+import RoomForm from "@/src/template/rooms/RoomForm";
 import { createRoom } from "@/src/lib/models/rooms";
 import { readDefaultUsers } from "@/src/lib/models/users";
 

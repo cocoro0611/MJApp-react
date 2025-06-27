@@ -1,5 +1,5 @@
-import ScoreCard from "@/src/template/Rooms/ScoreCard";
-import ScoreHeadCard from "@/src/template/Rooms/ScoreHeadCard";
+import ScoreCard from "./ScoreCard";
+import ScoreHeadCard from "./ScoreHeadCard";
 import { Fragment } from "react";
 import type { ReadScore } from "@/src/lib/models/rooms/type";
 import type { SelectState, SelectType } from "@/src/hooks/rooms/useSelection";

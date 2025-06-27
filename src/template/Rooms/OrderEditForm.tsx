@@ -4,7 +4,7 @@ import Form from "next/form";
 import Image from "next/image";
 import Card from "@/src/components/ui/Card";
 import Button from "@/src/components/ui/Button";
-import ToastButton from "../../nav/ToastButton";
+import ToastButton from "@/src/components/nav/ToastButton";
 import { useOrderEdit } from "@/src/hooks/rooms/useOrderEdit";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import { updateScoreOrder } from "@/src/lib/models/rooms";

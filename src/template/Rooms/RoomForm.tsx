@@ -3,8 +3,8 @@
 import Form from "next/form";
 import InputField from "@/src/components/form/InputField";
 import SelectField from "@/src/components/form/SelectField";
-import DefaultRoomUsers from "@/src/components/form/rooms/DefaultRoomUsers";
 import ToastButton from "@/src/components/nav/ToastButton";
+import DefaultRoomUsers from "./utils/DefaultRoomUsers";
 import {
   INITIAL_POINT_OPTIONS,
   RETURN_POINT_OPTIONS,

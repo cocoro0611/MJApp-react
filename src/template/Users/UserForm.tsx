@@ -2,7 +2,7 @@
 
 import Form from "next/form";
 import InputField from "@/src/components/form/InputField";
-import SelectIcon from "@/src/components/form/users/SelectIcon";
+import SelectIcon from "./utils/SelectIcon";
 import ToastButton from "@/src/components/nav/ToastButton";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import { useState } from "react";

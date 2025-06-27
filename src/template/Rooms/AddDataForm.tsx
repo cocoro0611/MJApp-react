@@ -1,9 +1,9 @@
 "use client";
 
 import Form from "next/form";
-import Dialog from "../../nav/Dialog";
-import Button from "../../ui/Button";
-import ButtonFixed from "../../ui/ButtonFixed";
+import Dialog from "@/src/components/nav/Dialog";
+import Button from "@/src/components/ui/Button";
+import ButtonFixed from "@/src/components/ui/ButtonFixed";
 import ToastButton from "@/src/components/nav/ToastButton";
 import { useDialog } from "@/src/hooks/ui/useDialog";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";

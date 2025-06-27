@@ -2,7 +2,7 @@
 
 import Form from "next/form";
 import ToastButton from "@/src/components/nav/ToastButton";
-import UserCard from "../Users/UserCard";
+import UserCard from "../users/UserCard";
 import { useUserSelect } from "@/src/hooks/user-data/useUserSelect";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";

@@ -3,8 +3,8 @@
 import Form from "next/form";
 import Button from "@/src/components/ui/Button";
 import ToastButton from "@/src/components/nav/ToastButton";
-import ScoreBoard from "@/src/components/form/rooms/ScoreBoard";
-import Keyboard from "@/src/components/form/rooms/Keyboard";
+import ScoreBoard from "./utils/ScoreBoard";
+import Keyboard from "./utils/Keyboard";
 import { useSelect } from "@/src/hooks/rooms/useSelection";
 import { useScoreEditor } from "@/src/hooks/rooms/useScoreEditor";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";

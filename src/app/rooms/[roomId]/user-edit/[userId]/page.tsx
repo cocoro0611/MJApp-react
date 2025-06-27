@@ -1,6 +1,6 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
-import UserForm from "@/src/template/Users/UserForm";
+import UserForm from "@/src/template/users/UserForm";
 import { readUser, updateUser } from "@/src/lib/models/users";
 
 interface RoomUserEditPageProps {
