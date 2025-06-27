@@ -25,8 +25,9 @@ export const adjustFu = (fu: number): number => {
     return 25; // 七対子
   }
 
-  // 10符単位で切り上げ、最低30符
-  return Math.max(30, Math.ceil(fu / 10) * 10);
+  // 10符単位で切り上げ、最低30符、最高110符
+  const adjustedFu = Math.max(30, Math.ceil(fu / 10) * 10);
+  return Math.min(adjustedFu, 110); // 110符を上限とする
 };
 
 // 満貫以上の点数を取得
@@ -35,7 +36,7 @@ const getLimitHandScore = (han: number): ScoreInfo | null => {
   for (const [minHan, maxHan, coRon, coTsumoKo, coTsumoOya, oyaRon, oyaTsumo] of limitHanPoints) {
     if (han >= minHan && han <= maxHan) {
       return {
-        oyaRon: oyaRon.toString(),
+        oyaRon: oyaRon.toString() ?? "null",
         oyaTsumo: `${oyaTsumo.toString()} All`,
         coRon: coRon.toString(),
         coTsumo: `${coTsumoOya.toString()} / ${coTsumoKo.toString()}`,
@@ -54,11 +55,11 @@ const getNormalScore = (han: number, adjustedFu: number): ScoreInfo | null => {
   const coTsumoKo = koTsumoKoPointMaps[han]?.[adjustedFu];
 
   return {
-    oyaRon: oyaRon !== null ? oyaRon.toString() : "null",
-    oyaTsumo: oyaTsumo !== null ? `${oyaTsumo.toString()} All` : "null",
-    coRon: coRon !== null ? coRon.toString() : "null",
+    oyaRon: oyaRon != null ? oyaRon.toString() : "null",
+    oyaTsumo: oyaTsumo != null ? `${oyaTsumo.toString()} All` : "null",
+    coRon: coRon != null ? coRon.toString() : "null",
     coTsumo:
-      coTsumoOya !== null && coTsumoKo !== null
+      coTsumoOya != null && coTsumoKo != null
         ? `${coTsumoOya.toString()} / ${coTsumoKo.toString()}`
         : "null",
   };

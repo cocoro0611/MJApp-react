@@ -13,7 +13,8 @@ interface ButtonProps {
     | "cancel"
     | "white"
     | "toggle-active"
-    | "toggle-inactive";
+    | "toggle-inactive"
+    | "toggle-dark";
   type?: "button" | "submit";
   disabled?: boolean;
   className?: string;

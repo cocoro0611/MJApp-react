@@ -17,7 +17,7 @@ const CalculationBoard = ({
       <div className="flex justify-betweenl w-full text-primary-500">
         <div className="w-full">
           <div>{adjustFu(totalFu)} 符</div>
-          <div className="text-xs">（{totalFu} 符）</div>
+          {totalFu > 0 && <div className="text-xs">（{totalFu} 符）</div>}
         </div>
         <div className="center w-full">{totalHan} 翻</div>
       </div>

@@ -18,7 +18,7 @@
     @apply text-gray-800;
   }
   .white {
-    @apply bg-white hover:bg-gray-100 active:bg-gray-200 shadow-xl;
+    @apply bg-white hover:bg-gray-100 active:bg-gray-200 shadow;
     @apply text-gray-800;
   }
   .toggle-active {
@@ -29,5 +29,9 @@
     @apply bg-white hover:bg-primary-50 active:bg-primary-100;
     @apply border border-primary-500;
     @apply text-primary-500;
+  }
+  .toggle-dark {
+    @apply bg-primary-900 hover:bg-primary-950 active:bg-primary-950 shadow;
+    @apply text-gray-400;
   }
 }

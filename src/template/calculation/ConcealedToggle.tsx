@@ -13,20 +13,20 @@ const ConcealedToggle = ({
 }: ConcealedToggleProps) => {
   return (
     <div
-      className="fixed-container top-[0.5rem] z-50 
+      className="fixed top-[0.5rem] z-50 font-bold
         xl:ml-[19rem] lg:ml-[11rem] md:ml-[10rem] sm:ml-[6rem] ml-[4.5rem]"
     >
       <Button
         onClick={() => setIsConcealed(true)}
-        color={isConcealed ? "toggle-active" : "toggle-inactive"}
+        color={isConcealed ? "toggle-active" : "toggle-dark"}
         className="rounded-l px-4"
       >
         門前
       </Button>
       <Button
-        color={isConcealed ? "toggle-inactive" : "toggle-active"}
+        color={isConcealed ? "toggle-dark" : "toggle-active"}
         onClick={() => setIsConcealed(false)}
-        className="rounded-r px-4"
+        className="rounded-r px-4 "
       >
         鳴き
       </Button>
