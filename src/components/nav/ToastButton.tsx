@@ -4,8 +4,7 @@ import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useRouter } from "next/navigation";
 import { ReactNode, useState, useEffect } from "react";
-
-const TOAST_TIME: number = 1000; //（ms)
+import { TOAST_TIME } from "@/src/constants/toastTime";
 
 interface ToastButtonProps {
   children: ReactNode;

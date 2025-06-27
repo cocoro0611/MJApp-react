@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateAll } from "../../../revalidate-wrapper";
 import { db } from "../../../db";
 import { updateScoreResults } from "./utils/update-score-results";
 
@@ -48,6 +49,8 @@ export const updateScoreOrder = async (data: FormData) => {
         { gameCount }
       );
     });
+
+    await revalidateAll();
 
     return {
       success: true,

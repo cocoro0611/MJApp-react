@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateAll } from "../../revalidate-wrapper";
 import { v4 } from "uuid";
 import { db } from "../../db";
 import { readDefaultUsers } from "./read/read-default-users";
@@ -16,6 +17,7 @@ export const createUser = async (data: FormData) => {
       isDefaultUser: defaultUsers.length < 4,
     };
     await db.insertInto("User").values(user).execute();
+    await revalidateAll();
 
     return {
       success: true,

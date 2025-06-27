@@ -2,6 +2,7 @@ import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import RoomCard from "@/src/template/rooms/RoomCard";
 import ButtonFixed from "@/src/components/ui/ButtonFixed";
+import MessageHandler from "@/src/components/nav/MessageHandler";
 import { readRooms } from "@/src/lib/models/rooms";
 import { readDefaultUsers } from "@/src/lib/models/users";
 
@@ -24,6 +25,7 @@ const RoomsPage = async () => {
         </div>
         <ButtonFixed href="/rooms/new" disabled={defaultUsers.length < 4} />
       </Main>
+      <MessageHandler type="room" />
     </>
   );
 };

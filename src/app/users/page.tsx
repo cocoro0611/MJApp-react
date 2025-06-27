@@ -2,6 +2,7 @@ import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import UserCard from "@/src/template/users/UserCard";
 import ButtonFixed from "@/src/components/ui/ButtonFixed";
+import MessageHandler from "@/src/components/nav/MessageHandler";
 import { readUsers } from "@/src/lib/models/users";
 
 const UsersPage = async () => {
@@ -23,6 +24,7 @@ const UsersPage = async () => {
         </div>
         <ButtonFixed href="/users/new" />
       </Main>
+      <MessageHandler type="user" />
     </>
   );
 };

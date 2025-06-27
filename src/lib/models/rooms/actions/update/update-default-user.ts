@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateAll } from "../../../revalidate-wrapper";
 import { db } from "../../../db";
 
 export const updateDefaultUser = async (data: FormData) => {
@@ -17,6 +18,9 @@ export const updateDefaultUser = async (data: FormData) => {
           .execute();
       }
     });
+
+    await revalidateAll();
+
     return {
       success: true,
       message: "ユーザーが選択されました",

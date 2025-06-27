@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateAll } from "../../../revalidate-wrapper";
 import { db } from "../../../db";
 import type { CreateScore } from "../../type";
 
@@ -31,6 +32,7 @@ export const createScore = async (data: FormData) => {
     }));
 
     await db.insertInto("Score").values(scores).execute();
+    await revalidateAll();
 
     return {
       success: true,
