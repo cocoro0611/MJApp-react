@@ -20,14 +20,25 @@ interface ScoreFormProps {
 const ScoreForm = ({ scores, roomId, roomInitialPoint }: ScoreFormProps) => {
   const { selected, openSelect, closeSelect, moveLeft, moveRight } =
     useSelect();
-  const { isPending, toastMessage, toastColor, redirect, handleSubmit } =
-    useServerActionToast(updateScore);
+  const {
+    isPending,
+    toastMessage,
+    toastColor,
+    redirect,
+    resetToast,
+    handleSubmit,
+  } = useServerActionToast(updateScore);
   const { editScore, getScore, getRemainingScore, isCompleteScore } =
     useScoreEditor(scores, roomInitialPoint);
 
   const handleScoreChange = (newScore: number) => {
     if (!selected) return;
     editScore(selected.gameCount, selected.index, newScore);
+  };
+
+  const handleToastClose = () => {
+    resetToast();
+    closeSelect();
   };
 
   return (
@@ -67,6 +78,7 @@ const ScoreForm = ({ scores, roomId, roomInitialPoint }: ScoreFormProps) => {
               toastMessage={toastMessage}
               toastColor={toastColor}
               redirect={redirect}
+              onToastClose={handleToastClose}
               className="rounded text-sm w-16"
             >
               {isPending ? "計算中..." : "計算"}

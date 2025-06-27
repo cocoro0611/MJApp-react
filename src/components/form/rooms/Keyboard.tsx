@@ -44,7 +44,7 @@ const Keyboard = ({
   }, [value, resetValue]);
 
   return (
-    <div className="fixed-container bottom-0 z-20">
+    <div className="fixed-container bottom-0 z-30">
       <div className="flex items-center justify-between py-2 bg-gray-100">
         <div className="flex ml-2">
           <Button
