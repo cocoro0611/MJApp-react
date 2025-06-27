@@ -37,7 +37,7 @@ export const createScore = async (data: FormData) => {
       message: "スコアが作成されました",
       redirect: `/rooms/${roomId}`,
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: "スコアの作成に失敗しました",

@@ -18,7 +18,7 @@ export const deleteRoom = async (data: FormData) => {
       message: "ルームが削除されました",
       redirect: "/rooms",
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: "ルームの削除に失敗しました",

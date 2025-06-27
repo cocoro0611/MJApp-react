@@ -21,7 +21,7 @@ export const updateUser = async (data: FormData) => {
       message: "ユーザーが更新されました",
       redirect: redirectUrl,
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: "ユーザーの更新に失敗しました",

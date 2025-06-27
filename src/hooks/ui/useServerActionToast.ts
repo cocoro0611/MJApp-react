@@ -22,7 +22,7 @@ export const useServerActionToast = (action: ServerAction) => {
         setToastMessage(result.message);
         setToastColor(result.success ? "success" : "error");
         setRedirect(result.redirect);
-      } catch (error) {
+      } catch (_error) {
         setToastMessage("予期しないエラーが発生しました");
         setToastColor("error");
         setRedirect("");

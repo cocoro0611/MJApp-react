@@ -45,7 +45,7 @@ export const createRoom = async (data: FormData) => {
       message: "ルームが作成されました",
       redirect: `/rooms/${room.id}`,
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: "ルームの作成に失敗しました",

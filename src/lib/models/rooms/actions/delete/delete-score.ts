@@ -41,7 +41,7 @@ export const deleteScore = async (data: FormData) => {
       message: "スコアが削除されました",
       redirect: `/rooms/${roomId}`,
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: "スコアの削除に失敗しました",

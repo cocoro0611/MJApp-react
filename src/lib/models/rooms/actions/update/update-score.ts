@@ -102,7 +102,7 @@ export const updateScore = async (data: FormData) => {
         redirect: `/rooms/${roomId}`,
       };
     }
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: "スコアの更新に失敗しました",

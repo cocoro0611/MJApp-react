@@ -22,7 +22,7 @@ export const updateDefaultUser = async (data: FormData) => {
       message: "ユーザーが選択されました",
       redirect: "/rooms/new",
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: "ユーザーの選択に失敗しました",

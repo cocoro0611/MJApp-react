@@ -52,7 +52,7 @@ export const updateChip = async (data: FormData) => {
       message: "チップが更新されました",
       redirect: `/rooms/${roomId}`,
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: "チップの更新に失敗しました",

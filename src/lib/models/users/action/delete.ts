@@ -12,7 +12,7 @@ export const deleteUser = async (data: FormData) => {
       message: "ユーザーが削除されました",
       redirect: "/users",
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: "ユーザーの削除に失敗しました",

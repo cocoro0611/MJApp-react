@@ -22,7 +22,7 @@ export const createUser = async (data: FormData) => {
       message: "ユーザーが作成されました",
       redirect: "/users",
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: "ユーザーの作成に失敗しました",

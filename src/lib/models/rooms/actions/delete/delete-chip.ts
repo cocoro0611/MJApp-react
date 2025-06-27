@@ -41,7 +41,7 @@ export const deleteChip = async (data: FormData) => {
       message: "チップが削除されました",
       redirect: `/rooms/${roomId}`,
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: "チップの削除に失敗しました",

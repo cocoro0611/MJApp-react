@@ -35,7 +35,7 @@ export const createChip = async (data: FormData) => {
       message: "チップが作成されました",
       redirect: `/rooms/${roomId}`,
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: "チップの作成に失敗しました",

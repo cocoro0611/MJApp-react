@@ -43,7 +43,7 @@ export const updateRoom = async (data: FormData) => {
       message: "ルームが更新されました",
       redirect: `/rooms/${roomId}`,
     };
-  } catch (error) {
+  } catch (_error) {
     return {
       success: false,
       message: "ルームの更新に失敗しました",
