@@ -19,13 +19,31 @@ const InputField = <T extends string | number>({
 }: InputFieldProps<T>) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!onChange) return;
+    const inputValue = e.target.value;
 
     if (type === "number") {
-      const numValue = e.target.value === "" ? 0 : Number(e.target.value);
+      if (inputValue.length > maxLength) {
+        return;
+      }
+
+      const numValue = inputValue === "" ? 0 : Number(inputValue);
+
+      if (inputValue !== "" && isNaN(numValue)) {
+        return;
+      }
+
       onChange(numValue as T);
     } else {
-      onChange(e.target.value as T);
+      onChange(inputValue as T);
     }
+  };
+
+  const displayValue = () => {
+    if (type === "number") {
+      // 数値が0の場合は空文字で表示
+      return value === 0 ? "" : String(value);
+    }
+    return String(value);
   };
 
   return (
@@ -39,7 +57,7 @@ const InputField = <T extends string | number>({
         type={type}
         maxLength={maxLength}
         placeholder={placeholder}
-        value={value}
+        value={displayValue()}
         onChange={handleChange}
         className="border-2 border-primary-500 rounded p-2 w-full          
         focus:ring-4 focus:ring-primary-100"

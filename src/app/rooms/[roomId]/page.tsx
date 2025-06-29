@@ -23,15 +23,25 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
   const scores = await readScores(roomId);
   const chips = await readChips(roomId);
 
+  // チップの有無でgameBoardの表示を変更
+  const totalChipSum = roomDetail.users.reduce(
+    (sum, user) => sum + user.totalChip,
+    0
+  );
+  const shouldShowChip = totalChipSum !== 0;
   return (
     <>
       <Header
         title={roomDetail.name}
         href="/rooms"
         addContent={
-          <GameBoard roomDetailUser={roomDetail.users} roomId={roomId} />
+          <GameBoard
+            roomDetailUser={roomDetail.users}
+            shouldShowChip={shouldShowChip}
+            roomId={roomId}
+          />
         }
-        bottomSpace="pb-45.5"
+        bottomSpace={shouldShowChip ? "pb-45.5" : "pb-40"}
       >
         <DeleteForm action={deleteRoom} name="id" value={roomId} />
       </Header>

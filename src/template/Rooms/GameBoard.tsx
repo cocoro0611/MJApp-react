@@ -4,10 +4,15 @@ import { ReadRoomDetailUser } from "@/src/lib/models/rooms/type";
 
 interface GameBoardProps {
   roomDetailUser: ReadRoomDetailUser[];
+  shouldShowChip: boolean;
   roomId: string;
 }
 
-const GameBoard = ({ roomDetailUser, roomId }: GameBoardProps) => {
+const GameBoard = ({
+  roomDetailUser,
+  shouldShowChip,
+  roomId,
+}: GameBoardProps) => {
   return (
     <>
       <div className="grid-5 center">
@@ -22,7 +27,7 @@ const GameBoard = ({ roomDetailUser, roomId }: GameBoardProps) => {
             </Card>
           </div>
           <div>スコア</div>
-          <div>チップ</div>
+          {shouldShowChip && <div>チップ</div>}
           <div>収支</div>
         </div>
         {roomDetailUser.map((user) => (
@@ -36,12 +41,14 @@ const GameBoard = ({ roomDetailUser, roomId }: GameBoardProps) => {
               />
             </div>
             <div>{user.totalScore}</div>
-            <div className="relative">
-              {user.totalChip}
-              <span className="absolute bottom-0 right-0.5 text-[0.6rem]">
-                枚
-              </span>
-            </div>
+            {shouldShowChip && (
+              <div className="relative">
+                {user.totalChip}
+                <span className="absolute bottom-0 right-0.5 text-[0.6rem]">
+                  枚
+                </span>
+              </div>
+            )}
             <div className="relative">
               {user.totalPoint}
               <span className="absolute bottom-0 right-0.5 text-[0.6rem]">

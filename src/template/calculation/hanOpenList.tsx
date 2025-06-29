@@ -28,22 +28,24 @@ const HanOpenList = ({
         return (
           <div key={category} className="mb-4">
             <div className="flex justify-start font-bold mb-2">{label}</div>
-            <div className="grid-6">
-              {buttons.map((buttonConfig) => {
-                const originalIndex = HAN_OPEN_CONFIG.indexOf(buttonConfig);
-                return (
-                  <ButtonCount
-                    key={originalIndex}
-                    count={buttonConfig.count}
-                    externalCount={buttonCounts[originalIndex]}
-                    onClick={(count) => onButtonClick(originalIndex, count)}
-                    group={buttonConfig.group}
-                    totalHan={totalHan}
-                  >
-                    {FormatButtonText(buttonConfig.label)}
-                  </ButtonCount>
-                );
-              })}
+            <div className="p-2 rounded-lg border-2 border-dotted border-primary-500 bg-primary-200">
+              <div className="grid-6">
+                {buttons.map((buttonConfig) => {
+                  const originalIndex = HAN_OPEN_CONFIG.indexOf(buttonConfig);
+                  return (
+                    <ButtonCount
+                      key={originalIndex}
+                      count={buttonConfig.count}
+                      externalCount={buttonCounts[originalIndex]}
+                      onClick={(count) => onButtonClick(originalIndex, count)}
+                      group={buttonConfig.group}
+                      totalHan={totalHan}
+                    >
+                      {FormatButtonText(buttonConfig.label)}
+                    </ButtonCount>
+                  );
+                })}
+              </div>
             </div>
           </div>
         );

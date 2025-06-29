@@ -45,24 +45,35 @@ const FuList = ({ buttonCounts, totalHan, onButtonClick }: FuListProps) => {
 
         return (
           <div key={category} className="mb-4">
-            <div className="flex justify-start font-bold mb-2">{label}</div>
-            <div className="grid grid-cols-4 gap-4">
-              {buttons.map((buttonConfig) => {
-                const originalIndex = FU_CONFIG.indexOf(buttonConfig);
-                return (
-                  <ButtonCount
-                    key={originalIndex}
-                    size="lg"
-                    count={buttonConfig.count}
-                    externalCount={buttonCounts[originalIndex]}
-                    onClick={(count) => onButtonClick(originalIndex, count)}
-                    group={buttonConfig.group}
-                    totalHan={totalHan}
-                  >
-                    {buttonConfig.label}
-                  </ButtonCount>
-                );
-              })}
+            <div className="flex justify-start font-bold mb-2">
+              <span>{label}</span>
+              {(category === "1-han" ||
+                category === "head" ||
+                category === "wait") && (
+                <span className="ml-2 px-2 my-1 center text-[0.6rem] rounded-2xl text-white bg-primary-800">
+                  1つまで選択可
+                </span>
+              )}
+            </div>
+            <div className="p-2 rounded-lg border-2 border-dotted border-primary-500 bg-primary-200">
+              <div className="grid grid-cols-4 gap-4">
+                {buttons.map((buttonConfig) => {
+                  const originalIndex = FU_CONFIG.indexOf(buttonConfig);
+                  return (
+                    <ButtonCount
+                      key={originalIndex}
+                      size="lg"
+                      count={buttonConfig.count}
+                      externalCount={buttonCounts[originalIndex]}
+                      onClick={(count) => onButtonClick(originalIndex, count)}
+                      group={buttonConfig.group}
+                      totalHan={totalHan}
+                    >
+                      {buttonConfig.label}
+                    </ButtonCount>
+                  );
+                })}
+              </div>
             </div>
           </div>
         );

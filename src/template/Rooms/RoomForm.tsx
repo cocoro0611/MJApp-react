@@ -87,7 +87,7 @@ const RoomForm = ({ action, btnText, room, roomUsers }: RoomFormProps) => {
         label="場代（後ほど更新できます）"
         name="gameAmount"
         type="number"
-        maxLength={5}
+        maxLength={6}
         placeholder="金額を入力"
         value={amount}
         onChange={(value) => setAmount(value)}
