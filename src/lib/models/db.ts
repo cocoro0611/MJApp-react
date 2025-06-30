@@ -6,9 +6,11 @@ const dialect = new PostgresDialect({
   pool: new Pool({
     connectionString: process.env.DATABASE_URL,
     // プライベートサブネットでの通信を想定しているためfalseにする
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    ssl: process.env.DATABASE_URL?.includes("localhost")
+      ? false
+      : {
+          rejectUnauthorized: false,
+        },
   }),
 });
 
