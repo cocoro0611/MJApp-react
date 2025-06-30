@@ -5,7 +5,10 @@ const SettingPage = () => {
   return (
     <>
       <Header title="　" isBackIcon={false} />
-      <Main>設定ページ</Main>
+      <Main>
+        <div>設定ページ</div>
+        <div>開発中</div>
+      </Main>
     </>
   );
 };
