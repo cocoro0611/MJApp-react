@@ -28,7 +28,7 @@ const HanConcealedList = ({
         return (
           <div key={category} className="mb-4">
             <div className="flex justify-start font-bold mb-2">{label}</div>
-            <div className="p-2 rounded-lg border-2 border-dotted border-primary-500 bg-primary-200">
+            <div className="p-2 rounded-lg border border-dotted border-primary-500 bg-primary-200">
               <div className="grid-6">
                 {buttons.map((buttonConfig) => {
                   const originalIndex =

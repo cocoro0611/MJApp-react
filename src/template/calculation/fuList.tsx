@@ -55,7 +55,7 @@ const FuList = ({ buttonCounts, totalHan, onButtonClick }: FuListProps) => {
                 </span>
               )}
             </div>
-            <div className="p-2 rounded-lg border-2 border-dotted border-primary-500 bg-primary-200">
+            <div className="p-2 rounded-lg border border-dotted border-primary-500 bg-primary-200">
               <div className="grid grid-cols-4 gap-4">
                 {buttons.map((buttonConfig) => {
                   const originalIndex = FU_CONFIG.indexOf(buttonConfig);

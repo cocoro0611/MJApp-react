@@ -9,6 +9,7 @@ const withPWA = require("next-pwa")({
 
 module.exports = withPWA({
   reactStrictMode: true,
+  // ビルドに時間がかかってしまうのでスキップ
   eslint: {
     ignoreDuringBuilds: true,
   },
