@@ -39,7 +39,7 @@ const ScoreHeadCard = ({
 
   // completeでボタンの表示を変えたいので関数で定義
   const ResetButton = () => (
-    <Button color="toggle-active" onClick={() => window.location.reload()}>
+    <Button color="toggle-on" onClick={() => window.location.reload()}>
       やり直し
     </Button>
   );

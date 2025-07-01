@@ -74,7 +74,7 @@ const SelectField = ({
         {isCustomBtn && (
           <Button
             href={href}
-            color="secondary"
+            color="primary-light"
             className="px-2 py-1 rounded text-xs"
           >
             カスタム
@@ -87,9 +87,7 @@ const SelectField = ({
             <Button
               key={option.value}
               color={
-                selectedValue === option.value
-                  ? "toggle-active"
-                  : "toggle-inactive"
+                selectedValue === option.value ? "toggle-on" : "toggle-off"
               }
               className="p-1 rounded-2xl w-30"
               onClick={() => setSelectedValue(option.value)}

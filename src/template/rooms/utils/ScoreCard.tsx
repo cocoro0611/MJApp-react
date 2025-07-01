@@ -32,7 +32,7 @@ const ScoreCard = ({
         className={`w-full p-1 
             ${
               isSelectedScore
-                ? "bg-accent-100 border-accent-400 text-accent-800 effect-pulse"
+                ? "bg-secondary-100 border-secondary-400 text-secondary-800 effect-pulse"
                 : ""
             }`}
         onClick={() => onOpen(gameCount, index, "score")}
@@ -41,7 +41,7 @@ const ScoreCard = ({
         <div>
           <span
             className={`px-1 border-b-2 ${
-              isSelectedScore ? "border-accent-500" : "border-primary-300"
+              isSelectedScore ? "border-secondary-500" : "border-primary-300"
             }`}
           >
             {score}

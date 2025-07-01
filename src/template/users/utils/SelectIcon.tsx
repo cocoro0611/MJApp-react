@@ -31,7 +31,7 @@ const SelectIcon = ({ name, value }: SelectIconProps) => {
             alt={icon}
             onClick={() => setSelectedIcon(icon)}
             className={`rounded-full effect-rotate
-              ${selectedIcon === icon ? "secondary" : "white"}`}
+              ${selectedIcon === icon ? "primary-light" : "white"}`}
             width={45}
             height={45}
           />

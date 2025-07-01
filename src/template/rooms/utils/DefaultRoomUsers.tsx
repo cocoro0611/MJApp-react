@@ -13,7 +13,7 @@ const DefaultRoomUsers = ({ roomUsers }: DefaultRoomUsersProps) => {
         <label>ユーザー</label>
         <Button
           href="/rooms/new/users"
-          color="secondary"
+          color="primary-light"
           className="px-2 py-1 rounded text-xs"
         >
           カスタム

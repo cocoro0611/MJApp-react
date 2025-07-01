@@ -3,7 +3,7 @@
     @apply bg-primary-800 hover:bg-primary-900 active:bg-primary-950 shadow;
     @apply text-white;
   }
-  .secondary {
+  .primary-light {
     @apply bg-primary-100 hover:bg-primary-200 active:bg-primary-300 shadow;
     @apply border border-primary-300;
     @apply text-primary-800;
@@ -21,16 +21,16 @@
     @apply bg-white hover:bg-gray-100 active:bg-gray-200 shadow;
     @apply text-gray-800;
   }
-  .toggle-active {
+  .toggle-on {
     @apply bg-primary-500 hover:bg-primary-600 active:bg-primary-700;
     @apply text-white;
   }
-  .toggle-inactive {
+  .toggle-off {
     @apply bg-white hover:bg-primary-50 active:bg-primary-100;
     @apply border border-primary-500;
     @apply text-primary-500;
   }
-  .toggle-dark {
+  .toggle-disabled {
     @apply bg-primary-900 hover:bg-primary-950 active:bg-primary-950 shadow;
     @apply text-gray-400;
   }

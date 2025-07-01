@@ -22,7 +22,7 @@ const Card = ({
     <Link
       href={href}
       className={`rounded-lg font-bold 
-      ${isColor ? "secondary" : "border border-gray-200"} 
+      ${isColor ? "primary-light" : "border border-gray-200"} 
       ${isEffect ? "effect-scale" : ""}
       ${className}`}
       onClick={onClick}

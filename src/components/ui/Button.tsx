@@ -8,13 +8,13 @@ interface ButtonProps {
   href?: string;
   color?:
     | "primary"
-    | "secondary"
+    | "primary-light"
     | "danger"
     | "cancel"
     | "white"
-    | "toggle-active"
-    | "toggle-inactive"
-    | "toggle-dark";
+    | "toggle-on"
+    | "toggle-off"
+    | "toggle-disabled";
   type?: "button" | "submit";
   disabled?: boolean;
   className?: string;

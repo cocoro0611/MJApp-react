@@ -49,7 +49,7 @@ const OrderEditForm = ({
             />
             <div className="grid grid-cols-10">
               <div className="col-span-1 center">
-                <div className="center w-8 h-8 toggle-active rounded-lg">
+                <div className="center w-8 h-8 toggle-on rounded-lg">
                   {index + 1}
                 </div>
               </div>

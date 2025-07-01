@@ -50,7 +50,7 @@ const FuList = ({ buttonCounts, totalHan, onButtonClick }: FuListProps) => {
               {category === "1-han" ||
               category === "head" ||
               category === "wait" ? (
-                <span className="ml-2 px-2 my-1 center text-[0.6rem] rounded-2xl text-white bg-accent-600">
+                <span className="ml-2 px-2 my-1 center text-[0.6rem] rounded-2xl text-white bg-secondary-600">
                   1つまで選択可
                 </span>
               ) : (

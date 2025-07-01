@@ -18,13 +18,13 @@ const ConcealedToggle = ({
     >
       <Button
         onClick={() => setIsConcealed(true)}
-        color={isConcealed ? "toggle-active" : "toggle-dark"}
+        color={isConcealed ? "toggle-on" : "toggle-disabled"}
         className="rounded-l px-4"
       >
         門前
       </Button>
       <Button
-        color={isConcealed ? "toggle-dark" : "toggle-active"}
+        color={isConcealed ? "toggle-disabled" : "toggle-on"}
         onClick={() => setIsConcealed(false)}
         className="rounded-r px-4 "
       >

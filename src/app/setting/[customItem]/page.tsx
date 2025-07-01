@@ -19,6 +19,7 @@ const CustomSettingPage = async ({ params }: CustomSettingPageProps) => {
         maxLength: number;
         placeholder: string;
         description?: string;
+        description2?: string;
       }
     > = {
       initialPoint: {
@@ -45,8 +46,8 @@ const CustomSettingPage = async ({ params }: CustomSettingPageProps) => {
         type: "number",
         maxLength: 5,
         placeholder: "レートを入力（例: テンゴの場合は50）",
-        description:
-          "1000点あたりのポイントを入力してください（テンゴ: 50、テンピン: 100）",
+        description: "1000点あたりのポイントを入力してください",
+        description2: "（テンゴ: 50、テンピン: 100）",
       },
       chipRate: {
         label: "チップ",
@@ -76,8 +77,9 @@ const CustomSettingPage = async ({ params }: CustomSettingPageProps) => {
         <div className="font-bold text-sm mb-8">
           <p>{config.label}を入力してください。</p>
           {config.description && (
-            <div className="mt-2 bg-accent-100 border border-accent-500 text-accent-800 rounded p-2">
-              {config.description}
+            <div className="mt-2 bg-secondary-100 border border-secondary-500 text-secondary-800 rounded p-2">
+              <p> {config.description}</p>
+              <p> {config.description2}</p>
             </div>
           )}
         </div>

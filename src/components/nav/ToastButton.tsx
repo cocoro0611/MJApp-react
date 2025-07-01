@@ -8,7 +8,7 @@ import { TOAST_TIME } from "@/src/constants/toastTime";
 
 interface ToastButtonProps {
   children: ReactNode;
-  color?: "primary" | "secondary" | "danger" | "cancel" | "white";
+  color?: "primary" | "primary-light" | "danger" | "cancel" | "white";
   disabled?: boolean;
   className?: string;
   // toast関係

@@ -4,12 +4,12 @@ interface ButtonFixedProps {
   href?: string;
   color?:
     | "primary"
-    | "secondary"
+    | "primary-light"
     | "danger"
     | "cancel"
     | "white"
-    | "toggle-active"
-    | "toggle-inactive";
+    | "toggle-on"
+    | "toggle-off";
   disabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }

@@ -94,7 +94,7 @@ const RoomForm = ({
       />
       {roomUsers && <DefaultRoomUsers roomUsers={roomUsers} />}
       {!room?.id! && (
-        <div className="mb-4 bg-accent-100 border border-accent-500 text-accent-800 rounded p-2 font-bold text-xs">
+        <div className="mb-4 bg-secondary-100 border border-secondary-500 text-secondary-800 rounded p-2 font-bold text-xs">
           <p> ※ カスタムしたい場合は設定から変更してください</p>
           <p>（ルーム作成後は変更できません）</p>
         </div>
