@@ -17,6 +17,7 @@ import { updateScoreOrder } from "./actions/update/update-score-order";
 import { deleteRoom } from "./actions/delete/delete-room";
 import { deleteScore } from "./actions/delete/delete-score";
 import { deleteChip } from "./actions/delete/delete-chip";
+import { deleteAmount } from "./actions/delete/delete-amount";
 
 export { createRoom, createScore, createChip };
 export { readRooms, readRoomDetail, readScores, readChips, readTiedScores };
@@ -27,4 +28,4 @@ export {
   updateChip,
   updateScoreOrder,
 };
-export { deleteRoom, deleteScore, deleteChip };
+export { deleteRoom, deleteScore, deleteChip, deleteAmount };

@@ -1,10 +1,12 @@
+import AmountHeadCard from "./utils/AmountHeadCard";
 import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
 
 interface AmountBoardProps {
+  roomId: string;
   amount: number;
 }
 
-const AmountBoard = ({ amount }: AmountBoardProps) => {
+const AmountBoard = ({ roomId, amount }: AmountBoardProps) => {
   if (amount == 0) {
     return null;
   }
@@ -18,11 +20,13 @@ const AmountBoard = ({ amount }: AmountBoardProps) => {
       </div>
       <div className="grid-5 font-bold">
         <div className="grid-5-inner">
-          <div className="h-8" />
+          <div className="center p-1 h-14">
+            <AmountHeadCard roomId={roomId} amount={amount} />
+          </div>
         </div>
         {Array.from({ length: 4 }, (_, index) => (
           <div key={index} className="grid-5-inner">
-            <div className="text-negative h-8 center relative">
+            <div className="text-negative h-14 center relative">
               -{pointPerPlayer}
               <span className="absolute right-0.5">P</span>
             </div>
