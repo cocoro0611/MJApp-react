@@ -22,18 +22,16 @@ const CalculationBoard = ({
         <div className="center w-full">{totalHan} 翻</div>
       </div>
       <div className="w-full">
-        {tokuten.coRon !== "null" && (
-          <div className="text-xl">{tokuten.coRon} 点</div>
-        )}
+        <div className="text-xl">{tokuten.coRon} 点</div>
         <div>
           <span>親：</span>
-          {tokuten.oyaRon !== "null" && <span>{tokuten.oyaRon}</span>}
-          {tokuten.oyaTsumo !== "null" && <span>（{tokuten.oyaTsumo}）</span>}
+          <span>{tokuten.oyaRon}</span>
+          <span>（{tokuten.oyaTsumo}）</span>
         </div>
         <div>
           <span>子：</span>
-          {tokuten.coRon !== "null" && <span>{tokuten.coRon}</span>}
-          {tokuten.coTsumo !== "null" && <span>（{tokuten.coTsumo}）</span>}
+          <span>{tokuten.coRon}</span>
+          <span>（{tokuten.coTsumo}）</span>
         </div>
       </div>
     </div>

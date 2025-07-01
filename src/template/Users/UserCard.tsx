@@ -14,12 +14,12 @@ const cardSizeClassName = {
   md: {
     card: "h-16 w-16",
     image: { width: 30, height: 30 },
-    text: "text-sm mt-1",
+    text: "text-xs mt-1",
   },
   mdWf: {
     card: "h-16 w-full",
     image: { width: 30, height: 30 },
-    text: "text-sm mt-1",
+    text: "text-xs mt-1",
   },
   lg: {
     card: "h-40 w-40",

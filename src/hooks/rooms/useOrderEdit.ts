@@ -12,16 +12,38 @@ export const useOrderEdit = (initialScores: TiedScore[]) => {
     setOrderedScores(newOrder);
   };
 
+  // 上に移動可能かチェック
+  const canMoveUp = (index: number): boolean => {
+    if (index === 0) return false;
+
+    const currentScore = orderedScores[index].score;
+    const upperScore = orderedScores[index - 1].score;
+
+    // 上のプレイヤーのスコアが大きい場合は移動不可
+    return currentScore >= upperScore;
+  };
+
+  // 下に移動可能かチェック
+  const canMoveDown = (index: number): boolean => {
+    if (index === orderedScores.length - 1) return false;
+
+    const currentScore = orderedScores[index].score;
+    const lowerScore = orderedScores[index + 1].score;
+
+    // 下のプレイヤーのスコアが小さい場合は移動不可
+    return currentScore <= lowerScore;
+  };
+
   // 上に移動
   const moveUp = (index: number) => {
-    if (index > 0) {
+    if (canMoveUp(index)) {
       movePlayer(index, index - 1);
     }
   };
 
   // 下に移動
   const moveDown = (index: number) => {
-    if (index < orderedScores.length - 1) {
+    if (canMoveDown(index)) {
       movePlayer(index, index + 1);
     }
   };
@@ -37,5 +59,7 @@ export const useOrderEdit = (initialScores: TiedScore[]) => {
     moveUp,
     moveDown,
     resetOrder,
+    canMoveUp,
+    canMoveDown,
   };
 };

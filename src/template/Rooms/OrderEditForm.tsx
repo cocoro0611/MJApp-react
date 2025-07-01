@@ -21,7 +21,8 @@ const OrderEditForm = ({
   gameCount,
   tiedScores,
 }: OrderEditFormProps) => {
-  const { orderedScores, moveUp, moveDown } = useOrderEdit(tiedScores);
+  const { orderedScores, moveUp, moveDown, canMoveUp, canMoveDown } =
+    useOrderEdit(tiedScores);
   const { isPending, toastMessage, toastColor, redirect, handleSubmit } =
     useServerActionToast(updateScoreOrder);
 
@@ -40,7 +41,7 @@ const OrderEditForm = ({
 
       <div className="center flex-col space-y-4 mb-8">
         {orderedScores.map((scoreData, index) => (
-          <Card key={scoreData.userId} className="p-2">
+          <Card key={scoreData.userId} isEffect={false} className="p-2">
             <input
               type="hidden"
               name={`order-${scoreData.userId}`}
@@ -67,7 +68,7 @@ const OrderEditForm = ({
               <div className="col-span-4 center gap-2">
                 <Button
                   color="white"
-                  disabled={index === 0}
+                  disabled={!canMoveUp(index)}
                   className="w-12 h-12 rounded"
                   onClick={() => moveUp(index)}
                 >
@@ -75,7 +76,7 @@ const OrderEditForm = ({
                 </Button>
                 <Button
                   color="white"
-                  disabled={index === orderedScores.length - 1}
+                  disabled={!canMoveDown(index)}
                   className="w-12 h-12 rounded"
                   onClick={() => moveDown(index)}
                 >
