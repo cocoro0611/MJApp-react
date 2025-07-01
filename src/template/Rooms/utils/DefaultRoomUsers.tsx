@@ -14,7 +14,7 @@ const DefaultRoomUsers = ({ roomUsers }: DefaultRoomUsersProps) => {
         <Button
           href="/rooms/new/users"
           color="secondary"
-          className="px-4 py-1 rounded-lg text-sm"
+          className="px-2 py-1 rounded text-xs"
         >
           カスタム
         </Button>

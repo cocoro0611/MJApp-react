@@ -2,7 +2,7 @@
 
 import { revalidateAll } from "../../../revalidate-wrapper";
 import { db } from "../../../db";
-import type { UpdateRoom } from "../../type";
+import type { UpdateRoom, UpdateSetting } from "../../type";
 import { updateScoreResults } from "./utils/update-score-results";
 
 export const updateRoom = async (data: FormData) => {
@@ -17,6 +17,15 @@ export const updateRoom = async (data: FormData) => {
       scoreRate: Number(data.get("scoreRate")),
       chipRate: Number(data.get("chipRate")),
       gameAmount: Number(data.get("gameAmount")),
+      updatedAt: new Date(),
+    };
+
+    const updateSetting: UpdateSetting = {
+      defaultInitialPoint: room.initialPoint,
+      defaultReturnPoint: room.returnPoint,
+      defaultBonusPoint: room.bonusPoint,
+      defaultScoreRate: room.scoreRate,
+      defaultChipRate: room.chipRate,
       updatedAt: new Date(),
     };
 
@@ -37,6 +46,20 @@ export const updateRoom = async (data: FormData) => {
         room.bonusPoint,
         { skipDefaults: true }
       );
+
+      // 3. Settingを更新（最初の1件を更新）
+      const existingSetting = await trx
+        .selectFrom("Setting")
+        .select("id")
+        .executeTakeFirst();
+
+      if (existingSetting) {
+        await trx
+          .updateTable("Setting")
+          .set(updateSetting)
+          .where("id", "=", existingSetting.id)
+          .execute();
+      }
     });
 
     await revalidateAll();

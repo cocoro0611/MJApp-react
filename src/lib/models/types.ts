@@ -41,6 +41,16 @@ export type Score = {
     userId: string;
     roomId: string;
 };
+export type Setting = {
+    id: Generated<string>;
+    defaultInitialPoint: number;
+    defaultReturnPoint: number;
+    defaultBonusPoint: string;
+    defaultScoreRate: number;
+    defaultChipRate: number;
+    createdAt: Generated<Timestamp>;
+    updatedAt: Generated<Timestamp>;
+};
 export type User = {
     id: Generated<string>;
     name: string;
@@ -54,5 +64,6 @@ export type DB = {
     Room: Room;
     RoomUser: RoomUser;
     Score: Score;
+    Setting: Setting;
     User: User;
 };

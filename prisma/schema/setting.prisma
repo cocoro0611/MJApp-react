@@ -1,0 +1,10 @@
+model Setting {
+    id                  String   @id @default(uuid()) @db.Uuid
+    defaultInitialPoint Int
+    defaultReturnPoint  Int
+    defaultBonusPoint   String
+    defaultScoreRate    Int
+    defaultChipRate     Int
+    createdAt           DateTime @default(now())
+    updatedAt           DateTime @default(now())
+}

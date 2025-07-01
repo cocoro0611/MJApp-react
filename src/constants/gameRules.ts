@@ -14,9 +14,9 @@ export const RETURN_POINT_OPTIONS = [
 
 export const BONUS_POINT_OPTIONS = [
   { value: "00-00", label: "なし" },
-  { value: "05-10", label: "5 - 10" },
-  { value: "10-20", label: "10 - 20" },
-  { value: "10-30", label: "10 - 30" },
+  { value: "05-10", label: "5-10" },
+  { value: "10-20", label: "10-20" },
+  { value: "10-30", label: "10-30" },
 ];
 
 export const SCORE_RATE_OPTIONS = [
