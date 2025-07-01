@@ -42,7 +42,7 @@ const SelectField = ({
       case "chipRate":
         return `${stringValue}P`; // 150 → "150P"
       case "scoreRate":
-        return `${stringValue}（1000点あたり）`; // 75 → "75（1000点あたり）"
+        return `${stringValue}P`; // 75P → "75P"
       case "bonusPoint":
         return stringValue; // "15-25" → "15-25"
       default:
@@ -94,7 +94,11 @@ const SelectField = ({
               className="p-1 rounded-2xl w-30"
               onClick={() => setSelectedValue(option.value)}
             >
-              {option.label}
+              <p>{option.label}</p>
+              {name === "scoreRate" &&
+                !options.some((opt) => opt.value === option.value) && (
+                  <p className="text-[0.6rem]">(1000点あたり)</p>
+                )}
             </Button>
           ))}
         </div>

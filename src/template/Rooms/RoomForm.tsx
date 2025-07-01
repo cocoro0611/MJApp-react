@@ -93,6 +93,10 @@ const RoomForm = ({
         onChange={(value) => setName(value)}
       />
       {roomUsers && <DefaultRoomUsers roomUsers={roomUsers} />}
+      <div className="mb-4 bg-accent-100 border border-accent-500 text-accent-800 rounded p-2 font-bold text-xs">
+        <p> ※ カスタムしたい場合は設定から変更してください</p>
+        <p>（ルーム作成後は変更できません）</p>
+      </div>
       <SelectField
         label="持ち点"
         name="initialPoint"
