@@ -31,8 +31,8 @@ const UserForm = ({ action, btnText, user, roomId }: UserFormProps) => {
         label="名前"
         name="name"
         type="text"
-        maxLength={4}
-        placeholder="名前を入力（４文字以内）"
+        maxLength={5}
+        placeholder="名前を入力（５文字以内）"
         value={name}
         onChange={(value) => setName(value)}
       />
