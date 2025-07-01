@@ -27,8 +27,14 @@ const HanOpenList = ({
 
         return (
           <div key={category} className="mb-4">
-            <div className="flex justify-start font-bold mb-2">{label}</div>
-            <div className="p-2 rounded-lg border border-dotted border-primary-500 bg-primary-200">
+            <div className="flex justify-start font-bold mb-2">
+              {" "}
+              <span>{label}</span>
+              <span className="ml-2 px-2 my-1 center text-[0.6rem] rounded-2xl text-white bg-primary-800">
+                複数選択可
+              </span>
+            </div>
+            <div className="p-2 rounded border border-dashed border-primary-500 bg-primary-100">
               <div className="grid-6">
                 {buttons.map((buttonConfig) => {
                   const originalIndex = HAN_OPEN_CONFIG.indexOf(buttonConfig);

@@ -47,16 +47,20 @@ const FuList = ({ buttonCounts, totalHan, onButtonClick }: FuListProps) => {
           <div key={category} className="mb-4">
             <div className="flex justify-start font-bold mb-2">
               <span>{label}</span>
-              {(category === "1-han" ||
-                category === "head" ||
-                category === "wait") && (
-                <span className="ml-2 px-2 my-1 center text-[0.6rem] rounded-2xl text-white bg-primary-800">
+              {category === "1-han" ||
+              category === "head" ||
+              category === "wait" ? (
+                <span className="ml-2 px-2 my-1 center text-[0.6rem] rounded-2xl text-white bg-accent-600">
                   1つまで選択可
+                </span>
+              ) : (
+                <span className="ml-2 px-2 my-1 center text-[0.6rem] rounded-2xl text-white bg-primary-800">
+                  複数選択可
                 </span>
               )}
             </div>
-            <div className="p-2 rounded-lg border border-dotted border-primary-500 bg-primary-200">
-              <div className="grid grid-cols-4 gap-4">
+            <div className="p-2 rounded border border-dashed border-primary-500 bg-primary-100">
+              <div className="grid grid-cols-4 gap-2">
                 {buttons.map((buttonConfig) => {
                   const originalIndex = FU_CONFIG.indexOf(buttonConfig);
                   return (
