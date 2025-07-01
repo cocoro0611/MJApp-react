@@ -71,13 +71,12 @@ const CustomSettingPage = async ({ params }: CustomSettingPageProps) => {
 
   return (
     <>
-      <Header title="　" isBackIcon={false} />
+      <Header title="カスタム設定" href="/setting/room-setting" />
       <Main>
-        <div className="font-bold text-xl mb-2">カスタム設定</div>
-        <div className="font-bold text-sm mb-8">
+        <div className="bg-secondary-100 border border-secondary-500 text-secondary-800 rounded p-2 font-bold text-sm mb-8">
           <p>{config.label}を入力してください。</p>
           {config.description && (
-            <div className="mt-2 bg-secondary-100 border border-secondary-500 text-secondary-800 rounded p-2">
+            <div>
               <p> {config.description}</p>
               <p> {config.description2}</p>
             </div>

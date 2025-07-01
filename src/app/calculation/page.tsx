@@ -5,12 +5,8 @@ import Button from "@/src/components/ui/Button";
 const CalculationPage = () => {
   return (
     <>
-      <Header title="　" isBackIcon={false} />
+      <Header title="計算一覧" isBackIcon={false} />
       <Main className="font-bold">
-        <div className="text-xl mb-2">計算の内容</div>
-        <div className="text-sm mb-8">
-          <p>計算したい内容を選択してください。</p>
-        </div>
         <Button
           href="/calculation/han-count"
           color="primary-light"

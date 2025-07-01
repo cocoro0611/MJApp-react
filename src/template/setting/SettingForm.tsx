@@ -64,7 +64,7 @@ const SettingForm = ({ action, btnText, setting }: SettingFormProps) => {
         options={INITIAL_POINT_OPTIONS}
         defaultValue={initialPoint}
         isCustomBtn={true}
-        href="/setting/initialPoint"
+        href="/setting/room-setting/initialPoint"
       />
       <SelectField
         label="返し点"
@@ -72,7 +72,7 @@ const SettingForm = ({ action, btnText, setting }: SettingFormProps) => {
         options={RETURN_POINT_OPTIONS}
         defaultValue={returnPoint}
         isCustomBtn={true}
-        href="/setting/returnPoint"
+        href="/setting/room-setting/returnPoint"
       />
       <SelectField
         label="ウマ"
@@ -80,7 +80,7 @@ const SettingForm = ({ action, btnText, setting }: SettingFormProps) => {
         options={BONUS_POINT_OPTIONS}
         defaultValue={bonusPoint}
         isCustomBtn={true}
-        href="/setting/bonusPoint"
+        href="/setting/room-setting/bonusPoint"
       />
       <SelectField
         label="レート"
@@ -88,7 +88,7 @@ const SettingForm = ({ action, btnText, setting }: SettingFormProps) => {
         options={SCORE_RATE_OPTIONS}
         defaultValue={scoreRate}
         isCustomBtn={true}
-        href="/setting/scoreRate"
+        href="/setting/room-setting/scoreRate"
       />
       <SelectField
         label="チップ"
@@ -96,7 +96,7 @@ const SettingForm = ({ action, btnText, setting }: SettingFormProps) => {
         options={CHIP_RATE_OPTIONS}
         defaultValue={chipRate}
         isCustomBtn={true}
-        href="/setting/chipRate"
+        href="/setting/room-setting/chipRate"
       />
       <ToastButton
         toastMessage={toastMessage}

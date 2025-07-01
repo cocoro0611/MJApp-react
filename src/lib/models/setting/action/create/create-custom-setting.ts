@@ -86,13 +86,13 @@ export const createCustomSetting = async (data: FormData) => {
     return {
       success: true,
       message: "設定が保存されました",
-      redirect: "/setting",
+      redirect: "/setting/room-setting",
     };
   } catch (_error) {
     return {
       success: false,
       message: "設定の保存に失敗しました",
-      redirect: "/setting",
+      redirect: "/setting/room-setting",
     };
   }
 };
