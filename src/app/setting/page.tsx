@@ -15,19 +15,15 @@ const SettingPage = () => {
   };
 
   const handleLogout = async () => {
-    try {
-      sessionStorage.setItem("isLoggingOut", "true");
-      await signOut({ redirect: false });
+    // 1. NextAuthからサインアウト
+    await signOut({ redirect: false });
 
-      const response = await fetch("/api/auth/logout", { method: "POST" });
-      const { logoutUrl } = await response.json();
-
-      window.location.href = logoutUrl;
-    } catch {
-      sessionStorage.removeItem("isLoggingOut");
-      window.location.href = "/";
-    }
+    // 2. Cognitoのログアウト用URLを取得してリダイレクト
+    const response = await fetch("/api/auth/logout", { method: "POST" });
+    const { logoutUrl } = await response.json();
+    window.location.href = logoutUrl;
   };
+
   return (
     <>
       <Header title="設定一覧" isBackIcon={false} />

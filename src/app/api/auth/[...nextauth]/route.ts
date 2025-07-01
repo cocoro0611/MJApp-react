@@ -81,6 +81,11 @@ export const authOptions: NextAuthOptions = {
 
       return session;
     },
+
+    async redirect({ url, baseUrl }) {
+      // ログイン後は常にトップページ（/）にリダイレクト
+      return baseUrl;
+    },
   },
   session: {
     strategy: "jwt",
