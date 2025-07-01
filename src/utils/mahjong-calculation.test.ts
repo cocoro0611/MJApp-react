@@ -20,9 +20,9 @@ describe("翻数と符数に応じた点数を計算する関数のテスト", (
 
     expect(result).toEqual({
       oyaRon: "2400",
-      oyaTsumo: "null",
+      oyaTsumo: "800 All",
       coRon: "1600",
-      coTsumo: "null",
+      coTsumo: "800 / 400",
     });
   });
 
@@ -31,9 +31,9 @@ describe("翻数と符数に応じた点数を計算する関数のテスト", (
     const result = getAllScores(han, fu);
 
     expect(result).toEqual({
-      oyaRon: "null",
+      oyaRon: "3900",
       oyaTsumo: "1300 All",
-      coRon: "null",
+      coRon: "2600",
       coTsumo: "1300 / 700",
     });
   });
