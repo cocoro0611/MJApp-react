@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "../ui/Button";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 type optionsType = {
   value: number | string;
@@ -29,6 +29,43 @@ const SelectField = ({
     defaultValue
   );
 
+  const generateCustomLabel = (
+    value: number | string,
+    fieldName: string
+  ): string => {
+    const stringValue = String(value);
+
+    switch (fieldName) {
+      case "initialPoint":
+      case "returnPoint":
+        return `${stringValue}点`; // 35000 → "35000点"
+      case "chipRate":
+        return `${stringValue}P`; // 150 → "150P"
+      case "scoreRate":
+        return `${stringValue}（1000点あたり）`; // 75 → "75（1000点あたり）"
+      case "bonusPoint":
+        return stringValue; // "15-25" → "15-25"
+      default:
+        return stringValue; // その他はそのまま
+    }
+  };
+
+  const displayOptions = useMemo(() => {
+    const existsInOptions = options.some(
+      (option) => option.value === selectedValue
+    );
+
+    if (existsInOptions) {
+      return options;
+    } else {
+      const customOption: optionsType = {
+        value: selectedValue,
+        label: generateCustomLabel(selectedValue, name),
+      };
+      return [...options, customOption];
+    }
+  }, [options, selectedValue, name]);
+
   return (
     <div className="w-full">
       <div className="flex justify-between text-primary-800 font-bold">
@@ -46,7 +83,7 @@ const SelectField = ({
       </div>
       <div className="center gap-2 mt-2 text-sm">
         <div className="grid-2">
-          {options.map((option) => (
+          {displayOptions.map((option) => (
             <Button
               key={option.value}
               color={

@@ -12,7 +12,7 @@ import {
   DEFAULT_GAME_RULES,
 } from "@/src/constants/gameRules";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
-import type {  ReadSetting } from "@/src/lib/models/rooms/type";
+import type { ReadSetting } from "@/src/lib/models/rooms/type";
 import type { ServerAction } from "@/src/hooks/ui/useServerActionToast";
 
 interface SettingFormProps {
@@ -63,30 +63,40 @@ const SettingForm = ({ action, btnText, setting }: SettingFormProps) => {
         name="initialPoint"
         options={INITIAL_POINT_OPTIONS}
         defaultValue={initialPoint}
+        isCustomBtn={true}
+        href="/setting/initialPoint"
       />
       <SelectField
         label="返し点"
         name="returnPoint"
         options={RETURN_POINT_OPTIONS}
         defaultValue={returnPoint}
+        isCustomBtn={true}
+        href="/setting/returnPoint"
       />
       <SelectField
         label="ウマ"
         name="bonusPoint"
         options={BONUS_POINT_OPTIONS}
         defaultValue={bonusPoint}
+        isCustomBtn={true}
+        href="/setting/bonusPoint"
       />
       <SelectField
         label="レート"
         name="scoreRate"
         options={SCORE_RATE_OPTIONS}
         defaultValue={scoreRate}
+        isCustomBtn={true}
+        href="/setting/scoreRate"
       />
       <SelectField
         label="チップ"
         name="chipRate"
         options={CHIP_RATE_OPTIONS}
         defaultValue={chipRate}
+        isCustomBtn={true}
+        href="/setting/chipRate"
       />
       <ToastButton
         toastMessage={toastMessage}
