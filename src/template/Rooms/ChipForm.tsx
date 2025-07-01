@@ -34,7 +34,7 @@ const ChipForm = ({ scores, chips, roomId, roomChipRate }: ChipFormProps) => {
     useChipEditor(chips);
 
   // 自動スクロール機能
-  useAutoScroll({ selected, scores });
+  useAutoScroll({ selected, scores, chips });
 
   const handleChipChange = (newChip: number) => {
     if (!selected) return;

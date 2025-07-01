@@ -49,6 +49,7 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
         <AmountBoard amount={roomDetail.gameAmount} />
         <ScoreForm
           scores={scores}
+          chips={chips}
           roomId={roomId}
           roomInitialPoint={roomDetail.initialPoint}
         />

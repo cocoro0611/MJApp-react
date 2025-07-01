@@ -10,15 +10,21 @@ import { useScoreEditor } from "@/src/hooks/rooms/useScoreEditor";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import { useAutoScroll } from "@/src/hooks/rooms/useAutoScroll";
 import { updateScore } from "@/src/lib/models/rooms";
-import type { ReadScore } from "@/src/lib/models/rooms/type";
+import type { ReadScore, ReadChip } from "@/src/lib/models/rooms/type";
 
 interface ScoreFormProps {
   scores: ReadScore[];
+  chips: ReadChip[];
   roomId: string;
   roomInitialPoint: number;
 }
 
-const ScoreForm = ({ scores, roomId, roomInitialPoint }: ScoreFormProps) => {
+const ScoreForm = ({
+  scores,
+  chips,
+  roomId,
+  roomInitialPoint,
+}: ScoreFormProps) => {
   const { selected, openSelect, closeSelect, moveLeft, moveRight } =
     useSelect();
   const {
@@ -33,7 +39,7 @@ const ScoreForm = ({ scores, roomId, roomInitialPoint }: ScoreFormProps) => {
     useScoreEditor(scores, roomInitialPoint);
 
   // 自動スクロール機能
-  useAutoScroll({ selected, scores });
+  useAutoScroll({ selected, scores, chips });
 
   const handleScoreChange = (newScore: number) => {
     if (!selected) return;
