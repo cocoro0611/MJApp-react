@@ -5,6 +5,7 @@ interface CardProps {
   children: ReactNode;
   href?: string;
   isColor?: boolean;
+  isEffect?: boolean;
   className?: string;
   onClick?: () => void;
 }
@@ -13,14 +14,17 @@ const Card = ({
   children,
   href = "",
   isColor = true,
+  isEffect = true,
   className = "",
   onClick,
 }: CardProps) => {
   return (
     <Link
       href={href}
-      className={`effect-scale rounded-lg font-bold 
-      ${isColor ? "secondary" : "border border-gray-200"} ${className}`}
+      className={`rounded-lg font-bold 
+      ${isColor ? "secondary" : "border border-gray-200"} 
+      ${isEffect ? "effect-scale" : ""}
+      ${className}`}
       onClick={onClick}
     >
       {children}
