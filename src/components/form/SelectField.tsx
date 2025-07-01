@@ -13,6 +13,8 @@ interface SelectFieldProps {
   name: string;
   options: optionsType[];
   defaultValue: number | string;
+  isCustomBtn?: boolean;
+  href?: string;
 }
 
 const SelectField = ({
@@ -20,6 +22,8 @@ const SelectField = ({
   name,
   options,
   defaultValue,
+  isCustomBtn = false,
+  href = "",
 }: SelectFieldProps) => {
   const [selectedValue, setSelectedValue] = useState<number | string>(
     defaultValue
@@ -27,10 +31,19 @@ const SelectField = ({
 
   return (
     <div className="w-full">
-      <label htmlFor={name} className="flex text-primary-800 font-bold">
-        {label}
-      </label>
-      <input id={name} name={name} type="hidden" value={selectedValue} />
+      <div className="flex justify-between text-primary-800 font-bold">
+        <input id={name} name={name} type="hidden" value={selectedValue} />
+        <label htmlFor={name}>{label}</label>
+        {isCustomBtn && (
+          <Button
+            href={href}
+            color="secondary"
+            className="px-2 py-1 rounded text-xs"
+          >
+            カスタム
+          </Button>
+        )}
+      </div>
       <div className="center gap-2 mt-2 text-sm">
         <div className="grid-2">
           {options.map((option) => (
