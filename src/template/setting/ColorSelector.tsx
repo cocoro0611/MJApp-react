@@ -50,19 +50,23 @@ const ColorSelector = ({
 
         {/* プライマリカラー選択 */}
         <div>
-          <label className="flex text-primary-800 font-bold mb-2">
-            プライマリカラー
+          <label className="flex text-primary-800 font-bold mb-3">
+            プライマリカラー（メインカラー）
           </label>
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 gap-3">
             {COLOR_OPTIONS.map((option) => (
               <Button
                 key={`primary-${option.value}`}
                 color={
                   selectedPrimary === option.value ? "toggle-on" : "toggle-off"
                 }
-                className="p-2 rounded text-xs"
+                className="p-3 rounded text-sm flex items-center gap-2"
                 onClick={() => handlePrimaryChange(option.value as Color)}
               >
+                <div
+                  className="w-4 h-4 rounded-full border border-gray-300"
+                  style={{ backgroundColor: option.preview }}
+                />
                 {option.label}
               </Button>
             ))}
@@ -71,10 +75,10 @@ const ColorSelector = ({
 
         {/* セカンダリカラー選択 */}
         <div>
-          <label className="flex text-secondary-800 font-bold mb-2">
-            セカンダリカラー
+          <label className="flex text-secondary-800 font-bold mb-3">
+            セカンダリカラー（アクセントカラー）
           </label>
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 gap-3">
             {COLOR_OPTIONS.map((option) => (
               <Button
                 key={`secondary-${option.value}`}
@@ -83,9 +87,13 @@ const ColorSelector = ({
                     ? "toggle-on"
                     : "toggle-off"
                 }
-                className="p-2 rounded text-xs"
+                className="p-3 rounded text-sm flex items-center gap-2"
                 onClick={() => handleSecondaryChange(option.value as Color)}
               >
+                <div
+                  className="w-4 h-4 rounded-full border border-gray-300"
+                  style={{ backgroundColor: option.preview }}
+                />
                 {option.label}
               </Button>
             ))}
@@ -96,7 +104,7 @@ const ColorSelector = ({
           toastMessage={toastMessage}
           toastColor={toastColor}
           redirect={redirect}
-          className="rounded p-3 text-sm w-full"
+          className="rounded p-2 w-full font-bold"
         >
           {isPending ? "保存中..." : "保存"}
         </ToastButton>
