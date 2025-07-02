@@ -4,14 +4,21 @@ import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import Button from "@/src/components/ui/Button";
 import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const SettingPage = () => {
   const { data: session } = useSession();
   const isAdmin = session?.user.groups?.includes("admin") || false;
+  const router = useRouter();
 
-  const noticeCreate = async () => {
+  const handleColorSettingAccess = async () => {
     const response = await fetch("/api/auth/actions/admin", { method: "POST" });
-    if (response.ok) console.log("実処理はここに書く");
+
+    if (response.ok) {
+      router.push("/setting/color-setting");
+    } else {
+      alert("管理者権限が必要です");
+    }
   };
 
   const handleLogout = async () => {
@@ -26,7 +33,17 @@ const SettingPage = () => {
 
   return (
     <>
-      <Header title="設定一覧" isBackIcon={false} />
+      <Header title="設定一覧" isBackIcon={false}>
+        {session && (
+          <Button
+            color="secondary"
+            className="text-sm font-bold py-0.5 px-1.5 rounded"
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
+        )}
+      </Header>
       <Main className="font-bold">
         <Button
           href="/setting/room-setting"
@@ -35,22 +52,14 @@ const SettingPage = () => {
         >
           ルーム設定
         </Button>
-        {session && (
-          <Button
-            color="danger"
-            className="rounded p-4 text-lg w-60 mb-8"
-            onClick={handleLogout}
-          >
-            ログアウト
-          </Button>
-        )}
+        {/* テーマカラー設定はAdmin権限しか行えない */}
         <Button
-          color="primary"
+          color="primary-light"
           className="rounded p-4 text-lg w-60 mb-8"
           disabled={!isAdmin}
-          onClick={noticeCreate}
+          onClick={handleColorSettingAccess}
         >
-          テストボタン
+          テーマカラー設定
         </Button>
       </Main>
     </>

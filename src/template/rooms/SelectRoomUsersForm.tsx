@@ -31,7 +31,7 @@ const SelectRoomUsersForm = ({ action, users }: SelectRoomUsersFormProps) => {
         <input key={userId} type="hidden" name="userIds" value={userId} />
       ))}
 
-      <div className="grid-4">
+      <div className="grid-4 gap-4">
         {users.map((user) => (
           <div key={user.id} onClick={() => toggleUser(user.id)}>
             <UserCard

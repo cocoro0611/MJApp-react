@@ -1,10 +1,8 @@
-import { createSetting } from "./action/create/create-setting";
-import { createCustomSetting } from "./action/create/create-custom-setting";
+import { readSetting } from "./action/read-setting";
 
-import { readSetting } from "./action/read/read-setting";
+import { upsertDefaultRoom } from "./action/upsert/upsert-default-room";
+import { upsertDefaultRoomCustom } from "./action/upsert/upsert-default-room-custom";
+import { upsertColor } from "./action/upsert/upsert-color";
 
-import { updateSetting } from "./action/update/update-setting";
-
-export { createSetting, createCustomSetting };
 export { readSetting };
-export { updateSetting };
+export { upsertDefaultRoom, upsertDefaultRoomCustom, upsertColor };

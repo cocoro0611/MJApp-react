@@ -7,8 +7,8 @@ import type {
   CreateRoom,
   CreateRoomUser,
   CreateScore,
-  CreateSetting,
-  UpdateSetting,
+  CreateDefaultRoom,
+  UpdateDefaultRoom,
 } from "../../type";
 
 export const createRoom = async (data: FormData) => {
@@ -49,12 +49,12 @@ export const createRoom = async (data: FormData) => {
       defaultChipRate: room.chipRate,
     };
 
-    const createSetting: CreateSetting = {
+    const createDefaultRoom: CreateDefaultRoom = {
       id: v4(),
       ...setting,
     };
 
-    const updateSetting: UpdateSetting = {
+    const updateDefaultRoom: UpdateDefaultRoom = {
       ...setting,
       updatedAt: new Date(),
     };
@@ -73,11 +73,11 @@ export const createRoom = async (data: FormData) => {
       if (existingSetting) {
         await trx
           .updateTable("Setting")
-          .set(updateSetting)
+          .set(updateDefaultRoom)
           .where("id", "=", existingSetting.id)
           .execute();
       } else {
-        await trx.insertInto("Setting").values(createSetting).execute();
+        await trx.insertInto("Setting").values(createDefaultRoom).execute();
       }
     });
 

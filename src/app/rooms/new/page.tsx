@@ -17,7 +17,7 @@ const RoomNewPage = async () => {
           action={createRoom}
           btnText="作成"
           roomUsers={roomUsers}
-          setting={setting || undefined}
+          setting={setting}
         />
       </Main>
     </>

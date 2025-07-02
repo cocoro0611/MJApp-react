@@ -12,49 +12,21 @@ import {
   DEFAULT_GAME_RULES,
 } from "@/src/constants/gameRules";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
-import type { ReadSetting } from "@/src/lib/models/rooms/type";
-import type { ServerAction } from "@/src/hooks/ui/useServerActionToast";
+import { upsertDefaultRoom } from "@/src/lib/models/setting";
 
 interface SettingFormProps {
-  action: ServerAction;
-  btnText: string;
-  setting?: ReadSetting;
+  setting?: {
+    defaultInitialPoint?: number | null;
+    defaultReturnPoint?: number | null;
+    defaultBonusPoint?: string | null;
+    defaultScoreRate?: number | null;
+    defaultChipRate?: number | null;
+  };
 }
 
-const SettingForm = ({ action, btnText, setting }: SettingFormProps) => {
-  // デフォルト値の設定
-  const getDefaultValue = (
-    settingValue: number | undefined,
-    fallbackValue: number
-  ): number => {
-    return settingValue ?? fallbackValue;
-  };
-
-  const initialPoint = getDefaultValue(
-    setting?.defaultInitialPoint,
-    DEFAULT_GAME_RULES.initialPoint
-  );
-
-  const returnPoint = getDefaultValue(
-    setting?.defaultReturnPoint,
-    DEFAULT_GAME_RULES.returnPoint
-  );
-
-  const bonusPoint =
-    setting?.defaultBonusPoint ?? DEFAULT_GAME_RULES.bonusPoint;
-
-  const scoreRate = getDefaultValue(
-    setting?.defaultScoreRate,
-    DEFAULT_GAME_RULES.scoreRate
-  );
-
-  const chipRate = getDefaultValue(
-    setting?.defaultChipRate,
-    DEFAULT_GAME_RULES.chipRate
-  );
-
+const SettingForm = ({ setting }: SettingFormProps) => {
   const { isPending, toastMessage, toastColor, redirect, handleSubmit } =
-    useServerActionToast(action);
+    useServerActionToast(upsertDefaultRoom);
 
   return (
     <Form action={handleSubmit} className="space-y-8">
@@ -62,7 +34,9 @@ const SettingForm = ({ action, btnText, setting }: SettingFormProps) => {
         label="持ち点"
         name="initialPoint"
         options={INITIAL_POINT_OPTIONS}
-        defaultValue={initialPoint}
+        defaultValue={
+          setting?.defaultInitialPoint ?? DEFAULT_GAME_RULES.initialPoint
+        }
         isCustomBtn={true}
         href="/setting/room-setting/initialPoint"
       />
@@ -70,7 +44,9 @@ const SettingForm = ({ action, btnText, setting }: SettingFormProps) => {
         label="返し点"
         name="returnPoint"
         options={RETURN_POINT_OPTIONS}
-        defaultValue={returnPoint}
+        defaultValue={
+          setting?.defaultReturnPoint ?? DEFAULT_GAME_RULES.returnPoint
+        }
         isCustomBtn={true}
         href="/setting/room-setting/returnPoint"
       />
@@ -78,7 +54,9 @@ const SettingForm = ({ action, btnText, setting }: SettingFormProps) => {
         label="ウマ"
         name="bonusPoint"
         options={BONUS_POINT_OPTIONS}
-        defaultValue={bonusPoint}
+        defaultValue={
+          setting?.defaultBonusPoint ?? DEFAULT_GAME_RULES.bonusPoint
+        }
         isCustomBtn={true}
         href="/setting/room-setting/bonusPoint"
       />
@@ -86,7 +64,7 @@ const SettingForm = ({ action, btnText, setting }: SettingFormProps) => {
         label="レート"
         name="scoreRate"
         options={SCORE_RATE_OPTIONS}
-        defaultValue={scoreRate}
+        defaultValue={setting?.defaultScoreRate ?? DEFAULT_GAME_RULES.scoreRate}
         isCustomBtn={true}
         href="/setting/room-setting/scoreRate"
       />
@@ -94,7 +72,7 @@ const SettingForm = ({ action, btnText, setting }: SettingFormProps) => {
         label="チップ"
         name="chipRate"
         options={CHIP_RATE_OPTIONS}
-        defaultValue={chipRate}
+        defaultValue={setting?.defaultChipRate ?? DEFAULT_GAME_RULES.chipRate}
         isCustomBtn={true}
         href="/setting/room-setting/chipRate"
       />
@@ -103,7 +81,7 @@ const SettingForm = ({ action, btnText, setting }: SettingFormProps) => {
         toastColor={toastColor}
         redirect={redirect}
       >
-        {isPending ? `${btnText}中...` : btnText}
+        {isPending ? "保存中..." : "保存"}
       </ToastButton>
     </Form>
   );

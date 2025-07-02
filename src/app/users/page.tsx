@@ -12,7 +12,7 @@ const UsersPage = async () => {
     <>
       <Header title="ユーザー一覧" isBackIcon={false} />
       <Main isBlank={true}>
-        <div className="grid-4">
+        <div className="grid-4 gap-4">
           {users.map((user) => (
             <UserCard
               key={user.id}

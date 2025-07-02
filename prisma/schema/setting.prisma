@@ -1,10 +1,12 @@
 model Setting {
     id                  String   @id @default(uuid()) @db.Uuid
-    defaultInitialPoint Int
-    defaultReturnPoint  Int
-    defaultBonusPoint   String
-    defaultScoreRate    Int
-    defaultChipRate     Int
+    defaultInitialPoint Int?
+    defaultReturnPoint  Int?
+    defaultBonusPoint   String?
+    defaultScoreRate    Int?
+    defaultChipRate     Int?
+    primaryColor        String?
+    secondaryColor      String?
     createdAt           DateTime @default(now())
     updatedAt           DateTime @default(now())
 }

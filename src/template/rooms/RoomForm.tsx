@@ -15,7 +15,10 @@ import {
 } from "@/src/constants/gameRules";
 import { useState } from "react";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
-import type { ReadRoomDetail, ReadSetting } from "@/src/lib/models/rooms/type";
+import type {
+  ReadRoomDetail,
+  ReadDefaultRoom,
+} from "@/src/lib/models/rooms/type";
 import type { ReadUser } from "@/src/lib/models/users/type";
 import type { ServerAction } from "@/src/hooks/ui/useServerActionToast";
 
@@ -24,7 +27,7 @@ interface RoomFormProps {
   btnText: string;
   room?: ReadRoomDetail;
   roomUsers?: ReadUser[];
-  setting?: ReadSetting;
+  setting?: ReadDefaultRoom;
 }
 
 const RoomForm = ({
@@ -42,7 +45,7 @@ const RoomForm = ({
   // デフォルト値の設定
   const getDefaultValue = (
     roomValue: number | undefined,
-    settingValue: number | undefined,
+    settingValue: number | null | undefined,
     fallbackValue: number
   ): number => {
     return roomValue ?? settingValue ?? fallbackValue;

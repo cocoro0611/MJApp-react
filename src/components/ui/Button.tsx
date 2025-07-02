@@ -9,6 +9,7 @@ interface ButtonProps {
   color?:
     | "primary"
     | "primary-light"
+    | "secondary"
     | "danger"
     | "cancel"
     | "white"
