@@ -10,14 +10,14 @@ const CalculationPage = () => {
         <Button
           href="/calculation/han-count"
           color="primary-light"
-          className="rounded p-4 text-lg w-60 mb-8"
+          className="rounded-lg p-8 text-lg w-60 mb-8 shadow-xl"
         >
           飜数計算
         </Button>
         <Button
           href="/calculation/fu-count"
           color="primary-light"
-          className="rounded p-4 text-lg w-60"
+          className="rounded-lg p-8 text-lg w-60 shadow-xl"
         >
           符数計算
         </Button>

@@ -56,6 +56,7 @@ const ColorSelector = ({
           <div className="grid-4 gap-2">
             {COLOR_OPTIONS.map((option) => (
               <Button
+                type="submit"
                 key={`primary-${option.value}`}
                 color={
                   selectedPrimary === option.value ? "toggle-on" : "toggle-off"
@@ -81,6 +82,7 @@ const ColorSelector = ({
           <div className="grid-4 gap-2">
             {COLOR_OPTIONS.map((option) => (
               <Button
+                type="submit"
                 key={`secondary-${option.value}`}
                 color={
                   selectedSecondary === option.value
@@ -105,7 +107,7 @@ const ColorSelector = ({
           toastColor={toastColor}
           redirect={redirect}
           shouldReload={true} // カラー変更時はリロードする
-          className="rounded p-2 w-full font-bold"
+          className="hidden"
         >
           {isPending ? "保存中..." : "保存"}
         </ToastButton>

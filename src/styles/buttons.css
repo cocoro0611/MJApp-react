@@ -4,7 +4,7 @@
     @apply text-white;
   }
   .primary-light {
-    @apply bg-primary-100 hover:bg-primary-200 active:bg-primary-300 shadow;
+    @apply bg-primary-100 hover:bg-primary-200 active:bg-primary-300;
     @apply border border-primary-300;
     @apply text-primary-800;
   }

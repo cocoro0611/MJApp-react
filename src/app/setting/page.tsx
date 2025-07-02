@@ -6,6 +6,7 @@ import Button from "@/src/components/ui/Button";
 import LogoutForm from "@/src/components/form/LogoutForm";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import CalculateIcon from "@mui/icons-material/Calculate";
 
 const SettingPage = () => {
   const { data: session } = useSession();
@@ -31,14 +32,14 @@ const SettingPage = () => {
         <Button
           href="/setting/room-setting"
           color="primary-light"
-          className="rounded p-4 text-lg w-60 mb-8"
+          className="rounded-lg p-8 text-lg w-60 mb-8 shadow-xl"
         >
           ルーム設定
         </Button>
         {/* テーマカラー設定はAdmin権限しか行えない */}
         <Button
           color="primary-light"
-          className="rounded p-4 text-lg w-60 mb-8"
+          className="rounded-lg p-8 text-lg w-60 mb-8  shadow-xl"
           disabled={!isAdmin}
           onClick={handleColorSettingAccess}
         >
