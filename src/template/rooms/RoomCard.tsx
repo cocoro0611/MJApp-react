@@ -19,7 +19,7 @@ const RoomCard = ({ href, name, users }: RoomCardProps) => {
       <div className="text-left">{name}</div>
       <div className="center gap-8">
         {users.map((user) => (
-          <div key={user.name} className="text-[0.7rem] center flex-col">
+          <div key={user.name} className="text-sm center flex-col">
             <Image
               key={user.name}
               src={user.icon}
@@ -28,7 +28,9 @@ const RoomCard = ({ href, name, users }: RoomCardProps) => {
               height={40}
               className="pb-1"
             />
-            <div>{user.name}</div>
+            <div className={user.name.length === 5 ? "text-[0.6rem]" : ""}>
+              {user.name}
+            </div>
             <div
               className={
                 user.totalScore < 0 ? "text-negative" : "text-positive"
