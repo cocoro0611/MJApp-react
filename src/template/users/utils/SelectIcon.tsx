@@ -23,7 +23,7 @@ const SelectIcon = ({ name, value }: SelectIconProps) => {
       <div className="center py-4">
         <UserCard name={name} icon={selectedIcon} size="lg" />
       </div>
-      <div className="grid-6">
+      <div className="grid-6 gap-2">
         {iconList.map((icon) => (
           <Image
             key={icon}

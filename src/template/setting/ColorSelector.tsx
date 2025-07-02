@@ -50,17 +50,17 @@ const ColorSelector = ({
 
         {/* プライマリカラー選択 */}
         <div>
-          <label className="flex text-primary-800 font-bold mb-3">
+          <label className="flex text-primary-800 font-bold mb-2">
             プライマリカラー（メインカラー）
           </label>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid-4 gap-2">
             {COLOR_OPTIONS.map((option) => (
               <Button
                 key={`primary-${option.value}`}
                 color={
                   selectedPrimary === option.value ? "toggle-on" : "toggle-off"
                 }
-                className="p-3 rounded text-sm flex items-center gap-2"
+                className="py-2 rounded text-[0.6rem] font-bold center flex-col gap-1"
                 onClick={() => handlePrimaryChange(option.value as Color)}
               >
                 <div
@@ -75,10 +75,10 @@ const ColorSelector = ({
 
         {/* セカンダリカラー選択 */}
         <div>
-          <label className="flex text-secondary-800 font-bold mb-3">
+          <label className="flex text-secondary-800 font-bold mb-2">
             セカンダリカラー（アクセントカラー）
           </label>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid-4 gap-2">
             {COLOR_OPTIONS.map((option) => (
               <Button
                 key={`secondary-${option.value}`}
@@ -87,7 +87,7 @@ const ColorSelector = ({
                     ? "toggle-on"
                     : "toggle-off"
                 }
-                className="p-3 rounded text-sm flex items-center gap-2"
+                className="py-2 rounded text-[0.6rem] font-bold center flex-col gap-1"
                 onClick={() => handleSecondaryChange(option.value as Color)}
               >
                 <div

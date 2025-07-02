@@ -21,9 +21,7 @@ const ColorSettingPage = async () => {
       <Header title="テーマカラー設定" href="/setting" />
       <Main>
         <div className="bg-secondary-100 border border-secondary-500 text-secondary-800 rounded p-2 font-bold text-sm mb-8">
-          <div className="mb-2">テーマカラーを選択してください。</div>
-          <div>現在のメインカラー：{setting?.primaryColor || "blue"}</div>
-          <div>現在のサブカラー：{setting?.secondaryColor || "orange"}</div>
+          テーマカラーを選択してください。
         </div>
 
         <ColorSelector

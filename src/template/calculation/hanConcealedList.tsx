@@ -34,7 +34,7 @@ const HanConcealedList = ({
               </span>
             </div>
             <div className="p-2 rounded border border-dashed border-primary-500 bg-primary-100">
-              <div className="grid-6">
+              <div className="grid-6 gap-2">
                 {buttons.map((buttonConfig) => {
                   const originalIndex =
                     HAN_CONCEALED_CONFIG.indexOf(buttonConfig);
