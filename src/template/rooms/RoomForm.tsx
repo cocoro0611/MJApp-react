@@ -45,7 +45,7 @@ const RoomForm = ({
   // デフォルト値の設定
   const getDefaultValue = (
     roomValue: number | undefined,
-    settingValue: number | undefined,
+    settingValue: number | null | undefined,
     fallbackValue: number
   ): number => {
     return roomValue ?? settingValue ?? fallbackValue;

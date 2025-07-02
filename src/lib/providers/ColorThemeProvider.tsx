@@ -7,144 +7,87 @@ import {
   useEffect,
   useState,
 } from "react";
-import { COLOR_THEMES, DEFAULT_COLOR_THEME } from "@/src/constants/colorTheme";
-import type { ColorTheme } from "@/src/constants/colorTheme";
+import {
+  COLOR_PALETTES,
+  DEFAULT_PRIMARY_COLOR,
+  DEFAULT_SECONDARY_COLOR,
+  getValidColor,
+} from "@/src/constants/colorTheme";
+import type { Color } from "@/src/constants/colorTheme";
 
 interface ColorThemeContextType {
-  // 従来の統一テーマ
-  currentTheme: ColorTheme;
-  setTheme: (theme: ColorTheme) => void;
-
-  // 個別色選択
-  primaryColor: ColorTheme;
-  secondaryColor: ColorTheme;
-  setPrimaryColor: (color: ColorTheme) => void;
-  setSecondaryColor: (color: ColorTheme) => void;
-
-  // カスタムモードかどうか
-  isCustomMode: boolean;
-  setCustomMode: (enabled: boolean) => void;
+  primaryColor: Color;
+  secondaryColor: Color;
+  setPrimaryColor: (color: Color) => void;
+  setSecondaryColor: (color: Color) => void;
 }
 
 const ColorThemeContext = createContext<ColorThemeContextType>({
-  currentTheme: DEFAULT_COLOR_THEME,
-  setTheme: () => {},
-  primaryColor: DEFAULT_COLOR_THEME,
-  secondaryColor: DEFAULT_COLOR_THEME,
+  primaryColor: DEFAULT_PRIMARY_COLOR,
+  secondaryColor: DEFAULT_SECONDARY_COLOR,
   setPrimaryColor: () => {},
   setSecondaryColor: () => {},
-  isCustomMode: false,
-  setCustomMode: () => {},
 });
 
 export const useColorTheme = () => useContext(ColorThemeContext);
 
 interface ColorThemeProviderProps {
   children: ReactNode;
-  initialTheme?: ColorTheme;
-  initialPrimaryColor?: ColorTheme;
-  initialSecondaryColor?: ColorTheme;
-  initialCustomMode?: boolean;
+  initialPrimaryColor?: string;
+  initialSecondaryColor?: string;
 }
 
-export  const ColorThemeProvider = ({
+export const ColorThemeProvider = ({
   children,
-  initialTheme = DEFAULT_COLOR_THEME,
-  initialPrimaryColor = DEFAULT_COLOR_THEME,
-  initialSecondaryColor = DEFAULT_COLOR_THEME,
-  initialCustomMode = false,
+  initialPrimaryColor,
+  initialSecondaryColor,
 }: ColorThemeProviderProps) => {
-  const [currentTheme, setCurrentTheme] = useState<ColorTheme>(initialTheme);
-  const [primaryColor, setPrimaryColorState] =
-    useState<ColorTheme>(initialPrimaryColor);
-  const [secondaryColor, setSecondaryColorState] = useState<ColorTheme>(
-    initialSecondaryColor
+  // 型安全に初期値を設定
+  const [primaryColor, setPrimaryColorState] = useState<Color>(
+    getValidColor(initialPrimaryColor, DEFAULT_PRIMARY_COLOR)
   );
-  const [isCustomMode, setIsCustomMode] = useState(initialCustomMode);
+  const [secondaryColor, setSecondaryColorState] = useState<Color>(
+    getValidColor(initialSecondaryColor, DEFAULT_SECONDARY_COLOR)
+  );
 
-  const setTheme = (theme: ColorTheme) => {
-    setCurrentTheme(theme);
-    setIsCustomMode(false);
-    updateCSSVariables(theme, theme, false);
-  };
-
-  const setPrimaryColor = (color: ColorTheme) => {
+  const setPrimaryColor = (color: Color) => {
     setPrimaryColorState(color);
-    setIsCustomMode(true);
-    updateCSSVariables(color, secondaryColor, true);
+    updateCSSVariables(color, secondaryColor);
   };
 
-  const setSecondaryColor = (color: ColorTheme) => {
+  const setSecondaryColor = (color: Color) => {
     setSecondaryColorState(color);
-    setIsCustomMode(true);
-    updateCSSVariables(primaryColor, color, true);
+    updateCSSVariables(primaryColor, color);
   };
 
-  const setCustomMode = (enabled: boolean) => {
-    setIsCustomMode(enabled);
-    if (enabled) {
-      updateCSSVariables(primaryColor, secondaryColor, true);
-    } else {
-      updateCSSVariables(currentTheme, currentTheme, false);
-    }
-  };
-
-  const updateCSSVariables = (
-    primaryTheme: ColorTheme,
-    secondaryTheme: ColorTheme,
-    customMode: boolean
-  ) => {
+  const updateCSSVariables = (primary: Color, secondary: Color) => {
     const root = document.documentElement;
 
-    if (customMode) {
-      // カスタムモード：個別に選択された色を使用
-      const primaryColors = COLOR_THEMES[primaryTheme].primary;
-      const secondaryColors = COLOR_THEMES[secondaryTheme].primary; // secondary色も使いたい場合は.secondaryに変更
+    // プライマリカラーを更新
+    const primaryPalette = COLOR_PALETTES[primary];
+    Object.entries(primaryPalette).forEach(([shade, color]) => {
+      root.style.setProperty(`--color-primary-${shade}`, color);
+    });
 
-      // プライマリカラーを更新
-      Object.entries(primaryColors).forEach(([shade, color]) => {
-        root.style.setProperty(`--color-primary-${shade}`, color);
-      });
-
-      // セカンダリカラーを更新（選択された色のprimaryパレットを使用）
-      Object.entries(secondaryColors).forEach(([shade, color]) => {
-        root.style.setProperty(`--color-secondary-${shade}`, color);
-      });
-    } else {
-      // 統一テーマモード：定義済みの組み合わせを使用
-      const themeColors = COLOR_THEMES[primaryTheme];
-
-      // プライマリカラーを更新
-      Object.entries(themeColors.primary).forEach(([shade, color]) => {
-        root.style.setProperty(`--color-primary-${shade}`, color);
-      });
-
-      // セカンダリカラーを更新
-      Object.entries(themeColors.secondary).forEach(([shade, color]) => {
-        root.style.setProperty(`--color-secondary-${shade}`, color);
-      });
-    }
+    // セカンダリカラーを更新
+    const secondaryPalette = COLOR_PALETTES[secondary];
+    Object.entries(secondaryPalette).forEach(([shade, color]) => {
+      root.style.setProperty(`--color-secondary-${shade}`, color);
+    });
   };
 
+  // 初回レンダリング時にCSSを更新
   useEffect(() => {
-    if (isCustomMode) {
-      updateCSSVariables(primaryColor, secondaryColor, true);
-    } else {
-      updateCSSVariables(currentTheme, currentTheme, false);
-    }
-  }, [currentTheme, primaryColor, secondaryColor, isCustomMode]);
+    updateCSSVariables(primaryColor, secondaryColor);
+  }, [primaryColor, secondaryColor]);
 
   return (
     <ColorThemeContext.Provider
       value={{
-        currentTheme,
-        setTheme,
         primaryColor,
         secondaryColor,
         setPrimaryColor,
         setSecondaryColor,
-        isCustomMode,
-        setCustomMode,
       }}
     >
       {children}

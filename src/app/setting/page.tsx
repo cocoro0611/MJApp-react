@@ -26,7 +26,17 @@ const SettingPage = () => {
 
   return (
     <>
-      <Header title="設定一覧" isBackIcon={false} />
+      <Header title="設定一覧" isBackIcon={false}>
+        {session && (
+          <Button
+            color="secondary"
+            className="text-sm font-bold py-0.5 px-1.5 rounded"
+            onClick={handleLogout}
+          >
+            Logut
+          </Button>
+        )}
+      </Header>
       <Main className="font-bold">
         <Button
           href="/setting/room-setting"
@@ -35,22 +45,15 @@ const SettingPage = () => {
         >
           ルーム設定
         </Button>
-        {session && (
-          <Button
-            color="danger"
-            className="rounded p-4 text-lg w-60 mb-8"
-            onClick={handleLogout}
-          >
-            ログアウト
-          </Button>
-        )}
+
+        {/* このボタンはAdmin権限しか変更できない */}
         <Button
-          color="primary"
+          color="primary-light"
           className="rounded p-4 text-lg w-60 mb-8"
           disabled={!isAdmin}
           onClick={noticeCreate}
         >
-          テストボタン
+          テーマカラー設定
         </Button>
       </Main>
     </>

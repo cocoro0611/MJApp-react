@@ -3,26 +3,16 @@ import Footer from "../components/layout/Footer";
 import CognitoProvider from "../lib/providers/CognitoProvider";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { ColorThemeProvider } from "../lib/providers/ColorThemeProvider";
-import { readColor } from "../lib/models/setting";
-
-type Color =
-  | "blue"
-  | "green"
-  | "red"
-  | "orange"
-  | "purple"
-  | "pink"
-  | "cyan"
-  | "teal";
+import { readSetting } from "../lib/models/setting";
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const setting = await readColor();
-  const primaryColor = (setting?.primaryColor as Color) || "blue";
-  const secondaryColor = (setting?.secondaryColor as Color) || "orange";
+  const setting = await readSetting();
+  const primaryColor = setting?.primaryColor || "blue";
+  const secondaryColor = setting?.secondaryColor || "orange";
 
   return (
     <html lang="ja">
@@ -38,7 +28,6 @@ export default async function RootLayout({
           <ColorThemeProvider
             initialPrimaryColor={primaryColor}
             initialSecondaryColor={secondaryColor}
-            initialCustomMode={true}
           >
             <CognitoProvider>
               <div className="container mx-auto bg-white min-h-screen shadow-xl">

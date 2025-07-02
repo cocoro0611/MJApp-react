@@ -1,11 +1,8 @@
-import { createDefaultRoom } from "./action/create/create-default-room";
-import { createDefaultRoomCustom } from "./action/create/create-default-room-custom";
+import { readSetting } from "./action/read-setting";
 
-import { readDefaultRoom } from "./action/read/read-default-room";
-import { readColor } from "./action/read/read-color";
+import { upsertDefaultRoom } from "./action/upsert/upsert-default-room";
+import { upsertDefaultRoomCustom } from "./action/upsert/upsert-default-room-custom";
+import { upsertColor } from "./action/upsert/upsert-color";
 
-import { updateDefaultRoom } from "./action/update/update-default-room";
-
-export { createDefaultRoom, createDefaultRoomCustom };
-export { readDefaultRoom, readColor };
-export { updateDefaultRoom };
+export { readSetting };
+export { upsertDefaultRoom, upsertDefaultRoomCustom, upsertColor };

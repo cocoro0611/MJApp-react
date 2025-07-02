@@ -1,11 +1,8 @@
 "use server";
 
-import { db } from "../../../db";
-import type { ReadDefaultRoom } from "../../type";
+import { db } from "../../db";
 
-export const readDefaultRoom = async (): Promise<
-  ReadDefaultRoom | undefined
-> => {
+export const readSetting = async () => {
   const setting = await db
     .selectFrom("Setting")
     .select([
@@ -14,6 +11,8 @@ export const readDefaultRoom = async (): Promise<
       "defaultBonusPoint",
       "defaultScoreRate",
       "defaultChipRate",
+      "primaryColor",
+      "secondaryColor",
     ])
     .executeTakeFirst();
 
