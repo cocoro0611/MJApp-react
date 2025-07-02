@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidateAll } from "../../../revalidate-wrapper";
+import { revalidatePath } from "next/cache";
 import { v4 } from "uuid";
 import { db } from "../../../db";
 import type { CreateColor, UpdateColor } from "../../type";
@@ -35,6 +36,7 @@ export const upsertColor = async (data: FormData) => {
     }
 
     await revalidateAll();
+    revalidatePath("/manifest.json");
 
     return {
       success: true,
