@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidateAll } from "../../../revalidate-wrapper";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { v4 } from "uuid";
 import { db } from "../../../db";
 import type { CreateColor, UpdateColor } from "../../type";
@@ -36,7 +36,11 @@ export const upsertColor = async (data: FormData) => {
     }
 
     await revalidateAll();
+
+    // 複数の方法でキャッシュクリア
     revalidatePath("/manifest.json");
+    revalidatePath("/manifest.json", "page");
+    revalidateTag("manifest");
 
     return {
       success: true,

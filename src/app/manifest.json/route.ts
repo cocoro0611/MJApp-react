@@ -1,4 +1,3 @@
-// src/app/manifest.json/route.ts
 import { NextResponse } from "next/server";
 import { readSetting } from "@/src/lib/models/setting";
 import {
@@ -6,6 +5,10 @@ import {
   getValidColor,
   DEFAULT_PRIMARY_COLOR,
 } from "@/src/constants/colorTheme";
+
+// 動的レンダリングを強制
+export const dynamic = "force-dynamic";
+export const revalidate = 0; // キャッシュ無効化
 
 export async function GET() {
   try {
@@ -39,11 +42,16 @@ export async function GET() {
     return NextResponse.json(manifest, {
       headers: {
         "Content-Type": "application/json",
-        // ブラウザキャッシュを制御（開発時は短く、本番では長く）
-        "Cache-Control": "public, max-age=3600, must-revalidate",
+        // キャッシュを完全に無効化
+        "Cache-Control":
+          "no-store, no-cache, must-revalidate, proxy-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+        "Surrogate-Control": "no-store",
       },
     });
   } catch (error) {
+    console.error("Manifest generation error:", error);
     // エラー時はデフォルトのmanifestを返す
     const defaultManifest = {
       theme_color: COLOR_PALETTES[DEFAULT_PRIMARY_COLOR][800],
@@ -65,7 +73,7 @@ export async function GET() {
     return NextResponse.json(defaultManifest, {
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": "public, max-age=3600, must-revalidate",
+        "Cache-Control": "no-store, no-cache, must-revalidate",
       },
     });
   }
