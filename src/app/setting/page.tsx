@@ -3,7 +3,8 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import Button from "@/src/components/ui/Button";
-import { useSession, signOut } from "next-auth/react";
+import LogoutForm from "@/src/components/form/LogoutForm";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const SettingPage = () => {
@@ -21,28 +22,10 @@ const SettingPage = () => {
     }
   };
 
-  const handleLogout = async () => {
-    // 1. NextAuthからサインアウト
-    await signOut({ redirect: false });
-
-    // 2. Cognitoのログアウト用URLを取得してリダイレクト
-    const response = await fetch("/api/auth/logout", { method: "POST" });
-    const { logoutUrl } = await response.json();
-    window.location.href = logoutUrl;
-  };
-
   return (
     <>
       <Header title="設定一覧" isBackIcon={false}>
-        {session && (
-          <Button
-            color="secondary"
-            className="text-sm font-bold py-0.5 px-1.5 rounded"
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
-        )}
+        <LogoutForm />
       </Header>
       <Main className="font-bold">
         <Button
