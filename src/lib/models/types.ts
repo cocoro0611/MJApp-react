@@ -43,11 +43,13 @@ export type Score = {
 };
 export type Setting = {
     id: Generated<string>;
-    defaultInitialPoint: number;
-    defaultReturnPoint: number;
-    defaultBonusPoint: string;
-    defaultScoreRate: number;
-    defaultChipRate: number;
+    defaultInitialPoint: number | null;
+    defaultReturnPoint: number | null;
+    defaultBonusPoint: string | null;
+    defaultScoreRate: number | null;
+    defaultChipRate: number | null;
+    primaryColor: string | null;
+    secondaryColor: string | null;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
 };

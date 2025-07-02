@@ -1,9 +1,11 @@
 "use server";
 
 import { db } from "../../../db";
-import type { ReadSetting } from "../../type";
+import type { ReadDefaultRoom } from "../../type";
 
-export const readSetting = async (): Promise<ReadSetting | undefined> => {
+export const readDefaultRoom = async (): Promise<
+  ReadDefaultRoom | undefined
+> => {
   const setting = await db
     .selectFrom("Setting")
     .select([

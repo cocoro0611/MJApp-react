@@ -1,10 +1,11 @@
-import { createSetting } from "./action/create/create-setting";
-import { createCustomSetting } from "./action/create/create-custom-setting";
+import { createDefaultRoom } from "./action/create/create-default-room";
+import { createDefaultRoomCustom } from "./action/create/create-default-room-custom";
 
-import { readSetting } from "./action/read/read-setting";
+import { readDefaultRoom } from "./action/read/read-default-room";
+import { readColor } from "./action/read/read-color";
 
-import { updateSetting } from "./action/update/update-setting";
+import { updateDefaultRoom } from "./action/update/update-default-room";
 
-export { createSetting, createCustomSetting };
-export { readSetting };
-export { updateSetting };
+export { createDefaultRoom, createDefaultRoomCustom };
+export { readDefaultRoom, readColor };
+export { updateDefaultRoom };

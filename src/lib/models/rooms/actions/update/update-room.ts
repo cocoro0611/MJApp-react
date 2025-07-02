@@ -2,7 +2,7 @@
 
 import { revalidateAll } from "../../../revalidate-wrapper";
 import { db } from "../../../db";
-import type { UpdateRoom, UpdateSetting } from "../../type";
+import type { UpdateRoom, UpdateDefaultRoom } from "../../type";
 import { updateScoreResults } from "./utils/update-score-results";
 
 export const updateRoom = async (data: FormData) => {
@@ -20,7 +20,7 @@ export const updateRoom = async (data: FormData) => {
       updatedAt: new Date(),
     };
 
-    const updateSetting: UpdateSetting = {
+    const updateDefaultRoom: UpdateDefaultRoom = {
       defaultInitialPoint: room.initialPoint,
       defaultReturnPoint: room.returnPoint,
       defaultBonusPoint: room.bonusPoint,
@@ -56,7 +56,7 @@ export const updateRoom = async (data: FormData) => {
       if (existingSetting) {
         await trx
           .updateTable("Setting")
-          .set(updateSetting)
+          .set(updateDefaultRoom)
           .where("id", "=", existingSetting.id)
           .execute();
       }

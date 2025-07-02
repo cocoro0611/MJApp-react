@@ -1,7 +1,7 @@
 import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import CustomForm from "@/src/template/rooms/CustomForm";
-import { createCustomSetting } from "@/src/lib/models/setting";
+import { createDefaultRoomCustom } from "@/src/lib/models/setting";
 
 interface CustomSettingPageProps {
   params: Promise<{ customItem: string }>;
@@ -83,7 +83,7 @@ const CustomSettingPage = async ({ params }: CustomSettingPageProps) => {
           )}
         </div>
         <CustomForm
-          action={createCustomSetting}
+          action={createDefaultRoomCustom}
           label={config.label}
           name={customItem}
           type={config.type}

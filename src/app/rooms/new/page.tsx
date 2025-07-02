@@ -2,12 +2,12 @@ import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import RoomForm from "@/src/template/rooms/RoomForm";
 import { createRoom } from "@/src/lib/models/rooms";
-import { readSetting } from "@/src/lib/models/setting";
+import { readDefaultRoom } from "@/src/lib/models/setting";
 import { readDefaultUsers } from "@/src/lib/models/users";
 
 const RoomNewPage = async () => {
   const roomUsers = await readDefaultUsers();
-  const setting = await readSetting();
+  const setting = await readDefaultRoom();
 
   return (
     <>

@@ -2,15 +2,15 @@ import Header from "@/src/components/layout/Header";
 import Main from "@/src/components/layout/Main";
 import SettingForm from "@/src/template/setting/SettingForm";
 import {
-  createSetting,
-  updateSetting,
-  readSetting,
+  createDefaultRoom,
+  updateDefaultRoom,
+  readDefaultRoom,
 } from "@/src/lib/models/setting";
 
 const SettingPage = async () => {
-  const setting = await readSetting();
+  const setting = await readDefaultRoom();
 
-  const formAction = setting ? updateSetting : createSetting;
+  const formAction = setting ? updateDefaultRoom : createDefaultRoom;
   const btnText = setting ? "更新" : "作成";
 
   return (

@@ -12,13 +12,13 @@ import {
   DEFAULT_GAME_RULES,
 } from "@/src/constants/gameRules";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
-import type { ReadSetting } from "@/src/lib/models/rooms/type";
+import type { ReadDefaultRoom } from "@/src/lib/models/rooms/type";
 import type { ServerAction } from "@/src/hooks/ui/useServerActionToast";
 
 interface SettingFormProps {
   action: ServerAction;
   btnText: string;
-  setting?: ReadSetting;
+  setting?: ReadDefaultRoom;
 }
 
 const SettingForm = ({ action, btnText, setting }: SettingFormProps) => {

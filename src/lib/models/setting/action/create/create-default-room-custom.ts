@@ -4,7 +4,7 @@ import { revalidateAll } from "../../../revalidate-wrapper";
 import { v4 } from "uuid";
 import { db } from "../../../db";
 import { DEFAULT_GAME_RULES } from "@/src/constants/gameRules";
-import type { CreateSetting, UpdateSetting } from "../../type";
+import type { CreateDefaultRoom, UpdateDefaultRoom } from "../../type";
 
 interface SettingData {
   defaultInitialPoint?: number;
@@ -14,7 +14,7 @@ interface SettingData {
   defaultChipRate?: number;
 }
 
-export const createCustomSetting = async (data: FormData) => {
+export const createDefaultRoomCustom = async (data: FormData) => {
   try {
     // FormDataから部分的なデータを構築
     const settingData: SettingData = {};
@@ -52,10 +52,10 @@ export const createCustomSetting = async (data: FormData) => {
 
     if (existingSetting) {
       // 更新処理（部分更新）
-      const updateData: UpdateSetting = {
+      const updateData: UpdateDefaultRoom = {
         ...settingData,
         updatedAt: new Date(),
-      } as UpdateSetting;
+      } as UpdateDefaultRoom;
 
       await db
         .updateTable("Setting")
@@ -64,7 +64,7 @@ export const createCustomSetting = async (data: FormData) => {
         .execute();
     } else {
       // 新規作成（デフォルト値で補完）
-      const createData: CreateSetting = {
+      const createData: CreateDefaultRoom = {
         id: v4(),
         defaultInitialPoint:
           settingData.defaultInitialPoint ?? DEFAULT_GAME_RULES.initialPoint,

@@ -2,16 +2,16 @@
 
 import { revalidateAll } from "../../../revalidate-wrapper";
 import { db } from "../../../db";
-import type { UpdateSetting } from "../../type";
+import type { UpdateDefaultRoom } from "../../type";
 
-export const updateSetting = async (data: FormData) => {
+export const updateDefaultRoom = async (data: FormData) => {
   try {
     const existingSetting = await db
       .selectFrom("Setting")
       .select("id")
       .executeTakeFirst();
 
-    const setting: UpdateSetting = {
+    const setting: UpdateDefaultRoom = {
       defaultInitialPoint: Number(data.get("initialPoint")),
       defaultReturnPoint: Number(data.get("returnPoint")),
       defaultBonusPoint: String(data.get("bonusPoint")),

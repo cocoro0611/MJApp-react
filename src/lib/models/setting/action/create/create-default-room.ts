@@ -3,11 +3,11 @@
 import { revalidateAll } from "../../../revalidate-wrapper";
 import { v4 } from "uuid";
 import { db } from "../../../db";
-import type { CreateSetting } from "../../type";
+import type { CreateDefaultRoom } from "../../type";
 
-export const createSetting = async (data: FormData) => {
+export const createDefaultRoom = async (data: FormData) => {
   try {
-    const setting: CreateSetting = {
+    const setting: CreateDefaultRoom = {
       id: v4(),
       defaultInitialPoint: Number(data.get("initialPoint")),
       defaultReturnPoint: Number(data.get("returnPoint")),
