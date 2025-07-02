@@ -16,7 +16,7 @@ const Footer = () => {
     <nav className="fixed-container bottom-0 z-10 center">
       <ButtonGroup
         tabs={tabs}
-        className="center font-bold text-sm w-full py-2 flex-col md:flex-row md:space-x-2"
+        className="center font-bold text-sm w-full py-2 flex-col"
       />
     </nav>
   );

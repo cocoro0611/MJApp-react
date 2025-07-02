@@ -6,7 +6,6 @@ import Button from "@/src/components/ui/Button";
 import LogoutForm from "@/src/components/form/LogoutForm";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import CalculateIcon from "@mui/icons-material/Calculate";
 
 const SettingPage = () => {
   const { data: session } = useSession();
@@ -26,7 +25,10 @@ const SettingPage = () => {
   return (
     <>
       <Header title="設定一覧" isBackIcon={false}>
-        <LogoutForm />
+        {/* PCサイズではログアウトボタンはサイドバーに移動 */}
+        <div className="lg:hidden">
+          <LogoutForm />
+        </div>
       </Header>
       <Main className="font-bold">
         <Button
@@ -39,7 +41,7 @@ const SettingPage = () => {
         {/* テーマカラー設定はAdmin権限しか行えない */}
         <Button
           color="primary-light"
-          className="rounded-lg p-8 text-lg w-60 mb-8  shadow-xl"
+          className="rounded-lg p-8 text-lg w-60 mb-8 shadow-xl"
           disabled={!isAdmin}
           onClick={handleColorSettingAccess}
         >

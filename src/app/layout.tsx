@@ -1,5 +1,6 @@
 import "@/src/styles/globals.css";
 import Footer from "../components/layout/Footer";
+import Sidebar from "../components/layout/Sidebar";
 import CognitoProvider from "../lib/providers/CognitoProvider";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { ColorThemeProvider } from "../lib/providers/ColorThemeProvider";
@@ -30,9 +31,20 @@ export default async function RootLayout({
             initialSecondaryColor={secondaryColor}
           >
             <CognitoProvider>
-              <div className="container mx-auto bg-white min-h-screen shadow-xl">
-                <div className="pb-20">{children}</div>
-                <Footer />
+              <div className="flex min-h-screen">
+                {/* PCサイズはSidebar表示 */}
+                <div className="hidden lg:block">
+                  <Sidebar />
+                </div>
+                <div className="flex-1 lg:ml-64">
+                  <div className="container mx-auto bg-white min-h-screen shadow-xl lg:shadow-none">
+                    <div className="pb-20 lg:pb-0">{children}</div>
+                    {/* モバイルサイズはFooter表示 */}
+                    <div className="lg:hidden">
+                      <Footer />
+                    </div>
+                  </div>
+                </div>
               </div>
             </CognitoProvider>
           </ColorThemeProvider>

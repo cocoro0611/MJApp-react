@@ -3,16 +3,16 @@
     @apply flex justify-center items-center text-center;
   }
   .fixed-container {
-    @apply container mx-auto fixed;
+    @apply container mx-auto fixed lg:mx-0 lg:w-auto;
   }
   .grid-2 {
-    @apply grid grid-cols-2 md:grid-cols-4;
+    @apply grid grid-cols-2;
   }
   .grid-4 {
-    @apply grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8;
+    @apply grid grid-cols-4 lg:grid-cols-6;
   }
   .grid-6 {
-    @apply grid grid-cols-6 md:grid-cols-8 lg:grid-cols-12;
+    @apply grid grid-cols-6 lg:grid-cols-8;
   }
   /* border-grid-5 */
   .grid-5 {

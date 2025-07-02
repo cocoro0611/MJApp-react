@@ -10,7 +10,7 @@ const Main = ({ children, isBlank = true, className = "" }: MainProps) => {
   return (
     <main
       className={`${className} 
-      ${isBlank ? "center flex-col mx-8 sm:mx-16 md:mx-32" : ""}`}
+      ${isBlank ? "center flex-col mx-8" : ""}`}
     >
       {children}
     </main>
