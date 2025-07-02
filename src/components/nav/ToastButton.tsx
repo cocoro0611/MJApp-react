@@ -16,6 +16,8 @@ interface ToastButtonProps {
   toastColor: "error" | "info" | "success" | "warning";
   redirect: string;
   onToastClose?: () => void;
+  // リロードオプション追加
+  shouldReload?: boolean;
 }
 
 const ToastButton = ({
@@ -28,6 +30,7 @@ const ToastButton = ({
   toastColor = "success",
   redirect,
   onToastClose,
+  shouldReload = false, // デフォルトはリロードしない
 }: ToastButtonProps) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -52,6 +55,13 @@ const ToastButton = ({
       onToastClose();
     }
 
+    // リロードが必要な場合
+    if (shouldReload) {
+      window.location.reload();
+      return; // リロード後はリダイレクト不要
+    }
+
+    // 通常のリダイレクト
     if (redirect) {
       router.push(redirect);
     }

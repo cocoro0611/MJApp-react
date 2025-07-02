@@ -104,6 +104,7 @@ const ColorSelector = ({
           toastMessage={toastMessage}
           toastColor={toastColor}
           redirect={redirect}
+          shouldReload={true} // カラー変更時はリロードする
           className="rounded p-2 w-full font-bold"
         >
           {isPending ? "保存中..." : "保存"}

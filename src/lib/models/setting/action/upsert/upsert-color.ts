@@ -45,14 +45,13 @@ export const upsertColor = async (data: FormData) => {
     return {
       success: true,
       message: "ルームのテーマカラーが保存されました",
-      shouldReload: true, // リロードフラグ
-      redirect: "/setting",
+      redirect: "/setting/color-setting",
     };
   } catch (_error) {
     return {
       success: false,
       message: "ルームのテーマカラーの保存に失敗しました",
-      redirect: "/setting",
+      redirect: "/setting/color-setting",
     };
   }
 };
