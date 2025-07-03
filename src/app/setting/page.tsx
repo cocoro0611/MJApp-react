@@ -40,9 +40,9 @@ const SettingPage = () => {
             className="p-4 w-80"
           >
             <div className="center flex-col">
-              <p className="bg-primary-300 rounded-full p-2">
-                <BuildIcon />
-              </p>
+              <div className="bg-gradient-to-br from-primary-400 to-primary-600 rounded-full p-4 shadow">
+                <BuildIcon className="text-white" />
+              </div>
               <p className="font-bold pt-2">ルーム設定</p>
             </div>
           </Card>
@@ -54,9 +54,9 @@ const SettingPage = () => {
             className="p-4 w-80"
           >
             <div className="center flex-col">
-              <p className="bg-primary-300 rounded-full p-2">
-                <PaletteIcon />
-              </p>
+              <div className="bg-gradient-to-br from-primary-400 to-primary-600 rounded-full p-4 shadow">
+                <PaletteIcon className="text-white" />
+              </div>
               <p className="font-bold pt-2">テーマカラー設定</p>
             </div>
           </Card>

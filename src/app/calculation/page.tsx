@@ -16,9 +16,9 @@ const CalculationPage = () => {
             className="p-4 w-80"
           >
             <div className="center flex-col">
-              <p className="bg-primary-300 rounded-full p-2">
-                <CalculateIcon />
-              </p>
+              <div className="bg-gradient-to-br from-primary-400 to-primary-600 rounded-full p-4 shadow">
+                <CalculateIcon className="text-white" />
+              </div>
               <p className="font-bold pt-2">飜数計算</p>
             </div>
           </Card>
@@ -28,9 +28,9 @@ const CalculationPage = () => {
             className="p-4 w-80"
           >
             <div className="center flex-col">
-              <p className="bg-primary-300 rounded-full p-2">
-                <FunctionsIcon />
-              </p>
+              <div className="bg-gradient-to-br from-primary-400 to-primary-600 rounded-full p-4 shadow">
+                <FunctionsIcon className="text-white" />
+              </div>
               <p className="font-bold pt-2">符数計算</p>
             </div>
           </Card>

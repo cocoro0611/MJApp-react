@@ -24,7 +24,7 @@ export default async function RootLayout({
         />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className="bg-primary-50 text-gray-800 font-mono">
+      <body className="bg-primary-50 text-gray-800 font-sans">
         <AppRouterCacheProvider>
           <ColorThemeProvider
             initialPrimaryColor={primaryColor}
