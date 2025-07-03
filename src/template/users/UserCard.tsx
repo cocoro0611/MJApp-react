@@ -6,11 +6,18 @@ interface UserCardProps {
   name: string;
   icon: string;
   isColor?: boolean;
+  border?: "sm" | "md" | "lg";
   size?: "mdWf" | "md" | "lg";
   className?: string;
 }
 
-const cardSizeClassName = {
+interface CardSizeConfig {
+  card: string;
+  image: { width: number; height: number };
+  text: string;
+}
+
+const cardSizeClassName: Record<string, CardSizeConfig> = {
   md: {
     card: "h-16 w-16",
     image: { width: 30, height: 30 },
@@ -33,6 +40,7 @@ const UserCard = ({
   name,
   icon,
   isColor = true,
+  border = "md",
   size = "md",
   className = "",
 }: UserCardProps) => {
@@ -42,6 +50,7 @@ const UserCard = ({
     <Card
       href={href}
       isColor={isColor}
+      border={border}
       className={`center flex-col center ${cardSize.card} ${className}`}
     >
       <Image

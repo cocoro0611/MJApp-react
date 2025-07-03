@@ -13,7 +13,7 @@ const RoomsPage = async () => {
     <>
       <Header title="ルーム一覧" showBackButton={false} />
       <Content>
-        <div className="space-y-4">
+        <div className="grid-1 gap-8">
           {rooms.map((room) => (
             <RoomCard
               key={room.id}

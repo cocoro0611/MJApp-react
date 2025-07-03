@@ -27,7 +27,7 @@ const ButtonFixed = ({
       disabled={disabled}
       onClick={onClick}
       className="px-5 py-3 text-3xl rounded-xl fixed z-10 bottom-[6rem] 
-      right-[2rem] md:right-[8rem] lg:right-[5rem]"
+      right-[2rem] lg:right-[6rem]"
     >
       +
     </Button>

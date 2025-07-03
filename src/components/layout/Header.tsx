@@ -34,7 +34,7 @@ const Header = ({
         </div>
         {extra}
       </header>
-      <div className="pb-20 lg:pb-10" />
+      <div className="pb-20 lg:pb-30" />
     </>
   );
 };

@@ -16,6 +16,7 @@ const UsersPage = async () => {
           {users.map((user) => (
             <UserCard
               key={user.id}
+              border="sm"
               href={`/users/${user.id}/edit`}
               name={user.name}
               icon={user.icon}
