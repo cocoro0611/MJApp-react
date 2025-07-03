@@ -19,20 +19,19 @@ const Header = ({
 }: HeaderProps) => {
   return (
     <>
-      <header
-        className="fixed-container top-0 z-30 bg-primary-800 text-white
-        lg:fixed lg:left-64 lg:right-0 lg:bg-white lg:text-primary-800 lg:border-b lg:border-gray-200 lg:shadow"
-      >
-        <div className="center lg:p-4">
-          <Link href={href} className="w-1/6 py-2">
-            {showBackButton && <ArrowBackIosIcon />}
-          </Link>
-          <h1 className="w-4/6 py-2 font-bold text-lg lg:text-xl lg:flex-1">
-            {title}
-          </h1>
-          <div className="w-1/6 py-2">{children}</div>
+      <header className="fixed top-0 left-0 right-0 z-30 lg:left-0 lg:ml-64">
+        <div className="container mx-auto bg-primary-800 text-white lg:bg-white lg:text-primary-800 lg:border-b lg:border-gray-200 lg:shadow">
+          <div className="center lg:p-4">
+            <Link href={href} className="w-1/6 py-2">
+              {showBackButton && <ArrowBackIosIcon />}
+            </Link>
+            <h1 className="w-4/6 py-2 font-bold text-lg lg:text-xl lg:flex-1">
+              {title}
+            </h1>
+            <div className="w-1/6 py-2">{children}</div>
+          </div>
+          {extra && <div>{extra}</div>}
         </div>
-        {extra}
       </header>
       <div className="pb-20 lg:pb-30" />
     </>
