@@ -39,11 +39,11 @@ const SettingPage = () => {
             leftBorder="lg"
             className="p-4 w-80"
           >
-            <div className="center flex-col">
+            <div className="flex justify-start items-center gap-6">
               <div className="bg-gradient-to-br from-primary-400 to-primary-600 rounded-full p-4 shadow">
                 <BuildIcon className="text-white" />
               </div>
-              <p className="font-bold pt-2">ルーム設定</p>
+              <p className="font-bold">ルーム設定</p>
             </div>
           </Card>
           {/* テーマカラー設定はAdmin権限しか行えない */}
@@ -53,11 +53,11 @@ const SettingPage = () => {
             leftBorder="lg"
             className="p-4 w-80"
           >
-            <div className="center flex-col">
+            <div className="flex justify-start items-center gap-6">
               <div className="bg-gradient-to-br from-primary-400 to-primary-600 rounded-full p-4 shadow">
                 <PaletteIcon className="text-white" />
               </div>
-              <p className="font-bold pt-2">テーマカラー設定</p>
+              <p className="font-bold">テーマカラー設定</p>
             </div>
           </Card>
         </div>

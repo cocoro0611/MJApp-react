@@ -6,7 +6,7 @@ import {
   oyaTsumoPointMaps,
   limitHanPoints,
   limitNames,
-} from "../constants/calculation/score-table";
+} from "../constants/calculation/yonma-score-table";
 
 export interface ScoreInfo {
   oyaRon: string;

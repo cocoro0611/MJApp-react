@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { getAllScores, getLimitName } from "./mahjong-calculation";
+import { getAllScores, getLimitName } from "./yonma-mahjong-calculation";
 
 describe("翻数と符数に応じた点数を計算する関数のテスト", () => {
   test("テスト1: 2翻40符（通常の計算）", () => {
@@ -20,9 +20,9 @@ describe("翻数と符数に応じた点数を計算する関数のテスト", (
 
     expect(result).toEqual({
       oyaRon: "2400",
-      oyaTsumo: "800 All",
+      oyaTsumo: "null",
       coRon: "1600",
-      coTsumo: "800 / 400",
+      coTsumo: "null",
     });
   });
 

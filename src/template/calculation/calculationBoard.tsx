@@ -1,5 +1,5 @@
-import { adjustFu } from "@/src/utils/mahjong-calculation";
-import type { ScoreInfo } from "@/src/utils/mahjong-calculation";
+import { adjustFu } from "@/src/utils/yonma-mahjong-calculation";
+import type { ScoreInfo } from "@/src/utils/yonma-mahjong-calculation";
 
 interface CalculationBoardProps {
   totalHan: number;

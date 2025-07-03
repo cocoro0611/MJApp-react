@@ -6,7 +6,7 @@ import CalculationBoard from "@/src/template/calculation/calculationBoard";
 import FuList from "@/src/template/calculation/fuList";
 import { useCalculator } from "@/src/hooks/calculation/useCalculator";
 import { FU_CONFIG } from "@/src/constants/calculation/fu-config";
-import { getAllScores } from "@/src/utils/mahjong-calculation";
+import { getAllScores } from "@/src/utils/sanma-mahjong-calculation";
 import CachedIcon from "@mui/icons-material/Cached";
 
 const FuCalculationPage = () => {

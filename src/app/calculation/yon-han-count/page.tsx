@@ -10,7 +10,7 @@ import HanOpenList from "@/src/template/calculation/hanOpenList";
 import { useCalculator } from "@/src/hooks/calculation/useCalculator";
 import { HAN_CONCEALED_CONFIG } from "@/src/constants/calculation/han-concealed-config";
 import { HAN_OPEN_CONFIG } from "@/src/constants/calculation/han-open-config";
-import { getAllScores } from "@/src/utils/mahjong-calculation";
+import { getAllScores } from "@/src/utils/yonma-mahjong-calculation";
 import CachedIcon from "@mui/icons-material/Cached";
 
 const HanCalculationPage = () => {
