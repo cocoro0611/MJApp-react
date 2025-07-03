@@ -1,5 +1,5 @@
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import DeleteForm from "@/src/components/form/DeleteForm";
 import AddDataForm from "@/src/template/rooms/AddDataForm";
 import GameBoard from "@/src/template/rooms/GameBoard";
@@ -45,7 +45,7 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
       >
         <DeleteForm action={deleteRoom} name="id" value={roomId} />
       </Header>
-      <Main isBlank={false}>
+      <Content isBlank={false}>
         <AmountBoard roomId={roomId} amount={roomDetail.gameAmount} />
         <ScoreForm
           scores={scores}
@@ -60,7 +60,7 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
           roomChipRate={roomDetail.chipRate}
         />
         <AddDataForm roomId={roomId} />
-      </Main>
+      </Content>
     </>
   );
 };

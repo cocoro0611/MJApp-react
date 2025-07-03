@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import Button from "@/src/components/ui/Button";
 import LogoutForm from "@/src/components/form/LogoutForm";
 import { useSession } from "next-auth/react";
@@ -30,7 +30,7 @@ const SettingPage = () => {
           <LogoutForm />
         </div>
       </Header>
-      <Main className="font-bold">
+      <Content className="font-bold">
         <Button
           href="/setting/room-setting"
           color="primary-light"
@@ -47,7 +47,7 @@ const SettingPage = () => {
         >
           テーマカラー設定
         </Button>
-      </Main>
+      </Content>
     </>
   );
 };

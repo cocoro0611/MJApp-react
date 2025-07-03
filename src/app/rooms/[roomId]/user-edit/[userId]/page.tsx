@@ -1,5 +1,5 @@
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import UserForm from "@/src/template/users/UserForm";
 import { readUser, updateUser } from "@/src/lib/models/users";
 
@@ -14,14 +14,14 @@ const RoomUserEditPage = async ({ params }: RoomUserEditPageProps) => {
   return (
     <>
       <Header title="ユーザー編集" href={`/rooms/${roomId}`} />
-      <Main>
+      <Content>
         <UserForm
           action={updateUser}
           btnText="更新"
           user={user}
           roomId={roomId}
         />
-      </Main>
+      </Content>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import OrderEditForm from "@/src/template/rooms/OrderEditForm";
 import { readTiedScores } from "@/src/lib/models/rooms";
 
@@ -17,13 +17,13 @@ const OrderEditPage = async ({ params, searchParams }: OrderEditPageProps) => {
   return (
     <>
       <Header title="　" isBackIcon={false} />
-      <Main>
+      <Content>
         <OrderEditForm
           roomId={roomId}
           gameCount={Number(gameCount)}
           tiedScores={tiedScores}
         />
-      </Main>
+      </Content>
     </>
   );
 };

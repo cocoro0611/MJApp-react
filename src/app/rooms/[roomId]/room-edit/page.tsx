@@ -1,5 +1,5 @@
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import RoomForm from "@/src/template/rooms/RoomForm";
 import { readRoomDetail, updateRoom } from "@/src/lib/models/rooms";
 
@@ -14,9 +14,9 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
   return (
     <>
       <Header title="ルームの編集" href={`/rooms/${room.id}`} />
-      <Main>
+      <Content>
         <RoomForm action={updateRoom} btnText="更新" room={room} />
-      </Main>
+      </Content>
     </>
   );
 };

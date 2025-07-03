@@ -1,12 +1,12 @@
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import Button from "@/src/components/ui/Button";
 
 const CalculationPage = () => {
   return (
     <>
       <Header title="計算一覧" isBackIcon={false} />
-      <Main className="font-bold">
+      <Content className="font-bold">
         <Button
           href="/calculation/han-count"
           color="primary-light"
@@ -21,7 +21,7 @@ const CalculationPage = () => {
         >
           符数計算
         </Button>
-      </Main>
+      </Content>
     </>
   );
 };

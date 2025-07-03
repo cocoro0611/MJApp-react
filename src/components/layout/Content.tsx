@@ -1,12 +1,16 @@
 import { ReactNode } from "react";
 
-interface MainProps {
+interface ContentProps {
   children: ReactNode;
   isBlank?: boolean;
   className?: string;
 }
 
-const Main = ({ children, isBlank = true, className = "" }: MainProps) => {
+const Content = ({
+  children,
+  isBlank = true,
+  className = "",
+}: ContentProps) => {
   return (
     <main
       className={`${className} 
@@ -17,4 +21,4 @@ const Main = ({ children, isBlank = true, className = "" }: MainProps) => {
   );
 };
 
-export default Main;
+export default Content;

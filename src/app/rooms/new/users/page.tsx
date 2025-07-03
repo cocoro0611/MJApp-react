@@ -1,5 +1,5 @@
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import SelectRoomUsersForm from "@/src/template/rooms/SelectRoomUsersForm";
 import { readUsers } from "@/src/lib/models/users";
 import { updateDefaultUser } from "@/src/lib/models/rooms";
@@ -10,9 +10,9 @@ const SelectUsersPage = async () => {
   return (
     <>
       <Header title="ルームの作成" href="/rooms/new" />
-      <Main>
+      <Content>
         <SelectRoomUsersForm action={updateDefaultUser} users={users} />
-      </Main>
+      </Content>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import RoomCard from "@/src/template/rooms/RoomCard";
 import ButtonFixed from "@/src/components/ui/ButtonFixed";
 import MessageHandler from "@/src/components/nav/MessageHandler";
@@ -12,7 +12,7 @@ const RoomsPage = async () => {
   return (
     <>
       <Header title="ルーム一覧" isBackIcon={false} />
-      <Main>
+      <Content>
         <div className="space-y-4">
           {rooms.map((room) => (
             <RoomCard
@@ -24,7 +24,7 @@ const RoomsPage = async () => {
           ))}
         </div>
         <ButtonFixed href="/rooms/new" disabled={defaultUsers.length < 4} />
-      </Main>
+      </Content>
       <MessageHandler type="room" />
     </>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import CalculationBoard from "@/src/template/calculation/calculationBoard";
 import FuList from "@/src/template/calculation/fuList";
 import { useCalculator } from "@/src/hooks/calculation/useCalculator";
@@ -34,13 +34,13 @@ const FuCalculationPage = () => {
           <CachedIcon />
         </button>
       </Header>
-      <Main className="flex-col">
+      <Content className="flex-col">
         <FuList
           buttonCounts={buttonCounts}
           totalHan={totalHan}
           onButtonClick={exclusiveButton}
         />
-      </Main>
+      </Content>
     </>
   );
 };

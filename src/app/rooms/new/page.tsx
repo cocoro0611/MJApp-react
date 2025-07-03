@@ -1,5 +1,5 @@
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import RoomForm from "@/src/template/rooms/RoomForm";
 import { createRoom } from "@/src/lib/models/rooms";
 import { readSetting } from "@/src/lib/models/setting";
@@ -12,14 +12,14 @@ const RoomNewPage = async () => {
   return (
     <>
       <Header title="ルームの作成" href="/rooms" />
-      <Main>
+      <Content>
         <RoomForm
           action={createRoom}
           btnText="作成"
           roomUsers={roomUsers}
           setting={setting}
         />
-      </Main>
+      </Content>
     </>
   );
 };
