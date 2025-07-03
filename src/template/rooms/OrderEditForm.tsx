@@ -27,19 +27,16 @@ const OrderEditForm = ({
     useServerActionToast(updateScoreOrder);
 
   return (
-    <Form action={handleSubmit}>
+    <Form action={handleSubmit} className="space-y-8">
       <input type="hidden" name="roomId" value={roomId} />
       <input type="hidden" name="gameCount" value={gameCount} />
 
-      <div className="text-xl font-bold mb-2">
-        {`${gameCount} 回戦 順位調整`}
-      </div>
-      <div className="text-sm mb-8 font-bold">
+      <div className="info-box-secondary">
         <p>同じ点数のプレイヤーがいます。</p>
         <p>順位を調整してください。</p>
       </div>
 
-      <div className="center flex-col space-y-4 mb-8">
+      <div className="center flex-col space-y-4">
         {orderedScores.map((scoreData, index) => (
           <Card key={scoreData.userId} isEffect={false} className="p-2">
             <input
@@ -69,7 +66,7 @@ const OrderEditForm = ({
                 <Button
                   color="white"
                   disabled={!canMoveUp(index)}
-                  className="w-12 h-12 rounded"
+                  className="w-12 h-12 rounded border border-gray-300 shadow-lg"
                   onClick={() => moveUp(index)}
                 >
                   ↑
@@ -77,7 +74,7 @@ const OrderEditForm = ({
                 <Button
                   color="white"
                   disabled={!canMoveDown(index)}
-                  className="w-12 h-12 rounded"
+                  className="w-12 h-12 rounded border-gray-300 shadow-lg"
                   onClick={() => moveDown(index)}
                 >
                   ↓

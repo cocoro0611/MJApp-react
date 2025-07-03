@@ -5,7 +5,7 @@ interface CardProps {
   children: ReactNode;
   href?: string;
   isColor?: boolean;
-  border?: "sm" | "md" | "lg";
+  border?: "sm" | "md" | "lg" | "none";
   isEffect?: boolean;
   className?: string;
   disabled?: boolean;
@@ -23,16 +23,18 @@ const Card = ({
   onClick,
 }: CardProps) => {
   const borderClasses = {
-    sm: "border-l-3 border-primary-500",
-    md: "border-l-6 border-primary-500",
-    lg: "border-l-9 border-primary-500",
+    sm: "border border-l-3 border-primary-500",
+    md: "border border-l-6 border-primary-500",
+    lg: "border border-l-9 border-primary-500",
+    none: "",
   };
 
+  // FIXME: 選択せれていない時の色の調整
   return (
     <Link
       href={href}
       className={`rounded-lg font-bold shadow-xl
-      ${isColor ? "bg-primary-50 text-primary-800" : "border border-gray-200"} 
+      ${isColor ? "bg-primary-50 text-primary-800" : "opacity-20"} 
       ${borderClasses[border]}
       ${isEffect ? "effect-scale" : ""}
       ${disabled ? "effect-disabled" : ""}

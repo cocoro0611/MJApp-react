@@ -44,6 +44,10 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
       >
         <DeleteForm action={deleteRoom} name="id" value={roomId} />
       </Header>
+
+      {/* extraの分の調整 */}
+      <div className={shouldShowChip ? "pt-25.5" : "pt-20"} />
+
       <Content isBlank={false}>
         <AmountBoard roomId={roomId} amount={roomDetail.gameAmount} />
         <ScoreForm

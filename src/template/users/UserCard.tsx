@@ -6,7 +6,7 @@ interface UserCardProps {
   name: string;
   icon: string;
   isColor?: boolean;
-  border?: "sm" | "md" | "lg";
+  border?: "sm" | "md" | "lg" | "none";
   size?: "mdWf" | "md" | "lg";
   className?: string;
 }

@@ -80,7 +80,7 @@ const ToastButton = ({
           onClose={handleClose}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
-          <Alert severity={toastColor} variant="filled" className="z-20">
+          <Alert severity={toastColor} variant="filled" className="z-30">
             {toastMessage}
           </Alert>
         </Snackbar>

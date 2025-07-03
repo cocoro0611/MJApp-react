@@ -1,23 +1,23 @@
 @layer Style {
   .primary {
-    @apply bg-primary-800 hover:bg-primary-900 active:bg-primary-950 shadow;
+    @apply bg-primary-800 hover:bg-primary-900 active:bg-primary-950;
     @apply text-white;
   }
   .primary-light {
-    @apply bg-primary-50 hover:bg-primary-100 active:bg-primary-200 shadow;
+    @apply bg-primary-50 hover:bg-primary-100 active:bg-primary-200;
     @apply border-2 border-primary-200;
     @apply text-primary-800;
   }
   .secondary {
-    @apply bg-secondary-100 hover:bg-secondary-200 active:bg-secondary-300 shadow;
+    @apply bg-secondary-100 hover:bg-secondary-200 active:bg-secondary-300;
     @apply text-secondary-800;
   }
   .danger {
-    @apply bg-red-700 hover:bg-red-800 active:bg-red-900 shadow;
+    @apply bg-red-700 hover:bg-red-800 active:bg-red-900;
     @apply text-white;
   }
   .cancel {
-    @apply bg-gray-100 hover:bg-gray-200 active:bg-gray-300 shadow;
+    @apply bg-gray-100 hover:bg-gray-200 active:bg-gray-300;
     @apply border border-gray-300;
     @apply text-gray-800;
   }
@@ -35,7 +35,7 @@
     @apply text-primary-500;
   }
   .toggle-disabled {
-    @apply bg-primary-900 hover:bg-primary-950 active:bg-primary-950 shadow;
+    @apply bg-primary-900 hover:bg-primary-950 active:bg-primary-950;
     @apply text-gray-400;
   }
 }

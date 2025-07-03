@@ -97,9 +97,9 @@ const RoomForm = ({
       />
       {roomUsers && <DefaultRoomUsers roomUsers={roomUsers} />}
       {!room?.id! && (
-        <div className="mb-4 bg-secondary-100 border border-secondary-500 text-secondary-800 rounded p-2 font-bold text-xs">
-          <p> ※ カスタムしたい場合は設定から変更してください</p>
-          <p>（ルーム作成後は変更できません）</p>
+        <div className="info-box-secondary my-4">
+          <p>カスタム設定は事前に</p>
+          <p>「設定」から変更してください</p>
         </div>
       )}
       <SelectField

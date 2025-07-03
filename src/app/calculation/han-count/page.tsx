@@ -51,7 +51,10 @@ const HanCalculationPage = () => {
           <CachedIcon />
         </button>
       </Header>
+
+      {/* extraの分の調整 */}
       <div className="pt-22" />
+
       <Content>
         {isConcealed ? (
           <HanConcealedList
