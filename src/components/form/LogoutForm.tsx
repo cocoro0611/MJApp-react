@@ -27,8 +27,8 @@ const LogoutForm = () => {
       <Dialog
         open={isOpen}
         close={closeDialog}
-        title="削除の確認"
-        message="本当に削除しますか？"
+        title="ログアウトの確認"
+        message="本当にログアウトしますか？"
       >
         <div className="grid grid-cols-2 gap-4">
           <Button color="cancel" onClick={closeDialog}>

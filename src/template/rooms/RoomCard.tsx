@@ -19,7 +19,7 @@ const RoomCard = ({ href, name, users }: RoomCardProps) => {
       <div className="text-left">{name}</div>
       <div className="center gap-8">
         {users.map((user) => (
-          <div key={user.name} className="text-[0.7rem] center flex-col">
+          <div key={user.name} className="text-[0.65rem] center flex-col">
             <Image
               key={user.name}
               src={user.icon}
