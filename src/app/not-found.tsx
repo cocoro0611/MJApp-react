@@ -4,7 +4,7 @@ import Button from "../components/ui/Button";
 const NotFound = async () => {
   return (
     <>
-      <Header title="　" isBackIcon={false} />
+      <Header title="　" showBackButton={false} />
       <div className="center flex-col">
         <div className="text-9xl font-bold text-gray-300">404</div>
         <div className="text-2xl font-bold text-gray-800 mb-4">

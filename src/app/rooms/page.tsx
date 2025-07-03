@@ -11,7 +11,7 @@ const RoomsPage = async () => {
   const defaultUsers = await readDefaultUsers();
   return (
     <>
-      <Header title="ルーム一覧" isBackIcon={false} />
+      <Header title="ルーム一覧" showBackButton={false} />
       <Content>
         <div className="space-y-4">
           {rooms.map((room) => (

@@ -34,14 +34,13 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
       <Header
         title={roomDetail.name}
         href="/rooms"
-        addContent={
+        extra={
           <GameBoard
             roomDetailUser={roomDetail.users}
             shouldShowChip={shouldShowChip}
             roomId={roomId}
           />
         }
-        bottomSpace={shouldShowChip ? "pb-45.5" : "pb-40"}
       >
         <DeleteForm action={deleteRoom} name="id" value={roomId} />
       </Header>

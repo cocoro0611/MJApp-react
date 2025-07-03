@@ -21,14 +21,13 @@ const FuCalculationPage = () => {
       <Header
         title="　"
         href="/calculation"
-        addContent={
+        extra={
           <CalculationBoard
             totalHan={totalHan}
             totalFu={totalFu}
             tokuten={tokuten}
           />
         }
-        bottomSpace="pb-40"
       >
         <button type="button" onClick={resetButton}>
           <CachedIcon />

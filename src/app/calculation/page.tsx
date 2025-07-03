@@ -5,7 +5,7 @@ import Button from "@/src/components/ui/Button";
 const CalculationPage = () => {
   return (
     <>
-      <Header title="計算一覧" isBackIcon={false} />
+      <Header title="計算一覧" showBackButton={false} />
       <Content className="font-bold">
         <Button
           href="/calculation/han-count"

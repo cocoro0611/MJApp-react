@@ -16,7 +16,7 @@ const OrderEditPage = async ({ params, searchParams }: OrderEditPageProps) => {
 
   return (
     <>
-      <Header title="　" isBackIcon={false} />
+      <Header title="　" showBackButton={false} />
       <Content>
         <OrderEditForm
           roomId={roomId}

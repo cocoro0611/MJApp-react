@@ -45,7 +45,7 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   ) {
     return (
       <div className="container mx-auto bg-white min-h-screen shadow-xl">
-        <Header title="　" isBackIcon={false} />
+        <Header title="　" showBackButton={false} />
         <Content className="font-bold">ログイン画面に遷移中...</Content>
       </div>
     );

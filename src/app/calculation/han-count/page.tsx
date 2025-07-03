@@ -33,8 +33,7 @@ const HanCalculationPage = () => {
       <Header
         title="　"
         href="/calculation"
-        bottomSpace="pb-40"
-        addContent={
+        extra={
           <CalculationBoard
             totalHan={currentState.totalHan}
             totalFu={currentState.totalFu}

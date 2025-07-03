@@ -24,7 +24,7 @@ const SettingPage = () => {
 
   return (
     <>
-      <Header title="設定一覧" isBackIcon={false}>
+      <Header title="設定一覧" showBackButton={false}>
         {/* PCサイズではログアウトボタンはサイドバーに移動 */}
         <div className="lg:hidden">
           <LogoutForm />

@@ -17,7 +17,7 @@ const Sidebar = ({ className = "" }: SidebarProps) => {
   return (
     <aside className={className}>
       <div
-        className="flex flex-col fixed top-0 bottom-0 left-0 z-40
+        className="flex flex-col fixed top-0 bottom-0 left-0 z-50
       bg-primary-800 text-white w-64"
       >
         {/* Logo/Header */}
