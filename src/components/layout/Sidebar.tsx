@@ -30,16 +30,17 @@ const Sidebar = ({ className = "" }: SidebarProps) => {
           <ul className="space-y-2">
             {NAVIGATION_TABS.map((tab) => {
               const IconComponent = tab.icon;
+              const isActive = pathname.startsWith(tab.id);
 
               return (
                 <li key={tab.id}>
                   <Link
                     href={tab.id}
-                    className={`flex items-center gap-3 px-4 py-2 rounded-lg
+                    className={`flex items-center gap-3 px-4 py-2 rounded-lg effect-scale
                     ${
-                      pathname.startsWith(tab.id)
-                        ? "bg-primary-100 text-primary-800"
-                        : "text-white hover:bg-primary-700 hover:text-gray-200"
+                      isActive
+                        ? "bg-primary-100 text-primary-800 border-l-6 border-primary-500"
+                        : "text-white hover:bg-primary-700 hover:text-gray-200 hover:border-l-6 hover:border-primary-600"
                     }`}
                   >
                     <span>

@@ -11,6 +11,7 @@ const Footer = () => {
     <nav className="fixed-container bottom-0 z-10 center">
       {NAVIGATION_TABS.map((tab, index) => {
         const IconComponent = tab.icon;
+        const isActive = pathname.startsWith(tab.id);
 
         return (
           <Link
@@ -20,7 +21,7 @@ const Footer = () => {
               border-y border-r border-gray-500 center flex-col flex-1 py-2 
               ${index === 0 ? "rounded-l-lg border-l" : ""}
               ${index === NAVIGATION_TABS.length - 1 ? "rounded-r-lg" : ""}
-              ${pathname.startsWith(tab.id) ? "primary" : "white"}
+              ${isActive ? "primary" : "white"}
             `}
           >
             <span>
