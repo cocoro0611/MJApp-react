@@ -15,11 +15,11 @@ interface RoomCardProps {
 
 const RoomCard = ({ href, name, users }: RoomCardProps) => {
   return (
-    <Card href={href} className="flex flex-col px-4 py-2">
+    <Card href={href} leftBorder="lg" className="flex flex-col p-4 w-80">
       <div className="text-left">{name}</div>
-      <div className="center gap-8">
+      <div className="center gap-2">
         {users.map((user) => (
-          <div key={user.name} className="text-[0.65rem] center flex-col">
+          <div key={user.name} className="text-xs center flex-col w-18">
             <Image
               key={user.name}
               src={user.icon}
@@ -28,14 +28,14 @@ const RoomCard = ({ href, name, users }: RoomCardProps) => {
               height={40}
               className="pb-1"
             />
-            <div>{user.name}</div>
-            <div
+            <p>{user.name}</p>
+            <p
               className={
                 user.totalScore < 0 ? "text-negative" : "text-positive"
               }
             >
               {user.totalScore}
-            </div>
+            </p>
           </div>
         ))}
       </div>

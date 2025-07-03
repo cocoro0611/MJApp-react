@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/src/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import ColorSelector from "@/src/template/setting/ColorSelector";
 import { readSetting } from "@/src/lib/models/setting";
 
@@ -19,7 +19,7 @@ const ColorSettingPage = async () => {
   return (
     <>
       <Header title="テーマカラー設定" href="/setting" />
-      <Main>
+      <Content>
         <div className="bg-secondary-100 border border-secondary-500 text-secondary-800 rounded p-2 font-bold text-sm mb-8">
           テーマカラーを選択してください。
         </div>
@@ -28,7 +28,7 @@ const ColorSettingPage = async () => {
           defaultPrimaryColor={setting?.primaryColor || "blue"}
           defaultSecondaryColor={setting?.secondaryColor || "orange"}
         />
-      </Main>
+      </Content>
     </>
   );
 };

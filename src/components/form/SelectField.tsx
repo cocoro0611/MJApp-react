@@ -75,13 +75,14 @@ const SelectField = ({
           <Button
             href={href}
             color="primary-light"
+            border="primary-light-border"
             className="px-2 py-1 rounded text-xs"
           >
             カスタム
           </Button>
         )}
       </div>
-      <div className="center gap-2 mt-2 text-sm">
+      <div className="center mt-2 text-sm">
         <div className="grid-2 gap-2">
           {displayOptions.map((option) => (
             <Button

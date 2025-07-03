@@ -21,16 +21,34 @@ const ButtonFixed = ({
   onClick,
 }: ButtonFixedProps) => {
   return (
-    <Button
-      href={href}
-      color={color}
-      disabled={disabled}
-      onClick={onClick}
-      className="px-5 py-3 text-3xl rounded-xl fixed z-10 bottom-[6rem] 
-      right-[2rem] md:right-[8rem] lg:right-[5rem]"
-    >
-      +
-    </Button>
+    <>
+      <div className="lg:hidden container mx-auto fixed bottom-24 z-10">
+        <div className="flex justify-end pr-8">
+          <Button
+            href={href}
+            color={color}
+            disabled={disabled}
+            onClick={onClick}
+            className="px-5 py-3 text-3xl rounded-xl"
+          >
+            +
+          </Button>
+        </div>
+      </div>
+      <div className="hidden lg:block fixed bottom-24 right-0 z-10">
+        <div className="flex justify-end pr-20">
+          <Button
+            href={href}
+            color={color}
+            disabled={disabled}
+            onClick={onClick}
+            className="px-7 py-5 text-5xl rounded-xl"
+          >
+            +
+          </Button>
+        </div>
+      </div>
+    </>
   );
 };
 

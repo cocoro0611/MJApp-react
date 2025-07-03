@@ -9,6 +9,7 @@ import { TOAST_TIME } from "@/src/constants/toastTime";
 interface ToastButtonProps {
   children: ReactNode;
   color?: "primary" | "primary-light" | "danger" | "cancel" | "white";
+  border?: "primary-light-border" | "cancel-border" | "none";
   disabled?: boolean;
   className?: string;
   // toast関係
@@ -23,6 +24,7 @@ interface ToastButtonProps {
 const ToastButton = ({
   children,
   color = "primary",
+  border = "none",
   disabled = false,
   className = "rounded px-4 py-2 w-full", // defaultのsize
   // toast関係
@@ -67,7 +69,11 @@ const ToastButton = ({
     }
   };
 
-  const btnClass = `effect-scale ${color} ${className} ${disabled ? "effect-disabled" : ""} `;
+  const btnClass = `effect-scale 
+  ${color ? color : ""}
+  ${border !== "none" ? border : ""}
+  ${className} ${disabled ? "effect-disabled" : ""} `;
+
   return (
     <>
       <button type="submit" disabled={disabled} className={btnClass}>
@@ -80,7 +86,7 @@ const ToastButton = ({
           onClose={handleClose}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
-          <Alert severity={toastColor} variant="filled" className="z-20">
+          <Alert severity={toastColor} variant="filled" className="z-30">
             {toastMessage}
           </Alert>
         </Snackbar>

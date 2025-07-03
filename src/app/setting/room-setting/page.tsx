@@ -1,5 +1,5 @@
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import SettingForm from "@/src/template/setting/SettingForm";
 import { readSetting } from "@/src/lib/models/setting";
 
@@ -9,12 +9,13 @@ const SettingPage = async () => {
   return (
     <>
       <Header title="ルーム設定" href="/setting" />
-      <Main>
-        <div className="bg-secondary-100 border border-secondary-500 text-secondary-800 rounded p-2 font-bold text-sm mb-8">
-          デフォルトのルーム設定を選択してください。
+      <Content>
+        <div className="info-box-secondary mb-8">
+          <p>ルーム作成時に使用する</p>
+          <p>デフォルト設定を選択してください。</p>
         </div>
         <SettingForm setting={setting} />
-      </Main>
+      </Content>
     </>
   );
 };

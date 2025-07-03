@@ -22,7 +22,7 @@ const SelectRoomUsersForm = ({ action, users }: SelectRoomUsersFormProps) => {
 
   return (
     <Form action={handleSubmit} className="center flex-col space-y-6">
-      <label className=" text-primary-800 font-bold">
+      <label className="info-box-secondary">
         {MAX_ROOM_PLAYERS}人選択してください ({selectedUsers.length}/
         {MAX_ROOM_PLAYERS})
       </label>
@@ -37,7 +37,10 @@ const SelectRoomUsersForm = ({ action, users }: SelectRoomUsersFormProps) => {
             <UserCard
               name={user.name}
               icon={user.icon}
-              isColor={isUserSelected(user.id)}
+              leftBorder="sm"
+              className={`
+                ${isUserSelected(user.id) ? "" : "opacity-20"}
+                h-16 w-16 text-[0.7rem]`}
             />
           </div>
         ))}

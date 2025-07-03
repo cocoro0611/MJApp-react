@@ -45,7 +45,7 @@ const ScoreHeadCard = ({
   );
 
   const CancelButton = () => (
-    <Button color="cancel" onClick={closeDialog}>
+    <Button color="cancel" border="cancel-border" onClick={closeDialog}>
       キャンセル
     </Button>
   );
@@ -70,12 +70,10 @@ const ScoreHeadCard = ({
     <>
       <Card
         onClick={handleOpenDialog}
-        isColor={complete}
-        className={
-          complete
-            ? "w-full py-3"
-            : "p-1.5 font-bold text-xs bg-gray-100 w-full"
-        }
+        leftBorder={complete ? "sm" : "none"}
+        color={complete ? "primary-light" : "cancel"}
+        className={`w-full
+          ${complete ? "py-3" : "p-1.5 text-xs border-l-3 border-gray-400"}`}
       >
         {complete ? (
           <>{gameCount}回戦</>

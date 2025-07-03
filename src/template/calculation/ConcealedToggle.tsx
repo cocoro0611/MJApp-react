@@ -12,10 +12,7 @@ const ConcealedToggle = ({
   setIsConcealed,
 }: ConcealedToggleProps) => {
   return (
-    <div
-      className="fixed top-[0.5rem] z-50 font-bold
-        xl:ml-[19rem] lg:ml-[11rem] md:ml-[10rem] sm:ml-[6rem] ml-[4.5rem]"
-    >
+    <div className="fixed top-[0.5rem] lg:top-[1.6rem] z-40 font-bold ml-22 lg:ml-50 ] ">
       <Button
         onClick={() => setIsConcealed(true)}
         color={isConcealed ? "toggle-on" : "toggle-disabled"}

@@ -1,5 +1,5 @@
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import RoomCard from "@/src/template/rooms/RoomCard";
 import ButtonFixed from "@/src/components/ui/ButtonFixed";
 import MessageHandler from "@/src/components/nav/MessageHandler";
@@ -11,9 +11,9 @@ const RoomsPage = async () => {
   const defaultUsers = await readDefaultUsers();
   return (
     <>
-      <Header title="ルーム一覧" isBackIcon={false} />
-      <Main>
-        <div className="space-y-4">
+      <Header title="ルーム一覧" showBackButton={false} />
+      <Content>
+        <div className="grid-1 gap-8">
           {rooms.map((room) => (
             <RoomCard
               key={room.id}
@@ -24,7 +24,7 @@ const RoomsPage = async () => {
           ))}
         </div>
         <ButtonFixed href="/rooms/new" disabled={defaultUsers.length < 4} />
-      </Main>
+      </Content>
       <MessageHandler type="room" />
     </>
   );

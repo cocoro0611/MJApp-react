@@ -1,7 +1,7 @@
 "use client";
 
-import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
+import CircularProgress from "@mui/material/CircularProgress";
 import { SessionProvider, useSession, signIn } from "next-auth/react";
 import { useEffect, useRef } from "react";
 
@@ -44,10 +44,10 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
     (status === "unauthenticated" && !isLoggingOut.current)
   ) {
     return (
-      <div className="container mx-auto bg-white min-h-screen shadow-xl">
-        <Header title="　" isBackIcon={false} />
-        <Main className="font-bold">ログイン画面に遷移中...</Main>
-      </div>
+      <Content className="min-h-screen center">
+        <CircularProgress />
+        <p className="text-lg font-bold mt-4">読み込み中...</p>
+      </Content>
     );
   }
 

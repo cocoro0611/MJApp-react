@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import ConcealedToggle from "@/src/template/calculation/ConcealedToggle";
 import CalculationBoard from "@/src/template/calculation/calculationBoard";
 import HanConcealedList from "@/src/template/calculation/hanConcealedList";
@@ -33,8 +33,7 @@ const HanCalculationPage = () => {
       <Header
         title="　"
         href="/calculation"
-        bottomSpace="pb-40"
-        addContent={
+        extra={
           <CalculationBoard
             totalHan={currentState.totalHan}
             totalFu={currentState.totalFu}
@@ -52,7 +51,11 @@ const HanCalculationPage = () => {
           <CachedIcon />
         </button>
       </Header>
-      <Main className="flex-col">
+
+      {/* extraの分の調整 */}
+      <div className="pt-22" />
+
+      <Content>
         {isConcealed ? (
           <HanConcealedList
             buttonCounts={concealedState.buttonCounts}
@@ -66,7 +69,7 @@ const HanCalculationPage = () => {
             onButtonClick={openState.exclusiveButton}
           />
         )}
-      </Main>
+      </Content>
     </>
   );
 };

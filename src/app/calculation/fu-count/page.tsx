@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import CalculationBoard from "@/src/template/calculation/calculationBoard";
 import FuList from "@/src/template/calculation/fuList";
 import { useCalculator } from "@/src/hooks/calculation/useCalculator";
@@ -19,28 +19,31 @@ const FuCalculationPage = () => {
   return (
     <>
       <Header
-        title="　"
+        title="符数計算"
         href="/calculation"
-        addContent={
+        extra={
           <CalculationBoard
             totalHan={totalHan}
             totalFu={totalFu}
             tokuten={tokuten}
           />
         }
-        bottomSpace="pb-40"
       >
         <button type="button" onClick={resetButton}>
           <CachedIcon />
         </button>
       </Header>
-      <Main className="flex-col">
+
+      {/* extraの分の調整 */}
+      <div className="pt-22" />
+
+      <Content>
         <FuList
           buttonCounts={buttonCounts}
           totalHan={totalHan}
           onButtonClick={exclusiveButton}
         />
-      </Main>
+      </Content>
     </>
   );
 };

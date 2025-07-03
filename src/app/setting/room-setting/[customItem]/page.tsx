@@ -1,5 +1,5 @@
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import CustomForm from "@/src/template/rooms/CustomForm";
 import { upsertDefaultRoomCustom } from "@/src/lib/models/setting";
 
@@ -72,8 +72,8 @@ const CustomSettingPage = async ({ params }: CustomSettingPageProps) => {
   return (
     <>
       <Header title="カスタム設定" href="/setting/room-setting" />
-      <Main>
-        <div className="bg-secondary-100 border border-secondary-500 text-secondary-800 rounded p-2 font-bold text-sm mb-8">
+      <Content>
+        <div className="info-box-secondary mb-8">
           <p>{config.label}を入力してください。</p>
           {config.description && (
             <div>
@@ -90,7 +90,7 @@ const CustomSettingPage = async ({ params }: CustomSettingPageProps) => {
           maxLength={config.maxLength}
           placeholder={config.placeholder}
         />
-      </Main>
+      </Content>
     </>
   );
 };

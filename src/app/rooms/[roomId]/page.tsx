@@ -1,5 +1,5 @@
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import DeleteForm from "@/src/components/form/DeleteForm";
 import AddDataForm from "@/src/template/rooms/AddDataForm";
 import GameBoard from "@/src/template/rooms/GameBoard";
@@ -34,18 +34,21 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
       <Header
         title={roomDetail.name}
         href="/rooms"
-        addContent={
+        extra={
           <GameBoard
             roomDetailUser={roomDetail.users}
             shouldShowChip={shouldShowChip}
             roomId={roomId}
           />
         }
-        bottomSpace={shouldShowChip ? "pb-45.5" : "pb-40"}
       >
         <DeleteForm action={deleteRoom} name="id" value={roomId} />
       </Header>
-      <Main isBlank={false}>
+
+      {/* extraの分の調整 */}
+      <div className={shouldShowChip ? "pt-25.5" : "pt-20"} />
+
+      <Content isBlank={false}>
         <AmountBoard roomId={roomId} amount={roomDetail.gameAmount} />
         <ScoreForm
           scores={scores}
@@ -60,7 +63,7 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
           roomChipRate={roomDetail.chipRate}
         />
         <AddDataForm roomId={roomId} />
-      </Main>
+      </Content>
     </>
   );
 };

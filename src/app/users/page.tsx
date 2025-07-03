@@ -1,5 +1,5 @@
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
+import Content from "@/src/components/layout/Content";
 import UserCard from "@/src/template/users/UserCard";
 import ButtonFixed from "@/src/components/ui/ButtonFixed";
 import MessageHandler from "@/src/components/nav/MessageHandler";
@@ -10,8 +10,8 @@ const UsersPage = async () => {
 
   return (
     <>
-      <Header title="ユーザー一覧" isBackIcon={false} />
-      <Main isBlank={true}>
+      <Header title="ユーザー一覧" showBackButton={false} />
+      <Content isBlank={true}>
         <div className="grid-4 gap-4">
           {users.map((user) => (
             <UserCard
@@ -19,11 +19,13 @@ const UsersPage = async () => {
               href={`/users/${user.id}/edit`}
               name={user.name}
               icon={user.icon}
+              leftBorder="sm"
+              className="h-16 w-16 text-[0.7rem]"
             />
           ))}
         </div>
         <ButtonFixed href="/users/new" />
-      </Main>
+      </Content>
       <MessageHandler type="user" />
     </>
   );

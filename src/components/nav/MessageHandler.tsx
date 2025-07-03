@@ -63,7 +63,7 @@ const MessageContent = ({ type }: { type: MessageType }) => {
       onClose={() => setToastOpen(false)}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
     >
-      <Alert severity={toastSeverity} variant="filled" className="z-20">
+      <Alert severity={toastSeverity} variant="filled" className="z-30">
         {toastMessage}
       </Alert>
     </Snackbar>

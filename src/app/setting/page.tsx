@@ -1,12 +1,13 @@
 "use client";
 
 import Header from "@/src/components/layout/Header";
-import Main from "@/src/components/layout/Main";
-import Button from "@/src/components/ui/Button";
+import Content from "@/src/components/layout/Content";
+import Card from "@/src/components/ui/Card";
 import LogoutForm from "@/src/components/form/LogoutForm";
+import BuildIcon from "@mui/icons-material/Build";
+import PaletteIcon from "@mui/icons-material/Palette";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import CalculateIcon from "@mui/icons-material/Calculate";
 
 const SettingPage = () => {
   const { data: session } = useSession();
@@ -25,27 +26,42 @@ const SettingPage = () => {
 
   return (
     <>
-      <Header title="設定一覧" isBackIcon={false}>
-        <LogoutForm />
+      <Header title="設定一覧" showBackButton={false}>
+        {/* PCサイズではログアウトボタンはサイドバーに移動 */}
+        <div className="lg:hidden">
+          <LogoutForm />
+        </div>
       </Header>
-      <Main className="font-bold">
-        <Button
-          href="/setting/room-setting"
-          color="primary-light"
-          className="rounded-lg p-8 text-lg w-60 mb-8 shadow-xl"
-        >
-          ルーム設定
-        </Button>
-        {/* テーマカラー設定はAdmin権限しか行えない */}
-        <Button
-          color="primary-light"
-          className="rounded-lg p-8 text-lg w-60 mb-8  shadow-xl"
-          disabled={!isAdmin}
-          onClick={handleColorSettingAccess}
-        >
-          テーマカラー設定
-        </Button>
-      </Main>
+      <Content>
+        <div className="grid-1 gap-8">
+          <Card
+            href="/setting/room-setting"
+            leftBorder="lg"
+            className="p-4 w-80"
+          >
+            <div className="center flex-col">
+              <div className="bg-gradient-to-br from-primary-400 to-primary-600 rounded-full p-4 shadow">
+                <BuildIcon className="text-white" />
+              </div>
+              <p className="font-bold pt-2">ルーム設定</p>
+            </div>
+          </Card>
+          {/* テーマカラー設定はAdmin権限しか行えない */}
+          <Card
+            disabled={!isAdmin}
+            onClick={handleColorSettingAccess}
+            leftBorder="lg"
+            className="p-4 w-80"
+          >
+            <div className="center flex-col">
+              <div className="bg-gradient-to-br from-primary-400 to-primary-600 rounded-full p-4 shadow">
+                <PaletteIcon className="text-white" />
+              </div>
+              <p className="font-bold pt-2">テーマカラー設定</p>
+            </div>
+          </Card>
+        </div>
+      </Content>
     </>
   );
 };

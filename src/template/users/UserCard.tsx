@@ -3,54 +3,43 @@ import Card from "@/src/components/ui/Card";
 
 interface UserCardProps {
   href?: string;
+  color?:
+    | "primary"
+    | "primary-light"
+    | "secondary"
+    | "danger"
+    | "cancel"
+    | "white"
+    | "toggle-on"
+    | "toggle-off"
+    | "toggle-disabled";
+  leftBorder?: "sm" | "md" | "lg" | "none";
+  // カード情報
   name: string;
   icon: string;
-  isColor?: boolean;
-  size?: "mdWf" | "md" | "lg";
+  imageSize?: number;
   className?: string;
 }
 
-const cardSizeClassName = {
-  md: {
-    card: "h-16 w-16",
-    image: { width: 30, height: 30 },
-    text: "text-xs mt-1",
-  },
-  mdWf: {
-    card: "h-16 w-full",
-    image: { width: 30, height: 30 },
-    text: "text-xs mt-1",
-  },
-  lg: {
-    card: "h-40 w-40",
-    image: { width: 100, height: 100 },
-    text: "text-lg mt-2",
-  },
-};
-
 const UserCard = ({
   href = "",
+  color = "primary-light",
+  leftBorder = "none",
+  // カード情報
   name,
   icon,
-  isColor = true,
-  size = "md",
+  imageSize = 30,
   className = "",
 }: UserCardProps) => {
-  const cardSize = cardSizeClassName[size];
-
   return (
     <Card
       href={href}
-      isColor={isColor}
-      className={`center flex-col center ${cardSize.card} ${className}`}
+      color={color}
+      leftBorder={leftBorder}
+      className={`center flex-col ${className}`}
     >
-      <Image
-        src={icon}
-        alt="user-icon"
-        width={cardSize.image.width}
-        height={cardSize.image.height}
-      />
-      <span className={cardSize.text}>{name}</span>
+      <Image src={icon} alt="user-icon" width={imageSize} height={imageSize} />
+      <span className="mt-1">{name}</span>
     </Card>
   );
 };
