@@ -18,12 +18,12 @@ const SelectIcon = ({ name, value }: SelectIconProps) => {
 
   return (
     <div className="w-full">
-      <label className={`flex text-primary-800 font-bold `}>アイコン</label>
+      <label className="flex text-primary-800 font-bold">アイコン</label>
       <input type="hidden" name="icon" value={selectedIcon} />
-      <div className="center py-4">
+      <div className="center pb-8">
         <UserCard name={name} icon={selectedIcon} size="lg" />
       </div>
-      <div className="grid-6 gap-2">
+      <div className="grid-6 gap-4">
         {iconList.map((icon) => (
           <Image
             key={icon}
@@ -32,8 +32,8 @@ const SelectIcon = ({ name, value }: SelectIconProps) => {
             onClick={() => setSelectedIcon(icon)}
             className={`rounded-full effect-rotate
               ${selectedIcon === icon ? "primary-light" : "white"}`}
-            width={45}
-            height={45}
+            width={42}
+            height={42}
           />
         ))}
       </div>

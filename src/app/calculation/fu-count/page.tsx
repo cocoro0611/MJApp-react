@@ -19,7 +19,7 @@ const FuCalculationPage = () => {
   return (
     <>
       <Header
-        title="　"
+        title="符数計算"
         href="/calculation"
         extra={
           <CalculationBoard
@@ -33,7 +33,8 @@ const FuCalculationPage = () => {
           <CachedIcon />
         </button>
       </Header>
-      <Content className="flex-col">
+      <div className="pt-22" />
+      <Content>
         <FuList
           buttonCounts={buttonCounts}
           totalHan={totalHan}

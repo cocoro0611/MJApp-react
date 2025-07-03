@@ -51,7 +51,8 @@ const HanCalculationPage = () => {
           <CachedIcon />
         </button>
       </Header>
-      <Content className="flex-col">
+      <div className="pt-22" />
+      <Content>
         {isConcealed ? (
           <HanConcealedList
             buttonCounts={concealedState.buttonCounts}
