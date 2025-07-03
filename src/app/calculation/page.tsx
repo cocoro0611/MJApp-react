@@ -1,6 +1,8 @@
 import Header from "@/src/components/layout/Header";
 import Content from "@/src/components/layout/Content";
 import Card from "@/src/components/ui/Card";
+import CalculateIcon from "@mui/icons-material/Calculate";
+import FunctionsIcon from "@mui/icons-material/Functions";
 
 const CalculationPage = () => {
   return (
@@ -10,17 +12,27 @@ const CalculationPage = () => {
         <div className="grid-1 gap-8">
           <Card
             href="/calculation/han-count"
-            border="lg"
-            className="p-8 w-80 text-lg font-bold"
+            leftBorder="lg"
+            className="p-4 w-80"
           >
-            飜数計算
+            <div className="center flex-col">
+              <p className="bg-primary-300 rounded-full p-2">
+                <CalculateIcon />
+              </p>
+              <p className="font-bold pt-2">飜数計算</p>
+            </div>
           </Card>
           <Card
             href="/calculation/fu-count"
-            border="lg"
-            className="p-8 w-80 text-lg font-bold"
+            leftBorder="lg"
+            className="p-4 w-80"
           >
-            符数計算
+            <div className="center flex-col">
+              <p className="bg-primary-300 rounded-full p-2">
+                <FunctionsIcon />
+              </p>
+              <p className="font-bold pt-2">符数計算</p>
+            </div>
           </Card>
         </div>
       </Content>

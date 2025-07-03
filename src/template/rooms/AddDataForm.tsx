@@ -58,7 +58,7 @@ const AddDataForm = ({ roomId }: AddDataFormProps) => {
             </ToastButton>
           </Form>
         </div>
-        <Button color="cancel" onClick={closeDialog}>
+        <Button color="cancel" border="cancel-border" onClick={closeDialog}>
           キャンセル
         </Button>
       </Dialog>

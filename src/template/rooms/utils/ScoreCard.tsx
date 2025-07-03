@@ -28,13 +28,10 @@ const ScoreCard = ({
   return (
     <>
       <Card
-        isColor={!isSelectedScore}
+        leftBorder={!isSelectedScore ? "sm" : "none"}
+        color={!isSelectedScore ? "primary-light" : "secondary"}
         className={`w-full p-1 
-            ${
-              isSelectedScore
-                ? "bg-secondary-100 border-secondary-400 text-secondary-800 effect-pulse"
-                : ""
-            }`}
+        ${!isSelectedScore ? "" : "effect-pulse border-l-3 border-secondary-400"}`}
         onClick={() => onOpen(gameCount, index, "score")}
       >
         <div className="flex text-[0.6rem]">点数</div>

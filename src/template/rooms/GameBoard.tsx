@@ -15,15 +15,16 @@ const GameBoard = ({
 }: GameBoardProps) => {
   return (
     <>
-      <div className="grid-5 center">
+      <div className="grid-5 center bg-primary-800 text-white">
         <div className="grid-5-inner">
           <div className="center p-0.5 bg-white">
             <Card
               href={`/rooms/${roomId}/room-edit`}
-              className="w-full center flex-col h-16"
+              leftBorder="sm"
+              className="h-16 w-full center flex-col"
             >
-              <span>設定</span>
-              <span>変更</span>
+              <p>設定</p>
+              <p>変更</p>
             </Card>
           </div>
           <div>スコア</div>
@@ -35,9 +36,10 @@ const GameBoard = ({
             <div className="center p-0.5 bg-white">
               <UserCard
                 href={`/rooms/${roomId}/user-edit/${user.id}`}
+                leftBorder="sm"
+                className="h-16 w-full"
                 name={user.name}
                 icon={user.icon}
-                size="mdWf"
               />
             </div>
             <div>{user.totalScore}</div>

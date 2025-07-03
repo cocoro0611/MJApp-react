@@ -39,7 +39,7 @@ const DeleteForm = ({ action, name, value }: DeleteFormProps) => {
           <input type="hidden" name={name} value={value} />
 
           <div className="grid grid-cols-2 gap-4">
-            <Button color="cancel" onClick={closeDialog}>
+            <Button color="cancel" border="cancel-border" onClick={closeDialog}>
               キャンセル
             </Button>
             <Button type="submit" color="danger">

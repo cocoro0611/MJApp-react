@@ -15,7 +15,7 @@ interface RoomCardProps {
 
 const RoomCard = ({ href, name, users }: RoomCardProps) => {
   return (
-    <Card href={href} className="flex flex-col p-4 w-80">
+    <Card href={href} leftBorder="lg" className="flex flex-col p-4 w-80">
       <div className="text-left">{name}</div>
       <div className="center gap-2">
         {users.map((user) => (

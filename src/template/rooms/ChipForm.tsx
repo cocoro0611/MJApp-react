@@ -95,7 +95,7 @@ const ChipForm = ({ scores, chips, roomId, roomChipRate }: ChipFormProps) => {
             </ToastButton>
             <Button
               color="cancel"
-              className="rounded text-sm w-16"
+              className="rounded text-sm w-16 border-2 border-gray-300"
               onClick={closeSelect}
             >
               閉じる

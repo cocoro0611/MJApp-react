@@ -15,8 +15,8 @@ interface ButtonProps {
     | "white"
     | "toggle-on"
     | "toggle-off"
-    | "toggle-disabled"
-    | "custom";
+    | "toggle-disabled";
+  border?: "primary-light-border" | "cancel-border" | "none";
   type?: "button" | "submit";
   disabled?: boolean;
   className?: string;
@@ -27,6 +27,7 @@ const Button = ({
   children,
   href,
   color = "primary",
+  border = "none",
   type = "button",
   disabled = false,
   className = "rounded px-4 py-2 w-full",
@@ -34,6 +35,7 @@ const Button = ({
 }: ButtonProps) => {
   const btnClass = `effect-scale 
   ${color ? color : ""}
+  ${border !== "none" ? border : ""}
   ${className} ${disabled ? "effect-disabled" : ""} `;
 
   // Link ボタン

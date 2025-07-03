@@ -44,7 +44,7 @@ const Keyboard = ({
   }, [value, resetValue]);
 
   return (
-    <div className="fixed-container bottom-0 z-30">
+    <div className="fixed-container bottom-0 z-30 lg:fixed lg:left-64 lg:right-0">
       <div className="flex items-center justify-between py-2 bg-gray-100">
         <div className="flex ml-2">
           <Button
@@ -79,7 +79,7 @@ const Keyboard = ({
           row.map((key) => (
             <Button
               key={`${index}-${key}`}
-              className={`${key === "" ? "invisible" : "white rounded-lg text-lg py-1 "}`}
+              className={`${key === "" ? "invisible" : "white rounded-lg text-lg py-1 shadow-lg"}`}
               onClick={() => handleKeyPress(key)}
             >
               {key === "delete" ? "☒" : key}

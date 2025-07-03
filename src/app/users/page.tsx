@@ -16,10 +16,11 @@ const UsersPage = async () => {
           {users.map((user) => (
             <UserCard
               key={user.id}
-              border="sm"
               href={`/users/${user.id}/edit`}
               name={user.name}
               icon={user.icon}
+              leftBorder="sm"
+              className="h-16 w-16 text-[0.7rem]"
             />
           ))}
         </div>

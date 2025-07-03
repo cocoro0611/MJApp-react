@@ -32,11 +32,13 @@ const AmountHeadCard = ({ roomId, amount }: AmountHeadCardProps) => {
 
   return (
     <>
-      <Card onClick={handleOpenDialog} className="w-full py-1">
-        <div className="font-bold text-xs">
-          <p>-合計-</p>
-          <p>{amount} P</p>
-        </div>
+      <Card
+        onClick={handleOpenDialog}
+        leftBorder="sm"
+        className="w-full py-1 text-xs"
+      >
+        <p>-合計-</p>
+        <p>{amount} P</p>
       </Card>
 
       <Dialog
@@ -46,7 +48,7 @@ const AmountHeadCard = ({ roomId, amount }: AmountHeadCardProps) => {
         message="本当に削除しますか？"
       >
         <div className="grid grid-cols-2 gap-4 mb-4">
-          <Button color="cancel" onClick={closeDialog}>
+          <Button color="cancel" border="cancel-border" onClick={closeDialog}>
             キャンセル
           </Button>
           <Form action={handleSubmit}>

@@ -31,7 +31,7 @@ const LogoutForm = () => {
         message="本当にログアウトしますか？"
       >
         <div className="grid grid-cols-2 gap-4">
-          <Button color="cancel" onClick={closeDialog}>
+          <Button color="cancel" border="cancel-border" onClick={closeDialog}>
             キャンセル
           </Button>
           <Button color="danger" onClick={handleLogout}>

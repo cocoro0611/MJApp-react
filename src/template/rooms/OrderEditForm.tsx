@@ -38,7 +38,7 @@ const OrderEditForm = ({
 
       <div className="center flex-col space-y-4">
         {orderedScores.map((scoreData, index) => (
-          <Card key={scoreData.userId} isEffect={false} className="p-2">
+          <Card key={scoreData.userId} leftBorder="md" className="p-2">
             <input
               type="hidden"
               name={`order-${scoreData.userId}`}
@@ -86,7 +86,7 @@ const OrderEditForm = ({
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <Button color="cancel" onClick={() => window.history.back()}>
+        <Button color="cancel" border="cancel-border" onClick={() => window.history.back()}>
           キャンセル
         </Button>
         <ToastButton

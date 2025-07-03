@@ -28,13 +28,10 @@ const ChipCard = ({
   return (
     <>
       <Card
-        isColor={!isSelectedChip}
+        leftBorder={!isSelectedChip ? "sm" : "none"}
+        color={!isSelectedChip ? "primary-light" : "secondary"}
         className={`w-full p-1 
-            ${
-              isSelectedChip
-                ? "bg-secondary-100 border-secondary-400 text-secondary-800 effect-pulse"
-                : ""
-            }`}
+        ${!isSelectedChip ? "" : "effect-pulse border-l-3 border-secondary-400"}`}
         onClick={() => onOpen(gameCount, index, "chip")}
       >
         <div className="flex text-[0.6rem]">枚数</div>

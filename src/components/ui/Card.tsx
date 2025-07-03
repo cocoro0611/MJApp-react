@@ -1,42 +1,50 @@
-import { ReactNode } from "react";
+"use client";
+
 import Link from "next/link";
+import { ReactNode } from "react";
 
 interface CardProps {
   children: ReactNode;
   href?: string;
-  isColor?: boolean;
-  border?: "sm" | "md" | "lg" | "none";
-  isEffect?: boolean;
-  className?: string;
+  color?:
+    | "primary"
+    | "primary-light"
+    | "secondary"
+    | "danger"
+    | "cancel"
+    | "white"
+    | "toggle-on"
+    | "toggle-off"
+    | "toggle-disabled";
+  leftBorder?: "sm" | "md" | "lg" | "none";
   disabled?: boolean;
+  className?: string;
   onClick?: () => void;
 }
 
 const Card = ({
   children,
   href = "",
-  isColor = true,
-  border = "md",
-  isEffect = true,
-  className = "",
+  color = "primary-light",
+  leftBorder = "none",
   disabled = false,
-  onClick,
+  className = "",
+  onClick = () => {},
 }: CardProps) => {
-  const borderClasses = {
-    sm: "border border-l-3 border-primary-500",
-    md: "border border-l-6 border-primary-500",
-    lg: "border border-l-9 border-primary-500",
+  const leftBorderClasses = {
     none: "",
+    sm: "border-l-3 border-primary-500",
+    md: "border-l-6 border-primary-500",
+    lg: "border-l-9 border-primary-500",
   };
 
   // FIXME: 選択せれていない時の色の調整
   return (
     <Link
       href={href}
-      className={`rounded-lg font-bold shadow-xl
-      ${isColor ? "bg-primary-50 text-primary-800" : "opacity-20"} 
-      ${borderClasses[border]}
-      ${isEffect ? "effect-scale" : ""}
+      className={`rounded-lg font-bold shadow-lg effect-scale
+      ${color ? color : ""}
+      ${leftBorderClasses[leftBorder]}
       ${disabled ? "effect-disabled" : ""}
       ${className}`}
       onClick={onClick}
