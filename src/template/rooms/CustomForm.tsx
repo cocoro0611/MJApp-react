@@ -30,7 +30,7 @@ const CustomForm = ({
     useServerActionToast(action);
 
   return (
-    <Form action={handleSubmit} className="space-y-8 w-full lg:w-1/2">
+    <Form action={handleSubmit} className="space-y-8 w-80 lg:w-120">
       <InputField
         label={label}
         name={name}

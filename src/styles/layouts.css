@@ -12,7 +12,7 @@
     @apply grid grid-cols-1 lg:grid-cols-2;
   }
   .grid-2 {
-    @apply grid grid-cols-2;
+    @apply grid grid-cols-2 lg:grid-cols-4;
   }
   .grid-4 {
     @apply grid grid-cols-4 lg:grid-cols-8;
@@ -30,5 +30,12 @@
   }
   .grid-5-inner > * {
     @apply border-y border-gray-300;
+  }
+}
+
+@layer style {
+  .info-box-secondary {
+    @apply rounded py-2 px-4 font-bold text-sm;
+    @apply bg-secondary-100 border border-secondary-500 text-secondary-800;
   }
 }

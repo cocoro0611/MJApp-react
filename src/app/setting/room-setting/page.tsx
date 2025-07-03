@@ -10,8 +10,9 @@ const SettingPage = async () => {
     <>
       <Header title="ルーム設定" href="/setting" />
       <Content>
-        <div className="bg-secondary-100 border border-secondary-500 text-secondary-800 rounded p-2 font-bold text-sm mb-8">
-          ルームのデフォルトの設定を選択してください。
+        <div className="info-box-secondary mb-8">
+          <p>ルーム作成時に使用する</p>
+          <p>デフォルト設定を選択してください。</p>
         </div>
         <SettingForm setting={setting} />
       </Content>

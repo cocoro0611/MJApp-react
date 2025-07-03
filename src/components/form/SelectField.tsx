@@ -81,7 +81,7 @@ const SelectField = ({
           </Button>
         )}
       </div>
-      <div className="center gap-2 mt-2 text-sm">
+      <div className="center mt-2 text-sm">
         <div className="grid-2 gap-2">
           {displayOptions.map((option) => (
             <Button
