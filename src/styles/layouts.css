@@ -1,9 +1,12 @@
 @layer components {
-  .center {
-    @apply flex justify-center items-center text-center;
+  .page-container {
+    @apply container mx-auto min-h-screen bg-white;
   }
   .fixed-container {
     @apply container mx-auto fixed lg:mx-0 lg:w-auto;
+  }
+  .center {
+    @apply flex justify-center items-center text-center;
   }
   .grid-2 {
     @apply grid grid-cols-2;
