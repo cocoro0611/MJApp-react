@@ -17,6 +17,8 @@ export type CreateColor = Pick<
   "id" | "primaryColor" | "secondaryColor"
 >;
 
+export type CreateShowPoint = Pick<TS<Setting>, "id" | "isShowPoint">;
+
 // UpdateData
 export type UpdateDefaultRoom = Pick<
   TS<Setting>,
@@ -32,3 +34,5 @@ export type UpdateColor = Pick<
   TS<Setting>,
   "primaryColor" | "secondaryColor" | "updatedAt"
 >;
+
+export type UpdateShowPoint = Pick<TS<Setting>, "isShowPoint" | "updatedAt">;

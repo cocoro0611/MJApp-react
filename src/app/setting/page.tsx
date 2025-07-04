@@ -6,6 +6,7 @@ import Card from "@/src/components/ui/Card";
 import LogoutForm from "@/src/components/form/LogoutForm";
 import BuildIcon from "@mui/icons-material/Build";
 import PaletteIcon from "@mui/icons-material/Palette";
+import CurrencyYenIcon from "@mui/icons-material/CurrencyYen";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -19,6 +20,16 @@ const SettingPage = () => {
 
     if (response.ok) {
       router.push("/setting/color-setting");
+    } else {
+      alert("管理者権限が必要です");
+    }
+  };
+
+  const handleShowPointSettingAccess = async () => {
+    const response = await fetch("/api/auth/actions/admin", { method: "POST" });
+
+    if (response.ok) {
+      router.push("/setting/show-point-setting");
     } else {
       alert("管理者権限が必要です");
     }
@@ -60,6 +71,22 @@ const SettingPage = () => {
               <p className="font-bold">テーマカラー設定</p>
             </div>
           </Card>
+          {/* ポイントの非表示設定はAdmin権限しか行えないかつ表示されない */}
+          {isAdmin && (
+            <Card
+              disabled={!isAdmin}
+              onClick={handleShowPointSettingAccess}
+              leftBorder="lg"
+              className="p-4 w-80"
+            >
+              <div className="flex justify-start items-center gap-6">
+                <div className="bg-gradient-to-br from-primary-400 to-primary-600 rounded-full p-4 shadow">
+                  <CurrencyYenIcon className="text-white" />
+                </div>
+                <p className="font-bold">ポイントの非表示設定</p>
+              </div>
+            </Card>
+          )}
         </div>
       </Content>
     </>
