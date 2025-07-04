@@ -34,7 +34,7 @@ const RoomCard = ({ href, name, users }: RoomCardProps) => {
                 user.totalScore < 0 ? "text-negative" : "text-positive"
               }
             >
-              {user.totalScore}
+              {user.totalScore >= 0 ? `+${user.totalScore}` : user.totalScore}
             </p>
           </div>
         ))}

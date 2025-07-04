@@ -5,7 +5,6 @@ interface ChipCardProps {
   gameCount: number;
   index: number;
   selected?: SelectState | null;
-  roomChipRate: number;
   onOpen: (gameCount: number, index: number, type: SelectType) => void;
   getChip: (gameCount: number, index: number) => number;
 }
@@ -14,7 +13,6 @@ const ChipCard = ({
   gameCount,
   index,
   selected,
-  roomChipRate,
   onOpen,
   getChip,
 }: ChipCardProps) => {
@@ -24,7 +22,7 @@ const ChipCard = ({
     selected?.type === "chip";
 
   const chip = getChip(gameCount, index);
-  const chipPoint = (chip - 20) * roomChipRate;
+  const desplayChip = chip - 20;
   return (
     <>
       <Card
@@ -48,11 +46,11 @@ const ChipCard = ({
       </Card>
       <div
         className={`font-bold center w-full relative mt-0.5 ${
-          chipPoint < 0 ? "text-negative" : "text-positive"
+          desplayChip < 0 ? "text-negative" : "text-positive"
         }`}
       >
-        {chipPoint}
-        <span className="absolute right-0.5">P</span>
+        {desplayChip >= 0 ? `+${desplayChip}` : desplayChip}
+        <span className="absolute bottom-0 right-0.5 text-[0.6rem]">枚</span>
       </div>
     </>
   );

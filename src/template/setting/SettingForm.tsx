@@ -13,18 +13,24 @@ import {
 } from "@/src/constants/gameRules";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import { upsertDefaultRoom } from "@/src/lib/models/setting";
+import { useSession } from "next-auth/react";
+import { ReadDefaultRoom } from "@/src/lib/models/setting/type";
 
 interface SettingFormProps {
-  setting?: {
-    defaultInitialPoint?: number | null;
-    defaultReturnPoint?: number | null;
-    defaultBonusPoint?: string | null;
-    defaultScoreRate?: number | null;
-    defaultChipRate?: number | null;
-  };
+  setting?: ReadDefaultRoom;
 }
 
 const SettingForm = ({ setting }: SettingFormProps) => {
+  const { data: session } = useSession();
+  const isMonitor = session?.user.groups?.includes("monitor") || false;
+  const isShowPoint = setting?.isShowPoint ?? true;
+
+  // isMonitor = false, isShowPoint = true  → 表示 ✅
+  // isMonitor = false, isShowPoint = false → 非表示 ✅
+  // isMonitor = true,  isShowPoint = true  → 非表示 ✅
+  // isMonitor = true,  isShowPoint = false → 非表示 ✅
+  const shouldShowPoints = isShowPoint && !isMonitor;
+
   const { isPending, toastMessage, toastColor, redirect, handleSubmit } =
     useServerActionToast(upsertDefaultRoom);
 
@@ -60,22 +66,30 @@ const SettingForm = ({ setting }: SettingFormProps) => {
         isCustomBtn={true}
         href="/setting/room-setting/bonusPoint"
       />
-      <SelectField
-        label="レート"
-        name="scoreRate"
-        options={SCORE_RATE_OPTIONS}
-        defaultValue={setting?.defaultScoreRate ?? DEFAULT_GAME_RULES.scoreRate}
-        isCustomBtn={true}
-        href="/setting/room-setting/scoreRate"
-      />
-      <SelectField
-        label="チップ"
-        name="chipRate"
-        options={CHIP_RATE_OPTIONS}
-        defaultValue={setting?.defaultChipRate ?? DEFAULT_GAME_RULES.chipRate}
-        isCustomBtn={true}
-        href="/setting/room-setting/chipRate"
-      />
+      {shouldShowPoints && (
+        <>
+          <SelectField
+            label="レート"
+            name="scoreRate"
+            options={SCORE_RATE_OPTIONS}
+            defaultValue={
+              setting?.defaultScoreRate ?? DEFAULT_GAME_RULES.scoreRate
+            }
+            isCustomBtn={true}
+            href="/setting/room-setting/scoreRate"
+          />
+          <SelectField
+            label="チップ"
+            name="chipRate"
+            options={CHIP_RATE_OPTIONS}
+            defaultValue={
+              setting?.defaultChipRate ?? DEFAULT_GAME_RULES.chipRate
+            }
+            isCustomBtn={true}
+            href="/setting/room-setting/chipRate"
+          />
+        </>
+      )}
       <ToastButton
         toastMessage={toastMessage}
         toastColor={toastColor}

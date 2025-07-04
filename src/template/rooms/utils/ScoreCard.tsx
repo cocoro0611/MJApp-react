@@ -51,7 +51,7 @@ const ScoreCard = ({
           scoreResult < 0 ? "text-negative" : "text-positive"
         }`}
       >
-        {scoreResult}
+        {scoreResult >= 0 ? `+${scoreResult}` : scoreResult}
       </div>
     </>
   );

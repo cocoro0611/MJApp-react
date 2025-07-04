@@ -12,23 +12,34 @@ import {
   readChips,
   deleteRoom,
 } from "@/src/lib/models/rooms";
+import { readSetting } from "@/src/lib/models/setting";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 interface RoomEditPageProps {
   params: Promise<{ roomId: string }>;
 }
 
 const RoomEditPage = async ({ params }: RoomEditPageProps) => {
+  const session = await getServerSession(authOptions);
+  const isMonitor = session?.user.groups?.includes("monitor") || false;
+
   const { roomId } = await params;
   const roomDetail = await readRoomDetail(roomId);
   const scores = await readScores(roomId);
   const chips = await readChips(roomId);
 
+  const setting = await readSetting();
+  const isShowPoint = setting?.isShowPoint ?? true;
+
   // チップの有無でgameBoardの表示を変更
-  const totalChipSum = roomDetail.users.reduce(
-    (sum, user) => sum + user.totalChip,
-    0
-  );
-  const shouldShowChip = totalChipSum !== 0;
+  const shouldShowChip = chips.length > 0;
+
+  // isMonitor = false, isShowPoint = true  → 表示 ✅
+  // isMonitor = false, isShowPoint = false → 非表示 ✅
+  // isMonitor = true,  isShowPoint = true  → 非表示 ✅
+  // isMonitor = true,  isShowPoint = false → 非表示 ✅
+  const shouldShowPoints = isShowPoint && !isMonitor;
   return (
     <>
       <Header
@@ -36,6 +47,7 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
         href="/rooms"
         extra={
           <GameBoard
+            shouldShowPoints={shouldShowPoints}
             roomDetailUser={roomDetail.users}
             shouldShowChip={shouldShowChip}
             roomId={roomId}
@@ -45,23 +57,23 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
         <DeleteForm action={deleteRoom} name="id" value={roomId} />
       </Header>
 
-      {/* extraの分の調整 */}
+      {/* extraの調整 */}
       <div className={shouldShowChip ? "pt-25.5" : "pt-20"} />
 
+      {/* shouldShowPointsの調整 */}
+      <div className={shouldShowPoints ? "" : "-mt-6 lg:-mt-7.5"} />
+
       <Content isBlank={false}>
-        <AmountBoard roomId={roomId} amount={roomDetail.gameAmount} />
+        {shouldShowPoints && (
+          <AmountBoard roomId={roomId} amount={roomDetail.gameAmount} />
+        )}
         <ScoreForm
           scores={scores}
           chips={chips}
           roomId={roomId}
           roomInitialPoint={roomDetail.initialPoint}
         />
-        <ChipForm
-          scores={scores}
-          chips={chips}
-          roomId={roomId}
-          roomChipRate={roomDetail.chipRate}
-        />
+        <ChipForm scores={scores} chips={chips} roomId={roomId} />
         <AddDataForm roomId={roomId} />
       </Content>
     </>

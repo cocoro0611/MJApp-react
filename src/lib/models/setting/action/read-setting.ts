@@ -13,6 +13,7 @@ export const readSetting = async () => {
       "defaultChipRate",
       "primaryColor",
       "secondaryColor",
+      "isShowPoint",
     ])
     .executeTakeFirst();
 

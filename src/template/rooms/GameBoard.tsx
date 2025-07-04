@@ -1,18 +1,23 @@
+"use client";
+
 import Card from "@/src/components/ui/Card";
 import UserCard from "../users/UserCard";
 import { ReadRoomDetailUser } from "@/src/lib/models/rooms/type";
 
 interface GameBoardProps {
+  shouldShowPoints: boolean;
   roomDetailUser: ReadRoomDetailUser[];
   shouldShowChip: boolean;
   roomId: string;
 }
 
 const GameBoard = ({
+  shouldShowPoints,
   roomDetailUser,
   shouldShowChip,
   roomId,
 }: GameBoardProps) => {
+
   return (
     <>
       <div className="grid-5 center bg-primary-800 text-white">
@@ -29,7 +34,7 @@ const GameBoard = ({
           </div>
           <div>スコア</div>
           {shouldShowChip && <div>チップ</div>}
-          <div>収支</div>
+          {shouldShowPoints && <div>収支</div>}
         </div>
         {roomDetailUser.map((user) => (
           <div className="grid-5-inner" key={user.id}>
@@ -42,21 +47,25 @@ const GameBoard = ({
                 icon={user.icon}
               />
             </div>
-            <div>{user.totalScore}</div>
+            <div>
+              {user.totalScore >= 0 ? `+${user.totalScore}` : user.totalScore}
+            </div>
             {shouldShowChip && (
               <div className="relative">
-                {user.totalChip}
+                {user.totalChip >= 0 ? `+${user.totalChip}` : user.totalChip}
                 <span className="absolute bottom-0 right-0.5 text-[0.6rem]">
                   枚
                 </span>
               </div>
             )}
-            <div className="relative">
-              {user.totalPoint}
-              <span className="absolute bottom-0 right-0.5 text-[0.6rem]">
-                P
-              </span>
-            </div>
+            {shouldShowPoints && (
+              <div className="relative">
+                {user.totalPoint >= 0 ? `+${user.totalPoint}` : user.totalPoint}
+                <span className="absolute bottom-0 right-0.5 text-[0.6rem]">
+                  P
+                </span>
+              </div>
+            )}
           </div>
         ))}
       </div>
