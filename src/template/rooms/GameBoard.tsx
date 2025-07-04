@@ -1,14 +1,18 @@
+"use client";
+
 import Card from "@/src/components/ui/Card";
 import UserCard from "../users/UserCard";
 import { ReadRoomDetailUser } from "@/src/lib/models/rooms/type";
 
 interface GameBoardProps {
+  isMonitor: boolean;
   roomDetailUser: ReadRoomDetailUser[];
   shouldShowChip: boolean;
   roomId: string;
 }
 
 const GameBoard = ({
+  isMonitor,
   roomDetailUser,
   shouldShowChip,
   roomId,
@@ -29,7 +33,7 @@ const GameBoard = ({
           </div>
           <div>スコア</div>
           {shouldShowChip && <div>チップ</div>}
-          <div>収支</div>
+          {!isMonitor && <div>収支</div>}
         </div>
         {roomDetailUser.map((user) => (
           <div className="grid-5-inner" key={user.id}>
@@ -53,12 +57,14 @@ const GameBoard = ({
                 </span>
               </div>
             )}
-            <div className="relative">
-              {user.totalPoint >= 0 ? `+${user.totalPoint}` : user.totalPoint}
-              <span className="absolute bottom-0 right-0.5 text-[0.6rem]">
-                P
-              </span>
-            </div>
+            {!isMonitor && (
+              <div className="relative">
+                {user.totalPoint >= 0 ? `+${user.totalPoint}` : user.totalPoint}
+                <span className="absolute bottom-0 right-0.5 text-[0.6rem]">
+                  P
+                </span>
+              </div>
+            )}
           </div>
         ))}
       </div>

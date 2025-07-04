@@ -13,6 +13,7 @@ import {
 } from "@/src/constants/gameRules";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import { upsertDefaultRoom } from "@/src/lib/models/setting";
+import { useSession } from "next-auth/react";
 
 interface SettingFormProps {
   setting?: {
@@ -25,6 +26,9 @@ interface SettingFormProps {
 }
 
 const SettingForm = ({ setting }: SettingFormProps) => {
+  const { data: session } = useSession();
+  const isMonitor = session?.user.groups?.includes("monitor") || false;
+
   const { isPending, toastMessage, toastColor, redirect, handleSubmit } =
     useServerActionToast(upsertDefaultRoom);
 
@@ -60,22 +64,30 @@ const SettingForm = ({ setting }: SettingFormProps) => {
         isCustomBtn={true}
         href="/setting/room-setting/bonusPoint"
       />
-      <SelectField
-        label="レート"
-        name="scoreRate"
-        options={SCORE_RATE_OPTIONS}
-        defaultValue={setting?.defaultScoreRate ?? DEFAULT_GAME_RULES.scoreRate}
-        isCustomBtn={true}
-        href="/setting/room-setting/scoreRate"
-      />
-      <SelectField
-        label="チップ"
-        name="chipRate"
-        options={CHIP_RATE_OPTIONS}
-        defaultValue={setting?.defaultChipRate ?? DEFAULT_GAME_RULES.chipRate}
-        isCustomBtn={true}
-        href="/setting/room-setting/chipRate"
-      />
+      {!isMonitor && (
+        <>
+          <SelectField
+            label="レート"
+            name="scoreRate"
+            options={SCORE_RATE_OPTIONS}
+            defaultValue={
+              setting?.defaultScoreRate ?? DEFAULT_GAME_RULES.scoreRate
+            }
+            isCustomBtn={true}
+            href="/setting/room-setting/scoreRate"
+          />
+          <SelectField
+            label="チップ"
+            name="chipRate"
+            options={CHIP_RATE_OPTIONS}
+            defaultValue={
+              setting?.defaultChipRate ?? DEFAULT_GAME_RULES.chipRate
+            }
+            isCustomBtn={true}
+            href="/setting/room-setting/chipRate"
+          />
+        </>
+      )}
       <ToastButton
         toastMessage={toastMessage}
         toastColor={toastColor}

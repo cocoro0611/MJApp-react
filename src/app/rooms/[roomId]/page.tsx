@@ -12,12 +12,17 @@ import {
   readChips,
   deleteRoom,
 } from "@/src/lib/models/rooms";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 interface RoomEditPageProps {
   params: Promise<{ roomId: string }>;
 }
 
 const RoomEditPage = async ({ params }: RoomEditPageProps) => {
+  const session = await getServerSession(authOptions);
+  const isMonitor = session?.user.groups?.includes("monitor") || false;
+
   const { roomId } = await params;
   const roomDetail = await readRoomDetail(roomId);
   const scores = await readScores(roomId);
@@ -32,6 +37,7 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
         href="/rooms"
         extra={
           <GameBoard
+            isMonitor={isMonitor}
             roomDetailUser={roomDetail.users}
             shouldShowChip={shouldShowChip}
             roomId={roomId}
@@ -41,11 +47,16 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
         <DeleteForm action={deleteRoom} name="id" value={roomId} />
       </Header>
 
-      {/* extraの分の調整 */}
+      {/* extraの調整 */}
       <div className={shouldShowChip ? "pt-25.5" : "pt-20"} />
 
+      {/* isMonitorの調整 */}
+      <div className={!isMonitor ? "" : "-mt-7.5"} />
+
       <Content isBlank={false}>
-        <AmountBoard roomId={roomId} amount={roomDetail.gameAmount} />
+        {!isMonitor && (
+          <AmountBoard roomId={roomId} amount={roomDetail.gameAmount} />
+        )}
         <ScoreForm
           scores={scores}
           chips={chips}

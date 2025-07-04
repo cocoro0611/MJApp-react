@@ -21,6 +21,7 @@ import type {
 } from "@/src/lib/models/rooms/type";
 import type { ReadUser } from "@/src/lib/models/users/type";
 import type { ServerAction } from "@/src/hooks/ui/useServerActionToast";
+import { useSession } from "next-auth/react";
 
 interface RoomFormProps {
   action: ServerAction;
@@ -37,6 +38,9 @@ const RoomForm = ({
   roomUsers,
   setting,
 }: RoomFormProps) => {
+  const { data: session } = useSession();
+  const isMonitor = session?.user.groups?.includes("monitor") || false;
+
   const today = new Date().toLocaleDateString("ja-JP");
 
   const [name, setName] = useState(room?.name ?? today);
@@ -120,27 +124,31 @@ const RoomForm = ({
         options={BONUS_POINT_OPTIONS}
         defaultValue={bonusPoint}
       />
-      <SelectField
-        label="レート"
-        name="scoreRate"
-        options={SCORE_RATE_OPTIONS}
-        defaultValue={scoreRate}
-      />
-      <SelectField
-        label="チップ"
-        name="chipRate"
-        options={CHIP_RATE_OPTIONS}
-        defaultValue={chipRate}
-      />
-      <InputField
-        label="場代（後ほど更新できます）"
-        name="gameAmount"
-        type="number"
-        maxLength={6}
-        placeholder="金額を入力"
-        value={amount}
-        onChange={(value) => setAmount(value)}
-      />
+      {!isMonitor && (
+        <>
+          <SelectField
+            label="レート"
+            name="scoreRate"
+            options={SCORE_RATE_OPTIONS}
+            defaultValue={scoreRate}
+          />
+          <SelectField
+            label="チップ"
+            name="chipRate"
+            options={CHIP_RATE_OPTIONS}
+            defaultValue={chipRate}
+          />
+          <InputField
+            label="場代（後ほど更新できます）"
+            name="gameAmount"
+            type="number"
+            maxLength={6}
+            placeholder="金額を入力"
+            value={amount}
+            onChange={(value) => setAmount(value)}
+          />
+        </>
+      )}
       <ToastButton
         toastMessage={toastMessage}
         toastColor={toastColor}
