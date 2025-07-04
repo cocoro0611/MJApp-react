@@ -83,7 +83,7 @@ const SettingPage = () => {
                 <div className="bg-gradient-to-br from-primary-400 to-primary-600 rounded-full p-4 shadow">
                   <CurrencyYenIcon className="text-white" />
                 </div>
-                <p className="font-bold">ポイントの非表示設定</p>
+                <p className="font-bold">ポイントの表示設定</p>
               </div>
             </Card>
           )}

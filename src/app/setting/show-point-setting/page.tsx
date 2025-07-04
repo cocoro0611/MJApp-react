@@ -18,7 +18,7 @@ const ShowPointSettingPage = async () => {
 
   return (
     <>
-      <Header title="ポイントの非表示設定" href="/setting" />
+      <Header title="ポイントの表示設定" href="/setting" />
       <Content>
         <div className="bg-secondary-100 border border-secondary-500 text-secondary-800 rounded p-2 font-bold text-sm mb-8">
           ポイントの表示設定を選択してください。
