@@ -50,6 +50,7 @@ export type Setting = {
     defaultChipRate: number | null;
     primaryColor: string | null;
     secondaryColor: string | null;
+    isShowPoint: Generated<boolean | null>;
     createdAt: Generated<Timestamp>;
     updatedAt: Generated<Timestamp>;
 };

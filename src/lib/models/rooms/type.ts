@@ -48,25 +48,73 @@ export type ReadDefaultRoom = Pick<
 >;
 
 // CreateData
-export type CreateRoom = Omit<TS<Room>, "createdAt" | "updatedAt">;
+export type CreateRoom = Pick<
+  TS<Room>,
+  | "id"
+  | "name"
+  | "initialPoint"
+  | "returnPoint"
+  | "bonusPoint"
+  | "scoreRate"
+  | "chipRate"
+  | "gameAmount"
+>;
 
-export type CreateRoomUser = Omit<TS<RoomUser>, "createdAt" | "updatedAt">;
+export type CreateRoomUser = Pick<
+  TS<RoomUser>,
+  "userId" | "roomId" | "position"
+>;
 
-export type CreateScore = Omit<TS<Score>, "createdAt" | "updatedAt">;
+export type CreateScore = Pick<
+  TS<Score>,
+  "score" | "scoreResult" | "gameCount" | "order" | "userId" | "roomId"
+>;
 
-export type CreateChip = Omit<TS<Chip>, "createdAt" | "updatedAt">;
+export type CreateChip = Pick<
+  TS<Chip>,
+  "chip" | "gameCount" | "userId" | "roomId"
+>;
 
-export type CreateDefaultRoom = Omit<
+export type CreateDefaultRoom = Pick<
   TS<Setting>,
-  "primaryColor" | "secondaryColor" | "createdAt" | "updatedAt"
+  | "id"
+  | "defaultInitialPoint"
+  | "defaultReturnPoint"
+  | "defaultBonusPoint"
+  | "defaultScoreRate"
+  | "defaultChipRate"
 >;
 
 // UpdateData
-export type UpdateRoom = Omit<TS<Room>, "id" | "createdAt">;
+export type UpdateRoom = Pick<
+  TS<Room>,
+  | "name"
+  | "initialPoint"
+  | "returnPoint"
+  | "bonusPoint"
+  | "scoreRate"
+  | "chipRate"
+  | "gameAmount"
+  | "updatedAt"
+>;
 
-export type UpdateScore = Omit<TS<Score>, "createdAt">;
+export type UpdateScore = Pick<
+  TS<Score>,
+  | "score"
+  | "scoreResult"
+  | "gameCount"
+  | "order"
+  | "userId"
+  | "roomId"
+  | "updatedAt"
+>;
 
-export type UpdateDefaultRoom = Omit<
+export type UpdateDefaultRoom = Pick<
   TS<Setting>,
-  "id" | "primaryColor" | "secondaryColor" | "createdAt"
+  | "defaultInitialPoint"
+  | "defaultReturnPoint"
+  | "defaultBonusPoint"
+  | "defaultScoreRate"
+  | "defaultChipRate"
+  | "updatedAt"
 >;

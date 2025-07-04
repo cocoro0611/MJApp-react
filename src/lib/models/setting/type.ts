@@ -2,29 +2,7 @@ import type { Setting } from "../types";
 import { TS } from "../kysely-utils";
 
 // CreateData
-export type CreateDefaultRoom = Omit<
-  TS<Setting>,
-  "primaryColor" | "secondaryColor" | "createdAt" | "updatedAt"
->;
-
-export type CreateColor = Omit<
-  TS<Setting>,
-  | "defaultInitialPoint"
-  | "defaultReturnPoint"
-  | "defaultBonusPoint"
-  | "defaultScoreRate"
-  | "defaultChipRate"
-  | "createdAt"
-  | "updatedAt"
->;
-
-// UpdateData
-export type UpdateDefaultRoom = Omit<
-  TS<Setting>,
-  "id" | "primaryColor" | "secondaryColor" | "createdAt"
->;
-
-export type UpdateColor = Omit<
+export type CreateDefaultRoom = Pick<
   TS<Setting>,
   | "id"
   | "defaultInitialPoint"
@@ -32,5 +10,25 @@ export type UpdateColor = Omit<
   | "defaultBonusPoint"
   | "defaultScoreRate"
   | "defaultChipRate"
-  | "createdAt"
+>;
+
+export type CreateColor = Pick<
+  TS<Setting>,
+  "id" | "primaryColor" | "secondaryColor"
+>;
+
+// UpdateData
+export type UpdateDefaultRoom = Pick<
+  TS<Setting>,
+  | "defaultInitialPoint"
+  | "defaultReturnPoint"
+  | "defaultBonusPoint"
+  | "defaultScoreRate"
+  | "defaultChipRate"
+  | "updatedAt"
+>;
+
+export type UpdateColor = Pick<
+  TS<Setting>,
+  "primaryColor" | "secondaryColor" | "updatedAt"
 >;

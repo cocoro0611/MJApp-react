@@ -5,7 +5,10 @@ import { TS } from "../kysely-utils";
 export type ReadUser = Pick<TS<User>, "id" | "name" | "icon" | "isDefaultUser">;
 
 // CreateData
-export type CreateUser = Omit<TS<User>, "createdAt" | "updatedAt">;
+export type CreateUser = Pick<
+  TS<User>,
+  "id" | "name" | "icon" | "isDefaultUser"
+>;
 
 // UpdateData
-export type UpdateUser = Omit<TS<User>, "id" | "isDefaultUser" | "createdAt">;
+export type UpdateUser = Pick<TS<User>, "name" | "icon" | "updatedAt">;
