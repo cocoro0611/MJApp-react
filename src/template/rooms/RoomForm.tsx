@@ -40,6 +40,13 @@ const RoomForm = ({
 }: RoomFormProps) => {
   const { data: session } = useSession();
   const isMonitor = session?.user.groups?.includes("monitor") || false;
+  const isShowPoint = setting?.isShowPoint ?? true;
+
+  // isMonitor = false, isShowPoint = true  → 表示 ✅
+  // isMonitor = false, isShowPoint = false → 非表示 ✅
+  // isMonitor = true,  isShowPoint = true  → 非表示 ✅
+  // isMonitor = true,  isShowPoint = false → 非表示 ✅
+  const shouldShowPoints = isShowPoint && !isMonitor;
 
   const today = new Date().toLocaleDateString("ja-JP");
 
@@ -124,7 +131,7 @@ const RoomForm = ({
         options={BONUS_POINT_OPTIONS}
         defaultValue={bonusPoint}
       />
-      {!isMonitor && (
+      {shouldShowPoints && (
         <>
           <SelectField
             label="レート"

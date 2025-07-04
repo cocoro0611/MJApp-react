@@ -23,7 +23,7 @@ const ShowPointSettingPage = async () => {
         <div className="bg-secondary-100 border border-secondary-500 text-secondary-800 rounded p-2 font-bold text-sm mb-8">
           ポイントの表示設定を選択してください。
         </div>
-        <ShowPoint isShowPoint={setting?.isShowPoint || true} />
+        <ShowPoint isShowPoint={setting?.isShowPoint ?? true} />
       </Content>
     </>
   );

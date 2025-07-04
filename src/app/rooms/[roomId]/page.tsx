@@ -12,6 +12,7 @@ import {
   readChips,
   deleteRoom,
 } from "@/src/lib/models/rooms";
+import { readSetting } from "@/src/lib/models/setting";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 
@@ -28,8 +29,17 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
   const scores = await readScores(roomId);
   const chips = await readChips(roomId);
 
+  const setting = await readSetting();
+  const isShowPoint = setting?.isShowPoint ?? true;
+
   // チップの有無でgameBoardの表示を変更
   const shouldShowChip = chips.length > 0;
+
+  // isMonitor = false, isShowPoint = true  → 表示 ✅
+  // isMonitor = false, isShowPoint = false → 非表示 ✅
+  // isMonitor = true,  isShowPoint = true  → 非表示 ✅
+  // isMonitor = true,  isShowPoint = false → 非表示 ✅
+  const shouldShowPoints = isShowPoint && !isMonitor;
   return (
     <>
       <Header
@@ -37,7 +47,7 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
         href="/rooms"
         extra={
           <GameBoard
-            isMonitor={isMonitor}
+            shouldShowPoints={shouldShowPoints}
             roomDetailUser={roomDetail.users}
             shouldShowChip={shouldShowChip}
             roomId={roomId}
@@ -50,11 +60,11 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
       {/* extraの調整 */}
       <div className={shouldShowChip ? "pt-25.5" : "pt-20"} />
 
-      {/* isMonitorの調整 */}
-      <div className={!isMonitor ? "" : "-mt-7.5"} />
+      {/* shouldShowPointsの調整 */}
+      <div className={shouldShowPoints ? "" : "-mt-6 lg:-mt-7.5"} />
 
       <Content isBlank={false}>
-        {!isMonitor && (
+        {shouldShowPoints && (
           <AmountBoard roomId={roomId} amount={roomDetail.gameAmount} />
         )}
         <ScoreForm

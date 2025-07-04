@@ -38,7 +38,8 @@ const ShowPoint = ({ isShowPoint = true }: ShowPointProps) => {
 
         <div className="center">
           <label className="flex items-center cursor-pointer">
-            <div
+            <button
+              type="submit"
               onClick={handleToggle}
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer ${
                 showPoint ? "bg-primary-600" : "bg-gray-200"
@@ -49,7 +50,7 @@ const ShowPoint = ({ isShowPoint = true }: ShowPointProps) => {
                   showPoint ? "translate-x-6" : "translate-x-1"
                 }`}
               />
-            </div>
+            </button>
             <span className="ml-3 text-sm font-bold">
               {showPoint ? "ポイントを表示" : "ポイントを非表示"}
             </span>
@@ -60,7 +61,7 @@ const ShowPoint = ({ isShowPoint = true }: ShowPointProps) => {
           toastMessage={toastMessage}
           toastColor={toastColor}
           redirect={redirect}
-          className="rounded px-4 py-2 w-80"
+          className="hidden"
         >
           {isPending ? "保存中..." : "保存"}
         </ToastButton>

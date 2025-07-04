@@ -45,6 +45,7 @@ export type ReadDefaultRoom = Pick<
   | "defaultBonusPoint"
   | "defaultScoreRate"
   | "defaultChipRate"
+  | "isShowPoint"
 >;
 
 // CreateData
