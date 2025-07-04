@@ -42,17 +42,19 @@ const GameBoard = ({
                 icon={user.icon}
               />
             </div>
-            <div>{user.totalScore}</div>
+            <div>
+              {user.totalScore >= 0 ? `+${user.totalScore}` : user.totalScore}
+            </div>
             {shouldShowChip && (
               <div className="relative">
-                {user.totalChip}
+                {user.totalChip >= 0 ? `+${user.totalChip}` : user.totalChip}
                 <span className="absolute bottom-0 right-0.5 text-[0.6rem]">
                   枚
                 </span>
               </div>
             )}
             <div className="relative">
-              {user.totalPoint}
+              {user.totalPoint >= 0 ? `+${user.totalPoint}` : user.totalPoint}
               <span className="absolute bottom-0 right-0.5 text-[0.6rem]">
                 P
               </span>

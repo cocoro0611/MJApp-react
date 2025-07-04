@@ -63,12 +63,14 @@ export const readRoomDetail = async (
         .executeTakeFirst();
 
       const totalScore = Math.round(Number(scoreSum?.total || 0) * 10) / 10; // 小数第1位で丸める
-      const totalChip = Number(chipSum?.total || 0);
+
+      const INITIAL_CHIPS = 20 * Number(chipSum?.maxGameCount);
+      const totalChip = Number(chipSum?.total) - INITIAL_CHIPS;
 
       // 収支計算
-      const INITIAL_CHIPS = 20 * Number(chipSum?.maxGameCount);
+
       const scorePoint = totalScore * room.scoreRate;
-      const chipPoint = (totalChip - INITIAL_CHIPS) * room.chipRate;
+      const chipPoint = totalChip * room.chipRate;
       const gamePoint = room.gameAmount / MAX_ROOM_PLAYERS;
       const totalPoint = Math.round(scorePoint + chipPoint - gamePoint);
 

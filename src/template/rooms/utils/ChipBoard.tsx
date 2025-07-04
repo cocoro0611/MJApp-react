@@ -7,7 +7,6 @@ import type { SelectState, SelectType } from "@/src/hooks/rooms/useSelection";
 interface ChipBoardProps {
   chips: ReadChip[];
   roomId: string;
-  roomChipRate: number;
   // 状態管理
   selected?: SelectState | null;
   onOpen: (gameCount: number, index: number, type: SelectType) => void;
@@ -19,7 +18,6 @@ interface ChipBoardProps {
 const ChipBoard = ({
   chips,
   roomId,
-  roomChipRate,
   selected,
   onOpen,
   getChip,
@@ -52,7 +50,6 @@ const ChipBoard = ({
                       gameCount={gameChip.gameCount}
                       index={index}
                       selected={selected}
-                      roomChipRate={roomChipRate}
                       onOpen={onOpen}
                       getChip={getChip}
                     />

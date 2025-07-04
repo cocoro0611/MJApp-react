@@ -16,10 +16,9 @@ interface ChipFormProps {
   scores: ReadScore[];
   chips: ReadChip[];
   roomId: string;
-  roomChipRate: number;
 }
 
-const ChipForm = ({ scores, chips, roomId, roomChipRate }: ChipFormProps) => {
+const ChipForm = ({ scores, chips, roomId }: ChipFormProps) => {
   const { selected, openSelect, closeSelect, moveLeft, moveRight } =
     useSelect();
   const {
@@ -55,7 +54,6 @@ const ChipForm = ({ scores, chips, roomId, roomChipRate }: ChipFormProps) => {
       <ChipBoard
         chips={chips}
         roomId={roomId}
-        roomChipRate={roomChipRate}
         selected={selected}
         onOpen={openSelect}
         getChip={getChip}
