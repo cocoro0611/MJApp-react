@@ -30,7 +30,7 @@ const ScoreCard = ({
       <Card
         leftBorder={!isSelectedScore ? "sm" : "none"}
         color={!isSelectedScore ? "primary-light" : "secondary"}
-        className={`w-full p-1 
+        className={`w-full px-1 py-2 
         ${!isSelectedScore ? "" : "effect-pulse border-l-3 border-secondary-400"}`}
         onClick={() => onOpen(gameCount, index, "score")}
       >

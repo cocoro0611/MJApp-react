@@ -58,10 +58,12 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
       </Header>
 
       {/* extraの調整 */}
-      <div className={shouldShowChip ? "pt-25.5" : "pt-20"} />
+      <div
+        className={shouldShowChip ? "pt-31.5 lg:pt-29.5" : "pt-24 lg:pt-22"}
+      />
 
       {/* shouldShowPointsの調整 */}
-      <div className={shouldShowPoints ? "" : "-mt-6 lg:-mt-7.5"} />
+      <div className={shouldShowPoints ? "" : "-mt-7.5"} />
 
       <Content isBlank={false}>
         {shouldShowPoints && (

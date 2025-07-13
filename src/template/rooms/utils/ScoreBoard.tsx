@@ -27,13 +27,13 @@ const ScoreBoard = ({
   return (
     <>
       <div className="bg-gray-300 text-gray-600 font-bold grid-5">
-        <div className="center">各スコア</div>
+        <div className="center">スコア</div>
       </div>
       <div className="grid-5">
         {scores.map((gameScore) => (
           <Fragment key={gameScore.gameCount}>
             <div className="grid-5-inner">
-              <div className="center flex-col p-1 h-18">
+              <div className="center flex-col p-1 h-20">
                 <ScoreHeadCard
                   roomId={roomId}
                   gameCount={gameScore.gameCount}
@@ -45,7 +45,7 @@ const ScoreBoard = ({
             {gameScore.scores.map((scoreItem, index) => {
               return (
                 <div className="grid-5-inner" key={index}>
-                  <div className="center flex-col p-0.5 h-18">
+                  <div className="center flex-col p-0.5 h-20">
                     <ScoreCard
                       gameCount={gameScore.gameCount}
                       index={index}

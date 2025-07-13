@@ -35,7 +35,7 @@ const AmountHeadCard = ({ roomId, amount }: AmountHeadCardProps) => {
       <Card
         onClick={handleOpenDialog}
         leftBorder="sm"
-        className="w-full py-1 text-xs"
+        className="w-full py-3 text-xs"
       >
         <p>-合計-</p>
         <p>{amount} P</p>

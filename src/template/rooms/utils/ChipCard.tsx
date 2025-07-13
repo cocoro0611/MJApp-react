@@ -28,7 +28,7 @@ const ChipCard = ({
       <Card
         leftBorder={!isSelectedChip ? "sm" : "none"}
         color={!isSelectedChip ? "primary-light" : "secondary"}
-        className={`w-full p-1 
+        className={`w-full px-1 py-2 
         ${!isSelectedChip ? "" : "effect-pulse border-l-3 border-secondary-400"}`}
         onClick={() => onOpen(gameCount, index, "chip")}
       >

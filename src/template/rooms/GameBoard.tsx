@@ -17,7 +17,6 @@ const GameBoard = ({
   shouldShowChip,
   roomId,
 }: GameBoardProps) => {
-
   return (
     <>
       <div className="grid-5 center bg-primary-800 text-white">
@@ -32,9 +31,9 @@ const GameBoard = ({
               <p>変更</p>
             </Card>
           </div>
-          <div>スコア</div>
-          {shouldShowChip && <div>チップ</div>}
-          {shouldShowPoints && <div>収支</div>}
+          <div className="py-1">スコア</div>
+          {shouldShowChip && <div className="py-1">チップ</div>}
+          {shouldShowPoints && <div className="py-1">収支</div>}
         </div>
         {roomDetailUser.map((user) => (
           <div className="grid-5-inner" key={user.id}>
@@ -47,11 +46,11 @@ const GameBoard = ({
                 icon={user.icon}
               />
             </div>
-            <div>
+            <div className="py-1">
               {user.totalScore >= 0 ? `+${user.totalScore}` : user.totalScore}
             </div>
             {shouldShowChip && (
-              <div className="relative">
+              <div className="relative py-1">
                 {user.totalChip >= 0 ? `+${user.totalChip}` : user.totalChip}
                 <span className="absolute bottom-0 right-0.5 text-[0.6rem]">
                   枚
@@ -59,7 +58,7 @@ const GameBoard = ({
               </div>
             )}
             {shouldShowPoints && (
-              <div className="relative">
+              <div className="relative py-1">
                 {user.totalPoint >= 0 ? `+${user.totalPoint}` : user.totalPoint}
                 <span className="absolute bottom-0 right-0.5 text-[0.6rem]">
                   P

@@ -73,7 +73,7 @@ const ScoreHeadCard = ({
         leftBorder={complete ? "sm" : "none"}
         color={complete ? "primary-light" : "cancel"}
         className={`w-full
-          ${complete ? "py-3" : "p-1.5 text-xs border-l-3 border-gray-400"}`}
+          ${complete ? "py-5" : "p-1.5 text-xs border-l-3 border-gray-400"}`}
       >
         {complete ? (
           <>{gameCount}回戦</>

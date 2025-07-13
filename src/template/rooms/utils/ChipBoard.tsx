@@ -27,13 +27,13 @@ const ChipBoard = ({
   return (
     <>
       <div className="bg-gray-300 text-gray-600 font-bold grid-5">
-        <div className="center">各チップ</div>
+        <div className="center">チップ</div>
       </div>
       <div className="grid-5">
         {chips.map((gameChip) => (
           <Fragment key={gameChip.gameCount}>
             <div className="grid-5-inner">
-              <div className="center flex-col p-1 h-18">
+              <div className="center flex-col p-1 h-20">
                 <ChipHeadCard
                   roomId={roomId}
                   gameCount={gameChip.gameCount}
@@ -45,7 +45,7 @@ const ChipBoard = ({
             {gameChip.chips.map((chipItem, index) => {
               return (
                 <div className="grid-5-inner" key={index}>
-                  <div className="center flex-col p-0.5 h-18">
+                  <div className="center flex-col p-0.5 h-20">
                     <ChipCard
                       gameCount={gameChip.gameCount}
                       index={index}
