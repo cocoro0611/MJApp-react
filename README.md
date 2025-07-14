@@ -2,6 +2,36 @@
 npx prisma db seed
 ```
 
+## アプリの運用保守
+
+### GitHub との 連携
+
+- SSH `git clone`するには、EC2 内に SSH Key を作成する必要がある
+
+```bash
+# SSH keyを生成
+$ ssh-keygen -t ed25519 -C "<メールアドレス>"
+
+# 公開鍵をGitHubに追加
+$ cat ~/.ssh/id_ed25519.pub
+```
+
+### PM2 の立ち上げ
+
+- `clone`した後、`pm2`を立ち上げる
+
+```bash
+$ pnpm run build
+$ pm2 start pnpm --name "nextjs-app" -- start
+
+# ステータス確認や削除
+$ pm2 status
+$ pm2 kill
+
+# 変更内容のプル
+$ git pull
+```
+
 ## MEMO
 
 - `container` と `absolute` の関係

@@ -5,6 +5,21 @@ import { useState } from "react";
 export const useKeyboard = (onValueChange?: (newValue: number) => void) => {
   const [currentValue, setCurrentValue] = useState(0);
 
+  const playClickSound = () => {
+    try {
+      // 音声再生
+      const audio = new Audio("/sounds/click.mp3");
+      audio.play().catch((error) => console.log("Audio play failed:", error));
+
+      // バイブレーション
+      if ("vibrate" in navigator) {
+        navigator.vibrate(100); // 100ms振動
+      }
+    } catch (error) {
+      console.log("Audio creation failed:", error);
+    }
+  };
+
   const resetValue = (initialValue: number) => {
     setCurrentValue(initialValue);
   };
@@ -16,6 +31,7 @@ export const useKeyboard = (onValueChange?: (newValue: number) => void) => {
   };
 
   const addDigit = (digit: number, maxLength: number) => {
+    playClickSound();
     const valueStr = String(Math.abs(currentValue)); // 絶対値で処理
     const isNegative = currentValue < 0;
 
