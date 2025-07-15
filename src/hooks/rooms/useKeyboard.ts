@@ -1,24 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useClickSound } from "../sounds/useClickSound";
 
 export const useKeyboard = (onValueChange?: (newValue: number) => void) => {
   const [currentValue, setCurrentValue] = useState(0);
-
-  const playClickSound = () => {
-    try {
-      // 音声再生
-      const audio = new Audio("/sounds/click.mp3");
-      audio.play().catch((error) => console.log("Audio play failed:", error));
-
-      // バイブレーション
-      if ("vibrate" in navigator) {
-        navigator.vibrate(100); // 100ms振動
-      }
-    } catch (error) {
-      console.log("Audio creation failed:", error);
-    }
-  };
+  const { playClick } = useClickSound();
 
   const resetValue = (initialValue: number) => {
     setCurrentValue(initialValue);
@@ -31,7 +18,7 @@ export const useKeyboard = (onValueChange?: (newValue: number) => void) => {
   };
 
   const addDigit = (digit: number, maxLength: number) => {
-    playClickSound();
+    playClick(); // クリック音再生
     const valueStr = String(Math.abs(currentValue)); // 絶対値で処理
     const isNegative = currentValue < 0;
 
@@ -49,6 +36,7 @@ export const useKeyboard = (onValueChange?: (newValue: number) => void) => {
   };
 
   const toggleSign = () => {
+    playClick();
     if (currentValue === 0) return;
 
     const newValue = -currentValue;
@@ -57,6 +45,7 @@ export const useKeyboard = (onValueChange?: (newValue: number) => void) => {
   };
 
   const removeDigit = () => {
+    playClick();
     const valueStr = String(Math.abs(currentValue)); // 絶対値で処理
     const isNegative = currentValue < 0;
 
