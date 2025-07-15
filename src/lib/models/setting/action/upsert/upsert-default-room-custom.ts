@@ -3,10 +3,19 @@
 import { revalidateAll } from "../../../revalidate-wrapper";
 import { v4 } from "uuid";
 import { db } from "../../../db";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/src/app/api/auth/[...nextauth]/route";
 import { ReadDefaultRoom } from "../../type";
 
 export const upsertDefaultRoomCustom = async (data: FormData) => {
   try {
+    const session = await getServerSession(authOptions);
+
+    // 認証チェック
+    if (!session?.user?.id) {
+      return { success: false, message: "認証が必要です" };
+    }
+
     const settingData: Record<string, any> = {};
 
     const initialPoint = data.get("initialPoint");
@@ -36,6 +45,7 @@ export const upsertDefaultRoomCustom = async (data: FormData) => {
     // 既存設定の確認
     const existingSetting = await db
       .selectFrom("Setting")
+      .where("cognitoUserId", "=", session.user.id)
       .select("id")
       .executeTakeFirst();
 
@@ -50,7 +60,7 @@ export const upsertDefaultRoomCustom = async (data: FormData) => {
       // 新規作成
       await db
         .insertInto("Setting")
-        .values({ id: v4(), ...settingData })
+        .values({ id: v4(), cognitoUserId: session.user.id, ...settingData })
         .execute();
     }
 

@@ -240,10 +240,7 @@ export const isValidColor = (color: string): color is Color => {
 };
 
 // 安全に色を取得する関数
-export const getValidColor = (
-  color: string | undefined,
-  defaultColor: Color
-): Color => {
+export const getValidColor = (color: string, defaultColor: Color): Color => {
   if (color && isValidColor(color)) {
     return color;
   }

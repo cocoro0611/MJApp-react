@@ -20,7 +20,7 @@ export const createUser = async (data: FormData) => {
 
     const user: CreateUser = {
       id: v4(),
-      cognitoUserId: session?.user.id,
+      cognitoUserId: session.user.id,
       name: String(data.get("name")),
       icon: String(data.get("icon")),
       isDefaultUser: defaultUsers.length < 4,

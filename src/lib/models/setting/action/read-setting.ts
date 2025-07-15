@@ -16,7 +16,6 @@ export const readSetting = async (): Promise<ReadDefaultRoom> => {
   const setting = await db
     .selectFrom("Setting")
     .select([
-      "id",
       "defaultInitialPoint",
       "defaultReturnPoint",
       "defaultBonusPoint",
@@ -29,9 +28,18 @@ export const readSetting = async (): Promise<ReadDefaultRoom> => {
     .where("cognitoUserId", "=", session.user.id)
     .executeTakeFirst();
 
-  // Settingが存在しない場合の最小限のオブジェクト
+  // デフォルト値
   if (!setting) {
-    return { id: "" };
+    return {
+      defaultInitialPoint: 25000,
+      defaultReturnPoint: 30000,
+      defaultBonusPoint: "10-30",
+      defaultScoreRate: 50,
+      defaultChipRate: 200,
+      primaryColor: "blue",
+      secondaryColor: "orange",
+      isShowPoint: true,
+    };
   }
 
   return setting;
