@@ -3,6 +3,7 @@
 import { revalidateAll } from "../../../revalidate-wrapper";
 import { v4 } from "uuid";
 import { db } from "../../../db";
+import { ReadDefaultRoom } from "../../type";
 
 export const upsertDefaultRoomCustom = async (data: FormData) => {
   try {
