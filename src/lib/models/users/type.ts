@@ -7,7 +7,7 @@ export type ReadUser = Pick<TS<User>, "id" | "name" | "icon" | "isDefaultUser">;
 // CreateData
 export type CreateUser = Pick<
   TS<User>,
-  "id" | "name" | "icon" | "isDefaultUser"
+  "id" | "cognitoUserId" | "name" | "icon" | "isDefaultUser"
 >;
 
 // UpdateData

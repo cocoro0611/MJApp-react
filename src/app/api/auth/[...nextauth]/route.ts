@@ -46,7 +46,12 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, account }) {
+    async jwt({ token, account, user }) {
+      // 初回ログイン時にuser情報をtokenに保存
+      if (user) {
+        token.id = user.id;
+      }
+
       // Get username and group from access token
       if (account?.access_token) {
         token.accessToken = account.access_token;
@@ -62,10 +67,15 @@ export const authOptions: NextAuthOptions = {
           token.groups = [];
         }
       }
+
       return token;
     },
 
     async session({ session, token }) {
+      if ((token as JWT).id) {
+        session.user.id = (token as JWT).id;
+      }
+
       if ((token as JWT).username) {
         session.user.name = (token as JWT).username;
       }

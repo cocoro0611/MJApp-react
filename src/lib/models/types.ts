@@ -14,6 +14,7 @@ export type Chip = {
 };
 export type Room = {
     id: Generated<string>;
+    cognitoUserId: string;
     name: string;
     initialPoint: number;
     returnPoint: number;
@@ -43,6 +44,7 @@ export type Score = {
 };
 export type Setting = {
     id: Generated<string>;
+    cognitoUserId: string;
     defaultInitialPoint: number | null;
     defaultReturnPoint: number | null;
     defaultBonusPoint: string | null;
@@ -56,6 +58,7 @@ export type Setting = {
 };
 export type User = {
     id: Generated<string>;
+    cognitoUserId: string;
     name: string;
     icon: string;
     isDefaultUser: boolean;
