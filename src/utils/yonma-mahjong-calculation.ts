@@ -66,7 +66,7 @@ const getNormalScore = (han: number, adjustedFu: number): ScoreInfo | null => {
 };
 
 // 翻数と符数から全ての点数情報を取得
-export const getAllScores = (han: number, fu: number): ScoreInfo => {
+export const getYonmaAllScores = (han: number, fu: number): ScoreInfo => {
   // 翻数が0の場合
   if (han === 0) {
     return { oyaRon: "0", oyaTsumo: "0", coRon: "0", coTsumo: "0" };

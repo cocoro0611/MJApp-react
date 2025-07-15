@@ -1,10 +1,10 @@
 import { describe, test, expect } from "vitest";
-import { getAllScores, getLimitName } from "./yonma-mahjong-calculation";
+import { getYonmaAllScores, getLimitName } from "./yonma-mahjong-calculation";
 
 describe("翻数と符数に応じた点数を計算する関数のテスト", () => {
   test("テスト1: 2翻40符（通常の計算）", () => {
     const [han, fu] = [2, 40];
-    const result = getAllScores(han, fu);
+    const result = getYonmaAllScores(han, fu);
 
     expect(result).toEqual({
       oyaRon: "3900",
@@ -16,7 +16,7 @@ describe("翻数と符数に応じた点数を計算する関数のテスト", (
 
   test("テスト2: 2翻25符（七対子）", () => {
     const [han, fu] = [2, 25];
-    const result = getAllScores(han, fu);
+    const result = getYonmaAllScores(han, fu);
 
     expect(result).toEqual({
       oyaRon: "2400",
@@ -28,7 +28,7 @@ describe("翻数と符数に応じた点数を計算する関数のテスト", (
 
   test("テスト3: 3翻20符（平和ツモ）", () => {
     const [han, fu] = [3, 20];
-    const result = getAllScores(han, fu);
+    const result = getYonmaAllScores(han, fu);
 
     expect(result).toEqual({
       oyaRon: "3900",
@@ -40,7 +40,7 @@ describe("翻数と符数に応じた点数を計算する関数のテスト", (
 
   test("テスト4: 5翻（満貫・符数関係なし）", () => {
     const [han, fu] = [5, 20];
-    const result = getAllScores(han, fu);
+    const result = getYonmaAllScores(han, fu);
     const limitName = getLimitName(han);
 
     expect(result).toEqual({
@@ -54,7 +54,7 @@ describe("翻数と符数に応じた点数を計算する関数のテスト", (
 
   test("テスト5: 13翻（数え役満）", () => {
     const [han, fu] = [13, 0];
-    const result = getAllScores(han, fu);
+    const result = getYonmaAllScores(han, fu);
     const limitName = getLimitName(han);
 
     expect(result).toEqual({
@@ -68,7 +68,7 @@ describe("翻数と符数に応じた点数を計算する関数のテスト", (
 
   test("テスト6: 0翻（無効なケース）", () => {
     const [han, fu] = [0, 30];
-    const result = getAllScores(han, fu);
+    const result = getYonmaAllScores(han, fu);
     const limitName = getLimitName(han);
 
     expect(result).toEqual({
@@ -82,7 +82,7 @@ describe("翻数と符数に応じた点数を計算する関数のテスト", (
 
   test("テスト7: 4翻30符（満貫手前）", () => {
     const [han, fu] = [4, 30];
-    const result = getAllScores(han, fu);
+    const result = getYonmaAllScores(han, fu);
 
     expect(result).toEqual({
       oyaRon: "11600",
@@ -94,7 +94,7 @@ describe("翻数と符数に応じた点数を計算する関数のテスト", (
 
   test("テスト8: 符数の自動調整（35符 → 40符）", () => {
     const [han, fu] = [1, 35];
-    const result = getAllScores(han, fu);
+    const result = getYonmaAllScores(han, fu);
 
     // 35符は40符に調整されるため、1翻40符の点数になる
     expect(result).toEqual({
@@ -107,7 +107,7 @@ describe("翻数と符数に応じた点数を計算する関数のテスト", (
 
   test("テスト9: 6翻（跳満）", () => {
     const [han, fu] = [6, 25];
-    const result = getAllScores(han, fu);
+    const result = getYonmaAllScores(han, fu);
     const limitName = getLimitName(han);
 
     expect(result).toEqual({
@@ -121,7 +121,7 @@ describe("翻数と符数に応じた点数を計算する関数のテスト", (
 
   test("テスト10: 8翻（倍満）", () => {
     const [han, fu] = [8, 10];
-    const result = getAllScores(han, fu);
+    const result = getYonmaAllScores(han, fu);
     const limitName = getLimitName(han);
 
     expect(result).toEqual({

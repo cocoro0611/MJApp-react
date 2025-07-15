@@ -4,34 +4,53 @@ import { useState } from "react";
 import Header from "@/src/components/layout/Header";
 import Content from "@/src/components/layout/Content";
 import ConcealedToggle from "@/src/template/calculation/ConcealedToggle";
+import YonmaSanmaToggle from "@/src/template/calculation/yonmaSanmaToggle";
 import CalculationBoard from "@/src/template/calculation/calculationBoard";
 import HanConcealedList from "@/src/template/calculation/hanConcealedList";
 import HanOpenList from "@/src/template/calculation/hanOpenList";
 import { useCalculator } from "@/src/hooks/calculation/useCalculator";
 import { HAN_CONCEALED_CONFIG } from "@/src/constants/calculation/han-concealed-config";
 import { HAN_OPEN_CONFIG } from "@/src/constants/calculation/han-open-config";
-import { getAllScores } from "@/src/utils/yonma-mahjong-calculation";
+import { getYonmaAllScores } from "@/src/utils/yonma-mahjong-calculation";
+import { getSanmaAllScores } from "@/src/utils/sanma-mahjong-calculation";
+import { useClickSound } from "@/src/hooks/sounds/useClickSound";
 import CachedIcon from "@mui/icons-material/Cached";
 
 const HanCalculationPage = () => {
-  const [isConcealed, setIsConcealed] = useState(true);
+  const [isConcealed, setIsConcealed] = useState(true); //門前/鳴きの切替
+  const [isYonma, setIsYonma] = useState(true); // 四麻/三麻の切替
+  const { playClick } = useClickSound();
 
   // 門前と鳴きの状態を別々に管理
   const concealedState = useCalculator(HAN_CONCEALED_CONFIG);
   const openState = useCalculator(HAN_OPEN_CONFIG);
   const currentState = isConcealed ? concealedState : openState;
 
-  const tokuten = getAllScores(currentState.totalHan, currentState.totalFu);
+  // 点数計算の関数
+  const yonmaTokuten = getYonmaAllScores(
+    currentState.totalHan,
+    currentState.totalFu
+  );
+
+  const sanmaTokuten = getSanmaAllScores(
+    currentState.totalHan,
+    currentState.totalFu
+  );
+
+  const tokuten = isYonma ? yonmaTokuten : sanmaTokuten;
 
   return (
     <>
-      {/* 一旦強引にヘッダーの上に置いている */}
-      <ConcealedToggle
-        isConcealed={isConcealed}
-        setIsConcealed={setIsConcealed}
-      />
       <Header
-        title="　"
+        title={
+          <div className="grid-2 gap-4">
+            <YonmaSanmaToggle isYonma={isYonma} setIsYonma={setIsYonma} />
+            <ConcealedToggle
+              isConcealed={isConcealed}
+              setIsConcealed={setIsConcealed}
+            />
+          </div>
+        }
         href="/calculation"
         extra={
           <CalculationBoard
@@ -44,6 +63,7 @@ const HanCalculationPage = () => {
         <button
           type="button"
           onClick={() => {
+            playClick();
             concealedState.resetButton();
             openState.resetButton();
           }}

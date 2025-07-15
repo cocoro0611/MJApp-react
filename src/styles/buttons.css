@@ -36,6 +36,10 @@
     @apply bg-primary-900 hover:bg-primary-950 active:bg-primary-950;
     @apply text-gray-400;
   }
+  .toggle-secondary-on {
+    @apply bg-secondary-400 hover:bg-secondary-500 active:bg-secondary-600;
+    @apply text-white;
+  }
 }
 
 @layer Border {

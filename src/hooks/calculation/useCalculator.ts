@@ -1,4 +1,7 @@
+"use client";
+
 import { useState, useCallback } from "react";
+import { useClickSound } from "@/src/hooks/sounds/useClickSound";
 
 export interface MahjongItem {
   label: string;
@@ -19,6 +22,8 @@ export interface SelectedItem {
 }
 
 export const useCalculator = (buttonList: MahjongItem[]) => {
+  const { playClick } = useClickSound();
+
   const [buttonCounts, setButtonCounts] = useState<number[]>(
     new Array(buttonList.length).fill(0)
   );
@@ -74,6 +79,7 @@ export const useCalculator = (buttonList: MahjongItem[]) => {
 
   // ボタンをリセット
   const resetButton = useCallback(() => {
+    playClick();
     setButtonCounts(new Array(buttonList.length).fill(0));
   }, [buttonList.length]);
 

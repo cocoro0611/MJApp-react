@@ -3,15 +3,12 @@
 import Button from "@/src/components/ui/Button";
 import { useClickSound } from "@/src/hooks/sounds/useClickSound";
 
-interface ConcealedToggleProps {
-  isConcealed: boolean;
-  setIsConcealed: (value: boolean) => void;
+interface YonmaSanmaToggleProps {
+  isYonma: boolean;
+  setIsYonma: (value: boolean) => void;
 }
 
-const ConcealedToggle = ({
-  isConcealed,
-  setIsConcealed,
-}: ConcealedToggleProps) => {
+const YonmaSanmaToggle = ({ isYonma, setIsYonma }: YonmaSanmaToggleProps) => {
   const { playClick } = useClickSound();
 
   return (
@@ -19,25 +16,25 @@ const ConcealedToggle = ({
       <Button
         onClick={() => {
           playClick();
-          setIsConcealed(true);
+          setIsYonma(true);
         }}
-        color={isConcealed ? "toggle-on" : "toggle-disabled"}
+        color={isYonma ? "toggle-secondary-on" : "toggle-disabled"}
         className="rounded-l px-3"
       >
-        門前
+        四麻
       </Button>
       <Button
-        color={isConcealed ? "toggle-disabled" : "toggle-on"}
+        color={isYonma ? "toggle-disabled" : "toggle-secondary-on"}
         onClick={() => {
           playClick();
-          setIsConcealed(false);
+          setIsYonma(false);
         }}
         className="rounded-r px-3 "
       >
-        鳴き
+        三麻
       </Button>
     </div>
   );
 };
 
-export default ConcealedToggle;
+export default YonmaSanmaToggle;

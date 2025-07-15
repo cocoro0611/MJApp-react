@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ReactNode } from "react";
 
 interface HeaderProps {
-  title: string;
+  title: string | ReactNode;
   href?: string;
   showBackButton?: boolean;
   children?: ReactNode;

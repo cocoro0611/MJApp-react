@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode, useState } from "react";
+import { useClickSound } from "@/src/hooks/sounds/useClickSound";
 
 interface ButtonCountProps {
   children: ReactNode;
@@ -23,12 +24,14 @@ const ButtonCount = ({
   totalHan,
 }: ButtonCountProps) => {
   const [internalCount, setInternalCount] = useState<number>(0);
+  const { playClick } = useClickSound();
 
   // 親コンポーネントのbuttonCountsと子コンポーネントのnternalCountを連携
   const currentCount =
     externalCount !== undefined ? externalCount : internalCount;
 
   const handleClick = () => {
+    playClick(); // クリック音再生
     const newCount = currentCount >= count ? 0 : currentCount + 1;
     onClick?.(newCount, newCount > 0);
 

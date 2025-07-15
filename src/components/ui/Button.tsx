@@ -15,7 +15,8 @@ interface ButtonProps {
     | "white"
     | "toggle-on"
     | "toggle-off"
-    | "toggle-disabled";
+    | "toggle-disabled"
+    | "toggle-secondary-on";
   border?: "primary-light-border" | "cancel-border" | "none";
   type?: "button" | "submit";
   disabled?: boolean;
