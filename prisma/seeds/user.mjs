@@ -9,6 +9,7 @@ const main = async () => {
 
     await prisma.user.create({
       data: {
+        cognitoUserId: "c438d478-5041-708e-dc88-777e0bff57b4", // 仮
         name: user.name,
         icon: user.icon,
         isDefaultUser: i < 4, // 最初の4つだけtrue

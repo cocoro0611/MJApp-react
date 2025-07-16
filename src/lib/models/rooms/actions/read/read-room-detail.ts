@@ -1,14 +1,17 @@
 "use server";
 
 import { db } from "../../../db";
-import type { ReadRoomDetail } from "../../type";
+import { requireAuth } from "../../../utils/auth-cognito";
 import { MAX_ROOM_PLAYERS } from "@/src/constants/gameRules";
 import { isUUID } from "@/src/utils/uuid-check";
 import { notFound } from "next/navigation";
+import type { ReadRoomDetail } from "../../type";
 
 export const readRoomDetail = async (
   roomId: string
 ): Promise<ReadRoomDetail> => {
+  const cognitoUserId = await requireAuth();
+
   if (!isUUID(roomId)) {
     notFound();
   }
@@ -25,6 +28,7 @@ export const readRoomDetail = async (
       "chipRate",
       "gameAmount",
     ])
+    .where("cognitoUserId", "=", cognitoUserId)
     .where("id", "=", roomId)
     .executeTakeFirst();
 
@@ -68,7 +72,6 @@ export const readRoomDetail = async (
       const totalChip = Number(chipSum?.total) - INITIAL_CHIPS;
 
       // 収支計算
-
       const scorePoint = totalScore * room.scoreRate;
       const chipPoint = totalChip * room.chipRate;
       const gamePoint = room.gameAmount / MAX_ROOM_PLAYERS;

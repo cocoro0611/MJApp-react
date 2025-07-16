@@ -26,7 +26,7 @@ const ShowPoint = ({ isShowPoint = true }: ShowPointProps) => {
 
   return (
     <div className="w-full space-y-6">
-      <Form action={handleSubmit} className="space-y-6">
+      <Form action={handleSubmit}>
         {/* checkboxのchecked属性を利用 - チェックされていれば"on"、されていなければundefined */}
         <input
           type="checkbox"
@@ -37,24 +37,22 @@ const ShowPoint = ({ isShowPoint = true }: ShowPointProps) => {
         />
 
         <div className="center">
-          <label className="flex items-center cursor-pointer">
-            <button
-              type="submit"
-              onClick={handleToggle}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer ${
-                showPoint ? "bg-primary-600" : "bg-gray-200"
+          <button
+            type="submit"
+            onClick={handleToggle}
+            className={`relative inline-flex h-8 w-15 items-center rounded-full  transition-transform ${
+              showPoint ? "bg-primary-600" : "bg-gray-200"
+            }`}
+          >
+            <span
+              className={`inline-block h-6 w-6 rounded-full bg-white transition-transform ${
+                showPoint ? "translate-x-8" : "translate-x-1"
               }`}
-            >
-              <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                  showPoint ? "translate-x-6" : "translate-x-1"
-                }`}
-              />
-            </button>
-            <span className="ml-3 text-sm font-bold">
-              {showPoint ? "ポイントを表示" : "ポイントを非表示"}
-            </span>
-          </label>
+            />
+          </button>
+          <span className="ml-2 text-primary-800  font-bold">
+            {showPoint ? "表示" : "非表示"}
+          </span>
         </div>
 
         <ToastButton

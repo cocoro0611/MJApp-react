@@ -3,6 +3,8 @@
 import { revalidateAll } from "../../../revalidate-wrapper";
 import { v4 } from "uuid";
 import { db } from "../../../db";
+import { requireAuth } from "../../../utils/auth-cognito";
+import { upsertSettingTrx } from "../../../utils/upsert-setting";
 import type {
   CreateRoom,
   CreateRoomUser,
@@ -13,10 +15,12 @@ import type {
 
 export const createRoom = async (data: FormData) => {
   try {
+    const cognitoUserId = await requireAuth();
     const userIds = data.getAll("userIds");
 
     const room: CreateRoom = {
       id: v4(),
+      cognitoUserId: cognitoUserId,
       name: String(data.get("name")),
       initialPoint: Number(data.get("initialPoint")),
       returnPoint: Number(data.get("returnPoint")),
@@ -27,16 +31,16 @@ export const createRoom = async (data: FormData) => {
     };
 
     const roomUsers: CreateRoomUser[] = userIds.map((userId, index) => ({
-      position: index + 1,
       userId: String(userId),
       roomId: room.id,
+      position: index + 1,
     }));
 
     const score: CreateScore[] = userIds.map((userId, index) => ({
       score: 0,
+      scoreResult: 0,
       gameCount: 1,
       order: index + 1,
-      scoreResult: 0,
       userId: String(userId),
       roomId: room.id,
     }));
@@ -51,6 +55,7 @@ export const createRoom = async (data: FormData) => {
 
     const createDefaultRoom: CreateDefaultRoom = {
       id: v4(),
+      cognitoUserId: cognitoUserId,
       ...setting,
     };
 
@@ -63,22 +68,7 @@ export const createRoom = async (data: FormData) => {
       await trx.insertInto("Room").values(room).execute();
       await trx.insertInto("RoomUser").values(roomUsers).execute();
       await trx.insertInto("Score").values(score).execute();
-
-      // Settingへの登録
-      const existingSetting = await trx
-        .selectFrom("Setting")
-        .select("id")
-        .executeTakeFirst();
-
-      if (existingSetting) {
-        await trx
-          .updateTable("Setting")
-          .set(updateDefaultRoom)
-          .where("id", "=", existingSetting.id)
-          .execute();
-      } else {
-        await trx.insertInto("Setting").values(createDefaultRoom).execute();
-      }
+      await upsertSettingTrx(trx, createDefaultRoom, updateDefaultRoom);
     });
 
     await revalidateAll();

@@ -25,8 +25,8 @@ export const createChip = async (data: FormData) => {
     const chips: CreateChip[] = roomUsers.map((user) => ({
       chip: 0,
       gameCount: (maxGameCount?.maxGameCount ?? 0) + 1,
-      roomId: roomId,
       userId: user.userId,
+      roomId: roomId,
     }));
 
     await db.insertInto("Chip").values(chips).execute();

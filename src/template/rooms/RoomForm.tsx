@@ -1,6 +1,7 @@
 "use client";
 
 import Form from "next/form";
+import Box from "@/src/components/ui/Box";
 import InputField from "@/src/components/form/InputField";
 import SelectField from "@/src/components/form/SelectField";
 import ToastButton from "@/src/components/nav/ToastButton";
@@ -15,10 +16,8 @@ import {
 } from "@/src/constants/gameRules";
 import { useState } from "react";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
-import type {
-  ReadRoomDetail,
-  ReadDefaultRoom,
-} from "@/src/lib/models/rooms/type";
+import type { ReadRoomDetail } from "@/src/lib/models/rooms/type";
+import { ReadDefaultRoom } from "@/src/lib/models/setting/type";
 import type { ReadUser } from "@/src/lib/models/users/type";
 import type { ServerAction } from "@/src/hooks/ui/useServerActionToast";
 import { useSession } from "next-auth/react";
@@ -28,7 +27,7 @@ interface RoomFormProps {
   btnText: string;
   room?: ReadRoomDetail;
   roomUsers?: ReadUser[];
-  setting?: ReadDefaultRoom;
+  setting: ReadDefaultRoom;
 }
 
 const RoomForm = ({
@@ -107,11 +106,11 @@ const RoomForm = ({
         onChange={(value) => setName(value)}
       />
       {roomUsers && <DefaultRoomUsers roomUsers={roomUsers} />}
-      {!room?.id! && (
-        <div className="info-box-secondary my-4">
+      {!room?.id && (
+        <Box>
           <p>カスタム設定は事前に</p>
           <p>「設定」から変更してください</p>
-        </div>
+        </Box>
       )}
       <SelectField
         label="持ち点"

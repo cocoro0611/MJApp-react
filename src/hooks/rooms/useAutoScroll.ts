@@ -42,5 +42,5 @@ export const useAutoScroll = ({
         });
       }, 300);
     }
-  }, [selected, scores]);
+  }, [selected, scores, chips]);
 };

@@ -72,8 +72,8 @@ const ChipHeadCard = ({
         onClick={handleOpenDialog}
         leftBorder={complete ? "sm" : "none"}
         color={complete ? "primary-light" : "cancel"}
-        className={`w-full py-3.5
-        ${complete ? "" : "text-xs border-l-3 border-gray-400"}`}
+        className={`w-full 
+        ${complete ? "py-3.5" : "py-1.5 text-xs border-l-3 border-gray-400"}`}
       >
         {complete ? (
           <>

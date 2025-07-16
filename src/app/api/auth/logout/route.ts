@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+export async function POST() {
   const cognitoDomain = process.env.COGNITO_DOMAIN || "";
   const clientId = process.env.COGNITO_CLIENT_ID || "";
   const logoutRedirectUri = process.env.NEXTAUTH_URL || "";

@@ -3,6 +3,7 @@ import { authOptions } from "@/src/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import Header from "@/src/components/layout/Header";
 import Content from "@/src/components/layout/Content";
+import Box from "@/src/components/ui/Box";
 import ShowPoint from "@/src/template/setting/ShowPoint";
 import { readSetting } from "@/src/lib/models/setting";
 
@@ -20,10 +21,16 @@ const ShowPointSettingPage = async () => {
     <>
       <Header title="ポイントの表示設定" href="/setting" />
       <Content>
-        <div className="bg-secondary-100 border border-secondary-500 text-secondary-800 rounded p-2 font-bold text-sm mb-8">
-          ポイントの表示設定を選択してください。
-        </div>
-        <ShowPoint isShowPoint={setting?.isShowPoint ?? true} />
+        <Box>
+          <div className="mb-4 text-sm">ゲームの表示を選択してください</div>
+          <div className="text-sm">
+            現在の設定：
+            {setting.isShowPoint
+              ? "ポイントが表示されます"
+              : "ポイントは非表示です"}
+          </div>
+        </Box>
+        <ShowPoint isShowPoint={setting.isShowPoint ?? true} />
       </Content>
     </>
   );

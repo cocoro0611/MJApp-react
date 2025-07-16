@@ -33,8 +33,8 @@ export const useColorTheme = () => useContext(ColorThemeContext);
 
 interface ColorThemeProviderProps {
   children: ReactNode;
-  initialPrimaryColor?: string;
-  initialSecondaryColor?: string;
+  initialPrimaryColor: string;
+  initialSecondaryColor: string;
 }
 
 export const ColorThemeProvider = ({

@@ -1,5 +1,6 @@
 model Setting {
     id                  String   @id @default(uuid()) @db.Uuid
+    cognitoUserId       String   @db.Uuid
     defaultInitialPoint Int?
     defaultReturnPoint  Int?
     defaultBonusPoint   String?

@@ -38,20 +38,11 @@ export type ReadChip = Pick<TS<Chip>, "gameCount"> & {
   chips: Pick<TS<Chip>, "chip">[];
 };
 
-export type ReadDefaultRoom = Pick<
-  TS<Setting>,
-  | "defaultInitialPoint"
-  | "defaultReturnPoint"
-  | "defaultBonusPoint"
-  | "defaultScoreRate"
-  | "defaultChipRate"
-  | "isShowPoint"
->;
-
 // CreateData
 export type CreateRoom = Pick<
   TS<Room>,
   | "id"
+  | "cognitoUserId"
   | "name"
   | "initialPoint"
   | "returnPoint"
@@ -79,6 +70,7 @@ export type CreateChip = Pick<
 export type CreateDefaultRoom = Pick<
   TS<Setting>,
   | "id"
+  | "cognitoUserId"
   | "defaultInitialPoint"
   | "defaultReturnPoint"
   | "defaultBonusPoint"

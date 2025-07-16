@@ -4,6 +4,7 @@ import Form from "next/form";
 import Image from "next/image";
 import Card from "@/src/components/ui/Card";
 import Button from "@/src/components/ui/Button";
+import Box from "@/src/components/ui/Box";
 import ToastButton from "@/src/components/nav/ToastButton";
 import { useOrderEdit } from "@/src/hooks/rooms/useOrderEdit";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
@@ -31,10 +32,10 @@ const OrderEditForm = ({
       <input type="hidden" name="roomId" value={roomId} />
       <input type="hidden" name="gameCount" value={gameCount} />
 
-      <div className="info-box-secondary">
+      <Box>
         <p>同じ点数のプレイヤーがいます。</p>
         <p>順位を調整してください。</p>
-      </div>
+      </Box>
 
       <div className="center flex-col space-y-4">
         {orderedScores.map((scoreData, index) => (
@@ -86,7 +87,11 @@ const OrderEditForm = ({
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <Button color="cancel" border="cancel-border" onClick={() => window.history.back()}>
+        <Button
+          color="cancel"
+          border="cancel-border"
+          onClick={() => window.history.back()}
+        >
           キャンセル
         </Button>
         <ToastButton

@@ -3,38 +3,32 @@
 import { revalidateAll } from "../../../revalidate-wrapper";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { v4 } from "uuid";
-import { db } from "../../../db";
+import { requireAuth } from "../../../utils/auth-cognito";
+import { upsertSetting } from "../../../utils/upsert-setting";
 import type { CreateColor, UpdateColor } from "../../type";
 
 export const upsertColor = async (data: FormData) => {
   try {
-    const existingSetting = await db
-      .selectFrom("Setting")
-      .select("id")
-      .executeTakeFirst();
+    const cognitoUserId = await requireAuth();
 
-    if (existingSetting) {
-      // 更新処理
-      const color: UpdateColor = {
-        primaryColor: String(data.get("primaryColor")),
-        secondaryColor: String(data.get("secondaryColor")),
-        updatedAt: new Date(),
-      };
-      await db
-        .updateTable("Setting")
-        .set(color)
-        .where("id", "=", existingSetting?.id)
-        .execute();
-    } else {
-      // 作成処理
-      const color: CreateColor = {
-        id: v4(),
-        primaryColor: String(data.get("primaryColor")),
-        secondaryColor: String(data.get("secondaryColor")),
-      };
-      await db.insertInto("Setting").values(color).execute();
-    }
+    const setting = {
+      primaryColor: String(data.get("primaryColor")),
+      secondaryColor: String(data.get("secondaryColor")),
+    };
 
+    const createColor: CreateColor = {
+      id: v4(),
+      cognitoUserId: cognitoUserId,
+      ...setting,
+    };
+
+    const updateColor: UpdateColor = {
+      ...setting,
+      updatedAt: new Date(),
+    };
+
+    // SettingへのUpsert
+    await upsertSetting(createColor, updateColor);
     await revalidateAll();
 
     // 複数の方法でキャッシュクリア

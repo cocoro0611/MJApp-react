@@ -17,7 +17,7 @@ import { useSession } from "next-auth/react";
 import { ReadDefaultRoom } from "@/src/lib/models/setting/type";
 
 interface SettingFormProps {
-  setting?: ReadDefaultRoom;
+  setting: ReadDefaultRoom;
 }
 
 const SettingForm = ({ setting }: SettingFormProps) => {

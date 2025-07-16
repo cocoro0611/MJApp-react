@@ -1,36 +1,31 @@
 "use server";
 
-import { revalidateAll } from "../../../revalidate-wrapper";
+import { revalidateAll } from "../../../../revalidate-wrapper";
 import { v4 } from "uuid";
-import { requireAuth } from "../../../utils/auth-cognito";
-import { upsertSetting } from "../../../utils/upsert-setting";
-import type { CreateDefaultRoom, UpdateDefaultRoom } from "../../type";
+import { requireAuth } from "../../../../utils/auth-cognito";
+import { upsertSetting } from "../../../../utils/upsert-setting";
 
-export const upsertDefaultRoom = async (data: FormData) => {
+export const upsertDefaultReturnPoint = async (data: FormData) => {
   try {
     const cognitoUserId = await requireAuth();
 
     const setting = {
-      defaultInitialPoint: Number(data.get("initialPoint")),
       defaultReturnPoint: Number(data.get("returnPoint")),
-      defaultBonusPoint: String(data.get("bonusPoint")),
-      defaultScoreRate: Number(data.get("scoreRate")),
-      defaultChipRate: Number(data.get("chipRate")),
     };
 
-    const createDefaultRoom: CreateDefaultRoom = {
+    const createDefaultCustomRoom = {
       id: v4(),
       cognitoUserId: cognitoUserId,
       ...setting,
     };
 
-    const updateDefaultRoom: UpdateDefaultRoom = {
+    const updateDefaultCustomRoom = {
       ...setting,
       updatedAt: new Date(),
     };
 
     // SettingへのUpsert
-    await upsertSetting(createDefaultRoom, updateDefaultRoom);
+    await upsertSetting(createDefaultCustomRoom, updateDefaultCustomRoom);
     await revalidateAll();
 
     return {
