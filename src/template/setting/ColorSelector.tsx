@@ -11,13 +11,13 @@ import { COLOR_OPTIONS } from "@/src/constants/colorTheme";
 import type { Color } from "@/src/constants/colorTheme";
 
 interface ColorSelectorProps {
-  defaultPrimaryColor?: string;
-  defaultSecondaryColor?: string;
+  defaultPrimaryColor: string;
+  defaultSecondaryColor: string;
 }
 
 const ColorSelector = ({
-  defaultPrimaryColor = "blue",
-  defaultSecondaryColor = "orange",
+  defaultPrimaryColor,
+  defaultSecondaryColor,
 }: ColorSelectorProps) => {
   const { primaryColor, secondaryColor, setPrimaryColor, setSecondaryColor } =
     useColorTheme();

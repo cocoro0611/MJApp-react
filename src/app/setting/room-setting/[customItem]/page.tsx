@@ -1,7 +1,14 @@
 import Header from "@/src/components/layout/Header";
 import Content from "@/src/components/layout/Content";
+import Box from "@/src/components/ui/Box";
 import CustomForm from "@/src/template/rooms/CustomForm";
-import { upsertDefaultRoom } from "@/src/lib/models/setting";
+import {
+  upsertDefaultInitialPoint,
+  upsertDefaultReturnPoint,
+  upsertDefaultBonusPoint,
+  upsertDefaultScoreRate,
+  upsertDefaultChipRate,
+} from "@/src/lib/models/setting";
 
 interface CustomSettingPageProps {
   params: Promise<{ customItem: string }>;
@@ -9,6 +16,25 @@ interface CustomSettingPageProps {
 
 const CustomSettingPage = async ({ params }: CustomSettingPageProps) => {
   const { customItem } = await params;
+
+  // customItemに応じて適切な関数を選択
+  const getUpsertFunction = (item: string) => {
+    switch (item) {
+      case "initialPoint":
+        return upsertDefaultInitialPoint;
+      case "returnPoint":
+        return upsertDefaultReturnPoint;
+      case "bonusPoint":
+        return upsertDefaultBonusPoint;
+      case "scoreRate":
+        return upsertDefaultScoreRate;
+      case "chipRate":
+        return upsertDefaultChipRate;
+      default:
+        return upsertDefaultInitialPoint;
+    }
+  };
+  const upsertDefaultCustomRoom = getUpsertFunction(customItem);
 
   const getFieldConfig = (item: string) => {
     const configs: Record<
@@ -46,7 +72,7 @@ const CustomSettingPage = async ({ params }: CustomSettingPageProps) => {
         type: "number",
         maxLength: 5,
         placeholder: "レートを入力（例: テンゴの場合は50）",
-        description: "1000点あたりのポイントを入力してください",
+        description: "1000点あたりのポイントを入力",
         description2: "（テンゴ: 50、テンピン: 100）",
       },
       chipRate: {
@@ -73,17 +99,17 @@ const CustomSettingPage = async ({ params }: CustomSettingPageProps) => {
     <>
       <Header title="カスタム設定" href="/setting/room-setting" />
       <Content>
-        <div className="info-box-secondary mb-8">
-          <p>{config.label}を入力してください。</p>
+        <Box>
+          <div className="text-sm">{config.label}を入力してください</div>
           {config.description && (
-            <div>
+            <div className="mt-4 text-sm">
               <p> {config.description}</p>
               <p> {config.description2}</p>
             </div>
           )}
-        </div>
+        </Box>
         <CustomForm
-          action={upsertDefaultRoom}
+          action={upsertDefaultCustomRoom}
           label={config.label}
           name={customItem}
           type={config.type}

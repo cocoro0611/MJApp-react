@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Setting" ALTER COLUMN "defaultInitialPoint" SET DEFAULT 25000,
+ALTER COLUMN "defaultReturnPoint" SET DEFAULT 30000,
+ALTER COLUMN "defaultBonusPoint" SET DEFAULT '10-30',
+ALTER COLUMN "defaultScoreRate" SET DEFAULT 50,
+ALTER COLUMN "defaultChipRate" SET DEFAULT 200;
