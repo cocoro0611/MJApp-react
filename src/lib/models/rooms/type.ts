@@ -38,16 +38,6 @@ export type ReadChip = Pick<TS<Chip>, "gameCount"> & {
   chips: Pick<TS<Chip>, "chip">[];
 };
 
-export type ReadDefaultRoom = Pick<
-  TS<Setting>,
-  | "defaultInitialPoint"
-  | "defaultReturnPoint"
-  | "defaultBonusPoint"
-  | "defaultScoreRate"
-  | "defaultChipRate"
-  | "isShowPoint"
->;
-
 // CreateData
 export type CreateRoom = Pick<
   TS<Room>,

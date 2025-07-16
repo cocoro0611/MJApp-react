@@ -21,9 +21,6 @@ export const readSetting = async (): Promise<ReadDefaultRoom> => {
       defaultBonusPoint: "10-30",
       defaultScoreRate: 50,
       defaultChipRate: 200,
-      primaryColor: "blue",
-      secondaryColor: "orange",
-      isShowPoint: true,
     };
   }
 

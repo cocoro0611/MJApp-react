@@ -1,6 +1,7 @@
 "use client";
 
 import Form from "next/form";
+import Box from "@/src/components/ui/Box";
 import ToastButton from "@/src/components/nav/ToastButton";
 import UserCard from "../users/UserCard";
 import { useUserSelect } from "@/src/hooks/user-data/useUserSelect";
@@ -22,11 +23,10 @@ const SelectRoomUsersForm = ({ action, users }: SelectRoomUsersFormProps) => {
 
   return (
     <Form action={handleSubmit} className="center flex-col space-y-6">
-      <label className="info-box-secondary">
+      <Box>
         {MAX_ROOM_PLAYERS}人選択してください ({selectedUsers.length}/
         {MAX_ROOM_PLAYERS})
-      </label>
-
+      </Box>
       {selectedUsers.map((userId) => (
         <input key={userId} type="hidden" name="userIds" value={userId} />
       ))}
