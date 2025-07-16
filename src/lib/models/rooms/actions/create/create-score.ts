@@ -24,11 +24,11 @@ export const createScore = async (data: FormData) => {
 
     const scores: CreateScore[] = roomUsers.map((user, index) => ({
       score: 0,
+      scoreResult: 0,
       gameCount: (maxGameCount?.maxGameCount ?? 0) + 1,
       order: index + 1,
-      scoreResult: 0,
-      roomId: roomId,
       userId: user.userId,
+      roomId: roomId,
     }));
 
     await db.insertInto("Score").values(scores).execute();

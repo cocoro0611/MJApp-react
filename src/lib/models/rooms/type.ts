@@ -52,6 +52,7 @@ export type ReadDefaultRoom = Pick<
 export type CreateRoom = Pick<
   TS<Room>,
   | "id"
+  | "cognitoUserId"
   | "name"
   | "initialPoint"
   | "returnPoint"
@@ -79,6 +80,7 @@ export type CreateChip = Pick<
 export type CreateDefaultRoom = Pick<
   TS<Setting>,
   | "id"
+  | "cognitoUserId"
   | "defaultInitialPoint"
   | "defaultReturnPoint"
   | "defaultBonusPoint"

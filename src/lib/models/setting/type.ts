@@ -2,17 +2,7 @@ import type { Setting } from "../types";
 import { TS } from "../kysely-utils";
 
 // ReadData
-export type ReadDefaultRoom = Pick<
-  TS<Setting>,
-  | "defaultInitialPoint"
-  | "defaultReturnPoint"
-  | "defaultBonusPoint"
-  | "defaultScoreRate"
-  | "defaultChipRate"
-  | "primaryColor"
-  | "secondaryColor"
-  | "isShowPoint"
->;
+export type ReadDefaultRoom = Partial<TS<Setting>>;
 
 // CreateData
 export type CreateDefaultRoom = Pick<

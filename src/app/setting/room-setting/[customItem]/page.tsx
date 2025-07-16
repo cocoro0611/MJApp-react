@@ -1,7 +1,7 @@
 import Header from "@/src/components/layout/Header";
 import Content from "@/src/components/layout/Content";
 import CustomForm from "@/src/template/rooms/CustomForm";
-import { upsertDefaultRoomCustom } from "@/src/lib/models/setting";
+import { upsertDefaultRoom } from "@/src/lib/models/setting";
 
 interface CustomSettingPageProps {
   params: Promise<{ customItem: string }>;
@@ -83,7 +83,7 @@ const CustomSettingPage = async ({ params }: CustomSettingPageProps) => {
           )}
         </div>
         <CustomForm
-          action={upsertDefaultRoomCustom}
+          action={upsertDefaultRoom}
           label={config.label}
           name={customItem}
           type={config.type}

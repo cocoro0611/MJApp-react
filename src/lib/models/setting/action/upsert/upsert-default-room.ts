@@ -2,55 +2,35 @@
 
 import { revalidateAll } from "../../../revalidate-wrapper";
 import { v4 } from "uuid";
-import { db } from "../../../db";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/src/app/api/auth/[...nextauth]/route";
+import { requireAuth } from "../../../utils/auth-cognito";
+import { upsertSetting } from "../../../utils/upsert-setting";
 import type { CreateDefaultRoom, UpdateDefaultRoom } from "../../type";
 
 export const upsertDefaultRoom = async (data: FormData) => {
   try {
-    const session = await getServerSession(authOptions);
+    const cognitoUserId = await requireAuth();
 
-    // 認証チェック
-    if (!session?.user?.id) {
-      return { success: false, message: "認証が必要です" };
-    }
+    const setting = {
+      defaultInitialPoint: Number(data.get("initialPoint")),
+      defaultReturnPoint: Number(data.get("returnPoint")),
+      defaultBonusPoint: String(data.get("bonusPoint")),
+      defaultScoreRate: Number(data.get("scoreRate")),
+      defaultChipRate: Number(data.get("chipRate")),
+    };
 
-    const existingSetting = await db
-      .selectFrom("Setting")
-      .where("cognitoUserId", "=", session.user.id)
-      .select("id")
-      .executeTakeFirst();
+    const createDefaultRoom: CreateDefaultRoom = {
+      id: v4(),
+      cognitoUserId: cognitoUserId,
+      ...setting,
+    };
 
-    if (existingSetting) {
-      // 更新処理
-      const setting: UpdateDefaultRoom = {
-        defaultInitialPoint: Number(data.get("initialPoint")),
-        defaultReturnPoint: Number(data.get("returnPoint")),
-        defaultBonusPoint: String(data.get("bonusPoint")),
-        defaultScoreRate: Number(data.get("scoreRate")),
-        defaultChipRate: Number(data.get("chipRate")),
-        updatedAt: new Date(),
-      };
-      await db
-        .updateTable("Setting")
-        .set(setting)
-        .where("id", "=", existingSetting?.id)
-        .execute();
-    } else {
-      // 作成処理
-      const setting: CreateDefaultRoom = {
-        id: v4(),
-        cognitoUserId: session.user.id,
-        defaultInitialPoint: Number(data.get("initialPoint")),
-        defaultReturnPoint: Number(data.get("returnPoint")),
-        defaultBonusPoint: String(data.get("bonusPoint")),
-        defaultScoreRate: Number(data.get("scoreRate")),
-        defaultChipRate: Number(data.get("chipRate")),
-      };
-      await db.insertInto("Setting").values(setting).execute();
-    }
+    const updateDefaultRoom: UpdateDefaultRoom = {
+      ...setting,
+      updatedAt: new Date(),
+    };
 
+    // SettingへのUpsert
+    await upsertSetting(createDefaultRoom, updateDefaultRoom);
     await revalidateAll();
 
     return {

@@ -1,15 +1,18 @@
 "use server";
 
 import { db } from "../../../db";
+import { requireAuth } from "../../../utils/auth-cognito";
 import type { ReadRoom } from "../../type";
 
 // N+1問題はあるが一旦はよし
 export const readRooms = async (): Promise<ReadRoom[]> => {
+  const cognitoUserId = await requireAuth();
   const roomsUsers: ReadRoom[] = [];
 
   const rooms = await db
     .selectFrom("Room")
     .select(["id", "name"])
+    .where("cognitoUserId", "=", cognitoUserId)
     .orderBy("updatedAt", "asc")
     .execute();
 
