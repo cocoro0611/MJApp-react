@@ -3,7 +3,7 @@
 import Header from "@/src/components/layout/Header";
 import Button from "../components/ui/Button";
 
-const Error = async () => {
+const Error = () => {
   return (
     <>
       <Header title="　" showBackButton={false} />

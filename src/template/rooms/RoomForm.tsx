@@ -106,7 +106,7 @@ const RoomForm = ({
         onChange={(value) => setName(value)}
       />
       {roomUsers && <DefaultRoomUsers roomUsers={roomUsers} />}
-      {!room?.id! && (
+      {!room?.id && (
         <Box>
           <p>カスタム設定は事前に</p>
           <p>「設定」から変更してください</p>

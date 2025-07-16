@@ -2,6 +2,10 @@
 
 import { useRef, useCallback } from "react";
 
+interface WebKitWindow extends Window {
+  webkitAudioContext?: typeof AudioContext;
+}
+
 export const useClickSound = () => {
   const audioContextRef = useRef<AudioContext | null>(null);
   const isInitializedRef = useRef(false);
@@ -9,9 +13,14 @@ export const useClickSound = () => {
   const initAudio = useCallback(() => {
     if (!audioContextRef.current && !isInitializedRef.current) {
       try {
-        audioContextRef.current = new (window.AudioContext ||
-          (window as any).webkitAudioContext)();
-        isInitializedRef.current = true;
+        const webkitWindow = window as WebKitWindow;
+        const AudioContextClass =
+          window.AudioContext || webkitWindow.webkitAudioContext;
+
+        if (AudioContextClass) {
+          audioContextRef.current = new AudioContextClass();
+          isInitializedRef.current = true;
+        }
       } catch (error) {
         console.log("AudioContext failed:", error);
       }

@@ -94,6 +94,7 @@ export const authOptions: NextAuthOptions = {
 
     async redirect({ url, baseUrl }) {
       // ログイン後は常にトップページ（/）にリダイレクト
+      console.log("url:", url);
       return baseUrl;
     },
   },

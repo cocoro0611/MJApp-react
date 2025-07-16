@@ -81,7 +81,7 @@ export const useCalculator = (buttonList: MahjongItem[]) => {
   const resetButton = useCallback(() => {
     playClick();
     setButtonCounts(new Array(buttonList.length).fill(0));
-  }, [buttonList.length]);
+  }, [buttonList.length, playClick]);
 
   // 翻の合計を計算
   const totalHan = buttonCounts.reduce((sum, count, index) => {
