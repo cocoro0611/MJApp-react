@@ -1,9 +1,12 @@
 "use server";
 
-import { revalidateAll } from "../../../revalidate-wrapper";
-import { db } from "../../../db";
+import { revalidateAll } from "../../../../revalidate-wrapper";
+import { db } from "../../../../db";
 
-export const updateDefaultUser = async (data: FormData) => {
+export const upsertDefaultUsers = async (data: FormData) => {
+  const isNewRoom = data.get("isNewRoom") === "true"; // /rooms/new から呼び出しているか
+  const redirectUrl = isNewRoom ? "/rooms/new" : "/setting/room-setting"; // リダイレクト先
+
   try {
     const selectedUserIds = data.getAll("userIds").map((id) => String(id));
 
@@ -24,13 +27,13 @@ export const updateDefaultUser = async (data: FormData) => {
     return {
       success: true,
       message: "ユーザーが選択されました",
-      redirect: "/rooms/new",
+      redirect: redirectUrl,
     };
   } catch (_error) {
     return {
       success: false,
       message: "ユーザーの選択に失敗しました",
-      redirect: "/rooms/new",
+      redirect: redirectUrl,
     };
   }
 };

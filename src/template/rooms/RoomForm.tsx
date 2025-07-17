@@ -1,7 +1,6 @@
 "use client";
 
 import Form from "next/form";
-import Box from "@/src/components/ui/Box";
 import InputField from "@/src/components/form/InputField";
 import SelectField from "@/src/components/form/SelectField";
 import ToastButton from "@/src/components/nav/ToastButton";
@@ -105,7 +104,7 @@ const RoomForm = ({
         value={name}
         onChange={(value) => setName(value)}
       />
-      {roomUsers && <DefaultRoomUsers roomUsers={roomUsers} />}
+      {roomUsers && <DefaultRoomUsers roomUsers={roomUsers} href="/rooms/new/users"/>}
       <SelectField
         label="持ち点"
         name="initialPoint"

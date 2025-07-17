@@ -3,6 +3,7 @@
 import Form from "next/form";
 import SelectField from "@/src/components/form/SelectField";
 import ToastButton from "@/src/components/nav/ToastButton";
+import DefaultRoomUsers from "../rooms/utils/DefaultRoomUsers";
 import {
   INITIAL_POINT_OPTIONS,
   RETURN_POINT_OPTIONS,
@@ -15,12 +16,14 @@ import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import { upsertDefaultRoom } from "@/src/lib/models/setting";
 import { useSession } from "next-auth/react";
 import { ReadDefaultRoom } from "@/src/lib/models/setting/type";
+import type { ReadUser } from "@/src/lib/models/users/type";
 
 interface SettingFormProps {
   setting: ReadDefaultRoom;
+  roomUsers: ReadUser[];
 }
 
-const SettingForm = ({ setting }: SettingFormProps) => {
+const SettingForm = ({ setting, roomUsers }: SettingFormProps) => {
   const { data: session } = useSession();
   const isMonitor = session?.user.groups?.includes("monitor") || false;
   const isShowPoint = setting?.isShowPoint ?? true;
@@ -36,6 +39,10 @@ const SettingForm = ({ setting }: SettingFormProps) => {
 
   return (
     <Form action={handleSubmit} className="space-y-8">
+      <DefaultRoomUsers
+        roomUsers={roomUsers}
+        href="/setting/room-setting/users"
+      />
       <SelectField
         label="持ち点"
         name="initialPoint"
