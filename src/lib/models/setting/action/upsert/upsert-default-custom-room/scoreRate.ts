@@ -6,6 +6,9 @@ import { requireAuth } from "../../../../utils/auth-cognito";
 import { upsertSetting } from "../../../../utils/upsert-setting";
 
 export const upsertDefaultScoreRate = async (data: FormData) => {
+  const isNewRoom = data.get("isNewRoom") === "true"; // /rooms/new から呼び出しているか
+  const redirectUrl = isNewRoom ? "/rooms/new" : "/setting/room-setting"; // リダイレクト先
+
   try {
     const cognitoUserId = await requireAuth();
 
@@ -31,13 +34,13 @@ export const upsertDefaultScoreRate = async (data: FormData) => {
     return {
       success: true,
       message: "ルームのデフォルト設定が保存されました",
-      redirect: "/setting/room-setting",
+      redirect: redirectUrl,
     };
   } catch (_error) {
     return {
       success: false,
       message: "ルームのデフォルト設定の保存に失敗しました",
-      redirect: "/setting/room-setting",
+      redirect: redirectUrl,
     };
   }
 };

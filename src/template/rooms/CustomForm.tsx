@@ -14,6 +14,7 @@ interface CustomFormProps {
   type: "text" | "number" | "hidden";
   maxLength: number;
   placeholder: string;
+  isNewRoom?: boolean;
 }
 
 const CustomForm = ({
@@ -23,6 +24,7 @@ const CustomForm = ({
   type,
   maxLength,
   placeholder,
+  isNewRoom = false,
 }: CustomFormProps) => {
   const [customItem, setCustomItem] = useState("");
 
@@ -31,6 +33,7 @@ const CustomForm = ({
 
   return (
     <Form action={handleSubmit} className="space-y-8 w-80 lg:w-120">
+      {isNewRoom && <input type="hidden" name="isNewRoom" value="true" />}
       <InputField
         label={label}
         name={name}

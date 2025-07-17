@@ -106,29 +106,29 @@ const RoomForm = ({
         onChange={(value) => setName(value)}
       />
       {roomUsers && <DefaultRoomUsers roomUsers={roomUsers} />}
-      {!room?.id && (
-        <Box>
-          <p>カスタム設定は事前に</p>
-          <p>「設定」から変更してください</p>
-        </Box>
-      )}
       <SelectField
         label="持ち点"
         name="initialPoint"
         options={INITIAL_POINT_OPTIONS}
         defaultValue={initialPoint}
+        isCustomBtn={true}
+        href="/rooms/new/initialPoint"
       />
       <SelectField
         label="返し点"
         name="returnPoint"
         options={RETURN_POINT_OPTIONS}
         defaultValue={returnPoint}
+        isCustomBtn={true}
+        href="/rooms/new/returnPoint"
       />
       <SelectField
         label="ウマ"
         name="bonusPoint"
         options={BONUS_POINT_OPTIONS}
         defaultValue={bonusPoint}
+        isCustomBtn={true}
+        href="/rooms/new/bonusPoint"
       />
       {shouldShowPoints && (
         <>
@@ -137,12 +137,16 @@ const RoomForm = ({
             name="scoreRate"
             options={SCORE_RATE_OPTIONS}
             defaultValue={scoreRate}
+            isCustomBtn={true}
+            href="/rooms/new/scoreRate"
           />
           <SelectField
             label="チップ"
             name="chipRate"
             options={CHIP_RATE_OPTIONS}
             defaultValue={chipRate}
+            isCustomBtn={true}
+            href="/rooms/new/chipRate"
           />
           <InputField
             label="場代（後ほど更新できます）"
