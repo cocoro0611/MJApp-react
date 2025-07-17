@@ -4,15 +4,16 @@ import type { ReadUser } from "@/src/lib/models/users/type";
 
 interface DefaultRoomUsersProps {
   roomUsers: ReadUser[];
+  href: string;
 }
 
-const DefaultRoomUsers = ({ roomUsers }: DefaultRoomUsersProps) => {
+const DefaultRoomUsers = ({ roomUsers, href }: DefaultRoomUsersProps) => {
   return (
     <div className="w-full font-bold text-primary-800">
       <div className="flex justify-between">
         <label>ユーザー</label>
         <Button
-          href="/rooms/new/users"
+          href={href}
           color="primary-light"
           border="primary-light-border"
           className="px-2 py-1 rounded text-xs"

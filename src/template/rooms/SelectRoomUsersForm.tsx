@@ -13,9 +13,14 @@ import type { ServerAction } from "@/src/hooks/ui/useServerActionToast";
 interface SelectRoomUsersFormProps {
   action: ServerAction;
   users: ReadUser[];
+  isNewRoom?: boolean;
 }
 
-const SelectRoomUsersForm = ({ action, users }: SelectRoomUsersFormProps) => {
+const SelectRoomUsersForm = ({
+  action,
+  users,
+  isNewRoom = false,
+}: SelectRoomUsersFormProps) => {
   const { selectedUsers, toggleUser, isUserSelected, isReady } =
     useUserSelect(users);
   const { isPending, toastMessage, toastColor, redirect, handleSubmit } =
@@ -23,6 +28,7 @@ const SelectRoomUsersForm = ({ action, users }: SelectRoomUsersFormProps) => {
 
   return (
     <Form action={handleSubmit} className="center flex-col space-y-6">
+      {isNewRoom && <input type="hidden" name="isNewRoom" value="true" />}
       <Box>
         {MAX_ROOM_PLAYERS}人選択してください ({selectedUsers.length}/
         {MAX_ROOM_PLAYERS})
@@ -37,6 +43,7 @@ const SelectRoomUsersForm = ({ action, users }: SelectRoomUsersFormProps) => {
             <UserCard
               name={user.name}
               icon={user.icon}
+              isStar={user.isDefaultUser}
               leftBorder="sm"
               className={`
                 ${isUserSelected(user.id) ? "" : "opacity-20"}

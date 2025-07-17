@@ -10,11 +10,13 @@ import {
   upsertDefaultChipRate,
 } from "@/src/lib/models/setting";
 
-interface CustomSettingPageProps {
+interface CustomRoomSettingPageProps {
   params: Promise<{ customItem: string }>;
 }
 
-const CustomSettingPage = async ({ params }: CustomSettingPageProps) => {
+const CustomRoomSettingPage = async ({
+  params,
+}: CustomRoomSettingPageProps) => {
   const { customItem } = await params;
 
   // customItemに応じて適切な関数を選択
@@ -115,10 +117,11 @@ const CustomSettingPage = async ({ params }: CustomSettingPageProps) => {
           type={config.type}
           maxLength={config.maxLength}
           placeholder={config.placeholder}
+          isNewRoom={true}
         />
       </Content>
     </>
   );
 };
 
-export default CustomSettingPage;
+export default CustomRoomSettingPage;

@@ -3,6 +3,7 @@
 import Form from "next/form";
 import SelectField from "@/src/components/form/SelectField";
 import ToastButton from "@/src/components/nav/ToastButton";
+import DefaultRoomUsers from "../rooms/utils/DefaultRoomUsers";
 import {
   INITIAL_POINT_OPTIONS,
   RETURN_POINT_OPTIONS,
@@ -13,29 +14,26 @@ import {
 } from "@/src/constants/gameRules";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import { upsertDefaultRoom } from "@/src/lib/models/setting";
-import { useSession } from "next-auth/react";
 import { ReadDefaultRoom } from "@/src/lib/models/setting/type";
+import type { ReadUser } from "@/src/lib/models/users/type";
+import { useShowPointsClient } from "@/src/hooks/auth/useShowPointsClient";
 
 interface SettingFormProps {
   setting: ReadDefaultRoom;
+  roomUsers: ReadUser[];
 }
 
-const SettingForm = ({ setting }: SettingFormProps) => {
-  const { data: session } = useSession();
-  const isMonitor = session?.user.groups?.includes("monitor") || false;
-  const isShowPoint = setting?.isShowPoint ?? true;
-
-  // isMonitor = false, isShowPoint = true  → 表示 ✅
-  // isMonitor = false, isShowPoint = false → 非表示 ✅
-  // isMonitor = true,  isShowPoint = true  → 非表示 ✅
-  // isMonitor = true,  isShowPoint = false → 非表示 ✅
-  const shouldShowPoints = isShowPoint && !isMonitor;
-
+const SettingForm = ({ setting, roomUsers }: SettingFormProps) => {
+  const showPoints = useShowPointsClient(setting?.isShowPoint ?? true);
   const { isPending, toastMessage, toastColor, redirect, handleSubmit } =
     useServerActionToast(upsertDefaultRoom);
 
   return (
     <Form action={handleSubmit} className="space-y-8">
+      <DefaultRoomUsers
+        roomUsers={roomUsers}
+        href="/setting/room-setting/users"
+      />
       <SelectField
         label="持ち点"
         name="initialPoint"
@@ -45,6 +43,7 @@ const SettingForm = ({ setting }: SettingFormProps) => {
         }
         isCustomBtn={true}
         href="/setting/room-setting/initialPoint"
+        isInstantUpdate={true}
       />
       <SelectField
         label="返し点"
@@ -55,6 +54,7 @@ const SettingForm = ({ setting }: SettingFormProps) => {
         }
         isCustomBtn={true}
         href="/setting/room-setting/returnPoint"
+        isInstantUpdate={true}
       />
       <SelectField
         label="ウマ"
@@ -65,8 +65,9 @@ const SettingForm = ({ setting }: SettingFormProps) => {
         }
         isCustomBtn={true}
         href="/setting/room-setting/bonusPoint"
+        isInstantUpdate={true}
       />
-      {shouldShowPoints && (
+      {showPoints && (
         <>
           <SelectField
             label="レート"
@@ -77,6 +78,7 @@ const SettingForm = ({ setting }: SettingFormProps) => {
             }
             isCustomBtn={true}
             href="/setting/room-setting/scoreRate"
+            isInstantUpdate={true}
           />
           <SelectField
             label="チップ"
@@ -87,6 +89,7 @@ const SettingForm = ({ setting }: SettingFormProps) => {
             }
             isCustomBtn={true}
             href="/setting/room-setting/chipRate"
+            isInstantUpdate={true}
           />
         </>
       )}
@@ -94,6 +97,8 @@ const SettingForm = ({ setting }: SettingFormProps) => {
         toastMessage={toastMessage}
         toastColor={toastColor}
         redirect={redirect}
+        shouldReload={true} // 変更時はリロードする
+        className="hidden"
       >
         {isPending ? "保存中..." : "保存"}
       </ToastButton>

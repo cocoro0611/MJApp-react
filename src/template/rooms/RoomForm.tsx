@@ -1,7 +1,6 @@
 "use client";
 
 import Form from "next/form";
-import Box from "@/src/components/ui/Box";
 import InputField from "@/src/components/form/InputField";
 import SelectField from "@/src/components/form/SelectField";
 import ToastButton from "@/src/components/nav/ToastButton";
@@ -20,7 +19,7 @@ import type { ReadRoomDetail } from "@/src/lib/models/rooms/type";
 import { ReadDefaultRoom } from "@/src/lib/models/setting/type";
 import type { ReadUser } from "@/src/lib/models/users/type";
 import type { ServerAction } from "@/src/hooks/ui/useServerActionToast";
-import { useSession } from "next-auth/react";
+import { useShowPointsClient } from "@/src/hooks/auth/useShowPointsClient";
 
 interface RoomFormProps {
   action: ServerAction;
@@ -37,16 +36,7 @@ const RoomForm = ({
   roomUsers,
   setting,
 }: RoomFormProps) => {
-  const { data: session } = useSession();
-  const isMonitor = session?.user.groups?.includes("monitor") || false;
-  const isShowPoint = setting?.isShowPoint ?? true;
-
-  // isMonitor = false, isShowPoint = true  → 表示 ✅
-  // isMonitor = false, isShowPoint = false → 非表示 ✅
-  // isMonitor = true,  isShowPoint = true  → 非表示 ✅
-  // isMonitor = true,  isShowPoint = false → 非表示 ✅
-  const shouldShowPoints = isShowPoint && !isMonitor;
-
+  const showPoints = useShowPointsClient(setting?.isShowPoint ?? true);
   const today = new Date().toLocaleDateString("ja-JP");
 
   const [name, setName] = useState(room?.name ?? today);
@@ -105,44 +95,50 @@ const RoomForm = ({
         value={name}
         onChange={(value) => setName(value)}
       />
-      {roomUsers && <DefaultRoomUsers roomUsers={roomUsers} />}
-      {!room?.id && (
-        <Box>
-          <p>カスタム設定は事前に</p>
-          <p>「設定」から変更してください</p>
-        </Box>
+      {roomUsers && (
+        <DefaultRoomUsers roomUsers={roomUsers} href="/rooms/new/users" />
       )}
       <SelectField
         label="持ち点"
         name="initialPoint"
         options={INITIAL_POINT_OPTIONS}
         defaultValue={initialPoint}
+        isCustomBtn={true}
+        href="/rooms/new/initialPoint"
       />
       <SelectField
         label="返し点"
         name="returnPoint"
         options={RETURN_POINT_OPTIONS}
         defaultValue={returnPoint}
+        isCustomBtn={true}
+        href="/rooms/new/returnPoint"
       />
       <SelectField
         label="ウマ"
         name="bonusPoint"
         options={BONUS_POINT_OPTIONS}
         defaultValue={bonusPoint}
+        isCustomBtn={true}
+        href="/rooms/new/bonusPoint"
       />
-      {shouldShowPoints && (
+      {showPoints && (
         <>
           <SelectField
             label="レート"
             name="scoreRate"
             options={SCORE_RATE_OPTIONS}
             defaultValue={scoreRate}
+            isCustomBtn={true}
+            href="/rooms/new/scoreRate"
           />
           <SelectField
             label="チップ"
             name="chipRate"
             options={CHIP_RATE_OPTIONS}
             defaultValue={chipRate}
+            isCustomBtn={true}
+            href="/rooms/new/chipRate"
           />
           <InputField
             label="場代（後ほど更新できます）"

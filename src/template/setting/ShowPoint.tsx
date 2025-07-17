@@ -59,6 +59,7 @@ const ShowPoint = ({ isShowPoint = true }: ShowPointProps) => {
           toastMessage={toastMessage}
           toastColor={toastColor}
           redirect={redirect}
+          shouldReload={true} // 変更時はリロードする
           className="hidden"
         >
           {isPending ? "保存中..." : "保存"}
