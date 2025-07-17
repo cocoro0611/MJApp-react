@@ -21,18 +21,18 @@ const ConcealedToggle = ({
           playClick();
           setIsConcealed(true);
         }}
-        color={isConcealed ? "toggle-on" : "toggle-disabled"}
-        className="rounded-l px-3"
+        color={isConcealed ? "toggle-on" : "toggle-off-disabled"}
+        className="rounded-l px-3 py-1 text-sm lg:text-xl"
       >
         門前
       </Button>
       <Button
-        color={isConcealed ? "toggle-disabled" : "toggle-on"}
+        color={isConcealed ? "toggle-off-disabled" : "toggle-on"}
         onClick={() => {
           playClick();
           setIsConcealed(false);
         }}
-        className="rounded-r px-3 "
+        className="rounded-r px-3 py-1 text-sm lg:text-xl"
       >
         鳴き
       </Button>

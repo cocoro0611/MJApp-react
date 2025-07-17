@@ -14,8 +14,7 @@ interface CardProps {
     | "cancel"
     | "white"
     | "toggle-on"
-    | "toggle-off"
-    | "toggle-disabled";
+    | "toggle-off";
   leftBorder?: "sm" | "md" | "lg" | "none";
   disabled?: boolean;
   className?: string;

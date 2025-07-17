@@ -44,7 +44,7 @@ const FuList = ({ buttonCounts, totalHan, onButtonClick }: FuListProps) => {
         );
 
         return (
-          <div key={category} className="mb-4">
+          <div key={category} className="mb-4 w-92 lg:w-150 mx-auto">
             <div className="flex justify-start font-bold mb-2">
               <span>{label}</span>
               {category === "1-han" ||
@@ -64,17 +64,18 @@ const FuList = ({ buttonCounts, totalHan, onButtonClick }: FuListProps) => {
                 {buttons.map((buttonConfig) => {
                   const originalIndex = FU_CONFIG.indexOf(buttonConfig);
                   return (
-                    <ButtonCount
-                      key={originalIndex}
-                      size="lg"
-                      count={buttonConfig.count}
-                      externalCount={buttonCounts[originalIndex]}
-                      onClick={(count) => onButtonClick(originalIndex, count)}
-                      group={buttonConfig.group}
-                      totalHan={totalHan}
-                    >
-                      {buttonConfig.label}
-                    </ButtonCount>
+                    <div className="center" key={originalIndex}>
+                      <ButtonCount
+                        size="lg"
+                        count={buttonConfig.count}
+                        externalCount={buttonCounts[originalIndex]}
+                        onClick={(count) => onButtonClick(originalIndex, count)}
+                        group={buttonConfig.group}
+                        totalHan={totalHan}
+                      >
+                        {buttonConfig.label}
+                      </ButtonCount>
+                    </div>
                   );
                 })}
               </div>

@@ -44,14 +44,14 @@ export const useClickSound = () => {
         const currentTime = audioContextRef.current.currentTime;
 
         // iPhoneスタイルのクリック音
-        oscillator.frequency.setValueAtTime(250, currentTime); // 開始周波数
+        oscillator.frequency.setValueAtTime(270, currentTime); // 開始周波数
         oscillator.frequency.exponentialRampToValueAtTime(
-          200,
+          220,
           currentTime + 0.05
         ); // 終了周波数
         oscillator.type = "sine";
 
-        gainNode.gain.setValueAtTime(0.2, currentTime); // 音量（0.1〜1.0）
+        gainNode.gain.setValueAtTime(0.8, currentTime); // 音量（0.1〜1.0）
         gainNode.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.1);
 
         oscillator.start(currentTime);

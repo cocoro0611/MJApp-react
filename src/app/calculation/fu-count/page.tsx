@@ -26,7 +26,7 @@ const FuCalculationPage = () => {
     <>
       <Header
         title={
-          <div className="grid-2 gap-4">
+          <div className="grid grid-cols-2 gap-4">
             <YonmaSanmaToggle isYonma={isYonma} setIsYonma={setIsYonma} />
             <div></div>
           </div>
@@ -48,7 +48,7 @@ const FuCalculationPage = () => {
       {/* extraの分の調整 */}
       <div className="pt-22" />
 
-      <Content>
+      <Content isBlank={false}>
         <FuList
           buttonCounts={buttonCounts}
           totalHan={totalHan}

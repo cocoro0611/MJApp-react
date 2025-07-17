@@ -14,7 +14,7 @@ const FormatButtonText = (text: string) => {
     const secondHalf = text.substring(3, 6);
     const thirdHalf = text.substring(6, 9);
     return (
-      <div className="center flex-col text-[0.6rem] leading-tight">
+      <div className="center flex-col text-[0.7rem] leading-tight">
         <div>{firstHalf}</div>
         <div>{secondHalf}</div>
         <div>{thirdHalf}</div>

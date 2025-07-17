@@ -18,18 +18,22 @@ const YonmaSanmaToggle = ({ isYonma, setIsYonma }: YonmaSanmaToggleProps) => {
           playClick();
           setIsYonma(true);
         }}
-        color={isYonma ? "toggle-secondary-on" : "toggle-disabled"}
-        className="rounded-l px-3"
+        color={
+          isYonma ? "toggle-secondary-on" : "toggle-secondary-off-disabled"
+        }
+        className="rounded-l px-3 py-1 text-sm lg:text-xl"
       >
         四麻
       </Button>
       <Button
-        color={isYonma ? "toggle-disabled" : "toggle-secondary-on"}
+        color={
+          isYonma ? "toggle-secondary-off-disabled" : "toggle-secondary-on"
+        }
         onClick={() => {
           playClick();
           setIsYonma(false);
         }}
-        className="rounded-r px-3 "
+        className="rounded-r px-3 py-1 text-sm lg:text-xl"
       >
         三麻
       </Button>

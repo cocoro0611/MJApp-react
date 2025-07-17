@@ -32,13 +32,30 @@
     @apply border border-primary-500;
     @apply text-primary-500;
   }
-  .toggle-disabled {
+  /* lg以下になった時に背景が暗い時はこれを利用 */
+  .toggle-off-disabled {
+    @apply lg:bg-white lg:hover:bg-primary-50 lg:active:bg-primary-100;
+    @apply lg:border lg:border-primary-500;
+    @apply lg:text-primary-500;
     @apply bg-primary-900 hover:bg-primary-950 active:bg-primary-950;
     @apply text-gray-400;
   }
   .toggle-secondary-on {
     @apply bg-secondary-400 hover:bg-secondary-500 active:bg-secondary-600;
     @apply text-white;
+  }
+  .toggle-secondary-off {
+    @apply bg-white hover:bg-secondary-50 active:bg-secondary-100;
+    @apply border border-secondary-500;
+    @apply text-secondary-500;
+  }
+  /* lg以下になった時に背景が暗い時はこれを利用 */
+  .toggle-secondary-off-disabled {
+    @apply lg:bg-white lg:hover:bg-secondary-50 lg:active:bg-secondary-100;
+    @apply lg:border lg:border-secondary-500;
+    @apply lg:text-secondary-500;
+    @apply bg-primary-900 hover:bg-primary-950 active:bg-primary-950;
+    @apply text-gray-400;
   }
 }
 

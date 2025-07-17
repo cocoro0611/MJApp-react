@@ -15,8 +15,11 @@ interface ButtonProps {
     | "white"
     | "toggle-on"
     | "toggle-off"
-    | "toggle-disabled"
-    | "toggle-secondary-on";
+    | "toggle-off-disabled"
+    | "toggle-secondary-on"
+    | "toggle-secondary-off"
+    | "toggle-secondary-off-disabled"
+    | "none";
   border?: "primary-light-border" | "cancel-border" | "none";
   type?: "button" | "submit";
   disabled?: boolean;
@@ -35,7 +38,7 @@ const Button = ({
   onClick = () => {},
 }: ButtonProps) => {
   const btnClass = `effect-scale 
-  ${color ? color : ""}
+  ${color !== "none" ? color : ""}
   ${border !== "none" ? border : ""}
   ${className} ${disabled ? "effect-disabled" : ""} `;
 
