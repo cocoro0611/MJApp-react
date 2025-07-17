@@ -43,6 +43,7 @@ const SelectRoomUsersForm = ({
             <UserCard
               name={user.name}
               icon={user.icon}
+              isStar={user.isDefaultUser}
               leftBorder="sm"
               className={`
                 ${isUserSelected(user.id) ? "" : "opacity-20"}

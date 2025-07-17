@@ -19,6 +19,7 @@ const UsersPage = async () => {
               href={`/users/${user.id}/edit`}
               name={user.name}
               icon={user.icon}
+              isStar={user.isDefaultUser}
               leftBorder="sm"
               className="h-16 w-16 text-[0.7rem]"
             />
