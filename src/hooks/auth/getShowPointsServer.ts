@@ -1,7 +1,9 @@
+// 厳密にはHooksではないが同じ処理でまとめておきたいのでここに配置
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/src/app/api/auth/[...nextauth]/route";
 
-export const useShowPointsServer = async (isShowPoint?: boolean) => {
+export const getShowPointsServer = async (isShowPoint?: boolean) => {
   const session = await getServerSession(authOptions);
   const isMonitor = session?.user.groups?.includes("monitor") || false;
   const showPoint = isShowPoint ?? true;

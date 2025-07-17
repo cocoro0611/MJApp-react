@@ -13,33 +13,24 @@ import {
   deleteRoom,
 } from "@/src/lib/models/rooms";
 import { readSetting } from "@/src/lib/models/setting";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { getShowPointsServer } from "@/src/hooks/auth/getShowPointsServer";
 
 interface RoomEditPageProps {
   params: Promise<{ roomId: string }>;
 }
 
 const RoomEditPage = async ({ params }: RoomEditPageProps) => {
-  const session = await getServerSession(authOptions);
-  const isMonitor = session?.user.groups?.includes("monitor") || false;
-
   const { roomId } = await params;
   const roomDetail = await readRoomDetail(roomId);
   const scores = await readScores(roomId);
   const chips = await readChips(roomId);
-
   const setting = await readSetting();
-  const isShowPoint = setting?.isShowPoint ?? true;
 
   // チップの有無でgameBoardの表示を変更
-  const shouldShowChip = chips.length > 0;
+  const showChip = chips.length > 0;
 
-  // isMonitor = false, isShowPoint = true  → 表示 ✅
-  // isMonitor = false, isShowPoint = false → 非表示 ✅
-  // isMonitor = true,  isShowPoint = true  → 非表示 ✅
-  // isMonitor = true,  isShowPoint = false → 非表示 ✅
-  const shouldShowPoints = isShowPoint && !isMonitor;
+  // MonitorかisShowPointがtuerの時の表示制御
+  const showPoints = await getShowPointsServer(setting?.isShowPoint ?? true);
   return (
     <>
       <Header
@@ -47,9 +38,9 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
         href="/rooms"
         extra={
           <GameBoard
-            shouldShowPoints={shouldShowPoints}
+            showPoints={showPoints}
+            showChip={showChip}
             roomDetailUser={roomDetail.users}
-            shouldShowChip={shouldShowChip}
             roomId={roomId}
           />
         }
@@ -58,15 +49,13 @@ const RoomEditPage = async ({ params }: RoomEditPageProps) => {
       </Header>
 
       {/* extraの調整 */}
-      <div
-        className={shouldShowChip ? "pt-31.5 lg:pt-29.5" : "pt-24 lg:pt-22"}
-      />
+      <div className={showChip ? "pt-31.5 lg:pt-29.5" : "pt-24 lg:pt-22"} />
 
-      {/* shouldShowPointsの調整 */}
-      <div className={shouldShowPoints ? "" : "-mt-7.5"} />
+      {/* showPointsの調整 */}
+      <div className={showPoints ? "" : "-mt-7.5"} />
 
       <Content isBlank={false}>
-        {shouldShowPoints && (
+        {showPoints && (
           <AmountBoard roomId={roomId} amount={roomDetail.gameAmount} />
         )}
         <ScoreForm

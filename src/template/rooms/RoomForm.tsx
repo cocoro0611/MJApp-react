@@ -19,7 +19,7 @@ import type { ReadRoomDetail } from "@/src/lib/models/rooms/type";
 import { ReadDefaultRoom } from "@/src/lib/models/setting/type";
 import type { ReadUser } from "@/src/lib/models/users/type";
 import type { ServerAction } from "@/src/hooks/ui/useServerActionToast";
-import { useSession } from "next-auth/react";
+import { useShowPointsClient } from "@/src/hooks/auth/useShowPointsClient";
 
 interface RoomFormProps {
   action: ServerAction;
@@ -36,16 +36,7 @@ const RoomForm = ({
   roomUsers,
   setting,
 }: RoomFormProps) => {
-  const { data: session } = useSession();
-  const isMonitor = session?.user.groups?.includes("monitor") || false;
-  const isShowPoint = setting?.isShowPoint ?? true;
-
-  // isMonitor = false, isShowPoint = true  → 表示 ✅
-  // isMonitor = false, isShowPoint = false → 非表示 ✅
-  // isMonitor = true,  isShowPoint = true  → 非表示 ✅
-  // isMonitor = true,  isShowPoint = false → 非表示 ✅
-  const shouldShowPoints = isShowPoint && !isMonitor;
-
+  const showPoints = useShowPointsClient(setting?.isShowPoint ?? true);
   const today = new Date().toLocaleDateString("ja-JP");
 
   const [name, setName] = useState(room?.name ?? today);
@@ -104,7 +95,9 @@ const RoomForm = ({
         value={name}
         onChange={(value) => setName(value)}
       />
-      {roomUsers && <DefaultRoomUsers roomUsers={roomUsers} href="/rooms/new/users"/>}
+      {roomUsers && (
+        <DefaultRoomUsers roomUsers={roomUsers} href="/rooms/new/users" />
+      )}
       <SelectField
         label="持ち点"
         name="initialPoint"
@@ -129,7 +122,7 @@ const RoomForm = ({
         isCustomBtn={true}
         href="/rooms/new/bonusPoint"
       />
-      {shouldShowPoints && (
+      {showPoints && (
         <>
           <SelectField
             label="レート"

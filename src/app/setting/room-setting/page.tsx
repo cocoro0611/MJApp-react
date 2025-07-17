@@ -5,22 +5,14 @@ import SettingForm from "@/src/template/setting/SettingForm";
 import { readSetting } from "@/src/lib/models/setting";
 import { readDefaultUsers } from "@/src/lib/models/users";
 import { DEFAULT_GAME_RULES } from "@/src/constants/gameRules";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { getShowPointsServer } from "@/src/hooks/auth/getShowPointsServer";
 
 const SettingPage = async () => {
-  const session = await getServerSession(authOptions);
-  const isMonitor = session?.user.groups?.includes("monitor") || false;
-
   const roomUsers = await readDefaultUsers();
   const setting = await readSetting();
-  const isShowPoint = setting?.isShowPoint ?? true;
 
-  // isMonitor = false, isShowPoint = true  → 表示 ✅
-  // isMonitor = false, isShowPoint = false → 非表示 ✅
-  // isMonitor = true,  isShowPoint = true  → 非表示 ✅
-  // isMonitor = true,  isShowPoint = false → 非表示 ✅
-  const shouldShowPoints = isShowPoint && !isMonitor;
+  // MonitorかisShowPointがtuerの時の表示制御
+  const showPoints = await getShowPointsServer(setting?.isShowPoint ?? true);
   return (
     <>
       <Header title="ルーム設定" href="/setting" />
@@ -42,7 +34,7 @@ const SettingPage = async () => {
                 現在のウマ　：
                 {setting.defaultBonusPoint || DEFAULT_GAME_RULES.bonusPoint}
               </p>
-              {shouldShowPoints && (
+              {showPoints && (
                 <>
                   <p>
                     現在のレート：

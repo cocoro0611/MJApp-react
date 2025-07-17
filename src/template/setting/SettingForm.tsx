@@ -14,9 +14,9 @@ import {
 } from "@/src/constants/gameRules";
 import { useServerActionToast } from "@/src/hooks/ui/useServerActionToast";
 import { upsertDefaultRoom } from "@/src/lib/models/setting";
-import { useSession } from "next-auth/react";
 import { ReadDefaultRoom } from "@/src/lib/models/setting/type";
 import type { ReadUser } from "@/src/lib/models/users/type";
+import { useShowPointsClient } from "@/src/hooks/auth/useShowPointsClient";
 
 interface SettingFormProps {
   setting: ReadDefaultRoom;
@@ -24,16 +24,7 @@ interface SettingFormProps {
 }
 
 const SettingForm = ({ setting, roomUsers }: SettingFormProps) => {
-  const { data: session } = useSession();
-  const isMonitor = session?.user.groups?.includes("monitor") || false;
-  const isShowPoint = setting?.isShowPoint ?? true;
-
-  // isMonitor = false, isShowPoint = true  → 表示 ✅
-  // isMonitor = false, isShowPoint = false → 非表示 ✅
-  // isMonitor = true,  isShowPoint = true  → 非表示 ✅
-  // isMonitor = true,  isShowPoint = false → 非表示 ✅
-  const shouldShowPoints = isShowPoint && !isMonitor;
-
+  const showPoints = useShowPointsClient(setting?.isShowPoint ?? true);
   const { isPending, toastMessage, toastColor, redirect, handleSubmit } =
     useServerActionToast(upsertDefaultRoom);
 
@@ -76,7 +67,7 @@ const SettingForm = ({ setting, roomUsers }: SettingFormProps) => {
         href="/setting/room-setting/bonusPoint"
         isInstantUpdate={true}
       />
-      {shouldShowPoints && (
+      {showPoints && (
         <>
           <SelectField
             label="レート"
