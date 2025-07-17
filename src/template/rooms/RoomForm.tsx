@@ -103,7 +103,7 @@ const RoomForm = ({
         name="initialPoint"
         options={INITIAL_POINT_OPTIONS}
         defaultValue={initialPoint}
-        isCustomBtn={true}
+        isCustomBtn={room?.id ? false : true}
         href="/rooms/new/initialPoint"
       />
       <SelectField
@@ -111,7 +111,7 @@ const RoomForm = ({
         name="returnPoint"
         options={RETURN_POINT_OPTIONS}
         defaultValue={returnPoint}
-        isCustomBtn={true}
+        isCustomBtn={room?.id ? false : true}
         href="/rooms/new/returnPoint"
       />
       <SelectField
@@ -119,7 +119,7 @@ const RoomForm = ({
         name="bonusPoint"
         options={BONUS_POINT_OPTIONS}
         defaultValue={bonusPoint}
-        isCustomBtn={true}
+        isCustomBtn={room?.id ? false : true}
         href="/rooms/new/bonusPoint"
       />
       {showPoints && (
@@ -129,7 +129,7 @@ const RoomForm = ({
             name="scoreRate"
             options={SCORE_RATE_OPTIONS}
             defaultValue={scoreRate}
-            isCustomBtn={true}
+            isCustomBtn={room?.id ? false : true}
             href="/rooms/new/scoreRate"
           />
           <SelectField
@@ -137,7 +137,7 @@ const RoomForm = ({
             name="chipRate"
             options={CHIP_RATE_OPTIONS}
             defaultValue={chipRate}
-            isCustomBtn={true}
+            isCustomBtn={room?.id ? false : true}
             href="/rooms/new/chipRate"
           />
           <InputField
