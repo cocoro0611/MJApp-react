@@ -52,6 +52,7 @@ const SettingForm = ({ setting, roomUsers }: SettingFormProps) => {
         }
         isCustomBtn={true}
         href="/setting/room-setting/initialPoint"
+        isInstantUpdate={true}
       />
       <SelectField
         label="返し点"
@@ -62,6 +63,7 @@ const SettingForm = ({ setting, roomUsers }: SettingFormProps) => {
         }
         isCustomBtn={true}
         href="/setting/room-setting/returnPoint"
+        isInstantUpdate={true}
       />
       <SelectField
         label="ウマ"
@@ -72,6 +74,7 @@ const SettingForm = ({ setting, roomUsers }: SettingFormProps) => {
         }
         isCustomBtn={true}
         href="/setting/room-setting/bonusPoint"
+        isInstantUpdate={true}
       />
       {shouldShowPoints && (
         <>
@@ -84,6 +87,7 @@ const SettingForm = ({ setting, roomUsers }: SettingFormProps) => {
             }
             isCustomBtn={true}
             href="/setting/room-setting/scoreRate"
+            isInstantUpdate={true}
           />
           <SelectField
             label="チップ"
@@ -94,6 +98,7 @@ const SettingForm = ({ setting, roomUsers }: SettingFormProps) => {
             }
             isCustomBtn={true}
             href="/setting/room-setting/chipRate"
+            isInstantUpdate={true}
           />
         </>
       )}
@@ -101,6 +106,8 @@ const SettingForm = ({ setting, roomUsers }: SettingFormProps) => {
         toastMessage={toastMessage}
         toastColor={toastColor}
         redirect={redirect}
+        shouldReload={true} // 変更時はリロードする
+        className="hidden"
       >
         {isPending ? "保存中..." : "保存"}
       </ToastButton>

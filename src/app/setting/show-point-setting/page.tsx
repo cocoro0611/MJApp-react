@@ -22,7 +22,7 @@ const ShowPointSettingPage = async () => {
       <Header title="ポイントの表示設定" href="/setting" />
       <Content>
         <Box>
-          <div className="mb-4 text-sm">ゲームの表示を選択してください</div>
+          <div className="mb-4">ゲームの表示を選択してください</div>
           <div className="text-sm">
             現在の設定：
             {setting.isShowPoint

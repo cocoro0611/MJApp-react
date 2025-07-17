@@ -15,6 +15,7 @@ interface SelectFieldProps {
   defaultValue: number | string;
   isCustomBtn?: boolean;
   href?: string;
+  isInstantUpdate?: boolean;
 }
 
 const SelectField = ({
@@ -24,6 +25,7 @@ const SelectField = ({
   defaultValue,
   isCustomBtn = false,
   href = "",
+  isInstantUpdate = false,
 }: SelectFieldProps) => {
   const [selectedValue, setSelectedValue] = useState<number | string>(
     defaultValue
@@ -87,6 +89,7 @@ const SelectField = ({
           {displayOptions.map((option) => (
             <Button
               key={option.value}
+              type={isInstantUpdate ? "submit" : "button"}
               color={
                 selectedValue === option.value ? "toggle-on" : "toggle-off"
               }

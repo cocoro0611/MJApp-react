@@ -106,7 +106,7 @@ const ColorSelector = ({
           toastMessage={toastMessage}
           toastColor={toastColor}
           redirect={redirect}
-          shouldReload={true} // カラー変更時はリロードする
+          shouldReload={true} // 変更時はリロードする
           className="hidden"
         >
           {isPending ? "保存中..." : "保存"}

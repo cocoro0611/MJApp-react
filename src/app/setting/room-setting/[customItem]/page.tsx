@@ -100,7 +100,7 @@ const CustomSettingPage = async ({ params }: CustomSettingPageProps) => {
       <Header title="カスタム設定" href="/setting/room-setting" />
       <Content>
         <Box>
-          <div className="text-sm">{config.label}を入力してください</div>
+          <div>{config.label}を入力してください</div>
           {config.description && (
             <div className="mt-4 text-sm">
               <p> {config.description}</p>

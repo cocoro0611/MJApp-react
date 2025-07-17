@@ -24,7 +24,7 @@ const ColorSettingPage = async () => {
       <Header title="テーマカラー設定" href="/setting" />
       <Content>
         <Box>
-          <div className="mb-4 text-sm">テーマカラーを選択してください</div>
+          <div className="mb-4">テーマカラーを選択してください</div>
           <div className="text-sm">
             現在のメインカラー：{defaultPrimaryColor}
           </div>
