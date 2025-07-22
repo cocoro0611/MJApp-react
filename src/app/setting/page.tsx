@@ -15,16 +15,6 @@ const SettingPage = () => {
   const isAdmin = session?.user.groups?.includes("admin") || false;
   const router = useRouter();
 
-  const handleColorSettingAccess = async () => {
-    const response = await fetch("/api/auth/actions/admin", { method: "POST" });
-
-    if (response.ok) {
-      router.push("/setting/color-setting");
-    } else {
-      alert("管理者権限が必要です");
-    }
-  };
-
   const handleShowPointSettingAccess = async () => {
     const response = await fetch("/api/auth/actions/admin", { method: "POST" });
 
@@ -59,8 +49,7 @@ const SettingPage = () => {
           </Card>
           {/* テーマカラー設定はAdmin権限しか行えない */}
           <Card
-            disabled={!isAdmin}
-            onClick={handleColorSettingAccess}
+            href="/setting/color-setting"
             leftBorder="lg"
             className="p-4 w-80"
           >
@@ -72,21 +61,21 @@ const SettingPage = () => {
             </div>
           </Card>
           {/* ポイントの非表示設定はAdmin権限しか行えないかつ表示されない */}
-          {isAdmin && (
-            <Card
-              disabled={!isAdmin}
-              onClick={handleShowPointSettingAccess}
-              leftBorder="lg"
-              className="p-4 w-80"
-            >
-              <div className="flex justify-start items-center gap-6">
-                <div className="bg-gradient-to-br from-primary-400 to-primary-600 rounded-full p-4 shadow">
-                  <CurrencyYenIcon className="text-white" />
-                </div>
-                <p className="font-bold">ポイントの表示設定</p>
+          <Card
+            disabled={!isAdmin}
+            onClick={handleShowPointSettingAccess}
+            leftBorder="lg"
+            className="p-4 w-80"
+          >
+            <div className="flex justify-start items-center gap-6">
+              <div className="bg-gradient-to-br from-primary-400 to-primary-600 rounded-full p-4 shadow">
+                <CurrencyYenIcon className="text-white" />
               </div>
-            </Card>
-          )}
+              <p className="font-bold">
+                {!isAdmin ? "管理者権限が必要な設定" : "ポイントの表示設定"}
+              </p>
+            </div>
+          </Card>
         </div>
       </Content>
     </>
