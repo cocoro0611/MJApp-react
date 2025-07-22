@@ -99,7 +99,7 @@ const CustomRoomSettingPage = async ({
 
   return (
     <>
-      <Header title="カスタム設定" href="/setting/room-setting" />
+      <Header title="ルームの作成" href="/rooms/new" />
       <Content>
         <Box>
           <div>{config.label}を入力してください</div>

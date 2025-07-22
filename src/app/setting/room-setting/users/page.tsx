@@ -9,7 +9,7 @@ const SelectUsersPage = async () => {
 
   return (
     <>
-      <Header title="カスタム設定" href="/setting/room-setting" />
+      <Header title="ユーザー設定" href="/setting/room-setting" />
       <Content>
         <SelectRoomUsersForm action={upsertDefaultUsers} users={users} />
       </Content>
