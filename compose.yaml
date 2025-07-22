@@ -1,4 +1,16 @@
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env # 環境変数ファイル
+    depends_on:
+      - postgresql
+    restart: unless-stopped
+
   postgresql:
     image: postgres:16
     container_name: MJApp

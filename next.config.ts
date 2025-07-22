@@ -9,6 +9,10 @@ const withPWA = require("next-pwa")({
 
 module.exports = withPWA({
   reactStrictMode: true,
+
+  // Docker用のstandalone出力を追加
+  output: "standalone",
+
   // ビルドに時間がかかってしまうのでスキップ
   eslint: {
     ignoreDuringBuilds: true,
