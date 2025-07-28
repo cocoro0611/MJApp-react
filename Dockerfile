@@ -1,50 +1,26 @@
-# ビルドステージ
-FROM node:18-alpine AS build
-
-WORKDIR /app
-
-# pnpm有効化
-RUN corepack enable pnpm
-
-# 依存関係のコピーとインストール
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
-
-# ソースコードをコピー
-COPY . .
-
-# Prismaクライアント生成
-RUN npx prisma migrate dev 
-RUN npx prisma generate
-
-# Next.jsビルド
-ENV NEXT_TELEMETRY_DISABLED=1
-RUN pnpm run build
-
-# 本番ステージ
+# Node.js 18のベースイメージを使用
 FROM node:18-alpine
 
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
-
-# ユーザー作成
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
+# 作業ディレクトリを設定
 WORKDIR /app
 
-# 必要なファイルをコピー
-COPY --from=build /app/public ./public
-COPY --from=build --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=build --chown=nextjs:nodejs /app/.next/static ./.next/static
+# package.jsonとpnpm-lock.yamlをコピー
+COPY package.json ./
 
-# 非rootユーザーに切り替え
-USER nextjs
+# pnpmをインストール
+RUN npm install -g pnpm
 
-# ポート設定
-ENV PORT=3000
-ENV HOSTNAME=0.0.0.0
+# 依存関係をインストール
+RUN pnpm install
 
+# アプリケーションのソースコードをコピー
+COPY . .
+
+# Next.jsアプリをビルド
+RUN pnpm run build
+
+# ポート3000を公開
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+# アプリケーションを起動
+CMD ["pnpm", "start"]

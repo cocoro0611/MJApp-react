@@ -6,16 +6,15 @@ services:
     ports:
       - "3000:3000"
     env_file:
-      - .env # 環境変数ファイル
+      - .env
     depends_on:
       - postgresql
-    restart: unless-stopped
 
   postgresql:
     image: postgres:16
     container_name: MJApp
     ports:
-      - "5433:5432"
+      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: Pa55word
