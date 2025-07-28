@@ -35,7 +35,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "18"
-          cache: "npm"
+          cache: "pnpm"
 
       # pnpmをインストール
       - name: Install pnpm
@@ -43,7 +43,7 @@ jobs:
 
       # 依存関係をインストール
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       # 環境変数を設定（テスト用）
       - name: Create .env file
@@ -60,14 +60,9 @@ jobs:
       - name: Run database migrations
         run: npx prisma migrate deploy
 
-      # テスト実行（もしテストがあれば）
+      # テスト実行
       - name: Run tests
-        run: |
-          if [ -f "package.json" ] && grep -q '"test"' package.json; then
-            pnpm test
-          else
-            echo "No tests found, skipping..."
-          fi
+        run: pnpm test:ci
 
       # ビルド実行
       - name: Build application
