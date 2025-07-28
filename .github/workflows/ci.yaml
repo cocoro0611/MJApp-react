@@ -1,0 +1,80 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: Pa55word
+          POSTGRES_DB: MJAppDb
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      # コードをチェックアウト
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Node.jsをセットアップ
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      # pnpmをインストール
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # 依存関係をインストール
+      - name: Install dependencies
+        run: pnpm install
+
+      # 環境変数を設定（テスト用）
+      - name: Create .env file
+        run: |
+          echo "DATABASE_URL=postgresql://postgres:Pa55word@localhost:5432/MJAppDb?schema=public&sslmode=disable" > .env
+          echo "NEXTAUTH_SECRET=test-secret-key" >> .env
+          echo "NEXTAUTH_URL=http://localhost:3000" >> .env
+
+      # Prismaセットアップ
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      # データベースマイグレーション
+      - name: Run database migrations
+        run: npx prisma migrate deploy
+
+      # テスト実行（もしテストがあれば）
+      - name: Run tests
+        run: |
+          if [ -f "package.json" ] && grep -q '"test"' package.json; then
+            pnpm test
+          else
+            echo "No tests found, skipping..."
+          fi
+
+      # ビルド実行
+      - name: Build application
+        run: pnpm run build
+
+      # ビルド成果物の確認
+      - name: Check build output
+        run: |
+          ls -la .next/
+          echo "Build completed successfully!"
