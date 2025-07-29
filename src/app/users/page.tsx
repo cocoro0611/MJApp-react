@@ -10,7 +10,7 @@ const UsersPage = async () => {
 
   return (
     <>
-      <Header title="ユーザー一覧" showBackButton={false} />
+      <Header title="ユーザー一覧テスト２" showBackButton={false} />
       <Content isBlank={true}>
         <div className="grid-4 gap-4">
           {users.map((user) => (
