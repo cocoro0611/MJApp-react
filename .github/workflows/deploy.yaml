@@ -61,14 +61,22 @@ jobs:
             # ECRにログイン
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}
             
-            # 最新イメージを取得
-            echo "📦 Pulling latest image..."
-            docker pull ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:latest
-            
             # 古いコンテナを停止・削除
             echo "🛑 Stopping old container..."
             docker stop my-app || true
             docker rm my-app || true
+            
+            # 古いイメージを削除（キャッシュ問題回避）
+            echo "🗑️ Removing old images..."
+            docker rmi ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:latest || true
+            
+            # Dockerの不要データを削除（容量確保）
+            echo "🧹 Cleaning up Docker cache..."
+            docker system prune -f
+            
+            # 最新イメージを取得
+            echo "📦 Pulling latest image..."
+            docker pull ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:latest
             
             # 新しいコンテナを起動
             echo "🏃 Starting new container..."
