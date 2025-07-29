@@ -1,15 +1,18 @@
-name: Test ECR Push
+name: Deploy to EC2
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - "main"
 
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: my-app
 
 jobs:
-  test-ecr:
-    name: Test ECR Push
+  deploy:
+    name: Deploy to EC2
     runs-on: ubuntu-latest
 
     steps:
@@ -41,4 +44,44 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
           echo "✅ Successfully pushed to ECR!"
-          echo "Image: $ECR_REGISTRY/$ECR_REPOSITORY:latest"
+
+      - name: Deploy to EC2
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          # SSH秘密鍵を設定
+          echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > private_key.pem
+          chmod 600 private_key.pem
+
+          # EC2にSSH接続してデプロイ
+          ssh -i private_key.pem -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_HOST }} << 'EOF'
+            echo "🚀 Starting deployment..."
+            
+            # ECRにログイン
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}
+            
+            # 最新イメージを取得
+            echo "📦 Pulling latest image..."
+            docker pull ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:latest
+            
+            # 古いコンテナを停止・削除
+            echo "🛑 Stopping old container..."
+            docker stop my-app || true
+            docker rm my-app || true
+            
+            # 新しいコンテナを起動
+            echo "🏃 Starting new container..."
+            docker run -d --name my-app \
+              -p 3000:3000 \
+              --env-file /home/ec2-user/.env.docker \
+              ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:latest
+            
+            # デプロイ状況確認
+            echo "✅ Deployment completed!"
+            docker ps | grep my-app
+            
+            # 簡単な動作確認
+            sleep 5
+            curl -f http://localhost:3000 > /dev/null && echo "🎉 App is responding!" || echo "❌ App is not responding"
+          EOF
